@@ -1,0 +1,26 @@
+syntax = "proto3";
+package priemman.v1;
+import "google/protobuf/timestamp.proto";
+
+message ObjectId {
+  string value = 1;
+}
+
+message Location {
+  string country = 1;
+  string city = 2;
+}
+
+message ErrorDetail {
+  string code = 1;      // mis. "RATE_LIMITED", "INVALID_OTP"
+  string message = 2;
+  map<string, string> meta = 3;
+}
+
+message Result {
+  bool is_error = 1;
+  bool has_value = 2;
+  string message = 3;
+  string value = 4;
+  ErrorDetail error_detail = 5;
+}

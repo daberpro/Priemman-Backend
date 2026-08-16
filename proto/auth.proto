@@ -1,0 +1,62 @@
+syntax = "proto3";
+package priemman.v1;
+import "common.proto";
+import "google/protobuf/timestamp.proto";
+
+enum AuthProvider {
+  AUTH_PROVIDER_UNSPECIFIED = 0;
+  AUTH_PROVIDER_EMAIL = 1;
+  AUTH_PROVIDER_GOOGLE = 2;
+  AUTH_PROVIDER_GITHUB = 3;
+}
+
+// ---- Email OTP flow ----
+
+message SendOtpRequest {
+  string email = 1;
+}
+
+message SendOtpResponse {
+  bool success = 1;
+  string message = 2;
+  int32 cooldown_seconds = 3; // 30s sesuai PRD
+}
+
+message VerifyOtpRequest {
+  string email = 1;
+  string otp = 2; // 6 digit
+}
+
+message VerifyOtpResponse {
+  string session_token = 1;
+  bool is_new_user = 2;
+}
+
+// ---- OAuth flow ----
+
+message OAuthCallbackRequest {
+  AuthProvider provider = 1;
+  string code = 2;       // authorization code dari provider
+  string state = 3;
+}
+
+message OAuthCallbackResponse {
+  string session_token = 1;
+  bool is_new_user = 2;
+}
+
+// ---- Session ----
+
+message Session {
+  string token = 1;
+  ObjectId user_id = 2;
+  google.protobuf.Timestamp expires_at = 3;
+}
+
+message LogoutRequest {
+  string session_token = 1;
+}
+
+message LogoutResponse {
+  bool success = 1;
+}

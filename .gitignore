@@ -1,0 +1,71 @@
+# ==============================
+# Build
+# ==============================
+build/
+cmake-build-*/
+out/
+bin/
+obj/
+
+# ==============================
+# CMake
+# ==============================
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+install_manifest.txt
+compile_commands.json
+CTestTestfile.cmake
+Makefile
+
+# ==============================
+# IDE / Editor
+# ==============================
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# ==============================
+# Python
+# ==============================
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+env/
+
+# ==============================
+# Testing / Coverage
+# ==============================
+Testing/
+coverage/
+*.gcda
+*.gcno
+*.gcov
+
+# ==============================
+# Logs
+# ==============================
+*.log
+logs/
+
+# ==============================
+# Environment / Secrets
+# ==============================
+.env
+.env.*
+!.env.example
+
+# ==============================
+# Configuration / Secrets
+# ==============================
+config/
+
+# ==============================
+# OS
+# ==============================
+.DS_Store
+Thumbs.db

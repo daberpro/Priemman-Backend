@@ -1,0 +1,66 @@
+syntax = "proto3";
+package priemman.v1;
+import "common.proto";
+import "google/protobuf/timestamp.proto";
+
+enum ConnectedPlatform {
+  CONNECTED_PLATFORM_UNSPECIFIED = 0;
+  CONNECTED_PLATFORM_INSTAGRAM = 1;
+  CONNECTED_PLATFORM_LINKEDIN = 2;
+  CONNECTED_PLATFORM_GITHUB = 3;
+}
+
+message WorkExperience {
+  ObjectId id = 1;
+  string title = 2;
+  string company = 3;
+  bool is_current = 4;
+  google.protobuf.Timestamp start_date = 5;
+  google.protobuf.Timestamp end_date = 6; // kosong jika is_current = true
+  string description = 7;
+}
+
+message ConnectedAccount {
+  ConnectedPlatform platform = 1;
+  string handle_or_url = 2;
+  bool verified = 3;
+  google.protobuf.Timestamp connected_at = 4;
+}
+
+message AboutMe {
+  string title = 1;
+  string description = 2;
+}
+
+message User {
+  ObjectId id = 1;
+  string email = 2;
+  string first_name = 3;
+  string last_name = 4;
+  string headline = 5;
+  string company = 6;
+  Location location = 7;
+  string website_url = 8;
+  string avatar_url = 9;
+  bool is_onboarded = 10;
+  repeated WorkExperience work_experience = 11;
+  repeated ConnectedAccount connected_accounts = 12;
+  AboutMe about_me = 13;
+  google.protobuf.Timestamp created_at = 14;
+  google.protobuf.Timestamp updated_at = 15;
+}
+
+// ---- Account API messages ----
+
+message UpdateBasicInfoRequest {
+  string first_name = 1;
+  string last_name = 2;
+  string headline = 3;
+  string company = 4;
+  Location location = 5;
+  string website_url = 6;
+}
+
+message UpsertWorkExperienceRequest {
+  WorkExperience entry = 1; // id kosong = create baru
+}

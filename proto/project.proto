@@ -1,0 +1,92 @@
+syntax = "proto3";
+package priemman.v1;
+import "common.proto";
+import "google/protobuf/timestamp.proto";
+
+enum ProjectVisibility {
+  PROJECT_VISIBILITY_UNSPECIFIED = 0;
+  PROJECT_VISIBILITY_PUBLIC = 1;
+  PROJECT_VISIBILITY_UNLISTED = 2;
+  PROJECT_VISIBILITY_DRAFT = 3;
+}
+
+enum ProjectStatus {
+  PROJECT_STATUS_UNSPECIFIED = 0;
+  PROJECT_STATUS_DRAFT = 1;
+  PROJECT_STATUS_PUBLISHED = 2;
+  PROJECT_STATUS_ARCHIVED = 3;
+}
+
+enum MediaType {
+  MEDIA_TYPE_UNSPECIFIED = 0;
+  MEDIA_TYPE_IMAGE = 1;
+  MEDIA_TYPE_VIDEO = 2;
+}
+
+message Media {
+  string url = 1;
+  MediaType type = 2;
+  int32 order = 3;
+}
+
+message Collaborator {
+  ObjectId user_id = 1;
+  string role = 2;
+}
+
+message ProjectMetrics {
+  int64 views = 1;
+  int64 likes = 2;
+  int64 saves = 3;
+}
+
+message Project {
+  ObjectId id = 1;
+  ObjectId owner_id = 2;
+  string title = 3;
+  string slug = 4;
+  string description = 5;
+  repeated string tools = 6;
+  repeated string disciplines = 7;
+  repeated string tags = 8;
+  string cover_media_id = 9;
+  repeated Media media = 10;
+  repeated Collaborator collaborators = 11;
+  ProjectVisibility visibility = 12;
+  ProjectStatus status = 13;
+  ProjectMetrics metrics = 14;
+  google.protobuf.Timestamp created_at = 15;
+  google.protobuf.Timestamp updated_at = 16;
+  google.protobuf.Timestamp published_at = 17;
+}
+
+enum CollectionVisibility {
+  COLLECTION_VISIBILITY_UNSPECIFIED = 0;
+  COLLECTION_VISIBILITY_PUBLIC = 1;
+  COLLECTION_VISIBILITY_PRIVATE = 2;
+}
+
+message Collection {
+  ObjectId id = 1;
+  ObjectId owner_id = 2;
+  string title = 3;
+  string description = 4;
+  repeated ObjectId project_ids = 5;
+  CollectionVisibility visibility = 6;
+  google.protobuf.Timestamp created_at = 7;
+  google.protobuf.Timestamp updated_at = 8;
+}
+
+// ---- List/query request umum, dipakai tab All/Drafts/Published ----
+
+message ListProjectsRequest {
+  ObjectId owner_id = 1;
+  ProjectStatus status_filter = 2; // UNSPECIFIED = semua
+  int32 page_size = 3;
+  string page_token = 4;
+}
+
+message ListProjectsResponse {
+  repeated Project projects = 1;
+  string next_page_token = 2;
+}
