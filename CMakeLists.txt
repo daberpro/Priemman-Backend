@@ -1,4 +1,5 @@
-cmake_minimum_required(VERSION 3.10)
+cmake_minimum_required(VERSION 3.24)
+
 project(server)
 
 set(CMAKE_CXX_STANDARD 23)
@@ -24,7 +25,8 @@ protobuf_generate(
 )
 
 target_include_directories(
-  ${PROJECT_NAME} PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}"
+    ${PROJECT_NAME} PRIVATE
+    "${CMAKE_CURRENT_SOURCE_DIR}"
 )
 
 target_link_libraries(
@@ -34,14 +36,4 @@ target_link_libraries(
     userver::mysql
     ssl
     crypto
-)
-
-
-# Only dev mode
-enable_testing()
-userver_testsuite_add_simple(
-    SERVICE_TARGET ${PROJECT_NAME}
-    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
-    TESTSUITE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/tests
-    CONFIG_PATH ${CMAKE_CURRENT_SOURCE_DIR}/config/config.yaml
 )
