@@ -2,6 +2,7 @@
 # Build
 # ==============================
 build/
+build-ci/
 cmake-build-*/
 out/
 bin/
@@ -62,10 +63,23 @@ logs/
 # ==============================
 # Configuration / Secrets
 # ==============================
-config/
+# config/config.yaml          -> MASUK GIT (aman: pakai #env + #fallback)
+# config/config_vars.example.yaml -> MASUK GIT (template untuk developer)
+# config/config_vars.yaml     -> TIDAK masuk (isi secrets lokal)
+config/config_vars*.yaml
+!config/config_vars.example.yaml
+config/secdist.json
 
 # ==============================
 # OS
 # ==============================
 .DS_Store
 Thumbs.db
+
+# ==============================
+# Test files (generated / runtime)
+# ==============================
+test_py/.session
+test_py/*_pb2.py
+test_py/__pycache__/
+test_py/.pytest_cache/

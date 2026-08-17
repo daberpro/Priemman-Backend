@@ -64,3 +64,17 @@ message UpdateBasicInfoRequest {
 message UpsertWorkExperienceRequest {
   WorkExperience entry = 1; // id kosong = create baru
 }
+
+// ---- Account API (tambahan) ----
+message ListWorkExperienceResponse {
+    repeated WorkExperience entries = 1;
+}
+message DeleteWorkExperienceRequest {
+    ObjectId id = 1;
+}
+message ListConnectedAccountsResponse {
+    repeated ConnectedAccount accounts = 1;
+}
+message DeleteConnectedAccountRequest {
+    ConnectedPlatform platform = 1;
+}

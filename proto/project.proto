@@ -27,6 +27,7 @@ message Media {
   string url = 1;
   MediaType type = 2;
   int32 order = 3;
+  ObjectId id = 4;
 }
 
 message Collaborator {
@@ -90,3 +91,32 @@ message ListProjectsResponse {
   repeated Project projects = 1;
   string next_page_token = 2;
 }
+
+// ---- Input & Request/Response CRUD ----
+message ProjectInput {
+    string title = 1;
+    string description = 2;
+    repeated string tools = 3;
+    repeated string disciplines = 4;
+    repeated string tags = 5;
+    repeated Media media = 6;
+    repeated Collaborator collaborators = 7;
+    ProjectVisibility visibility = 8;
+    ProjectStatus status = 9;       // set PUBLISHED untuk publish (published_at otomatis)
+    string cover_media_id = 10;     // kosong = media pertama
+}
+message CreateProjectRequest  { ProjectInput input = 1; }
+message UpdateProjectRequest  { ObjectId id = 1; ProjectInput input = 2; }
+message ProjectResponse       { Project project = 1; }
+
+message CollectionInput {
+    string title = 1;
+    string description = 2;
+    CollectionVisibility visibility = 3;
+    repeated ObjectId project_ids = 4;
+}
+message CreateCollectionRequest { CollectionInput input = 1; }
+message UpdateCollectionRequest { ObjectId id = 1; CollectionInput input = 2; }
+message CollectionResponse      { Collection collection = 1; }
+message ListCollectionsResponse { repeated Collection collections = 1; }
+message DeleteCollectionRequest { ObjectId id = 1; }

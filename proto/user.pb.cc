@@ -129,9 +129,61 @@ struct UpsertWorkExperienceRequestDefaultTypeInternal {
   };
 };
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 UpsertWorkExperienceRequestDefaultTypeInternal _UpsertWorkExperienceRequest_default_instance_;
+PROTOBUF_CONSTEXPR ListWorkExperienceResponse::ListWorkExperienceResponse(
+    ::_pbi::ConstantInitialized): _impl_{
+    /*decltype(_impl_.entries_)*/{}
+  , /*decltype(_impl_._cached_size_)*/{}} {}
+struct ListWorkExperienceResponseDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR ListWorkExperienceResponseDefaultTypeInternal()
+      : _instance(::_pbi::ConstantInitialized{}) {}
+  ~ListWorkExperienceResponseDefaultTypeInternal() {}
+  union {
+    ListWorkExperienceResponse _instance;
+  };
+};
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 ListWorkExperienceResponseDefaultTypeInternal _ListWorkExperienceResponse_default_instance_;
+PROTOBUF_CONSTEXPR DeleteWorkExperienceRequest::DeleteWorkExperienceRequest(
+    ::_pbi::ConstantInitialized): _impl_{
+    /*decltype(_impl_.id_)*/nullptr
+  , /*decltype(_impl_._cached_size_)*/{}} {}
+struct DeleteWorkExperienceRequestDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR DeleteWorkExperienceRequestDefaultTypeInternal()
+      : _instance(::_pbi::ConstantInitialized{}) {}
+  ~DeleteWorkExperienceRequestDefaultTypeInternal() {}
+  union {
+    DeleteWorkExperienceRequest _instance;
+  };
+};
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 DeleteWorkExperienceRequestDefaultTypeInternal _DeleteWorkExperienceRequest_default_instance_;
+PROTOBUF_CONSTEXPR ListConnectedAccountsResponse::ListConnectedAccountsResponse(
+    ::_pbi::ConstantInitialized): _impl_{
+    /*decltype(_impl_.accounts_)*/{}
+  , /*decltype(_impl_._cached_size_)*/{}} {}
+struct ListConnectedAccountsResponseDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR ListConnectedAccountsResponseDefaultTypeInternal()
+      : _instance(::_pbi::ConstantInitialized{}) {}
+  ~ListConnectedAccountsResponseDefaultTypeInternal() {}
+  union {
+    ListConnectedAccountsResponse _instance;
+  };
+};
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 ListConnectedAccountsResponseDefaultTypeInternal _ListConnectedAccountsResponse_default_instance_;
+PROTOBUF_CONSTEXPR DeleteConnectedAccountRequest::DeleteConnectedAccountRequest(
+    ::_pbi::ConstantInitialized): _impl_{
+    /*decltype(_impl_.platform_)*/0
+  , /*decltype(_impl_._cached_size_)*/{}} {}
+struct DeleteConnectedAccountRequestDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR DeleteConnectedAccountRequestDefaultTypeInternal()
+      : _instance(::_pbi::ConstantInitialized{}) {}
+  ~DeleteConnectedAccountRequestDefaultTypeInternal() {}
+  union {
+    DeleteConnectedAccountRequest _instance;
+  };
+};
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 DeleteConnectedAccountRequestDefaultTypeInternal _DeleteConnectedAccountRequest_default_instance_;
 }  // namespace v1
 }  // namespace priemman
-static ::_pb::Metadata file_level_metadata_user_2eproto[6];
+static ::_pb::Metadata file_level_metadata_user_2eproto[10];
 static const ::_pb::EnumDescriptor* file_level_enum_descriptors_user_2eproto[1];
 static constexpr ::_pb::ServiceDescriptor const** file_level_service_descriptors_user_2eproto = nullptr;
 
@@ -207,6 +259,34 @@ const uint32_t TableStruct_user_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE(pro
   ~0u,  // no _weak_field_map_
   ~0u,  // no _inlined_string_donated_
   PROTOBUF_FIELD_OFFSET(::priemman::v1::UpsertWorkExperienceRequest, _impl_.entry_),
+  ~0u,  // no _has_bits_
+  PROTOBUF_FIELD_OFFSET(::priemman::v1::ListWorkExperienceResponse, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  ~0u,  // no _inlined_string_donated_
+  PROTOBUF_FIELD_OFFSET(::priemman::v1::ListWorkExperienceResponse, _impl_.entries_),
+  ~0u,  // no _has_bits_
+  PROTOBUF_FIELD_OFFSET(::priemman::v1::DeleteWorkExperienceRequest, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  ~0u,  // no _inlined_string_donated_
+  PROTOBUF_FIELD_OFFSET(::priemman::v1::DeleteWorkExperienceRequest, _impl_.id_),
+  ~0u,  // no _has_bits_
+  PROTOBUF_FIELD_OFFSET(::priemman::v1::ListConnectedAccountsResponse, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  ~0u,  // no _inlined_string_donated_
+  PROTOBUF_FIELD_OFFSET(::priemman::v1::ListConnectedAccountsResponse, _impl_.accounts_),
+  ~0u,  // no _has_bits_
+  PROTOBUF_FIELD_OFFSET(::priemman::v1::DeleteConnectedAccountRequest, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  ~0u,  // no _inlined_string_donated_
+  PROTOBUF_FIELD_OFFSET(::priemman::v1::DeleteConnectedAccountRequest, _impl_.platform_),
 };
 static const ::_pbi::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
   { 0, -1, -1, sizeof(::priemman::v1::WorkExperience)},
@@ -215,6 +295,10 @@ static const ::_pbi::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protode
   { 31, -1, -1, sizeof(::priemman::v1::User)},
   { 52, -1, -1, sizeof(::priemman::v1::UpdateBasicInfoRequest)},
   { 64, -1, -1, sizeof(::priemman::v1::UpsertWorkExperienceRequest)},
+  { 71, -1, -1, sizeof(::priemman::v1::ListWorkExperienceResponse)},
+  { 78, -1, -1, sizeof(::priemman::v1::DeleteWorkExperienceRequest)},
+  { 85, -1, -1, sizeof(::priemman::v1::ListConnectedAccountsResponse)},
+  { 92, -1, -1, sizeof(::priemman::v1::DeleteConnectedAccountRequest)},
 };
 
 static const ::_pb::Message* const file_default_instances[] = {
@@ -224,6 +308,10 @@ static const ::_pb::Message* const file_default_instances[] = {
   &::priemman::v1::_User_default_instance_._instance,
   &::priemman::v1::_UpdateBasicInfoRequest_default_instance_._instance,
   &::priemman::v1::_UpsertWorkExperienceRequest_default_instance_._instance,
+  &::priemman::v1::_ListWorkExperienceResponse_default_instance_._instance,
+  &::priemman::v1::_DeleteWorkExperienceRequest_default_instance_._instance,
+  &::priemman::v1::_ListConnectedAccountsResponse_default_instance_._instance,
+  &::priemman::v1::_DeleteConnectedAccountRequest_default_instance_._instance,
 };
 
 const char descriptor_table_protodef_user_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) =
@@ -257,11 +345,19 @@ const char descriptor_table_protodef_user_2eproto[] PROTOBUF_SECTION_VARIABLE(pr
   "any\030\004 \001(\t\022\'\n\010location\030\005 \001(\0132\025.priemman.v"
   "1.Location\022\023\n\013website_url\030\006 \001(\t\"I\n\033Upser"
   "tWorkExperienceRequest\022*\n\005entry\030\001 \001(\0132\033."
-  "priemman.v1.WorkExperience*\231\001\n\021Connected"
-  "Platform\022\"\n\036CONNECTED_PLATFORM_UNSPECIFI"
-  "ED\020\000\022 \n\034CONNECTED_PLATFORM_INSTAGRAM\020\001\022\037"
-  "\n\033CONNECTED_PLATFORM_LINKEDIN\020\002\022\035\n\031CONNE"
-  "CTED_PLATFORM_GITHUB\020\003b\006proto3"
+  "priemman.v1.WorkExperience\"J\n\032ListWorkEx"
+  "perienceResponse\022,\n\007entries\030\001 \003(\0132\033.prie"
+  "mman.v1.WorkExperience\"@\n\033DeleteWorkExpe"
+  "rienceRequest\022!\n\002id\030\001 \001(\0132\025.priemman.v1."
+  "ObjectId\"P\n\035ListConnectedAccountsRespons"
+  "e\022/\n\010accounts\030\001 \003(\0132\035.priemman.v1.Connec"
+  "tedAccount\"Q\n\035DeleteConnectedAccountRequ"
+  "est\0220\n\010platform\030\001 \001(\0162\036.priemman.v1.Conn"
+  "ectedPlatform*\231\001\n\021ConnectedPlatform\022\"\n\036C"
+  "ONNECTED_PLATFORM_UNSPECIFIED\020\000\022 \n\034CONNE"
+  "CTED_PLATFORM_INSTAGRAM\020\001\022\037\n\033CONNECTED_P"
+  "LATFORM_LINKEDIN\020\002\022\035\n\031CONNECTED_PLATFORM"
+  "_GITHUB\020\003b\006proto3"
   ;
 static const ::_pbi::DescriptorTable* const descriptor_table_user_2eproto_deps[2] = {
   &::descriptor_table_common_2eproto,
@@ -269,9 +365,9 @@ static const ::_pbi::DescriptorTable* const descriptor_table_user_2eproto_deps[2
 };
 static ::_pbi::once_flag descriptor_table_user_2eproto_once;
 const ::_pbi::DescriptorTable descriptor_table_user_2eproto = {
-    false, false, 1390, descriptor_table_protodef_user_2eproto,
+    false, false, 1697, descriptor_table_protodef_user_2eproto,
     "user.proto",
-    &descriptor_table_user_2eproto_once, descriptor_table_user_2eproto_deps, 2, 6,
+    &descriptor_table_user_2eproto_once, descriptor_table_user_2eproto_deps, 2, 10,
     schemas, file_default_instances, TableStruct_user_2eproto::offsets,
     file_level_metadata_user_2eproto, file_level_enum_descriptors_user_2eproto,
     file_level_service_descriptors_user_2eproto,
@@ -2819,6 +2915,756 @@ void UpsertWorkExperienceRequest::InternalSwap(UpsertWorkExperienceRequest* othe
       file_level_metadata_user_2eproto[5]);
 }
 
+// ===================================================================
+
+class ListWorkExperienceResponse::_Internal {
+ public:
+};
+
+ListWorkExperienceResponse::ListWorkExperienceResponse(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                         bool is_message_owned)
+  : ::PROTOBUF_NAMESPACE_ID::Message(arena, is_message_owned) {
+  SharedCtor(arena, is_message_owned);
+  // @@protoc_insertion_point(arena_constructor:priemman.v1.ListWorkExperienceResponse)
+}
+ListWorkExperienceResponse::ListWorkExperienceResponse(const ListWorkExperienceResponse& from)
+  : ::PROTOBUF_NAMESPACE_ID::Message() {
+  ListWorkExperienceResponse* const _this = this; (void)_this;
+  new (&_impl_) Impl_{
+      decltype(_impl_.entries_){from._impl_.entries_}
+    , /*decltype(_impl_._cached_size_)*/{}};
+
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  // @@protoc_insertion_point(copy_constructor:priemman.v1.ListWorkExperienceResponse)
+}
+
+inline void ListWorkExperienceResponse::SharedCtor(
+    ::_pb::Arena* arena, bool is_message_owned) {
+  (void)arena;
+  (void)is_message_owned;
+  new (&_impl_) Impl_{
+      decltype(_impl_.entries_){arena}
+    , /*decltype(_impl_._cached_size_)*/{}
+  };
+}
+
+ListWorkExperienceResponse::~ListWorkExperienceResponse() {
+  // @@protoc_insertion_point(destructor:priemman.v1.ListWorkExperienceResponse)
+  if (auto *arena = _internal_metadata_.DeleteReturnArena<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>()) {
+  (void)arena;
+    return;
+  }
+  SharedDtor();
+}
+
+inline void ListWorkExperienceResponse::SharedDtor() {
+  GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
+  _impl_.entries_.~RepeatedPtrField();
+}
+
+void ListWorkExperienceResponse::SetCachedSize(int size) const {
+  _impl_._cached_size_.Set(size);
+}
+
+void ListWorkExperienceResponse::Clear() {
+// @@protoc_insertion_point(message_clear_start:priemman.v1.ListWorkExperienceResponse)
+  uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  _impl_.entries_.Clear();
+  _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+}
+
+const char* ListWorkExperienceResponse::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  while (!ctx->Done(&ptr)) {
+    uint32_t tag;
+    ptr = ::_pbi::ReadTag(ptr, &tag);
+    switch (tag >> 3) {
+      // repeated .priemman.v1.WorkExperience entries = 1;
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 10)) {
+          ptr -= 1;
+          do {
+            ptr += 1;
+            ptr = ctx->ParseMessage(_internal_add_entries(), ptr);
+            CHK_(ptr);
+            if (!ctx->DataAvailable(ptr)) break;
+          } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<10>(ptr));
+        } else
+          goto handle_unusual;
+        continue;
+      default:
+        goto handle_unusual;
+    }  // switch
+  handle_unusual:
+    if ((tag == 0) || ((tag & 7) == 4)) {
+      CHK_(ptr);
+      ctx->SetLastTag(tag);
+      goto message_done;
+    }
+    ptr = UnknownFieldParse(
+        tag,
+        _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
+        ptr, ctx);
+    CHK_(ptr != nullptr);
+  }  // while
+message_done:
+  return ptr;
+failure:
+  ptr = nullptr;
+  goto message_done;
+#undef CHK_
+}
+
+uint8_t* ListWorkExperienceResponse::_InternalSerialize(
+    uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
+  // @@protoc_insertion_point(serialize_to_array_start:priemman.v1.ListWorkExperienceResponse)
+  uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // repeated .priemman.v1.WorkExperience entries = 1;
+  for (unsigned i = 0,
+      n = static_cast<unsigned>(this->_internal_entries_size()); i < n; i++) {
+    const auto& repfield = this->_internal_entries(i);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+        InternalWriteMessage(1, repfield, repfield.GetCachedSize(), target, stream);
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:priemman.v1.ListWorkExperienceResponse)
+  return target;
+}
+
+size_t ListWorkExperienceResponse::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:priemman.v1.ListWorkExperienceResponse)
+  size_t total_size = 0;
+
+  uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  // repeated .priemman.v1.WorkExperience entries = 1;
+  total_size += 1UL * this->_internal_entries_size();
+  for (const auto& msg : this->_impl_.entries_) {
+    total_size +=
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(msg);
+  }
+
+  return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
+}
+
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData ListWorkExperienceResponse::_class_data_ = {
+    ::PROTOBUF_NAMESPACE_ID::Message::CopyWithSourceCheck,
+    ListWorkExperienceResponse::MergeImpl
+};
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*ListWorkExperienceResponse::GetClassData() const { return &_class_data_; }
+
+
+void ListWorkExperienceResponse::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg) {
+  auto* const _this = static_cast<ListWorkExperienceResponse*>(&to_msg);
+  auto& from = static_cast<const ListWorkExperienceResponse&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:priemman.v1.ListWorkExperienceResponse)
+  GOOGLE_DCHECK_NE(&from, _this);
+  uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  _this->_impl_.entries_.MergeFrom(from._impl_.entries_);
+  _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+}
+
+void ListWorkExperienceResponse::CopyFrom(const ListWorkExperienceResponse& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:priemman.v1.ListWorkExperienceResponse)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool ListWorkExperienceResponse::IsInitialized() const {
+  return true;
+}
+
+void ListWorkExperienceResponse::InternalSwap(ListWorkExperienceResponse* other) {
+  using std::swap;
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  _impl_.entries_.InternalSwap(&other->_impl_.entries_);
+}
+
+::PROTOBUF_NAMESPACE_ID::Metadata ListWorkExperienceResponse::GetMetadata() const {
+  return ::_pbi::AssignDescriptors(
+      &descriptor_table_user_2eproto_getter, &descriptor_table_user_2eproto_once,
+      file_level_metadata_user_2eproto[6]);
+}
+
+// ===================================================================
+
+class DeleteWorkExperienceRequest::_Internal {
+ public:
+  static const ::priemman::v1::ObjectId& id(const DeleteWorkExperienceRequest* msg);
+};
+
+const ::priemman::v1::ObjectId&
+DeleteWorkExperienceRequest::_Internal::id(const DeleteWorkExperienceRequest* msg) {
+  return *msg->_impl_.id_;
+}
+void DeleteWorkExperienceRequest::clear_id() {
+  if (GetArenaForAllocation() == nullptr && _impl_.id_ != nullptr) {
+    delete _impl_.id_;
+  }
+  _impl_.id_ = nullptr;
+}
+DeleteWorkExperienceRequest::DeleteWorkExperienceRequest(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                         bool is_message_owned)
+  : ::PROTOBUF_NAMESPACE_ID::Message(arena, is_message_owned) {
+  SharedCtor(arena, is_message_owned);
+  // @@protoc_insertion_point(arena_constructor:priemman.v1.DeleteWorkExperienceRequest)
+}
+DeleteWorkExperienceRequest::DeleteWorkExperienceRequest(const DeleteWorkExperienceRequest& from)
+  : ::PROTOBUF_NAMESPACE_ID::Message() {
+  DeleteWorkExperienceRequest* const _this = this; (void)_this;
+  new (&_impl_) Impl_{
+      decltype(_impl_.id_){nullptr}
+    , /*decltype(_impl_._cached_size_)*/{}};
+
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  if (from._internal_has_id()) {
+    _this->_impl_.id_ = new ::priemman::v1::ObjectId(*from._impl_.id_);
+  }
+  // @@protoc_insertion_point(copy_constructor:priemman.v1.DeleteWorkExperienceRequest)
+}
+
+inline void DeleteWorkExperienceRequest::SharedCtor(
+    ::_pb::Arena* arena, bool is_message_owned) {
+  (void)arena;
+  (void)is_message_owned;
+  new (&_impl_) Impl_{
+      decltype(_impl_.id_){nullptr}
+    , /*decltype(_impl_._cached_size_)*/{}
+  };
+}
+
+DeleteWorkExperienceRequest::~DeleteWorkExperienceRequest() {
+  // @@protoc_insertion_point(destructor:priemman.v1.DeleteWorkExperienceRequest)
+  if (auto *arena = _internal_metadata_.DeleteReturnArena<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>()) {
+  (void)arena;
+    return;
+  }
+  SharedDtor();
+}
+
+inline void DeleteWorkExperienceRequest::SharedDtor() {
+  GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
+  if (this != internal_default_instance()) delete _impl_.id_;
+}
+
+void DeleteWorkExperienceRequest::SetCachedSize(int size) const {
+  _impl_._cached_size_.Set(size);
+}
+
+void DeleteWorkExperienceRequest::Clear() {
+// @@protoc_insertion_point(message_clear_start:priemman.v1.DeleteWorkExperienceRequest)
+  uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  if (GetArenaForAllocation() == nullptr && _impl_.id_ != nullptr) {
+    delete _impl_.id_;
+  }
+  _impl_.id_ = nullptr;
+  _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+}
+
+const char* DeleteWorkExperienceRequest::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  while (!ctx->Done(&ptr)) {
+    uint32_t tag;
+    ptr = ::_pbi::ReadTag(ptr, &tag);
+    switch (tag >> 3) {
+      // .priemman.v1.ObjectId id = 1;
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 10)) {
+          ptr = ctx->ParseMessage(_internal_mutable_id(), ptr);
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      default:
+        goto handle_unusual;
+    }  // switch
+  handle_unusual:
+    if ((tag == 0) || ((tag & 7) == 4)) {
+      CHK_(ptr);
+      ctx->SetLastTag(tag);
+      goto message_done;
+    }
+    ptr = UnknownFieldParse(
+        tag,
+        _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
+        ptr, ctx);
+    CHK_(ptr != nullptr);
+  }  // while
+message_done:
+  return ptr;
+failure:
+  ptr = nullptr;
+  goto message_done;
+#undef CHK_
+}
+
+uint8_t* DeleteWorkExperienceRequest::_InternalSerialize(
+    uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
+  // @@protoc_insertion_point(serialize_to_array_start:priemman.v1.DeleteWorkExperienceRequest)
+  uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // .priemman.v1.ObjectId id = 1;
+  if (this->_internal_has_id()) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+      InternalWriteMessage(1, _Internal::id(this),
+        _Internal::id(this).GetCachedSize(), target, stream);
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:priemman.v1.DeleteWorkExperienceRequest)
+  return target;
+}
+
+size_t DeleteWorkExperienceRequest::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:priemman.v1.DeleteWorkExperienceRequest)
+  size_t total_size = 0;
+
+  uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  // .priemman.v1.ObjectId id = 1;
+  if (this->_internal_has_id()) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
+        *_impl_.id_);
+  }
+
+  return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
+}
+
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData DeleteWorkExperienceRequest::_class_data_ = {
+    ::PROTOBUF_NAMESPACE_ID::Message::CopyWithSourceCheck,
+    DeleteWorkExperienceRequest::MergeImpl
+};
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*DeleteWorkExperienceRequest::GetClassData() const { return &_class_data_; }
+
+
+void DeleteWorkExperienceRequest::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg) {
+  auto* const _this = static_cast<DeleteWorkExperienceRequest*>(&to_msg);
+  auto& from = static_cast<const DeleteWorkExperienceRequest&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:priemman.v1.DeleteWorkExperienceRequest)
+  GOOGLE_DCHECK_NE(&from, _this);
+  uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (from._internal_has_id()) {
+    _this->_internal_mutable_id()->::priemman::v1::ObjectId::MergeFrom(
+        from._internal_id());
+  }
+  _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+}
+
+void DeleteWorkExperienceRequest::CopyFrom(const DeleteWorkExperienceRequest& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:priemman.v1.DeleteWorkExperienceRequest)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool DeleteWorkExperienceRequest::IsInitialized() const {
+  return true;
+}
+
+void DeleteWorkExperienceRequest::InternalSwap(DeleteWorkExperienceRequest* other) {
+  using std::swap;
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  swap(_impl_.id_, other->_impl_.id_);
+}
+
+::PROTOBUF_NAMESPACE_ID::Metadata DeleteWorkExperienceRequest::GetMetadata() const {
+  return ::_pbi::AssignDescriptors(
+      &descriptor_table_user_2eproto_getter, &descriptor_table_user_2eproto_once,
+      file_level_metadata_user_2eproto[7]);
+}
+
+// ===================================================================
+
+class ListConnectedAccountsResponse::_Internal {
+ public:
+};
+
+ListConnectedAccountsResponse::ListConnectedAccountsResponse(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                         bool is_message_owned)
+  : ::PROTOBUF_NAMESPACE_ID::Message(arena, is_message_owned) {
+  SharedCtor(arena, is_message_owned);
+  // @@protoc_insertion_point(arena_constructor:priemman.v1.ListConnectedAccountsResponse)
+}
+ListConnectedAccountsResponse::ListConnectedAccountsResponse(const ListConnectedAccountsResponse& from)
+  : ::PROTOBUF_NAMESPACE_ID::Message() {
+  ListConnectedAccountsResponse* const _this = this; (void)_this;
+  new (&_impl_) Impl_{
+      decltype(_impl_.accounts_){from._impl_.accounts_}
+    , /*decltype(_impl_._cached_size_)*/{}};
+
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  // @@protoc_insertion_point(copy_constructor:priemman.v1.ListConnectedAccountsResponse)
+}
+
+inline void ListConnectedAccountsResponse::SharedCtor(
+    ::_pb::Arena* arena, bool is_message_owned) {
+  (void)arena;
+  (void)is_message_owned;
+  new (&_impl_) Impl_{
+      decltype(_impl_.accounts_){arena}
+    , /*decltype(_impl_._cached_size_)*/{}
+  };
+}
+
+ListConnectedAccountsResponse::~ListConnectedAccountsResponse() {
+  // @@protoc_insertion_point(destructor:priemman.v1.ListConnectedAccountsResponse)
+  if (auto *arena = _internal_metadata_.DeleteReturnArena<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>()) {
+  (void)arena;
+    return;
+  }
+  SharedDtor();
+}
+
+inline void ListConnectedAccountsResponse::SharedDtor() {
+  GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
+  _impl_.accounts_.~RepeatedPtrField();
+}
+
+void ListConnectedAccountsResponse::SetCachedSize(int size) const {
+  _impl_._cached_size_.Set(size);
+}
+
+void ListConnectedAccountsResponse::Clear() {
+// @@protoc_insertion_point(message_clear_start:priemman.v1.ListConnectedAccountsResponse)
+  uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  _impl_.accounts_.Clear();
+  _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+}
+
+const char* ListConnectedAccountsResponse::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  while (!ctx->Done(&ptr)) {
+    uint32_t tag;
+    ptr = ::_pbi::ReadTag(ptr, &tag);
+    switch (tag >> 3) {
+      // repeated .priemman.v1.ConnectedAccount accounts = 1;
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 10)) {
+          ptr -= 1;
+          do {
+            ptr += 1;
+            ptr = ctx->ParseMessage(_internal_add_accounts(), ptr);
+            CHK_(ptr);
+            if (!ctx->DataAvailable(ptr)) break;
+          } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<10>(ptr));
+        } else
+          goto handle_unusual;
+        continue;
+      default:
+        goto handle_unusual;
+    }  // switch
+  handle_unusual:
+    if ((tag == 0) || ((tag & 7) == 4)) {
+      CHK_(ptr);
+      ctx->SetLastTag(tag);
+      goto message_done;
+    }
+    ptr = UnknownFieldParse(
+        tag,
+        _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
+        ptr, ctx);
+    CHK_(ptr != nullptr);
+  }  // while
+message_done:
+  return ptr;
+failure:
+  ptr = nullptr;
+  goto message_done;
+#undef CHK_
+}
+
+uint8_t* ListConnectedAccountsResponse::_InternalSerialize(
+    uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
+  // @@protoc_insertion_point(serialize_to_array_start:priemman.v1.ListConnectedAccountsResponse)
+  uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // repeated .priemman.v1.ConnectedAccount accounts = 1;
+  for (unsigned i = 0,
+      n = static_cast<unsigned>(this->_internal_accounts_size()); i < n; i++) {
+    const auto& repfield = this->_internal_accounts(i);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+        InternalWriteMessage(1, repfield, repfield.GetCachedSize(), target, stream);
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:priemman.v1.ListConnectedAccountsResponse)
+  return target;
+}
+
+size_t ListConnectedAccountsResponse::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:priemman.v1.ListConnectedAccountsResponse)
+  size_t total_size = 0;
+
+  uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  // repeated .priemman.v1.ConnectedAccount accounts = 1;
+  total_size += 1UL * this->_internal_accounts_size();
+  for (const auto& msg : this->_impl_.accounts_) {
+    total_size +=
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(msg);
+  }
+
+  return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
+}
+
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData ListConnectedAccountsResponse::_class_data_ = {
+    ::PROTOBUF_NAMESPACE_ID::Message::CopyWithSourceCheck,
+    ListConnectedAccountsResponse::MergeImpl
+};
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*ListConnectedAccountsResponse::GetClassData() const { return &_class_data_; }
+
+
+void ListConnectedAccountsResponse::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg) {
+  auto* const _this = static_cast<ListConnectedAccountsResponse*>(&to_msg);
+  auto& from = static_cast<const ListConnectedAccountsResponse&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:priemman.v1.ListConnectedAccountsResponse)
+  GOOGLE_DCHECK_NE(&from, _this);
+  uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  _this->_impl_.accounts_.MergeFrom(from._impl_.accounts_);
+  _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+}
+
+void ListConnectedAccountsResponse::CopyFrom(const ListConnectedAccountsResponse& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:priemman.v1.ListConnectedAccountsResponse)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool ListConnectedAccountsResponse::IsInitialized() const {
+  return true;
+}
+
+void ListConnectedAccountsResponse::InternalSwap(ListConnectedAccountsResponse* other) {
+  using std::swap;
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  _impl_.accounts_.InternalSwap(&other->_impl_.accounts_);
+}
+
+::PROTOBUF_NAMESPACE_ID::Metadata ListConnectedAccountsResponse::GetMetadata() const {
+  return ::_pbi::AssignDescriptors(
+      &descriptor_table_user_2eproto_getter, &descriptor_table_user_2eproto_once,
+      file_level_metadata_user_2eproto[8]);
+}
+
+// ===================================================================
+
+class DeleteConnectedAccountRequest::_Internal {
+ public:
+};
+
+DeleteConnectedAccountRequest::DeleteConnectedAccountRequest(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                         bool is_message_owned)
+  : ::PROTOBUF_NAMESPACE_ID::Message(arena, is_message_owned) {
+  SharedCtor(arena, is_message_owned);
+  // @@protoc_insertion_point(arena_constructor:priemman.v1.DeleteConnectedAccountRequest)
+}
+DeleteConnectedAccountRequest::DeleteConnectedAccountRequest(const DeleteConnectedAccountRequest& from)
+  : ::PROTOBUF_NAMESPACE_ID::Message() {
+  DeleteConnectedAccountRequest* const _this = this; (void)_this;
+  new (&_impl_) Impl_{
+      decltype(_impl_.platform_){}
+    , /*decltype(_impl_._cached_size_)*/{}};
+
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  _this->_impl_.platform_ = from._impl_.platform_;
+  // @@protoc_insertion_point(copy_constructor:priemman.v1.DeleteConnectedAccountRequest)
+}
+
+inline void DeleteConnectedAccountRequest::SharedCtor(
+    ::_pb::Arena* arena, bool is_message_owned) {
+  (void)arena;
+  (void)is_message_owned;
+  new (&_impl_) Impl_{
+      decltype(_impl_.platform_){0}
+    , /*decltype(_impl_._cached_size_)*/{}
+  };
+}
+
+DeleteConnectedAccountRequest::~DeleteConnectedAccountRequest() {
+  // @@protoc_insertion_point(destructor:priemman.v1.DeleteConnectedAccountRequest)
+  if (auto *arena = _internal_metadata_.DeleteReturnArena<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>()) {
+  (void)arena;
+    return;
+  }
+  SharedDtor();
+}
+
+inline void DeleteConnectedAccountRequest::SharedDtor() {
+  GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
+}
+
+void DeleteConnectedAccountRequest::SetCachedSize(int size) const {
+  _impl_._cached_size_.Set(size);
+}
+
+void DeleteConnectedAccountRequest::Clear() {
+// @@protoc_insertion_point(message_clear_start:priemman.v1.DeleteConnectedAccountRequest)
+  uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  _impl_.platform_ = 0;
+  _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+}
+
+const char* DeleteConnectedAccountRequest::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  while (!ctx->Done(&ptr)) {
+    uint32_t tag;
+    ptr = ::_pbi::ReadTag(ptr, &tag);
+    switch (tag >> 3) {
+      // .priemman.v1.ConnectedPlatform platform = 1;
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 8)) {
+          uint64_t val = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
+          CHK_(ptr);
+          _internal_set_platform(static_cast<::priemman::v1::ConnectedPlatform>(val));
+        } else
+          goto handle_unusual;
+        continue;
+      default:
+        goto handle_unusual;
+    }  // switch
+  handle_unusual:
+    if ((tag == 0) || ((tag & 7) == 4)) {
+      CHK_(ptr);
+      ctx->SetLastTag(tag);
+      goto message_done;
+    }
+    ptr = UnknownFieldParse(
+        tag,
+        _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
+        ptr, ctx);
+    CHK_(ptr != nullptr);
+  }  // while
+message_done:
+  return ptr;
+failure:
+  ptr = nullptr;
+  goto message_done;
+#undef CHK_
+}
+
+uint8_t* DeleteConnectedAccountRequest::_InternalSerialize(
+    uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
+  // @@protoc_insertion_point(serialize_to_array_start:priemman.v1.DeleteConnectedAccountRequest)
+  uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // .priemman.v1.ConnectedPlatform platform = 1;
+  if (this->_internal_platform() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::_pbi::WireFormatLite::WriteEnumToArray(
+      1, this->_internal_platform(), target);
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:priemman.v1.DeleteConnectedAccountRequest)
+  return target;
+}
+
+size_t DeleteConnectedAccountRequest::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:priemman.v1.DeleteConnectedAccountRequest)
+  size_t total_size = 0;
+
+  uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  // .priemman.v1.ConnectedPlatform platform = 1;
+  if (this->_internal_platform() != 0) {
+    total_size += 1 +
+      ::_pbi::WireFormatLite::EnumSize(this->_internal_platform());
+  }
+
+  return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
+}
+
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData DeleteConnectedAccountRequest::_class_data_ = {
+    ::PROTOBUF_NAMESPACE_ID::Message::CopyWithSourceCheck,
+    DeleteConnectedAccountRequest::MergeImpl
+};
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*DeleteConnectedAccountRequest::GetClassData() const { return &_class_data_; }
+
+
+void DeleteConnectedAccountRequest::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg) {
+  auto* const _this = static_cast<DeleteConnectedAccountRequest*>(&to_msg);
+  auto& from = static_cast<const DeleteConnectedAccountRequest&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:priemman.v1.DeleteConnectedAccountRequest)
+  GOOGLE_DCHECK_NE(&from, _this);
+  uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (from._internal_platform() != 0) {
+    _this->_internal_set_platform(from._internal_platform());
+  }
+  _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+}
+
+void DeleteConnectedAccountRequest::CopyFrom(const DeleteConnectedAccountRequest& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:priemman.v1.DeleteConnectedAccountRequest)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool DeleteConnectedAccountRequest::IsInitialized() const {
+  return true;
+}
+
+void DeleteConnectedAccountRequest::InternalSwap(DeleteConnectedAccountRequest* other) {
+  using std::swap;
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  swap(_impl_.platform_, other->_impl_.platform_);
+}
+
+::PROTOBUF_NAMESPACE_ID::Metadata DeleteConnectedAccountRequest::GetMetadata() const {
+  return ::_pbi::AssignDescriptors(
+      &descriptor_table_user_2eproto_getter, &descriptor_table_user_2eproto_once,
+      file_level_metadata_user_2eproto[9]);
+}
+
 // @@protoc_insertion_point(namespace_scope)
 }  // namespace v1
 }  // namespace priemman
@@ -2846,6 +3692,22 @@ Arena::CreateMaybeMessage< ::priemman::v1::UpdateBasicInfoRequest >(Arena* arena
 template<> PROTOBUF_NOINLINE ::priemman::v1::UpsertWorkExperienceRequest*
 Arena::CreateMaybeMessage< ::priemman::v1::UpsertWorkExperienceRequest >(Arena* arena) {
   return Arena::CreateMessageInternal< ::priemman::v1::UpsertWorkExperienceRequest >(arena);
+}
+template<> PROTOBUF_NOINLINE ::priemman::v1::ListWorkExperienceResponse*
+Arena::CreateMaybeMessage< ::priemman::v1::ListWorkExperienceResponse >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::priemman::v1::ListWorkExperienceResponse >(arena);
+}
+template<> PROTOBUF_NOINLINE ::priemman::v1::DeleteWorkExperienceRequest*
+Arena::CreateMaybeMessage< ::priemman::v1::DeleteWorkExperienceRequest >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::priemman::v1::DeleteWorkExperienceRequest >(arena);
+}
+template<> PROTOBUF_NOINLINE ::priemman::v1::ListConnectedAccountsResponse*
+Arena::CreateMaybeMessage< ::priemman::v1::ListConnectedAccountsResponse >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::priemman::v1::ListConnectedAccountsResponse >(arena);
+}
+template<> PROTOBUF_NOINLINE ::priemman::v1::DeleteConnectedAccountRequest*
+Arena::CreateMaybeMessage< ::priemman::v1::DeleteConnectedAccountRequest >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::priemman::v1::DeleteConnectedAccountRequest >(arena);
 }
 PROTOBUF_NAMESPACE_CLOSE
 

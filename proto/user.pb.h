@@ -55,6 +55,18 @@ extern AboutMeDefaultTypeInternal _AboutMe_default_instance_;
 class ConnectedAccount;
 struct ConnectedAccountDefaultTypeInternal;
 extern ConnectedAccountDefaultTypeInternal _ConnectedAccount_default_instance_;
+class DeleteConnectedAccountRequest;
+struct DeleteConnectedAccountRequestDefaultTypeInternal;
+extern DeleteConnectedAccountRequestDefaultTypeInternal _DeleteConnectedAccountRequest_default_instance_;
+class DeleteWorkExperienceRequest;
+struct DeleteWorkExperienceRequestDefaultTypeInternal;
+extern DeleteWorkExperienceRequestDefaultTypeInternal _DeleteWorkExperienceRequest_default_instance_;
+class ListConnectedAccountsResponse;
+struct ListConnectedAccountsResponseDefaultTypeInternal;
+extern ListConnectedAccountsResponseDefaultTypeInternal _ListConnectedAccountsResponse_default_instance_;
+class ListWorkExperienceResponse;
+struct ListWorkExperienceResponseDefaultTypeInternal;
+extern ListWorkExperienceResponseDefaultTypeInternal _ListWorkExperienceResponse_default_instance_;
 class UpdateBasicInfoRequest;
 struct UpdateBasicInfoRequestDefaultTypeInternal;
 extern UpdateBasicInfoRequestDefaultTypeInternal _UpdateBasicInfoRequest_default_instance_;
@@ -72,6 +84,10 @@ extern WorkExperienceDefaultTypeInternal _WorkExperience_default_instance_;
 PROTOBUF_NAMESPACE_OPEN
 template<> ::priemman::v1::AboutMe* Arena::CreateMaybeMessage<::priemman::v1::AboutMe>(Arena*);
 template<> ::priemman::v1::ConnectedAccount* Arena::CreateMaybeMessage<::priemman::v1::ConnectedAccount>(Arena*);
+template<> ::priemman::v1::DeleteConnectedAccountRequest* Arena::CreateMaybeMessage<::priemman::v1::DeleteConnectedAccountRequest>(Arena*);
+template<> ::priemman::v1::DeleteWorkExperienceRequest* Arena::CreateMaybeMessage<::priemman::v1::DeleteWorkExperienceRequest>(Arena*);
+template<> ::priemman::v1::ListConnectedAccountsResponse* Arena::CreateMaybeMessage<::priemman::v1::ListConnectedAccountsResponse>(Arena*);
+template<> ::priemman::v1::ListWorkExperienceResponse* Arena::CreateMaybeMessage<::priemman::v1::ListWorkExperienceResponse>(Arena*);
 template<> ::priemman::v1::UpdateBasicInfoRequest* Arena::CreateMaybeMessage<::priemman::v1::UpdateBasicInfoRequest>(Arena*);
 template<> ::priemman::v1::UpsertWorkExperienceRequest* Arena::CreateMaybeMessage<::priemman::v1::UpsertWorkExperienceRequest>(Arena*);
 template<> ::priemman::v1::User* Arena::CreateMaybeMessage<::priemman::v1::User>(Arena*);
@@ -1516,6 +1532,625 @@ class UpsertWorkExperienceRequest final :
   typedef void DestructorSkippable_;
   struct Impl_ {
     ::priemman::v1::WorkExperience* entry_;
+    mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  };
+  union { Impl_ _impl_; };
+  friend struct ::TableStruct_user_2eproto;
+};
+// -------------------------------------------------------------------
+
+class ListWorkExperienceResponse final :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:priemman.v1.ListWorkExperienceResponse) */ {
+ public:
+  inline ListWorkExperienceResponse() : ListWorkExperienceResponse(nullptr) {}
+  ~ListWorkExperienceResponse() override;
+  explicit PROTOBUF_CONSTEXPR ListWorkExperienceResponse(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+
+  ListWorkExperienceResponse(const ListWorkExperienceResponse& from);
+  ListWorkExperienceResponse(ListWorkExperienceResponse&& from) noexcept
+    : ListWorkExperienceResponse() {
+    *this = ::std::move(from);
+  }
+
+  inline ListWorkExperienceResponse& operator=(const ListWorkExperienceResponse& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline ListWorkExperienceResponse& operator=(ListWorkExperienceResponse&& from) noexcept {
+    if (this == &from) return *this;
+    if (GetOwningArena() == from.GetOwningArena()
+  #ifdef PROTOBUF_FORCE_COPY_IN_MOVE
+        && GetOwningArena() != nullptr
+  #endif  // !PROTOBUF_FORCE_COPY_IN_MOVE
+    ) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const ListWorkExperienceResponse& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const ListWorkExperienceResponse* internal_default_instance() {
+    return reinterpret_cast<const ListWorkExperienceResponse*>(
+               &_ListWorkExperienceResponse_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    6;
+
+  friend void swap(ListWorkExperienceResponse& a, ListWorkExperienceResponse& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(ListWorkExperienceResponse* other) {
+    if (other == this) return;
+  #ifdef PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() != nullptr &&
+        GetOwningArena() == other->GetOwningArena()) {
+   #else  // PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() == other->GetOwningArena()) {
+  #endif  // !PROTOBUF_FORCE_COPY_IN_SWAP
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(ListWorkExperienceResponse* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetOwningArena() == other->GetOwningArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  ListWorkExperienceResponse* New(::PROTOBUF_NAMESPACE_ID::Arena* arena = nullptr) const final {
+    return CreateMaybeMessage<ListWorkExperienceResponse>(arena);
+  }
+  using ::PROTOBUF_NAMESPACE_ID::Message::CopyFrom;
+  void CopyFrom(const ListWorkExperienceResponse& from);
+  using ::PROTOBUF_NAMESPACE_ID::Message::MergeFrom;
+  void MergeFrom( const ListWorkExperienceResponse& from) {
+    ListWorkExperienceResponse::MergeImpl(*this, from);
+  }
+  private:
+  static void MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg);
+  public:
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  uint8_t* _InternalSerialize(
+      uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _impl_._cached_size_.Get(); }
+
+  private:
+  void SharedCtor(::PROTOBUF_NAMESPACE_ID::Arena* arena, bool is_message_owned);
+  void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(ListWorkExperienceResponse* other);
+
+  private:
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "priemman.v1.ListWorkExperienceResponse";
+  }
+  protected:
+  explicit ListWorkExperienceResponse(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                       bool is_message_owned = false);
+  public:
+
+  static const ClassData _class_data_;
+  const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kEntriesFieldNumber = 1,
+  };
+  // repeated .priemman.v1.WorkExperience entries = 1;
+  int entries_size() const;
+  private:
+  int _internal_entries_size() const;
+  public:
+  void clear_entries();
+  ::priemman::v1::WorkExperience* mutable_entries(int index);
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::priemman::v1::WorkExperience >*
+      mutable_entries();
+  private:
+  const ::priemman::v1::WorkExperience& _internal_entries(int index) const;
+  ::priemman::v1::WorkExperience* _internal_add_entries();
+  public:
+  const ::priemman::v1::WorkExperience& entries(int index) const;
+  ::priemman::v1::WorkExperience* add_entries();
+  const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::priemman::v1::WorkExperience >&
+      entries() const;
+
+  // @@protoc_insertion_point(class_scope:priemman.v1.ListWorkExperienceResponse)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  struct Impl_ {
+    ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::priemman::v1::WorkExperience > entries_;
+    mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  };
+  union { Impl_ _impl_; };
+  friend struct ::TableStruct_user_2eproto;
+};
+// -------------------------------------------------------------------
+
+class DeleteWorkExperienceRequest final :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:priemman.v1.DeleteWorkExperienceRequest) */ {
+ public:
+  inline DeleteWorkExperienceRequest() : DeleteWorkExperienceRequest(nullptr) {}
+  ~DeleteWorkExperienceRequest() override;
+  explicit PROTOBUF_CONSTEXPR DeleteWorkExperienceRequest(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+
+  DeleteWorkExperienceRequest(const DeleteWorkExperienceRequest& from);
+  DeleteWorkExperienceRequest(DeleteWorkExperienceRequest&& from) noexcept
+    : DeleteWorkExperienceRequest() {
+    *this = ::std::move(from);
+  }
+
+  inline DeleteWorkExperienceRequest& operator=(const DeleteWorkExperienceRequest& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline DeleteWorkExperienceRequest& operator=(DeleteWorkExperienceRequest&& from) noexcept {
+    if (this == &from) return *this;
+    if (GetOwningArena() == from.GetOwningArena()
+  #ifdef PROTOBUF_FORCE_COPY_IN_MOVE
+        && GetOwningArena() != nullptr
+  #endif  // !PROTOBUF_FORCE_COPY_IN_MOVE
+    ) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const DeleteWorkExperienceRequest& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const DeleteWorkExperienceRequest* internal_default_instance() {
+    return reinterpret_cast<const DeleteWorkExperienceRequest*>(
+               &_DeleteWorkExperienceRequest_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    7;
+
+  friend void swap(DeleteWorkExperienceRequest& a, DeleteWorkExperienceRequest& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(DeleteWorkExperienceRequest* other) {
+    if (other == this) return;
+  #ifdef PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() != nullptr &&
+        GetOwningArena() == other->GetOwningArena()) {
+   #else  // PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() == other->GetOwningArena()) {
+  #endif  // !PROTOBUF_FORCE_COPY_IN_SWAP
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(DeleteWorkExperienceRequest* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetOwningArena() == other->GetOwningArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  DeleteWorkExperienceRequest* New(::PROTOBUF_NAMESPACE_ID::Arena* arena = nullptr) const final {
+    return CreateMaybeMessage<DeleteWorkExperienceRequest>(arena);
+  }
+  using ::PROTOBUF_NAMESPACE_ID::Message::CopyFrom;
+  void CopyFrom(const DeleteWorkExperienceRequest& from);
+  using ::PROTOBUF_NAMESPACE_ID::Message::MergeFrom;
+  void MergeFrom( const DeleteWorkExperienceRequest& from) {
+    DeleteWorkExperienceRequest::MergeImpl(*this, from);
+  }
+  private:
+  static void MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg);
+  public:
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  uint8_t* _InternalSerialize(
+      uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _impl_._cached_size_.Get(); }
+
+  private:
+  void SharedCtor(::PROTOBUF_NAMESPACE_ID::Arena* arena, bool is_message_owned);
+  void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(DeleteWorkExperienceRequest* other);
+
+  private:
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "priemman.v1.DeleteWorkExperienceRequest";
+  }
+  protected:
+  explicit DeleteWorkExperienceRequest(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                       bool is_message_owned = false);
+  public:
+
+  static const ClassData _class_data_;
+  const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kIdFieldNumber = 1,
+  };
+  // .priemman.v1.ObjectId id = 1;
+  bool has_id() const;
+  private:
+  bool _internal_has_id() const;
+  public:
+  void clear_id();
+  const ::priemman::v1::ObjectId& id() const;
+  PROTOBUF_NODISCARD ::priemman::v1::ObjectId* release_id();
+  ::priemman::v1::ObjectId* mutable_id();
+  void set_allocated_id(::priemman::v1::ObjectId* id);
+  private:
+  const ::priemman::v1::ObjectId& _internal_id() const;
+  ::priemman::v1::ObjectId* _internal_mutable_id();
+  public:
+  void unsafe_arena_set_allocated_id(
+      ::priemman::v1::ObjectId* id);
+  ::priemman::v1::ObjectId* unsafe_arena_release_id();
+
+  // @@protoc_insertion_point(class_scope:priemman.v1.DeleteWorkExperienceRequest)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  struct Impl_ {
+    ::priemman::v1::ObjectId* id_;
+    mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  };
+  union { Impl_ _impl_; };
+  friend struct ::TableStruct_user_2eproto;
+};
+// -------------------------------------------------------------------
+
+class ListConnectedAccountsResponse final :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:priemman.v1.ListConnectedAccountsResponse) */ {
+ public:
+  inline ListConnectedAccountsResponse() : ListConnectedAccountsResponse(nullptr) {}
+  ~ListConnectedAccountsResponse() override;
+  explicit PROTOBUF_CONSTEXPR ListConnectedAccountsResponse(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+
+  ListConnectedAccountsResponse(const ListConnectedAccountsResponse& from);
+  ListConnectedAccountsResponse(ListConnectedAccountsResponse&& from) noexcept
+    : ListConnectedAccountsResponse() {
+    *this = ::std::move(from);
+  }
+
+  inline ListConnectedAccountsResponse& operator=(const ListConnectedAccountsResponse& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline ListConnectedAccountsResponse& operator=(ListConnectedAccountsResponse&& from) noexcept {
+    if (this == &from) return *this;
+    if (GetOwningArena() == from.GetOwningArena()
+  #ifdef PROTOBUF_FORCE_COPY_IN_MOVE
+        && GetOwningArena() != nullptr
+  #endif  // !PROTOBUF_FORCE_COPY_IN_MOVE
+    ) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const ListConnectedAccountsResponse& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const ListConnectedAccountsResponse* internal_default_instance() {
+    return reinterpret_cast<const ListConnectedAccountsResponse*>(
+               &_ListConnectedAccountsResponse_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    8;
+
+  friend void swap(ListConnectedAccountsResponse& a, ListConnectedAccountsResponse& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(ListConnectedAccountsResponse* other) {
+    if (other == this) return;
+  #ifdef PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() != nullptr &&
+        GetOwningArena() == other->GetOwningArena()) {
+   #else  // PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() == other->GetOwningArena()) {
+  #endif  // !PROTOBUF_FORCE_COPY_IN_SWAP
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(ListConnectedAccountsResponse* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetOwningArena() == other->GetOwningArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  ListConnectedAccountsResponse* New(::PROTOBUF_NAMESPACE_ID::Arena* arena = nullptr) const final {
+    return CreateMaybeMessage<ListConnectedAccountsResponse>(arena);
+  }
+  using ::PROTOBUF_NAMESPACE_ID::Message::CopyFrom;
+  void CopyFrom(const ListConnectedAccountsResponse& from);
+  using ::PROTOBUF_NAMESPACE_ID::Message::MergeFrom;
+  void MergeFrom( const ListConnectedAccountsResponse& from) {
+    ListConnectedAccountsResponse::MergeImpl(*this, from);
+  }
+  private:
+  static void MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg);
+  public:
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  uint8_t* _InternalSerialize(
+      uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _impl_._cached_size_.Get(); }
+
+  private:
+  void SharedCtor(::PROTOBUF_NAMESPACE_ID::Arena* arena, bool is_message_owned);
+  void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(ListConnectedAccountsResponse* other);
+
+  private:
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "priemman.v1.ListConnectedAccountsResponse";
+  }
+  protected:
+  explicit ListConnectedAccountsResponse(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                       bool is_message_owned = false);
+  public:
+
+  static const ClassData _class_data_;
+  const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kAccountsFieldNumber = 1,
+  };
+  // repeated .priemman.v1.ConnectedAccount accounts = 1;
+  int accounts_size() const;
+  private:
+  int _internal_accounts_size() const;
+  public:
+  void clear_accounts();
+  ::priemman::v1::ConnectedAccount* mutable_accounts(int index);
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::priemman::v1::ConnectedAccount >*
+      mutable_accounts();
+  private:
+  const ::priemman::v1::ConnectedAccount& _internal_accounts(int index) const;
+  ::priemman::v1::ConnectedAccount* _internal_add_accounts();
+  public:
+  const ::priemman::v1::ConnectedAccount& accounts(int index) const;
+  ::priemman::v1::ConnectedAccount* add_accounts();
+  const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::priemman::v1::ConnectedAccount >&
+      accounts() const;
+
+  // @@protoc_insertion_point(class_scope:priemman.v1.ListConnectedAccountsResponse)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  struct Impl_ {
+    ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::priemman::v1::ConnectedAccount > accounts_;
+    mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  };
+  union { Impl_ _impl_; };
+  friend struct ::TableStruct_user_2eproto;
+};
+// -------------------------------------------------------------------
+
+class DeleteConnectedAccountRequest final :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:priemman.v1.DeleteConnectedAccountRequest) */ {
+ public:
+  inline DeleteConnectedAccountRequest() : DeleteConnectedAccountRequest(nullptr) {}
+  ~DeleteConnectedAccountRequest() override;
+  explicit PROTOBUF_CONSTEXPR DeleteConnectedAccountRequest(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+
+  DeleteConnectedAccountRequest(const DeleteConnectedAccountRequest& from);
+  DeleteConnectedAccountRequest(DeleteConnectedAccountRequest&& from) noexcept
+    : DeleteConnectedAccountRequest() {
+    *this = ::std::move(from);
+  }
+
+  inline DeleteConnectedAccountRequest& operator=(const DeleteConnectedAccountRequest& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline DeleteConnectedAccountRequest& operator=(DeleteConnectedAccountRequest&& from) noexcept {
+    if (this == &from) return *this;
+    if (GetOwningArena() == from.GetOwningArena()
+  #ifdef PROTOBUF_FORCE_COPY_IN_MOVE
+        && GetOwningArena() != nullptr
+  #endif  // !PROTOBUF_FORCE_COPY_IN_MOVE
+    ) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const DeleteConnectedAccountRequest& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const DeleteConnectedAccountRequest* internal_default_instance() {
+    return reinterpret_cast<const DeleteConnectedAccountRequest*>(
+               &_DeleteConnectedAccountRequest_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    9;
+
+  friend void swap(DeleteConnectedAccountRequest& a, DeleteConnectedAccountRequest& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(DeleteConnectedAccountRequest* other) {
+    if (other == this) return;
+  #ifdef PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() != nullptr &&
+        GetOwningArena() == other->GetOwningArena()) {
+   #else  // PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() == other->GetOwningArena()) {
+  #endif  // !PROTOBUF_FORCE_COPY_IN_SWAP
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(DeleteConnectedAccountRequest* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetOwningArena() == other->GetOwningArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  DeleteConnectedAccountRequest* New(::PROTOBUF_NAMESPACE_ID::Arena* arena = nullptr) const final {
+    return CreateMaybeMessage<DeleteConnectedAccountRequest>(arena);
+  }
+  using ::PROTOBUF_NAMESPACE_ID::Message::CopyFrom;
+  void CopyFrom(const DeleteConnectedAccountRequest& from);
+  using ::PROTOBUF_NAMESPACE_ID::Message::MergeFrom;
+  void MergeFrom( const DeleteConnectedAccountRequest& from) {
+    DeleteConnectedAccountRequest::MergeImpl(*this, from);
+  }
+  private:
+  static void MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg);
+  public:
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  uint8_t* _InternalSerialize(
+      uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _impl_._cached_size_.Get(); }
+
+  private:
+  void SharedCtor(::PROTOBUF_NAMESPACE_ID::Arena* arena, bool is_message_owned);
+  void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(DeleteConnectedAccountRequest* other);
+
+  private:
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "priemman.v1.DeleteConnectedAccountRequest";
+  }
+  protected:
+  explicit DeleteConnectedAccountRequest(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                       bool is_message_owned = false);
+  public:
+
+  static const ClassData _class_data_;
+  const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kPlatformFieldNumber = 1,
+  };
+  // .priemman.v1.ConnectedPlatform platform = 1;
+  void clear_platform();
+  ::priemman::v1::ConnectedPlatform platform() const;
+  void set_platform(::priemman::v1::ConnectedPlatform value);
+  private:
+  ::priemman::v1::ConnectedPlatform _internal_platform() const;
+  void _internal_set_platform(::priemman::v1::ConnectedPlatform value);
+  public:
+
+  // @@protoc_insertion_point(class_scope:priemman.v1.DeleteConnectedAccountRequest)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  struct Impl_ {
+    int platform_;
     mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   };
   union { Impl_ _impl_; };
@@ -3557,9 +4192,218 @@ inline void UpsertWorkExperienceRequest::set_allocated_entry(::priemman::v1::Wor
   // @@protoc_insertion_point(field_set_allocated:priemman.v1.UpsertWorkExperienceRequest.entry)
 }
 
+// -------------------------------------------------------------------
+
+// ListWorkExperienceResponse
+
+// repeated .priemman.v1.WorkExperience entries = 1;
+inline int ListWorkExperienceResponse::_internal_entries_size() const {
+  return _impl_.entries_.size();
+}
+inline int ListWorkExperienceResponse::entries_size() const {
+  return _internal_entries_size();
+}
+inline void ListWorkExperienceResponse::clear_entries() {
+  _impl_.entries_.Clear();
+}
+inline ::priemman::v1::WorkExperience* ListWorkExperienceResponse::mutable_entries(int index) {
+  // @@protoc_insertion_point(field_mutable:priemman.v1.ListWorkExperienceResponse.entries)
+  return _impl_.entries_.Mutable(index);
+}
+inline ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::priemman::v1::WorkExperience >*
+ListWorkExperienceResponse::mutable_entries() {
+  // @@protoc_insertion_point(field_mutable_list:priemman.v1.ListWorkExperienceResponse.entries)
+  return &_impl_.entries_;
+}
+inline const ::priemman::v1::WorkExperience& ListWorkExperienceResponse::_internal_entries(int index) const {
+  return _impl_.entries_.Get(index);
+}
+inline const ::priemman::v1::WorkExperience& ListWorkExperienceResponse::entries(int index) const {
+  // @@protoc_insertion_point(field_get:priemman.v1.ListWorkExperienceResponse.entries)
+  return _internal_entries(index);
+}
+inline ::priemman::v1::WorkExperience* ListWorkExperienceResponse::_internal_add_entries() {
+  return _impl_.entries_.Add();
+}
+inline ::priemman::v1::WorkExperience* ListWorkExperienceResponse::add_entries() {
+  ::priemman::v1::WorkExperience* _add = _internal_add_entries();
+  // @@protoc_insertion_point(field_add:priemman.v1.ListWorkExperienceResponse.entries)
+  return _add;
+}
+inline const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::priemman::v1::WorkExperience >&
+ListWorkExperienceResponse::entries() const {
+  // @@protoc_insertion_point(field_list:priemman.v1.ListWorkExperienceResponse.entries)
+  return _impl_.entries_;
+}
+
+// -------------------------------------------------------------------
+
+// DeleteWorkExperienceRequest
+
+// .priemman.v1.ObjectId id = 1;
+inline bool DeleteWorkExperienceRequest::_internal_has_id() const {
+  return this != internal_default_instance() && _impl_.id_ != nullptr;
+}
+inline bool DeleteWorkExperienceRequest::has_id() const {
+  return _internal_has_id();
+}
+inline const ::priemman::v1::ObjectId& DeleteWorkExperienceRequest::_internal_id() const {
+  const ::priemman::v1::ObjectId* p = _impl_.id_;
+  return p != nullptr ? *p : reinterpret_cast<const ::priemman::v1::ObjectId&>(
+      ::priemman::v1::_ObjectId_default_instance_);
+}
+inline const ::priemman::v1::ObjectId& DeleteWorkExperienceRequest::id() const {
+  // @@protoc_insertion_point(field_get:priemman.v1.DeleteWorkExperienceRequest.id)
+  return _internal_id();
+}
+inline void DeleteWorkExperienceRequest::unsafe_arena_set_allocated_id(
+    ::priemman::v1::ObjectId* id) {
+  if (GetArenaForAllocation() == nullptr) {
+    delete reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(_impl_.id_);
+  }
+  _impl_.id_ = id;
+  if (id) {
+    
+  } else {
+    
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:priemman.v1.DeleteWorkExperienceRequest.id)
+}
+inline ::priemman::v1::ObjectId* DeleteWorkExperienceRequest::release_id() {
+  
+  ::priemman::v1::ObjectId* temp = _impl_.id_;
+  _impl_.id_ = nullptr;
+#ifdef PROTOBUF_FORCE_COPY_IN_RELEASE
+  auto* old =  reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(temp);
+  temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
+  if (GetArenaForAllocation() == nullptr) { delete old; }
+#else  // PROTOBUF_FORCE_COPY_IN_RELEASE
+  if (GetArenaForAllocation() != nullptr) {
+    temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
+  }
+#endif  // !PROTOBUF_FORCE_COPY_IN_RELEASE
+  return temp;
+}
+inline ::priemman::v1::ObjectId* DeleteWorkExperienceRequest::unsafe_arena_release_id() {
+  // @@protoc_insertion_point(field_release:priemman.v1.DeleteWorkExperienceRequest.id)
+  
+  ::priemman::v1::ObjectId* temp = _impl_.id_;
+  _impl_.id_ = nullptr;
+  return temp;
+}
+inline ::priemman::v1::ObjectId* DeleteWorkExperienceRequest::_internal_mutable_id() {
+  
+  if (_impl_.id_ == nullptr) {
+    auto* p = CreateMaybeMessage<::priemman::v1::ObjectId>(GetArenaForAllocation());
+    _impl_.id_ = p;
+  }
+  return _impl_.id_;
+}
+inline ::priemman::v1::ObjectId* DeleteWorkExperienceRequest::mutable_id() {
+  ::priemman::v1::ObjectId* _msg = _internal_mutable_id();
+  // @@protoc_insertion_point(field_mutable:priemman.v1.DeleteWorkExperienceRequest.id)
+  return _msg;
+}
+inline void DeleteWorkExperienceRequest::set_allocated_id(::priemman::v1::ObjectId* id) {
+  ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArenaForAllocation();
+  if (message_arena == nullptr) {
+    delete reinterpret_cast< ::PROTOBUF_NAMESPACE_ID::MessageLite*>(_impl_.id_);
+  }
+  if (id) {
+    ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena =
+        ::PROTOBUF_NAMESPACE_ID::Arena::InternalGetOwningArena(
+                reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(id));
+    if (message_arena != submessage_arena) {
+      id = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
+          message_arena, id, submessage_arena);
+    }
+    
+  } else {
+    
+  }
+  _impl_.id_ = id;
+  // @@protoc_insertion_point(field_set_allocated:priemman.v1.DeleteWorkExperienceRequest.id)
+}
+
+// -------------------------------------------------------------------
+
+// ListConnectedAccountsResponse
+
+// repeated .priemman.v1.ConnectedAccount accounts = 1;
+inline int ListConnectedAccountsResponse::_internal_accounts_size() const {
+  return _impl_.accounts_.size();
+}
+inline int ListConnectedAccountsResponse::accounts_size() const {
+  return _internal_accounts_size();
+}
+inline void ListConnectedAccountsResponse::clear_accounts() {
+  _impl_.accounts_.Clear();
+}
+inline ::priemman::v1::ConnectedAccount* ListConnectedAccountsResponse::mutable_accounts(int index) {
+  // @@protoc_insertion_point(field_mutable:priemman.v1.ListConnectedAccountsResponse.accounts)
+  return _impl_.accounts_.Mutable(index);
+}
+inline ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::priemman::v1::ConnectedAccount >*
+ListConnectedAccountsResponse::mutable_accounts() {
+  // @@protoc_insertion_point(field_mutable_list:priemman.v1.ListConnectedAccountsResponse.accounts)
+  return &_impl_.accounts_;
+}
+inline const ::priemman::v1::ConnectedAccount& ListConnectedAccountsResponse::_internal_accounts(int index) const {
+  return _impl_.accounts_.Get(index);
+}
+inline const ::priemman::v1::ConnectedAccount& ListConnectedAccountsResponse::accounts(int index) const {
+  // @@protoc_insertion_point(field_get:priemman.v1.ListConnectedAccountsResponse.accounts)
+  return _internal_accounts(index);
+}
+inline ::priemman::v1::ConnectedAccount* ListConnectedAccountsResponse::_internal_add_accounts() {
+  return _impl_.accounts_.Add();
+}
+inline ::priemman::v1::ConnectedAccount* ListConnectedAccountsResponse::add_accounts() {
+  ::priemman::v1::ConnectedAccount* _add = _internal_add_accounts();
+  // @@protoc_insertion_point(field_add:priemman.v1.ListConnectedAccountsResponse.accounts)
+  return _add;
+}
+inline const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::priemman::v1::ConnectedAccount >&
+ListConnectedAccountsResponse::accounts() const {
+  // @@protoc_insertion_point(field_list:priemman.v1.ListConnectedAccountsResponse.accounts)
+  return _impl_.accounts_;
+}
+
+// -------------------------------------------------------------------
+
+// DeleteConnectedAccountRequest
+
+// .priemman.v1.ConnectedPlatform platform = 1;
+inline void DeleteConnectedAccountRequest::clear_platform() {
+  _impl_.platform_ = 0;
+}
+inline ::priemman::v1::ConnectedPlatform DeleteConnectedAccountRequest::_internal_platform() const {
+  return static_cast< ::priemman::v1::ConnectedPlatform >(_impl_.platform_);
+}
+inline ::priemman::v1::ConnectedPlatform DeleteConnectedAccountRequest::platform() const {
+  // @@protoc_insertion_point(field_get:priemman.v1.DeleteConnectedAccountRequest.platform)
+  return _internal_platform();
+}
+inline void DeleteConnectedAccountRequest::_internal_set_platform(::priemman::v1::ConnectedPlatform value) {
+  
+  _impl_.platform_ = value;
+}
+inline void DeleteConnectedAccountRequest::set_platform(::priemman::v1::ConnectedPlatform value) {
+  _internal_set_platform(value);
+  // @@protoc_insertion_point(field_set:priemman.v1.DeleteConnectedAccountRequest.platform)
+}
+
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------
