@@ -25,7 +25,6 @@ jobs:
       - name: Install build dependencies
         run: |
           sudo apt-get update
-
           sudo apt-get install -y \
             build-essential \
             gcc-14 \
@@ -52,12 +51,7 @@ jobs:
         run: |
           wget -O userver.deb \
             https://github.com/userver-framework/userver/releases/download/v3.1/ubuntu24.04-libuserver-all-dev_3.1_amd64.deb
-
           sudo apt-get install -y ./userver.deb
-
-      - name: Start MariaDB
-        run: |
-          sudo systemctl start mariadb
 
       - name: Configure
         run: |
@@ -65,7 +59,7 @@ jobs:
             -S . \
             -B build-ci \
             -G Ninja \
-            -DCMAKE_BUILD_TYPE=Debug \
+            -DCMAKE_BUILD_TYPE=Release \
             -DCMAKE_C_COMPILER=gcc-14 \
             -DCMAKE_CXX_COMPILER=g++-14
 
@@ -74,3 +68,29 @@ jobs:
           cmake \
             --build build-ci \
             --parallel 2
+
+      # === TAMBAHAN BARU ===
+      - name: Strip binary (reduce size)
+        if: github.event_name == 'push'
+        run: |
+          strip build-ci/server
+          ls -lh build-ci/server
+
+      - name: Upload server binary as artifact
+        if: github.event_name == 'push'
+        uses: actions/upload-artifact@v4
+        with:
+          name: priemman-server-${{ github.ref_name }}-${{ github.sha }}
+          path: build-ci/server
+          retention-days: 30
+          if-no-files-found: error
+
+      - name: Upload config as artifact
+        if: github.event_name == 'push'
+        uses: actions/upload-artifact@v4
+        with:
+          name: priemman-config-${{ github.ref_name }}-${{ github.sha }}
+          path: config/config.yaml
+          retention-days: 30
+          if-no-files-found: error
+      # === END TAMBAHAN ===
