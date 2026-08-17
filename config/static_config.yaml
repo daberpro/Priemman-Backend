@@ -1,0 +1,170 @@
+components_manager:
+    components:
+        server:
+            listener:
+                port: $server-port
+                port#fallback: 8080
+                task_processor: main-task-processor
+
+        logging:
+            fs-task-processor: fs-task-processor
+            loggers:
+                default:
+                    file_path: $log-file-path
+                    file_path#fallback: '@stderr'
+                    level: $log-level
+                    level#fallback: info
+
+        cors-middleware:
+            allowed-origins: $cors-allowed-origins
+            allowed-origins#fallback:
+                - http://localhost:3000
+            allow-credentials: true
+            allowed-headers:
+                - Content-Type
+                - Authorization
+            max-age-seconds: 86400
+
+        default-server-middleware-pipeline-builder:
+            append:
+                - cors-middleware
+
+# ============== Handlers ==============
+        handler-project-create:
+            path: /v1/projects
+            method: POST,OPTIONS
+            task_processor: main-task-processor
+
+        handler-project-list:
+            path: /v1/projects/list
+            method: GET,OPTIONS
+            task_processor: main-task-processor
+
+        handler-project-detail:
+            path: /v1/projects/{id}
+            method: GET,PUT,DELETE,OPTIONS
+            task_processor: main-task-processor
+
+        handler-collection:
+            path: /v1/collections
+            method: GET,POST,PUT,DELETE,OPTIONS
+            task_processor: main-task-processor
+
+        handler-basic-info:
+            path: /v1/users/me
+            method: GET,PUT,PATCH,OPTIONS
+            task_processor: main-task-processor
+
+        handler-work-experience:
+            path: /v1/users/me/work-experiences
+            method: GET,POST,DELETE,OPTIONS
+            task_processor: main-task-processor
+
+        handler-connected-accounts:
+            path: /v1/users/me/connected-accounts
+            method: GET,DELETE,OPTIONS
+            task_processor: main-task-processor
+
+        handler-send-otp:
+            path: /v1/auth/send-otp
+            method: POST,OPTIONS
+            task_processor: main-task-processor
+
+        handler-verify-otp:
+            path: /v1/auth/verify-otp
+            method: POST,OPTIONS
+            task_processor: main-task-processor
+
+        handler-logout:
+            path: /v1/auth/logout
+            method: POST,OPTIONS
+            task_processor: main-task-processor
+
+        handler-ping:
+            path: /ping
+            method: GET,OPTIONS
+            task_processor: main-task-processor
+
+        handler-initiate-google-oauth:
+            path: /v1/auth/google
+            method: GET,OPTIONS
+            task_processor: main-task-processor
+
+        handler-callback-google-oauth:
+            path: /v1/auth/callback/google
+            method: GET,OPTIONS
+            task_processor: main-task-processor
+
+        handler-initiate-github-oauth:
+            path: /v1/auth/github
+            method: GET,OPTIONS
+            task_processor: main-task-processor
+
+        handler-callback-github-oauth:
+            path: /v1/auth/callback/github
+            method: GET,OPTIONS
+            task_processor: main-task-processor
+
+# ============== DB ==============
+        database:
+            max_pool_size: 15
+            initial_pool_size: 5
+
+# ============== SecDist ==============
+        secdist:
+            provider: default-secdist-provider
+
+        default-secdist-provider:
+            config: ../config/secdist.json
+            format: json
+            missing-ok: true
+
+# ============== SMTP ==============
+        daberdev-smtp-component-client:
+            host: $smtp-host
+            port: $smtp-port
+            email: $smtp-email
+            password: $smtp-password
+
+# ============== OAuth ==============
+        daberdev-oauth-google-component:
+            auth_url: https://accounts.google.com/o/oauth2/v2/auth
+            token_url: https://oauth2.googleapis.com/token
+            api_url: https://www.googleapis.com/oauth2/v3/userinfo
+            redirect_url: $google-redirect-url
+            client_id: $google-client-id
+            client_secret: $google-client-secret
+            scope: "openid email profile"
+
+        daberdev-oauth-github-component:
+            auth_url: https://github.com/login/oauth/authorize
+            token_url: https://github.com/login/oauth/access_token
+            api_url: https://api.github.com/user
+            redirect_url: $github-redirect-url
+            client_id: $github-client-id
+            client_secret: $github-client-secret
+            scope: "read:user user:email"
+
+# ============== Other ==============
+        dns-client:
+            fs-task-processor: fs-task-processor
+
+        http-client-core:
+            pool-statistics-disable: false
+            thread-name-prefix: http-client
+            threads: 2
+            fs-task-processor: fs-task-processor
+            destination-metrics-auto-max-size: 100
+
+        http-client:
+            core-component: http-client-core
+
+        http-client-middleware-pipeline:
+            middlewares: {}
+
+    task_processors:
+        main-task-processor:
+            worker_threads#env: WORKER_THREADS
+            worker_threads#fallback: 4
+        fs-task-processor:
+            worker_threads: 2

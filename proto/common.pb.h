@@ -50,6 +50,9 @@ struct TableStruct_common_2eproto {
 extern const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_common_2eproto;
 namespace priemman {
 namespace v1 {
+class DeleteResponse;
+struct DeleteResponseDefaultTypeInternal;
+extern DeleteResponseDefaultTypeInternal _DeleteResponse_default_instance_;
 class ErrorDetail;
 struct ErrorDetailDefaultTypeInternal;
 extern ErrorDetailDefaultTypeInternal _ErrorDetail_default_instance_;
@@ -68,6 +71,7 @@ extern ResultDefaultTypeInternal _Result_default_instance_;
 }  // namespace v1
 }  // namespace priemman
 PROTOBUF_NAMESPACE_OPEN
+template<> ::priemman::v1::DeleteResponse* Arena::CreateMaybeMessage<::priemman::v1::DeleteResponse>(Arena*);
 template<> ::priemman::v1::ErrorDetail* Arena::CreateMaybeMessage<::priemman::v1::ErrorDetail>(Arena*);
 template<> ::priemman::v1::ErrorDetail_MetaEntry_DoNotUse* Arena::CreateMaybeMessage<::priemman::v1::ErrorDetail_MetaEntry_DoNotUse>(Arena*);
 template<> ::priemman::v1::Location* Arena::CreateMaybeMessage<::priemman::v1::Location>(Arena*);
@@ -833,6 +837,154 @@ class Result final :
   union { Impl_ _impl_; };
   friend struct ::TableStruct_common_2eproto;
 };
+// -------------------------------------------------------------------
+
+class DeleteResponse final :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:priemman.v1.DeleteResponse) */ {
+ public:
+  inline DeleteResponse() : DeleteResponse(nullptr) {}
+  ~DeleteResponse() override;
+  explicit PROTOBUF_CONSTEXPR DeleteResponse(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+
+  DeleteResponse(const DeleteResponse& from);
+  DeleteResponse(DeleteResponse&& from) noexcept
+    : DeleteResponse() {
+    *this = ::std::move(from);
+  }
+
+  inline DeleteResponse& operator=(const DeleteResponse& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline DeleteResponse& operator=(DeleteResponse&& from) noexcept {
+    if (this == &from) return *this;
+    if (GetOwningArena() == from.GetOwningArena()
+  #ifdef PROTOBUF_FORCE_COPY_IN_MOVE
+        && GetOwningArena() != nullptr
+  #endif  // !PROTOBUF_FORCE_COPY_IN_MOVE
+    ) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const DeleteResponse& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const DeleteResponse* internal_default_instance() {
+    return reinterpret_cast<const DeleteResponse*>(
+               &_DeleteResponse_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    5;
+
+  friend void swap(DeleteResponse& a, DeleteResponse& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(DeleteResponse* other) {
+    if (other == this) return;
+  #ifdef PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() != nullptr &&
+        GetOwningArena() == other->GetOwningArena()) {
+   #else  // PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() == other->GetOwningArena()) {
+  #endif  // !PROTOBUF_FORCE_COPY_IN_SWAP
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(DeleteResponse* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetOwningArena() == other->GetOwningArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  DeleteResponse* New(::PROTOBUF_NAMESPACE_ID::Arena* arena = nullptr) const final {
+    return CreateMaybeMessage<DeleteResponse>(arena);
+  }
+  using ::PROTOBUF_NAMESPACE_ID::Message::CopyFrom;
+  void CopyFrom(const DeleteResponse& from);
+  using ::PROTOBUF_NAMESPACE_ID::Message::MergeFrom;
+  void MergeFrom( const DeleteResponse& from) {
+    DeleteResponse::MergeImpl(*this, from);
+  }
+  private:
+  static void MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg);
+  public:
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  uint8_t* _InternalSerialize(
+      uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _impl_._cached_size_.Get(); }
+
+  private:
+  void SharedCtor(::PROTOBUF_NAMESPACE_ID::Arena* arena, bool is_message_owned);
+  void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(DeleteResponse* other);
+
+  private:
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "priemman.v1.DeleteResponse";
+  }
+  protected:
+  explicit DeleteResponse(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                       bool is_message_owned = false);
+  public:
+
+  static const ClassData _class_data_;
+  const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kSuccessFieldNumber = 1,
+  };
+  // bool success = 1;
+  void clear_success();
+  bool success() const;
+  void set_success(bool value);
+  private:
+  bool _internal_success() const;
+  void _internal_set_success(bool value);
+  public:
+
+  // @@protoc_insertion_point(class_scope:priemman.v1.DeleteResponse)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  struct Impl_ {
+    bool success_;
+    mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  };
+  union { Impl_ _impl_; };
+  friend struct ::TableStruct_common_2eproto;
+};
 // ===================================================================
 
 
@@ -1367,9 +1519,35 @@ inline void Result::set_allocated_error_detail(::priemman::v1::ErrorDetail* erro
   // @@protoc_insertion_point(field_set_allocated:priemman.v1.Result.error_detail)
 }
 
+// -------------------------------------------------------------------
+
+// DeleteResponse
+
+// bool success = 1;
+inline void DeleteResponse::clear_success() {
+  _impl_.success_ = false;
+}
+inline bool DeleteResponse::_internal_success() const {
+  return _impl_.success_;
+}
+inline bool DeleteResponse::success() const {
+  // @@protoc_insertion_point(field_get:priemman.v1.DeleteResponse.success)
+  return _internal_success();
+}
+inline void DeleteResponse::_internal_set_success(bool value) {
+  
+  _impl_.success_ = value;
+}
+inline void DeleteResponse::set_success(bool value) {
+  _internal_set_success(value);
+  // @@protoc_insertion_point(field_set:priemman.v1.DeleteResponse.success)
+}
+
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------

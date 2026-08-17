@@ -25,6 +25,7 @@ namespace v1 {
 PROTOBUF_CONSTEXPR Media::Media(
     ::_pbi::ConstantInitialized): _impl_{
     /*decltype(_impl_.url_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
+  , /*decltype(_impl_.id_)*/nullptr
   , /*decltype(_impl_.type_)*/0
   , /*decltype(_impl_.order_)*/0
   , /*decltype(_impl_._cached_size_)*/{}} {}
@@ -145,9 +146,153 @@ struct ListProjectsResponseDefaultTypeInternal {
   };
 };
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 ListProjectsResponseDefaultTypeInternal _ListProjectsResponse_default_instance_;
+PROTOBUF_CONSTEXPR ProjectInput::ProjectInput(
+    ::_pbi::ConstantInitialized): _impl_{
+    /*decltype(_impl_.tools_)*/{}
+  , /*decltype(_impl_.disciplines_)*/{}
+  , /*decltype(_impl_.tags_)*/{}
+  , /*decltype(_impl_.media_)*/{}
+  , /*decltype(_impl_.collaborators_)*/{}
+  , /*decltype(_impl_.title_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
+  , /*decltype(_impl_.description_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
+  , /*decltype(_impl_.cover_media_id_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
+  , /*decltype(_impl_.visibility_)*/0
+  , /*decltype(_impl_.status_)*/0
+  , /*decltype(_impl_._cached_size_)*/{}} {}
+struct ProjectInputDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR ProjectInputDefaultTypeInternal()
+      : _instance(::_pbi::ConstantInitialized{}) {}
+  ~ProjectInputDefaultTypeInternal() {}
+  union {
+    ProjectInput _instance;
+  };
+};
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 ProjectInputDefaultTypeInternal _ProjectInput_default_instance_;
+PROTOBUF_CONSTEXPR CreateProjectRequest::CreateProjectRequest(
+    ::_pbi::ConstantInitialized): _impl_{
+    /*decltype(_impl_.input_)*/nullptr
+  , /*decltype(_impl_._cached_size_)*/{}} {}
+struct CreateProjectRequestDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR CreateProjectRequestDefaultTypeInternal()
+      : _instance(::_pbi::ConstantInitialized{}) {}
+  ~CreateProjectRequestDefaultTypeInternal() {}
+  union {
+    CreateProjectRequest _instance;
+  };
+};
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 CreateProjectRequestDefaultTypeInternal _CreateProjectRequest_default_instance_;
+PROTOBUF_CONSTEXPR UpdateProjectRequest::UpdateProjectRequest(
+    ::_pbi::ConstantInitialized): _impl_{
+    /*decltype(_impl_.id_)*/nullptr
+  , /*decltype(_impl_.input_)*/nullptr
+  , /*decltype(_impl_._cached_size_)*/{}} {}
+struct UpdateProjectRequestDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR UpdateProjectRequestDefaultTypeInternal()
+      : _instance(::_pbi::ConstantInitialized{}) {}
+  ~UpdateProjectRequestDefaultTypeInternal() {}
+  union {
+    UpdateProjectRequest _instance;
+  };
+};
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 UpdateProjectRequestDefaultTypeInternal _UpdateProjectRequest_default_instance_;
+PROTOBUF_CONSTEXPR ProjectResponse::ProjectResponse(
+    ::_pbi::ConstantInitialized): _impl_{
+    /*decltype(_impl_.project_)*/nullptr
+  , /*decltype(_impl_._cached_size_)*/{}} {}
+struct ProjectResponseDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR ProjectResponseDefaultTypeInternal()
+      : _instance(::_pbi::ConstantInitialized{}) {}
+  ~ProjectResponseDefaultTypeInternal() {}
+  union {
+    ProjectResponse _instance;
+  };
+};
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 ProjectResponseDefaultTypeInternal _ProjectResponse_default_instance_;
+PROTOBUF_CONSTEXPR CollectionInput::CollectionInput(
+    ::_pbi::ConstantInitialized): _impl_{
+    /*decltype(_impl_.project_ids_)*/{}
+  , /*decltype(_impl_.title_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
+  , /*decltype(_impl_.description_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
+  , /*decltype(_impl_.visibility_)*/0
+  , /*decltype(_impl_._cached_size_)*/{}} {}
+struct CollectionInputDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR CollectionInputDefaultTypeInternal()
+      : _instance(::_pbi::ConstantInitialized{}) {}
+  ~CollectionInputDefaultTypeInternal() {}
+  union {
+    CollectionInput _instance;
+  };
+};
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 CollectionInputDefaultTypeInternal _CollectionInput_default_instance_;
+PROTOBUF_CONSTEXPR CreateCollectionRequest::CreateCollectionRequest(
+    ::_pbi::ConstantInitialized): _impl_{
+    /*decltype(_impl_.input_)*/nullptr
+  , /*decltype(_impl_._cached_size_)*/{}} {}
+struct CreateCollectionRequestDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR CreateCollectionRequestDefaultTypeInternal()
+      : _instance(::_pbi::ConstantInitialized{}) {}
+  ~CreateCollectionRequestDefaultTypeInternal() {}
+  union {
+    CreateCollectionRequest _instance;
+  };
+};
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 CreateCollectionRequestDefaultTypeInternal _CreateCollectionRequest_default_instance_;
+PROTOBUF_CONSTEXPR UpdateCollectionRequest::UpdateCollectionRequest(
+    ::_pbi::ConstantInitialized): _impl_{
+    /*decltype(_impl_.id_)*/nullptr
+  , /*decltype(_impl_.input_)*/nullptr
+  , /*decltype(_impl_._cached_size_)*/{}} {}
+struct UpdateCollectionRequestDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR UpdateCollectionRequestDefaultTypeInternal()
+      : _instance(::_pbi::ConstantInitialized{}) {}
+  ~UpdateCollectionRequestDefaultTypeInternal() {}
+  union {
+    UpdateCollectionRequest _instance;
+  };
+};
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 UpdateCollectionRequestDefaultTypeInternal _UpdateCollectionRequest_default_instance_;
+PROTOBUF_CONSTEXPR CollectionResponse::CollectionResponse(
+    ::_pbi::ConstantInitialized): _impl_{
+    /*decltype(_impl_.collection_)*/nullptr
+  , /*decltype(_impl_._cached_size_)*/{}} {}
+struct CollectionResponseDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR CollectionResponseDefaultTypeInternal()
+      : _instance(::_pbi::ConstantInitialized{}) {}
+  ~CollectionResponseDefaultTypeInternal() {}
+  union {
+    CollectionResponse _instance;
+  };
+};
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 CollectionResponseDefaultTypeInternal _CollectionResponse_default_instance_;
+PROTOBUF_CONSTEXPR ListCollectionsResponse::ListCollectionsResponse(
+    ::_pbi::ConstantInitialized): _impl_{
+    /*decltype(_impl_.collections_)*/{}
+  , /*decltype(_impl_._cached_size_)*/{}} {}
+struct ListCollectionsResponseDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR ListCollectionsResponseDefaultTypeInternal()
+      : _instance(::_pbi::ConstantInitialized{}) {}
+  ~ListCollectionsResponseDefaultTypeInternal() {}
+  union {
+    ListCollectionsResponse _instance;
+  };
+};
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 ListCollectionsResponseDefaultTypeInternal _ListCollectionsResponse_default_instance_;
+PROTOBUF_CONSTEXPR DeleteCollectionRequest::DeleteCollectionRequest(
+    ::_pbi::ConstantInitialized): _impl_{
+    /*decltype(_impl_.id_)*/nullptr
+  , /*decltype(_impl_._cached_size_)*/{}} {}
+struct DeleteCollectionRequestDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR DeleteCollectionRequestDefaultTypeInternal()
+      : _instance(::_pbi::ConstantInitialized{}) {}
+  ~DeleteCollectionRequestDefaultTypeInternal() {}
+  union {
+    DeleteCollectionRequest _instance;
+  };
+};
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 DeleteCollectionRequestDefaultTypeInternal _DeleteCollectionRequest_default_instance_;
 }  // namespace v1
 }  // namespace priemman
-static ::_pb::Metadata file_level_metadata_project_2eproto[7];
+static ::_pb::Metadata file_level_metadata_project_2eproto[17];
 static const ::_pb::EnumDescriptor* file_level_enum_descriptors_project_2eproto[4];
 static constexpr ::_pb::ServiceDescriptor const** file_level_service_descriptors_project_2eproto = nullptr;
 
@@ -161,6 +306,7 @@ const uint32_t TableStruct_project_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE(
   PROTOBUF_FIELD_OFFSET(::priemman::v1::Media, _impl_.url_),
   PROTOBUF_FIELD_OFFSET(::priemman::v1::Media, _impl_.type_),
   PROTOBUF_FIELD_OFFSET(::priemman::v1::Media, _impl_.order_),
+  PROTOBUF_FIELD_OFFSET(::priemman::v1::Media, _impl_.id_),
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::priemman::v1::Collaborator, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -233,15 +379,109 @@ const uint32_t TableStruct_project_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE(
   ~0u,  // no _inlined_string_donated_
   PROTOBUF_FIELD_OFFSET(::priemman::v1::ListProjectsResponse, _impl_.projects_),
   PROTOBUF_FIELD_OFFSET(::priemman::v1::ListProjectsResponse, _impl_.next_page_token_),
+  ~0u,  // no _has_bits_
+  PROTOBUF_FIELD_OFFSET(::priemman::v1::ProjectInput, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  ~0u,  // no _inlined_string_donated_
+  PROTOBUF_FIELD_OFFSET(::priemman::v1::ProjectInput, _impl_.title_),
+  PROTOBUF_FIELD_OFFSET(::priemman::v1::ProjectInput, _impl_.description_),
+  PROTOBUF_FIELD_OFFSET(::priemman::v1::ProjectInput, _impl_.tools_),
+  PROTOBUF_FIELD_OFFSET(::priemman::v1::ProjectInput, _impl_.disciplines_),
+  PROTOBUF_FIELD_OFFSET(::priemman::v1::ProjectInput, _impl_.tags_),
+  PROTOBUF_FIELD_OFFSET(::priemman::v1::ProjectInput, _impl_.media_),
+  PROTOBUF_FIELD_OFFSET(::priemman::v1::ProjectInput, _impl_.collaborators_),
+  PROTOBUF_FIELD_OFFSET(::priemman::v1::ProjectInput, _impl_.visibility_),
+  PROTOBUF_FIELD_OFFSET(::priemman::v1::ProjectInput, _impl_.status_),
+  PROTOBUF_FIELD_OFFSET(::priemman::v1::ProjectInput, _impl_.cover_media_id_),
+  ~0u,  // no _has_bits_
+  PROTOBUF_FIELD_OFFSET(::priemman::v1::CreateProjectRequest, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  ~0u,  // no _inlined_string_donated_
+  PROTOBUF_FIELD_OFFSET(::priemman::v1::CreateProjectRequest, _impl_.input_),
+  ~0u,  // no _has_bits_
+  PROTOBUF_FIELD_OFFSET(::priemman::v1::UpdateProjectRequest, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  ~0u,  // no _inlined_string_donated_
+  PROTOBUF_FIELD_OFFSET(::priemman::v1::UpdateProjectRequest, _impl_.id_),
+  PROTOBUF_FIELD_OFFSET(::priemman::v1::UpdateProjectRequest, _impl_.input_),
+  ~0u,  // no _has_bits_
+  PROTOBUF_FIELD_OFFSET(::priemman::v1::ProjectResponse, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  ~0u,  // no _inlined_string_donated_
+  PROTOBUF_FIELD_OFFSET(::priemman::v1::ProjectResponse, _impl_.project_),
+  ~0u,  // no _has_bits_
+  PROTOBUF_FIELD_OFFSET(::priemman::v1::CollectionInput, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  ~0u,  // no _inlined_string_donated_
+  PROTOBUF_FIELD_OFFSET(::priemman::v1::CollectionInput, _impl_.title_),
+  PROTOBUF_FIELD_OFFSET(::priemman::v1::CollectionInput, _impl_.description_),
+  PROTOBUF_FIELD_OFFSET(::priemman::v1::CollectionInput, _impl_.visibility_),
+  PROTOBUF_FIELD_OFFSET(::priemman::v1::CollectionInput, _impl_.project_ids_),
+  ~0u,  // no _has_bits_
+  PROTOBUF_FIELD_OFFSET(::priemman::v1::CreateCollectionRequest, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  ~0u,  // no _inlined_string_donated_
+  PROTOBUF_FIELD_OFFSET(::priemman::v1::CreateCollectionRequest, _impl_.input_),
+  ~0u,  // no _has_bits_
+  PROTOBUF_FIELD_OFFSET(::priemman::v1::UpdateCollectionRequest, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  ~0u,  // no _inlined_string_donated_
+  PROTOBUF_FIELD_OFFSET(::priemman::v1::UpdateCollectionRequest, _impl_.id_),
+  PROTOBUF_FIELD_OFFSET(::priemman::v1::UpdateCollectionRequest, _impl_.input_),
+  ~0u,  // no _has_bits_
+  PROTOBUF_FIELD_OFFSET(::priemman::v1::CollectionResponse, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  ~0u,  // no _inlined_string_donated_
+  PROTOBUF_FIELD_OFFSET(::priemman::v1::CollectionResponse, _impl_.collection_),
+  ~0u,  // no _has_bits_
+  PROTOBUF_FIELD_OFFSET(::priemman::v1::ListCollectionsResponse, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  ~0u,  // no _inlined_string_donated_
+  PROTOBUF_FIELD_OFFSET(::priemman::v1::ListCollectionsResponse, _impl_.collections_),
+  ~0u,  // no _has_bits_
+  PROTOBUF_FIELD_OFFSET(::priemman::v1::DeleteCollectionRequest, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  ~0u,  // no _inlined_string_donated_
+  PROTOBUF_FIELD_OFFSET(::priemman::v1::DeleteCollectionRequest, _impl_.id_),
 };
 static const ::_pbi::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
   { 0, -1, -1, sizeof(::priemman::v1::Media)},
-  { 9, -1, -1, sizeof(::priemman::v1::Collaborator)},
-  { 17, -1, -1, sizeof(::priemman::v1::ProjectMetrics)},
-  { 26, -1, -1, sizeof(::priemman::v1::Project)},
-  { 49, -1, -1, sizeof(::priemman::v1::Collection)},
-  { 63, -1, -1, sizeof(::priemman::v1::ListProjectsRequest)},
-  { 73, -1, -1, sizeof(::priemman::v1::ListProjectsResponse)},
+  { 10, -1, -1, sizeof(::priemman::v1::Collaborator)},
+  { 18, -1, -1, sizeof(::priemman::v1::ProjectMetrics)},
+  { 27, -1, -1, sizeof(::priemman::v1::Project)},
+  { 50, -1, -1, sizeof(::priemman::v1::Collection)},
+  { 64, -1, -1, sizeof(::priemman::v1::ListProjectsRequest)},
+  { 74, -1, -1, sizeof(::priemman::v1::ListProjectsResponse)},
+  { 82, -1, -1, sizeof(::priemman::v1::ProjectInput)},
+  { 98, -1, -1, sizeof(::priemman::v1::CreateProjectRequest)},
+  { 105, -1, -1, sizeof(::priemman::v1::UpdateProjectRequest)},
+  { 113, -1, -1, sizeof(::priemman::v1::ProjectResponse)},
+  { 120, -1, -1, sizeof(::priemman::v1::CollectionInput)},
+  { 130, -1, -1, sizeof(::priemman::v1::CreateCollectionRequest)},
+  { 137, -1, -1, sizeof(::priemman::v1::UpdateCollectionRequest)},
+  { 145, -1, -1, sizeof(::priemman::v1::CollectionResponse)},
+  { 152, -1, -1, sizeof(::priemman::v1::ListCollectionsResponse)},
+  { 159, -1, -1, sizeof(::priemman::v1::DeleteCollectionRequest)},
 };
 
 static const ::_pb::Message* const file_default_instances[] = {
@@ -252,58 +492,96 @@ static const ::_pb::Message* const file_default_instances[] = {
   &::priemman::v1::_Collection_default_instance_._instance,
   &::priemman::v1::_ListProjectsRequest_default_instance_._instance,
   &::priemman::v1::_ListProjectsResponse_default_instance_._instance,
+  &::priemman::v1::_ProjectInput_default_instance_._instance,
+  &::priemman::v1::_CreateProjectRequest_default_instance_._instance,
+  &::priemman::v1::_UpdateProjectRequest_default_instance_._instance,
+  &::priemman::v1::_ProjectResponse_default_instance_._instance,
+  &::priemman::v1::_CollectionInput_default_instance_._instance,
+  &::priemman::v1::_CreateCollectionRequest_default_instance_._instance,
+  &::priemman::v1::_UpdateCollectionRequest_default_instance_._instance,
+  &::priemman::v1::_CollectionResponse_default_instance_._instance,
+  &::priemman::v1::_ListCollectionsResponse_default_instance_._instance,
+  &::priemman::v1::_DeleteCollectionRequest_default_instance_._instance,
 };
 
 const char descriptor_table_protodef_project_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) =
   "\n\rproject.proto\022\013priemman.v1\032\014common.pro"
-  "to\032\037google/protobuf/timestamp.proto\"I\n\005M"
+  "to\032\037google/protobuf/timestamp.proto\"l\n\005M"
   "edia\022\013\n\003url\030\001 \001(\t\022$\n\004type\030\002 \001(\0162\026.priemm"
-  "an.v1.MediaType\022\r\n\005order\030\003 \001(\005\"D\n\014Collab"
-  "orator\022&\n\007user_id\030\001 \001(\0132\025.priemman.v1.Ob"
-  "jectId\022\014\n\004role\030\002 \001(\t\"=\n\016ProjectMetrics\022\r"
-  "\n\005views\030\001 \001(\003\022\r\n\005likes\030\002 \001(\003\022\r\n\005saves\030\003 "
-  "\001(\003\"\306\004\n\007Project\022!\n\002id\030\001 \001(\0132\025.priemman.v"
-  "1.ObjectId\022\'\n\010owner_id\030\002 \001(\0132\025.priemman."
-  "v1.ObjectId\022\r\n\005title\030\003 \001(\t\022\014\n\004slug\030\004 \001(\t"
-  "\022\023\n\013description\030\005 \001(\t\022\r\n\005tools\030\006 \003(\t\022\023\n\013"
-  "disciplines\030\007 \003(\t\022\014\n\004tags\030\010 \003(\t\022\026\n\016cover"
-  "_media_id\030\t \001(\t\022!\n\005media\030\n \003(\0132\022.priemma"
-  "n.v1.Media\0220\n\rcollaborators\030\013 \003(\0132\031.prie"
-  "mman.v1.Collaborator\0222\n\nvisibility\030\014 \001(\016"
-  "2\036.priemman.v1.ProjectVisibility\022*\n\006stat"
-  "us\030\r \001(\0162\032.priemman.v1.ProjectStatus\022,\n\007"
-  "metrics\030\016 \001(\0132\033.priemman.v1.ProjectMetri"
-  "cs\022.\n\ncreated_at\030\017 \001(\0132\032.google.protobuf"
-  ".Timestamp\022.\n\nupdated_at\030\020 \001(\0132\032.google."
-  "protobuf.Timestamp\0220\n\014published_at\030\021 \001(\013"
-  "2\032.google.protobuf.Timestamp\"\277\002\n\nCollect"
-  "ion\022!\n\002id\030\001 \001(\0132\025.priemman.v1.ObjectId\022\'"
-  "\n\010owner_id\030\002 \001(\0132\025.priemman.v1.ObjectId\022"
-  "\r\n\005title\030\003 \001(\t\022\023\n\013description\030\004 \001(\t\022*\n\013p"
-  "roject_ids\030\005 \003(\0132\025.priemman.v1.ObjectId\022"
-  "5\n\nvisibility\030\006 \001(\0162!.priemman.v1.Collec"
-  "tionVisibility\022.\n\ncreated_at\030\007 \001(\0132\032.goo"
-  "gle.protobuf.Timestamp\022.\n\nupdated_at\030\010 \001"
-  "(\0132\032.google.protobuf.Timestamp\"\230\001\n\023ListP"
-  "rojectsRequest\022\'\n\010owner_id\030\001 \001(\0132\025.priem"
-  "man.v1.ObjectId\0221\n\rstatus_filter\030\002 \001(\0162\032"
-  ".priemman.v1.ProjectStatus\022\021\n\tpage_size\030"
-  "\003 \001(\005\022\022\n\npage_token\030\004 \001(\t\"W\n\024ListProject"
-  "sResponse\022&\n\010projects\030\001 \003(\0132\024.priemman.v"
-  "1.Project\022\027\n\017next_page_token\030\002 \001(\t*\225\001\n\021P"
-  "rojectVisibility\022\"\n\036PROJECT_VISIBILITY_U"
-  "NSPECIFIED\020\000\022\035\n\031PROJECT_VISIBILITY_PUBLI"
-  "C\020\001\022\037\n\033PROJECT_VISIBILITY_UNLISTED\020\002\022\034\n\030"
-  "PROJECT_VISIBILITY_DRAFT\020\003*\204\001\n\rProjectSt"
-  "atus\022\036\n\032PROJECT_STATUS_UNSPECIFIED\020\000\022\030\n\024"
-  "PROJECT_STATUS_DRAFT\020\001\022\034\n\030PROJECT_STATUS"
-  "_PUBLISHED\020\002\022\033\n\027PROJECT_STATUS_ARCHIVED\020"
-  "\003*S\n\tMediaType\022\032\n\026MEDIA_TYPE_UNSPECIFIED"
-  "\020\000\022\024\n\020MEDIA_TYPE_IMAGE\020\001\022\024\n\020MEDIA_TYPE_V"
-  "IDEO\020\002*\202\001\n\024CollectionVisibility\022%\n!COLLE"
-  "CTION_VISIBILITY_UNSPECIFIED\020\000\022 \n\034COLLEC"
-  "TION_VISIBILITY_PUBLIC\020\001\022!\n\035COLLECTION_V"
-  "ISIBILITY_PRIVATE\020\002b\006proto3"
+  "an.v1.MediaType\022\r\n\005order\030\003 \001(\005\022!\n\002id\030\004 \001"
+  "(\0132\025.priemman.v1.ObjectId\"D\n\014Collaborato"
+  "r\022&\n\007user_id\030\001 \001(\0132\025.priemman.v1.ObjectI"
+  "d\022\014\n\004role\030\002 \001(\t\"=\n\016ProjectMetrics\022\r\n\005vie"
+  "ws\030\001 \001(\003\022\r\n\005likes\030\002 \001(\003\022\r\n\005saves\030\003 \001(\003\"\306"
+  "\004\n\007Project\022!\n\002id\030\001 \001(\0132\025.priemman.v1.Obj"
+  "ectId\022\'\n\010owner_id\030\002 \001(\0132\025.priemman.v1.Ob"
+  "jectId\022\r\n\005title\030\003 \001(\t\022\014\n\004slug\030\004 \001(\t\022\023\n\013d"
+  "escription\030\005 \001(\t\022\r\n\005tools\030\006 \003(\t\022\023\n\013disci"
+  "plines\030\007 \003(\t\022\014\n\004tags\030\010 \003(\t\022\026\n\016cover_medi"
+  "a_id\030\t \001(\t\022!\n\005media\030\n \003(\0132\022.priemman.v1."
+  "Media\0220\n\rcollaborators\030\013 \003(\0132\031.priemman."
+  "v1.Collaborator\0222\n\nvisibility\030\014 \001(\0162\036.pr"
+  "iemman.v1.ProjectVisibility\022*\n\006status\030\r "
+  "\001(\0162\032.priemman.v1.ProjectStatus\022,\n\007metri"
+  "cs\030\016 \001(\0132\033.priemman.v1.ProjectMetrics\022.\n"
+  "\ncreated_at\030\017 \001(\0132\032.google.protobuf.Time"
+  "stamp\022.\n\nupdated_at\030\020 \001(\0132\032.google.proto"
+  "buf.Timestamp\0220\n\014published_at\030\021 \001(\0132\032.go"
+  "ogle.protobuf.Timestamp\"\277\002\n\nCollection\022!"
+  "\n\002id\030\001 \001(\0132\025.priemman.v1.ObjectId\022\'\n\010own"
+  "er_id\030\002 \001(\0132\025.priemman.v1.ObjectId\022\r\n\005ti"
+  "tle\030\003 \001(\t\022\023\n\013description\030\004 \001(\t\022*\n\013projec"
+  "t_ids\030\005 \003(\0132\025.priemman.v1.ObjectId\0225\n\nvi"
+  "sibility\030\006 \001(\0162!.priemman.v1.CollectionV"
+  "isibility\022.\n\ncreated_at\030\007 \001(\0132\032.google.p"
+  "rotobuf.Timestamp\022.\n\nupdated_at\030\010 \001(\0132\032."
+  "google.protobuf.Timestamp\"\230\001\n\023ListProjec"
+  "tsRequest\022\'\n\010owner_id\030\001 \001(\0132\025.priemman.v"
+  "1.ObjectId\0221\n\rstatus_filter\030\002 \001(\0162\032.prie"
+  "mman.v1.ProjectStatus\022\021\n\tpage_size\030\003 \001(\005"
+  "\022\022\n\npage_token\030\004 \001(\t\"W\n\024ListProjectsResp"
+  "onse\022&\n\010projects\030\001 \003(\0132\024.priemman.v1.Pro"
+  "ject\022\027\n\017next_page_token\030\002 \001(\t\"\261\002\n\014Projec"
+  "tInput\022\r\n\005title\030\001 \001(\t\022\023\n\013description\030\002 \001"
+  "(\t\022\r\n\005tools\030\003 \003(\t\022\023\n\013disciplines\030\004 \003(\t\022\014"
+  "\n\004tags\030\005 \003(\t\022!\n\005media\030\006 \003(\0132\022.priemman.v"
+  "1.Media\0220\n\rcollaborators\030\007 \003(\0132\031.priemma"
+  "n.v1.Collaborator\0222\n\nvisibility\030\010 \001(\0162\036."
+  "priemman.v1.ProjectVisibility\022*\n\006status\030"
+  "\t \001(\0162\032.priemman.v1.ProjectStatus\022\026\n\016cov"
+  "er_media_id\030\n \001(\t\"@\n\024CreateProjectReques"
+  "t\022(\n\005input\030\001 \001(\0132\031.priemman.v1.ProjectIn"
+  "put\"c\n\024UpdateProjectRequest\022!\n\002id\030\001 \001(\0132"
+  "\025.priemman.v1.ObjectId\022(\n\005input\030\002 \001(\0132\031."
+  "priemman.v1.ProjectInput\"8\n\017ProjectRespo"
+  "nse\022%\n\007project\030\001 \001(\0132\024.priemman.v1.Proje"
+  "ct\"\230\001\n\017CollectionInput\022\r\n\005title\030\001 \001(\t\022\023\n"
+  "\013description\030\002 \001(\t\0225\n\nvisibility\030\003 \001(\0162!"
+  ".priemman.v1.CollectionVisibility\022*\n\013pro"
+  "ject_ids\030\004 \003(\0132\025.priemman.v1.ObjectId\"F\n"
+  "\027CreateCollectionRequest\022+\n\005input\030\001 \001(\0132"
+  "\034.priemman.v1.CollectionInput\"i\n\027UpdateC"
+  "ollectionRequest\022!\n\002id\030\001 \001(\0132\025.priemman."
+  "v1.ObjectId\022+\n\005input\030\002 \001(\0132\034.priemman.v1"
+  ".CollectionInput\"A\n\022CollectionResponse\022+"
+  "\n\ncollection\030\001 \001(\0132\027.priemman.v1.Collect"
+  "ion\"G\n\027ListCollectionsResponse\022,\n\013collec"
+  "tions\030\001 \003(\0132\027.priemman.v1.Collection\"<\n\027"
+  "DeleteCollectionRequest\022!\n\002id\030\001 \001(\0132\025.pr"
+  "iemman.v1.ObjectId*\225\001\n\021ProjectVisibility"
+  "\022\"\n\036PROJECT_VISIBILITY_UNSPECIFIED\020\000\022\035\n\031"
+  "PROJECT_VISIBILITY_PUBLIC\020\001\022\037\n\033PROJECT_V"
+  "ISIBILITY_UNLISTED\020\002\022\034\n\030PROJECT_VISIBILI"
+  "TY_DRAFT\020\003*\204\001\n\rProjectStatus\022\036\n\032PROJECT_"
+  "STATUS_UNSPECIFIED\020\000\022\030\n\024PROJECT_STATUS_D"
+  "RAFT\020\001\022\034\n\030PROJECT_STATUS_PUBLISHED\020\002\022\033\n\027"
+  "PROJECT_STATUS_ARCHIVED\020\003*S\n\tMediaType\022\032"
+  "\n\026MEDIA_TYPE_UNSPECIFIED\020\000\022\024\n\020MEDIA_TYPE"
+  "_IMAGE\020\001\022\024\n\020MEDIA_TYPE_VIDEO\020\002*\202\001\n\024Colle"
+  "ctionVisibility\022%\n!COLLECTION_VISIBILITY"
+  "_UNSPECIFIED\020\000\022 \n\034COLLECTION_VISIBILITY_"
+  "PUBLIC\020\001\022!\n\035COLLECTION_VISIBILITY_PRIVAT"
+  "E\020\002b\006proto3"
   ;
 static const ::_pbi::DescriptorTable* const descriptor_table_project_2eproto_deps[2] = {
   &::descriptor_table_common_2eproto,
@@ -311,9 +589,9 @@ static const ::_pbi::DescriptorTable* const descriptor_table_project_2eproto_dep
 };
 static ::_pbi::once_flag descriptor_table_project_2eproto_once;
 const ::_pbi::DescriptorTable descriptor_table_project_2eproto = {
-    false, false, 1947, descriptor_table_protodef_project_2eproto,
+    false, false, 3051, descriptor_table_protodef_project_2eproto,
     "project.proto",
-    &descriptor_table_project_2eproto_once, descriptor_table_project_2eproto_deps, 2, 7,
+    &descriptor_table_project_2eproto_once, descriptor_table_project_2eproto_deps, 2, 17,
     schemas, file_default_instances, TableStruct_project_2eproto::offsets,
     file_level_metadata_project_2eproto, file_level_enum_descriptors_project_2eproto,
     file_level_service_descriptors_project_2eproto,
@@ -393,8 +671,19 @@ bool CollectionVisibility_IsValid(int value) {
 
 class Media::_Internal {
  public:
+  static const ::priemman::v1::ObjectId& id(const Media* msg);
 };
 
+const ::priemman::v1::ObjectId&
+Media::_Internal::id(const Media* msg) {
+  return *msg->_impl_.id_;
+}
+void Media::clear_id() {
+  if (GetArenaForAllocation() == nullptr && _impl_.id_ != nullptr) {
+    delete _impl_.id_;
+  }
+  _impl_.id_ = nullptr;
+}
 Media::Media(::PROTOBUF_NAMESPACE_ID::Arena* arena,
                          bool is_message_owned)
   : ::PROTOBUF_NAMESPACE_ID::Message(arena, is_message_owned) {
@@ -406,6 +695,7 @@ Media::Media(const Media& from)
   Media* const _this = this; (void)_this;
   new (&_impl_) Impl_{
       decltype(_impl_.url_){}
+    , decltype(_impl_.id_){nullptr}
     , decltype(_impl_.type_){}
     , decltype(_impl_.order_){}
     , /*decltype(_impl_._cached_size_)*/{}};
@@ -419,6 +709,9 @@ Media::Media(const Media& from)
     _this->_impl_.url_.Set(from._internal_url(), 
       _this->GetArenaForAllocation());
   }
+  if (from._internal_has_id()) {
+    _this->_impl_.id_ = new ::priemman::v1::ObjectId(*from._impl_.id_);
+  }
   ::memcpy(&_impl_.type_, &from._impl_.type_,
     static_cast<size_t>(reinterpret_cast<char*>(&_impl_.order_) -
     reinterpret_cast<char*>(&_impl_.type_)) + sizeof(_impl_.order_));
@@ -431,6 +724,7 @@ inline void Media::SharedCtor(
   (void)is_message_owned;
   new (&_impl_) Impl_{
       decltype(_impl_.url_){}
+    , decltype(_impl_.id_){nullptr}
     , decltype(_impl_.type_){0}
     , decltype(_impl_.order_){0}
     , /*decltype(_impl_._cached_size_)*/{}
@@ -453,6 +747,7 @@ Media::~Media() {
 inline void Media::SharedDtor() {
   GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
   _impl_.url_.Destroy();
+  if (this != internal_default_instance()) delete _impl_.id_;
 }
 
 void Media::SetCachedSize(int size) const {
@@ -466,6 +761,10 @@ void Media::Clear() {
   (void) cached_has_bits;
 
   _impl_.url_.ClearToEmpty();
+  if (GetArenaForAllocation() == nullptr && _impl_.id_ != nullptr) {
+    delete _impl_.id_;
+  }
+  _impl_.id_ = nullptr;
   ::memset(&_impl_.type_, 0, static_cast<size_t>(
       reinterpret_cast<char*>(&_impl_.order_) -
       reinterpret_cast<char*>(&_impl_.type_)) + sizeof(_impl_.order_));
@@ -501,6 +800,14 @@ const char* Media::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
       case 3:
         if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 24)) {
           _impl_.order_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      // .priemman.v1.ObjectId id = 4;
+      case 4:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 34)) {
+          ptr = ctx->ParseMessage(_internal_mutable_id(), ptr);
           CHK_(ptr);
         } else
           goto handle_unusual;
@@ -557,6 +864,13 @@ uint8_t* Media::_InternalSerialize(
     target = ::_pbi::WireFormatLite::WriteInt32ToArray(3, this->_internal_order(), target);
   }
 
+  // .priemman.v1.ObjectId id = 4;
+  if (this->_internal_has_id()) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+      InternalWriteMessage(4, _Internal::id(this),
+        _Internal::id(this).GetCachedSize(), target, stream);
+  }
+
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
     target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
         _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
@@ -578,6 +892,13 @@ size_t Media::ByteSizeLong() const {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
         this->_internal_url());
+  }
+
+  // .priemman.v1.ObjectId id = 4;
+  if (this->_internal_has_id()) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
+        *_impl_.id_);
   }
 
   // .priemman.v1.MediaType type = 2;
@@ -612,6 +933,10 @@ void Media::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF
   if (!from._internal_url().empty()) {
     _this->_internal_set_url(from._internal_url());
   }
+  if (from._internal_has_id()) {
+    _this->_internal_mutable_id()->::priemman::v1::ObjectId::MergeFrom(
+        from._internal_id());
+  }
   if (from._internal_type() != 0) {
     _this->_internal_set_type(from._internal_type());
   }
@@ -644,9 +969,9 @@ void Media::InternalSwap(Media* other) {
   ::PROTOBUF_NAMESPACE_ID::internal::memswap<
       PROTOBUF_FIELD_OFFSET(Media, _impl_.order_)
       + sizeof(Media::_impl_.order_)
-      - PROTOBUF_FIELD_OFFSET(Media, _impl_.type_)>(
-          reinterpret_cast<char*>(&_impl_.type_),
-          reinterpret_cast<char*>(&other->_impl_.type_));
+      - PROTOBUF_FIELD_OFFSET(Media, _impl_.id_)>(
+          reinterpret_cast<char*>(&_impl_.id_),
+          reinterpret_cast<char*>(&other->_impl_.id_));
 }
 
 ::PROTOBUF_NAMESPACE_ID::Metadata Media::GetMetadata() const {
@@ -3084,6 +3409,2526 @@ void ListProjectsResponse::InternalSwap(ListProjectsResponse* other) {
       file_level_metadata_project_2eproto[6]);
 }
 
+// ===================================================================
+
+class ProjectInput::_Internal {
+ public:
+};
+
+ProjectInput::ProjectInput(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                         bool is_message_owned)
+  : ::PROTOBUF_NAMESPACE_ID::Message(arena, is_message_owned) {
+  SharedCtor(arena, is_message_owned);
+  // @@protoc_insertion_point(arena_constructor:priemman.v1.ProjectInput)
+}
+ProjectInput::ProjectInput(const ProjectInput& from)
+  : ::PROTOBUF_NAMESPACE_ID::Message() {
+  ProjectInput* const _this = this; (void)_this;
+  new (&_impl_) Impl_{
+      decltype(_impl_.tools_){from._impl_.tools_}
+    , decltype(_impl_.disciplines_){from._impl_.disciplines_}
+    , decltype(_impl_.tags_){from._impl_.tags_}
+    , decltype(_impl_.media_){from._impl_.media_}
+    , decltype(_impl_.collaborators_){from._impl_.collaborators_}
+    , decltype(_impl_.title_){}
+    , decltype(_impl_.description_){}
+    , decltype(_impl_.cover_media_id_){}
+    , decltype(_impl_.visibility_){}
+    , decltype(_impl_.status_){}
+    , /*decltype(_impl_._cached_size_)*/{}};
+
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  _impl_.title_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+    _impl_.title_.Set("", GetArenaForAllocation());
+  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (!from._internal_title().empty()) {
+    _this->_impl_.title_.Set(from._internal_title(), 
+      _this->GetArenaForAllocation());
+  }
+  _impl_.description_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+    _impl_.description_.Set("", GetArenaForAllocation());
+  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (!from._internal_description().empty()) {
+    _this->_impl_.description_.Set(from._internal_description(), 
+      _this->GetArenaForAllocation());
+  }
+  _impl_.cover_media_id_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+    _impl_.cover_media_id_.Set("", GetArenaForAllocation());
+  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (!from._internal_cover_media_id().empty()) {
+    _this->_impl_.cover_media_id_.Set(from._internal_cover_media_id(), 
+      _this->GetArenaForAllocation());
+  }
+  ::memcpy(&_impl_.visibility_, &from._impl_.visibility_,
+    static_cast<size_t>(reinterpret_cast<char*>(&_impl_.status_) -
+    reinterpret_cast<char*>(&_impl_.visibility_)) + sizeof(_impl_.status_));
+  // @@protoc_insertion_point(copy_constructor:priemman.v1.ProjectInput)
+}
+
+inline void ProjectInput::SharedCtor(
+    ::_pb::Arena* arena, bool is_message_owned) {
+  (void)arena;
+  (void)is_message_owned;
+  new (&_impl_) Impl_{
+      decltype(_impl_.tools_){arena}
+    , decltype(_impl_.disciplines_){arena}
+    , decltype(_impl_.tags_){arena}
+    , decltype(_impl_.media_){arena}
+    , decltype(_impl_.collaborators_){arena}
+    , decltype(_impl_.title_){}
+    , decltype(_impl_.description_){}
+    , decltype(_impl_.cover_media_id_){}
+    , decltype(_impl_.visibility_){0}
+    , decltype(_impl_.status_){0}
+    , /*decltype(_impl_._cached_size_)*/{}
+  };
+  _impl_.title_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+    _impl_.title_.Set("", GetArenaForAllocation());
+  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  _impl_.description_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+    _impl_.description_.Set("", GetArenaForAllocation());
+  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  _impl_.cover_media_id_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+    _impl_.cover_media_id_.Set("", GetArenaForAllocation());
+  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+}
+
+ProjectInput::~ProjectInput() {
+  // @@protoc_insertion_point(destructor:priemman.v1.ProjectInput)
+  if (auto *arena = _internal_metadata_.DeleteReturnArena<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>()) {
+  (void)arena;
+    return;
+  }
+  SharedDtor();
+}
+
+inline void ProjectInput::SharedDtor() {
+  GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
+  _impl_.tools_.~RepeatedPtrField();
+  _impl_.disciplines_.~RepeatedPtrField();
+  _impl_.tags_.~RepeatedPtrField();
+  _impl_.media_.~RepeatedPtrField();
+  _impl_.collaborators_.~RepeatedPtrField();
+  _impl_.title_.Destroy();
+  _impl_.description_.Destroy();
+  _impl_.cover_media_id_.Destroy();
+}
+
+void ProjectInput::SetCachedSize(int size) const {
+  _impl_._cached_size_.Set(size);
+}
+
+void ProjectInput::Clear() {
+// @@protoc_insertion_point(message_clear_start:priemman.v1.ProjectInput)
+  uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  _impl_.tools_.Clear();
+  _impl_.disciplines_.Clear();
+  _impl_.tags_.Clear();
+  _impl_.media_.Clear();
+  _impl_.collaborators_.Clear();
+  _impl_.title_.ClearToEmpty();
+  _impl_.description_.ClearToEmpty();
+  _impl_.cover_media_id_.ClearToEmpty();
+  ::memset(&_impl_.visibility_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&_impl_.status_) -
+      reinterpret_cast<char*>(&_impl_.visibility_)) + sizeof(_impl_.status_));
+  _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+}
+
+const char* ProjectInput::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  while (!ctx->Done(&ptr)) {
+    uint32_t tag;
+    ptr = ::_pbi::ReadTag(ptr, &tag);
+    switch (tag >> 3) {
+      // string title = 1;
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 10)) {
+          auto str = _internal_mutable_title();
+          ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
+          CHK_(ptr);
+          CHK_(::_pbi::VerifyUTF8(str, "priemman.v1.ProjectInput.title"));
+        } else
+          goto handle_unusual;
+        continue;
+      // string description = 2;
+      case 2:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 18)) {
+          auto str = _internal_mutable_description();
+          ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
+          CHK_(ptr);
+          CHK_(::_pbi::VerifyUTF8(str, "priemman.v1.ProjectInput.description"));
+        } else
+          goto handle_unusual;
+        continue;
+      // repeated string tools = 3;
+      case 3:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 26)) {
+          ptr -= 1;
+          do {
+            ptr += 1;
+            auto str = _internal_add_tools();
+            ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
+            CHK_(ptr);
+            CHK_(::_pbi::VerifyUTF8(str, "priemman.v1.ProjectInput.tools"));
+            if (!ctx->DataAvailable(ptr)) break;
+          } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<26>(ptr));
+        } else
+          goto handle_unusual;
+        continue;
+      // repeated string disciplines = 4;
+      case 4:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 34)) {
+          ptr -= 1;
+          do {
+            ptr += 1;
+            auto str = _internal_add_disciplines();
+            ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
+            CHK_(ptr);
+            CHK_(::_pbi::VerifyUTF8(str, "priemman.v1.ProjectInput.disciplines"));
+            if (!ctx->DataAvailable(ptr)) break;
+          } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<34>(ptr));
+        } else
+          goto handle_unusual;
+        continue;
+      // repeated string tags = 5;
+      case 5:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 42)) {
+          ptr -= 1;
+          do {
+            ptr += 1;
+            auto str = _internal_add_tags();
+            ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
+            CHK_(ptr);
+            CHK_(::_pbi::VerifyUTF8(str, "priemman.v1.ProjectInput.tags"));
+            if (!ctx->DataAvailable(ptr)) break;
+          } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<42>(ptr));
+        } else
+          goto handle_unusual;
+        continue;
+      // repeated .priemman.v1.Media media = 6;
+      case 6:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 50)) {
+          ptr -= 1;
+          do {
+            ptr += 1;
+            ptr = ctx->ParseMessage(_internal_add_media(), ptr);
+            CHK_(ptr);
+            if (!ctx->DataAvailable(ptr)) break;
+          } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<50>(ptr));
+        } else
+          goto handle_unusual;
+        continue;
+      // repeated .priemman.v1.Collaborator collaborators = 7;
+      case 7:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 58)) {
+          ptr -= 1;
+          do {
+            ptr += 1;
+            ptr = ctx->ParseMessage(_internal_add_collaborators(), ptr);
+            CHK_(ptr);
+            if (!ctx->DataAvailable(ptr)) break;
+          } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<58>(ptr));
+        } else
+          goto handle_unusual;
+        continue;
+      // .priemman.v1.ProjectVisibility visibility = 8;
+      case 8:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 64)) {
+          uint64_t val = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
+          CHK_(ptr);
+          _internal_set_visibility(static_cast<::priemman::v1::ProjectVisibility>(val));
+        } else
+          goto handle_unusual;
+        continue;
+      // .priemman.v1.ProjectStatus status = 9;
+      case 9:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 72)) {
+          uint64_t val = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
+          CHK_(ptr);
+          _internal_set_status(static_cast<::priemman::v1::ProjectStatus>(val));
+        } else
+          goto handle_unusual;
+        continue;
+      // string cover_media_id = 10;
+      case 10:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 82)) {
+          auto str = _internal_mutable_cover_media_id();
+          ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
+          CHK_(ptr);
+          CHK_(::_pbi::VerifyUTF8(str, "priemman.v1.ProjectInput.cover_media_id"));
+        } else
+          goto handle_unusual;
+        continue;
+      default:
+        goto handle_unusual;
+    }  // switch
+  handle_unusual:
+    if ((tag == 0) || ((tag & 7) == 4)) {
+      CHK_(ptr);
+      ctx->SetLastTag(tag);
+      goto message_done;
+    }
+    ptr = UnknownFieldParse(
+        tag,
+        _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
+        ptr, ctx);
+    CHK_(ptr != nullptr);
+  }  // while
+message_done:
+  return ptr;
+failure:
+  ptr = nullptr;
+  goto message_done;
+#undef CHK_
+}
+
+uint8_t* ProjectInput::_InternalSerialize(
+    uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
+  // @@protoc_insertion_point(serialize_to_array_start:priemman.v1.ProjectInput)
+  uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // string title = 1;
+  if (!this->_internal_title().empty()) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+      this->_internal_title().data(), static_cast<int>(this->_internal_title().length()),
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+      "priemman.v1.ProjectInput.title");
+    target = stream->WriteStringMaybeAliased(
+        1, this->_internal_title(), target);
+  }
+
+  // string description = 2;
+  if (!this->_internal_description().empty()) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+      this->_internal_description().data(), static_cast<int>(this->_internal_description().length()),
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+      "priemman.v1.ProjectInput.description");
+    target = stream->WriteStringMaybeAliased(
+        2, this->_internal_description(), target);
+  }
+
+  // repeated string tools = 3;
+  for (int i = 0, n = this->_internal_tools_size(); i < n; i++) {
+    const auto& s = this->_internal_tools(i);
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+      s.data(), static_cast<int>(s.length()),
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+      "priemman.v1.ProjectInput.tools");
+    target = stream->WriteString(3, s, target);
+  }
+
+  // repeated string disciplines = 4;
+  for (int i = 0, n = this->_internal_disciplines_size(); i < n; i++) {
+    const auto& s = this->_internal_disciplines(i);
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+      s.data(), static_cast<int>(s.length()),
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+      "priemman.v1.ProjectInput.disciplines");
+    target = stream->WriteString(4, s, target);
+  }
+
+  // repeated string tags = 5;
+  for (int i = 0, n = this->_internal_tags_size(); i < n; i++) {
+    const auto& s = this->_internal_tags(i);
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+      s.data(), static_cast<int>(s.length()),
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+      "priemman.v1.ProjectInput.tags");
+    target = stream->WriteString(5, s, target);
+  }
+
+  // repeated .priemman.v1.Media media = 6;
+  for (unsigned i = 0,
+      n = static_cast<unsigned>(this->_internal_media_size()); i < n; i++) {
+    const auto& repfield = this->_internal_media(i);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+        InternalWriteMessage(6, repfield, repfield.GetCachedSize(), target, stream);
+  }
+
+  // repeated .priemman.v1.Collaborator collaborators = 7;
+  for (unsigned i = 0,
+      n = static_cast<unsigned>(this->_internal_collaborators_size()); i < n; i++) {
+    const auto& repfield = this->_internal_collaborators(i);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+        InternalWriteMessage(7, repfield, repfield.GetCachedSize(), target, stream);
+  }
+
+  // .priemman.v1.ProjectVisibility visibility = 8;
+  if (this->_internal_visibility() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::_pbi::WireFormatLite::WriteEnumToArray(
+      8, this->_internal_visibility(), target);
+  }
+
+  // .priemman.v1.ProjectStatus status = 9;
+  if (this->_internal_status() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::_pbi::WireFormatLite::WriteEnumToArray(
+      9, this->_internal_status(), target);
+  }
+
+  // string cover_media_id = 10;
+  if (!this->_internal_cover_media_id().empty()) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+      this->_internal_cover_media_id().data(), static_cast<int>(this->_internal_cover_media_id().length()),
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+      "priemman.v1.ProjectInput.cover_media_id");
+    target = stream->WriteStringMaybeAliased(
+        10, this->_internal_cover_media_id(), target);
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:priemman.v1.ProjectInput)
+  return target;
+}
+
+size_t ProjectInput::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:priemman.v1.ProjectInput)
+  size_t total_size = 0;
+
+  uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  // repeated string tools = 3;
+  total_size += 1 *
+      ::PROTOBUF_NAMESPACE_ID::internal::FromIntSize(_impl_.tools_.size());
+  for (int i = 0, n = _impl_.tools_.size(); i < n; i++) {
+    total_size += ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+      _impl_.tools_.Get(i));
+  }
+
+  // repeated string disciplines = 4;
+  total_size += 1 *
+      ::PROTOBUF_NAMESPACE_ID::internal::FromIntSize(_impl_.disciplines_.size());
+  for (int i = 0, n = _impl_.disciplines_.size(); i < n; i++) {
+    total_size += ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+      _impl_.disciplines_.Get(i));
+  }
+
+  // repeated string tags = 5;
+  total_size += 1 *
+      ::PROTOBUF_NAMESPACE_ID::internal::FromIntSize(_impl_.tags_.size());
+  for (int i = 0, n = _impl_.tags_.size(); i < n; i++) {
+    total_size += ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+      _impl_.tags_.Get(i));
+  }
+
+  // repeated .priemman.v1.Media media = 6;
+  total_size += 1UL * this->_internal_media_size();
+  for (const auto& msg : this->_impl_.media_) {
+    total_size +=
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(msg);
+  }
+
+  // repeated .priemman.v1.Collaborator collaborators = 7;
+  total_size += 1UL * this->_internal_collaborators_size();
+  for (const auto& msg : this->_impl_.collaborators_) {
+    total_size +=
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(msg);
+  }
+
+  // string title = 1;
+  if (!this->_internal_title().empty()) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+        this->_internal_title());
+  }
+
+  // string description = 2;
+  if (!this->_internal_description().empty()) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+        this->_internal_description());
+  }
+
+  // string cover_media_id = 10;
+  if (!this->_internal_cover_media_id().empty()) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+        this->_internal_cover_media_id());
+  }
+
+  // .priemman.v1.ProjectVisibility visibility = 8;
+  if (this->_internal_visibility() != 0) {
+    total_size += 1 +
+      ::_pbi::WireFormatLite::EnumSize(this->_internal_visibility());
+  }
+
+  // .priemman.v1.ProjectStatus status = 9;
+  if (this->_internal_status() != 0) {
+    total_size += 1 +
+      ::_pbi::WireFormatLite::EnumSize(this->_internal_status());
+  }
+
+  return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
+}
+
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData ProjectInput::_class_data_ = {
+    ::PROTOBUF_NAMESPACE_ID::Message::CopyWithSourceCheck,
+    ProjectInput::MergeImpl
+};
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*ProjectInput::GetClassData() const { return &_class_data_; }
+
+
+void ProjectInput::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg) {
+  auto* const _this = static_cast<ProjectInput*>(&to_msg);
+  auto& from = static_cast<const ProjectInput&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:priemman.v1.ProjectInput)
+  GOOGLE_DCHECK_NE(&from, _this);
+  uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  _this->_impl_.tools_.MergeFrom(from._impl_.tools_);
+  _this->_impl_.disciplines_.MergeFrom(from._impl_.disciplines_);
+  _this->_impl_.tags_.MergeFrom(from._impl_.tags_);
+  _this->_impl_.media_.MergeFrom(from._impl_.media_);
+  _this->_impl_.collaborators_.MergeFrom(from._impl_.collaborators_);
+  if (!from._internal_title().empty()) {
+    _this->_internal_set_title(from._internal_title());
+  }
+  if (!from._internal_description().empty()) {
+    _this->_internal_set_description(from._internal_description());
+  }
+  if (!from._internal_cover_media_id().empty()) {
+    _this->_internal_set_cover_media_id(from._internal_cover_media_id());
+  }
+  if (from._internal_visibility() != 0) {
+    _this->_internal_set_visibility(from._internal_visibility());
+  }
+  if (from._internal_status() != 0) {
+    _this->_internal_set_status(from._internal_status());
+  }
+  _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+}
+
+void ProjectInput::CopyFrom(const ProjectInput& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:priemman.v1.ProjectInput)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool ProjectInput::IsInitialized() const {
+  return true;
+}
+
+void ProjectInput::InternalSwap(ProjectInput* other) {
+  using std::swap;
+  auto* lhs_arena = GetArenaForAllocation();
+  auto* rhs_arena = other->GetArenaForAllocation();
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  _impl_.tools_.InternalSwap(&other->_impl_.tools_);
+  _impl_.disciplines_.InternalSwap(&other->_impl_.disciplines_);
+  _impl_.tags_.InternalSwap(&other->_impl_.tags_);
+  _impl_.media_.InternalSwap(&other->_impl_.media_);
+  _impl_.collaborators_.InternalSwap(&other->_impl_.collaborators_);
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
+      &_impl_.title_, lhs_arena,
+      &other->_impl_.title_, rhs_arena
+  );
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
+      &_impl_.description_, lhs_arena,
+      &other->_impl_.description_, rhs_arena
+  );
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
+      &_impl_.cover_media_id_, lhs_arena,
+      &other->_impl_.cover_media_id_, rhs_arena
+  );
+  ::PROTOBUF_NAMESPACE_ID::internal::memswap<
+      PROTOBUF_FIELD_OFFSET(ProjectInput, _impl_.status_)
+      + sizeof(ProjectInput::_impl_.status_)
+      - PROTOBUF_FIELD_OFFSET(ProjectInput, _impl_.visibility_)>(
+          reinterpret_cast<char*>(&_impl_.visibility_),
+          reinterpret_cast<char*>(&other->_impl_.visibility_));
+}
+
+::PROTOBUF_NAMESPACE_ID::Metadata ProjectInput::GetMetadata() const {
+  return ::_pbi::AssignDescriptors(
+      &descriptor_table_project_2eproto_getter, &descriptor_table_project_2eproto_once,
+      file_level_metadata_project_2eproto[7]);
+}
+
+// ===================================================================
+
+class CreateProjectRequest::_Internal {
+ public:
+  static const ::priemman::v1::ProjectInput& input(const CreateProjectRequest* msg);
+};
+
+const ::priemman::v1::ProjectInput&
+CreateProjectRequest::_Internal::input(const CreateProjectRequest* msg) {
+  return *msg->_impl_.input_;
+}
+CreateProjectRequest::CreateProjectRequest(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                         bool is_message_owned)
+  : ::PROTOBUF_NAMESPACE_ID::Message(arena, is_message_owned) {
+  SharedCtor(arena, is_message_owned);
+  // @@protoc_insertion_point(arena_constructor:priemman.v1.CreateProjectRequest)
+}
+CreateProjectRequest::CreateProjectRequest(const CreateProjectRequest& from)
+  : ::PROTOBUF_NAMESPACE_ID::Message() {
+  CreateProjectRequest* const _this = this; (void)_this;
+  new (&_impl_) Impl_{
+      decltype(_impl_.input_){nullptr}
+    , /*decltype(_impl_._cached_size_)*/{}};
+
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  if (from._internal_has_input()) {
+    _this->_impl_.input_ = new ::priemman::v1::ProjectInput(*from._impl_.input_);
+  }
+  // @@protoc_insertion_point(copy_constructor:priemman.v1.CreateProjectRequest)
+}
+
+inline void CreateProjectRequest::SharedCtor(
+    ::_pb::Arena* arena, bool is_message_owned) {
+  (void)arena;
+  (void)is_message_owned;
+  new (&_impl_) Impl_{
+      decltype(_impl_.input_){nullptr}
+    , /*decltype(_impl_._cached_size_)*/{}
+  };
+}
+
+CreateProjectRequest::~CreateProjectRequest() {
+  // @@protoc_insertion_point(destructor:priemman.v1.CreateProjectRequest)
+  if (auto *arena = _internal_metadata_.DeleteReturnArena<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>()) {
+  (void)arena;
+    return;
+  }
+  SharedDtor();
+}
+
+inline void CreateProjectRequest::SharedDtor() {
+  GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
+  if (this != internal_default_instance()) delete _impl_.input_;
+}
+
+void CreateProjectRequest::SetCachedSize(int size) const {
+  _impl_._cached_size_.Set(size);
+}
+
+void CreateProjectRequest::Clear() {
+// @@protoc_insertion_point(message_clear_start:priemman.v1.CreateProjectRequest)
+  uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  if (GetArenaForAllocation() == nullptr && _impl_.input_ != nullptr) {
+    delete _impl_.input_;
+  }
+  _impl_.input_ = nullptr;
+  _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+}
+
+const char* CreateProjectRequest::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  while (!ctx->Done(&ptr)) {
+    uint32_t tag;
+    ptr = ::_pbi::ReadTag(ptr, &tag);
+    switch (tag >> 3) {
+      // .priemman.v1.ProjectInput input = 1;
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 10)) {
+          ptr = ctx->ParseMessage(_internal_mutable_input(), ptr);
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      default:
+        goto handle_unusual;
+    }  // switch
+  handle_unusual:
+    if ((tag == 0) || ((tag & 7) == 4)) {
+      CHK_(ptr);
+      ctx->SetLastTag(tag);
+      goto message_done;
+    }
+    ptr = UnknownFieldParse(
+        tag,
+        _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
+        ptr, ctx);
+    CHK_(ptr != nullptr);
+  }  // while
+message_done:
+  return ptr;
+failure:
+  ptr = nullptr;
+  goto message_done;
+#undef CHK_
+}
+
+uint8_t* CreateProjectRequest::_InternalSerialize(
+    uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
+  // @@protoc_insertion_point(serialize_to_array_start:priemman.v1.CreateProjectRequest)
+  uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // .priemman.v1.ProjectInput input = 1;
+  if (this->_internal_has_input()) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+      InternalWriteMessage(1, _Internal::input(this),
+        _Internal::input(this).GetCachedSize(), target, stream);
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:priemman.v1.CreateProjectRequest)
+  return target;
+}
+
+size_t CreateProjectRequest::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:priemman.v1.CreateProjectRequest)
+  size_t total_size = 0;
+
+  uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  // .priemman.v1.ProjectInput input = 1;
+  if (this->_internal_has_input()) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
+        *_impl_.input_);
+  }
+
+  return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
+}
+
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData CreateProjectRequest::_class_data_ = {
+    ::PROTOBUF_NAMESPACE_ID::Message::CopyWithSourceCheck,
+    CreateProjectRequest::MergeImpl
+};
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*CreateProjectRequest::GetClassData() const { return &_class_data_; }
+
+
+void CreateProjectRequest::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg) {
+  auto* const _this = static_cast<CreateProjectRequest*>(&to_msg);
+  auto& from = static_cast<const CreateProjectRequest&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:priemman.v1.CreateProjectRequest)
+  GOOGLE_DCHECK_NE(&from, _this);
+  uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (from._internal_has_input()) {
+    _this->_internal_mutable_input()->::priemman::v1::ProjectInput::MergeFrom(
+        from._internal_input());
+  }
+  _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+}
+
+void CreateProjectRequest::CopyFrom(const CreateProjectRequest& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:priemman.v1.CreateProjectRequest)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool CreateProjectRequest::IsInitialized() const {
+  return true;
+}
+
+void CreateProjectRequest::InternalSwap(CreateProjectRequest* other) {
+  using std::swap;
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  swap(_impl_.input_, other->_impl_.input_);
+}
+
+::PROTOBUF_NAMESPACE_ID::Metadata CreateProjectRequest::GetMetadata() const {
+  return ::_pbi::AssignDescriptors(
+      &descriptor_table_project_2eproto_getter, &descriptor_table_project_2eproto_once,
+      file_level_metadata_project_2eproto[8]);
+}
+
+// ===================================================================
+
+class UpdateProjectRequest::_Internal {
+ public:
+  static const ::priemman::v1::ObjectId& id(const UpdateProjectRequest* msg);
+  static const ::priemman::v1::ProjectInput& input(const UpdateProjectRequest* msg);
+};
+
+const ::priemman::v1::ObjectId&
+UpdateProjectRequest::_Internal::id(const UpdateProjectRequest* msg) {
+  return *msg->_impl_.id_;
+}
+const ::priemman::v1::ProjectInput&
+UpdateProjectRequest::_Internal::input(const UpdateProjectRequest* msg) {
+  return *msg->_impl_.input_;
+}
+void UpdateProjectRequest::clear_id() {
+  if (GetArenaForAllocation() == nullptr && _impl_.id_ != nullptr) {
+    delete _impl_.id_;
+  }
+  _impl_.id_ = nullptr;
+}
+UpdateProjectRequest::UpdateProjectRequest(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                         bool is_message_owned)
+  : ::PROTOBUF_NAMESPACE_ID::Message(arena, is_message_owned) {
+  SharedCtor(arena, is_message_owned);
+  // @@protoc_insertion_point(arena_constructor:priemman.v1.UpdateProjectRequest)
+}
+UpdateProjectRequest::UpdateProjectRequest(const UpdateProjectRequest& from)
+  : ::PROTOBUF_NAMESPACE_ID::Message() {
+  UpdateProjectRequest* const _this = this; (void)_this;
+  new (&_impl_) Impl_{
+      decltype(_impl_.id_){nullptr}
+    , decltype(_impl_.input_){nullptr}
+    , /*decltype(_impl_._cached_size_)*/{}};
+
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  if (from._internal_has_id()) {
+    _this->_impl_.id_ = new ::priemman::v1::ObjectId(*from._impl_.id_);
+  }
+  if (from._internal_has_input()) {
+    _this->_impl_.input_ = new ::priemman::v1::ProjectInput(*from._impl_.input_);
+  }
+  // @@protoc_insertion_point(copy_constructor:priemman.v1.UpdateProjectRequest)
+}
+
+inline void UpdateProjectRequest::SharedCtor(
+    ::_pb::Arena* arena, bool is_message_owned) {
+  (void)arena;
+  (void)is_message_owned;
+  new (&_impl_) Impl_{
+      decltype(_impl_.id_){nullptr}
+    , decltype(_impl_.input_){nullptr}
+    , /*decltype(_impl_._cached_size_)*/{}
+  };
+}
+
+UpdateProjectRequest::~UpdateProjectRequest() {
+  // @@protoc_insertion_point(destructor:priemman.v1.UpdateProjectRequest)
+  if (auto *arena = _internal_metadata_.DeleteReturnArena<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>()) {
+  (void)arena;
+    return;
+  }
+  SharedDtor();
+}
+
+inline void UpdateProjectRequest::SharedDtor() {
+  GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
+  if (this != internal_default_instance()) delete _impl_.id_;
+  if (this != internal_default_instance()) delete _impl_.input_;
+}
+
+void UpdateProjectRequest::SetCachedSize(int size) const {
+  _impl_._cached_size_.Set(size);
+}
+
+void UpdateProjectRequest::Clear() {
+// @@protoc_insertion_point(message_clear_start:priemman.v1.UpdateProjectRequest)
+  uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  if (GetArenaForAllocation() == nullptr && _impl_.id_ != nullptr) {
+    delete _impl_.id_;
+  }
+  _impl_.id_ = nullptr;
+  if (GetArenaForAllocation() == nullptr && _impl_.input_ != nullptr) {
+    delete _impl_.input_;
+  }
+  _impl_.input_ = nullptr;
+  _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+}
+
+const char* UpdateProjectRequest::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  while (!ctx->Done(&ptr)) {
+    uint32_t tag;
+    ptr = ::_pbi::ReadTag(ptr, &tag);
+    switch (tag >> 3) {
+      // .priemman.v1.ObjectId id = 1;
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 10)) {
+          ptr = ctx->ParseMessage(_internal_mutable_id(), ptr);
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      // .priemman.v1.ProjectInput input = 2;
+      case 2:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 18)) {
+          ptr = ctx->ParseMessage(_internal_mutable_input(), ptr);
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      default:
+        goto handle_unusual;
+    }  // switch
+  handle_unusual:
+    if ((tag == 0) || ((tag & 7) == 4)) {
+      CHK_(ptr);
+      ctx->SetLastTag(tag);
+      goto message_done;
+    }
+    ptr = UnknownFieldParse(
+        tag,
+        _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
+        ptr, ctx);
+    CHK_(ptr != nullptr);
+  }  // while
+message_done:
+  return ptr;
+failure:
+  ptr = nullptr;
+  goto message_done;
+#undef CHK_
+}
+
+uint8_t* UpdateProjectRequest::_InternalSerialize(
+    uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
+  // @@protoc_insertion_point(serialize_to_array_start:priemman.v1.UpdateProjectRequest)
+  uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // .priemman.v1.ObjectId id = 1;
+  if (this->_internal_has_id()) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+      InternalWriteMessage(1, _Internal::id(this),
+        _Internal::id(this).GetCachedSize(), target, stream);
+  }
+
+  // .priemman.v1.ProjectInput input = 2;
+  if (this->_internal_has_input()) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+      InternalWriteMessage(2, _Internal::input(this),
+        _Internal::input(this).GetCachedSize(), target, stream);
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:priemman.v1.UpdateProjectRequest)
+  return target;
+}
+
+size_t UpdateProjectRequest::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:priemman.v1.UpdateProjectRequest)
+  size_t total_size = 0;
+
+  uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  // .priemman.v1.ObjectId id = 1;
+  if (this->_internal_has_id()) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
+        *_impl_.id_);
+  }
+
+  // .priemman.v1.ProjectInput input = 2;
+  if (this->_internal_has_input()) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
+        *_impl_.input_);
+  }
+
+  return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
+}
+
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData UpdateProjectRequest::_class_data_ = {
+    ::PROTOBUF_NAMESPACE_ID::Message::CopyWithSourceCheck,
+    UpdateProjectRequest::MergeImpl
+};
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*UpdateProjectRequest::GetClassData() const { return &_class_data_; }
+
+
+void UpdateProjectRequest::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg) {
+  auto* const _this = static_cast<UpdateProjectRequest*>(&to_msg);
+  auto& from = static_cast<const UpdateProjectRequest&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:priemman.v1.UpdateProjectRequest)
+  GOOGLE_DCHECK_NE(&from, _this);
+  uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (from._internal_has_id()) {
+    _this->_internal_mutable_id()->::priemman::v1::ObjectId::MergeFrom(
+        from._internal_id());
+  }
+  if (from._internal_has_input()) {
+    _this->_internal_mutable_input()->::priemman::v1::ProjectInput::MergeFrom(
+        from._internal_input());
+  }
+  _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+}
+
+void UpdateProjectRequest::CopyFrom(const UpdateProjectRequest& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:priemman.v1.UpdateProjectRequest)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool UpdateProjectRequest::IsInitialized() const {
+  return true;
+}
+
+void UpdateProjectRequest::InternalSwap(UpdateProjectRequest* other) {
+  using std::swap;
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  ::PROTOBUF_NAMESPACE_ID::internal::memswap<
+      PROTOBUF_FIELD_OFFSET(UpdateProjectRequest, _impl_.input_)
+      + sizeof(UpdateProjectRequest::_impl_.input_)
+      - PROTOBUF_FIELD_OFFSET(UpdateProjectRequest, _impl_.id_)>(
+          reinterpret_cast<char*>(&_impl_.id_),
+          reinterpret_cast<char*>(&other->_impl_.id_));
+}
+
+::PROTOBUF_NAMESPACE_ID::Metadata UpdateProjectRequest::GetMetadata() const {
+  return ::_pbi::AssignDescriptors(
+      &descriptor_table_project_2eproto_getter, &descriptor_table_project_2eproto_once,
+      file_level_metadata_project_2eproto[9]);
+}
+
+// ===================================================================
+
+class ProjectResponse::_Internal {
+ public:
+  static const ::priemman::v1::Project& project(const ProjectResponse* msg);
+};
+
+const ::priemman::v1::Project&
+ProjectResponse::_Internal::project(const ProjectResponse* msg) {
+  return *msg->_impl_.project_;
+}
+ProjectResponse::ProjectResponse(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                         bool is_message_owned)
+  : ::PROTOBUF_NAMESPACE_ID::Message(arena, is_message_owned) {
+  SharedCtor(arena, is_message_owned);
+  // @@protoc_insertion_point(arena_constructor:priemman.v1.ProjectResponse)
+}
+ProjectResponse::ProjectResponse(const ProjectResponse& from)
+  : ::PROTOBUF_NAMESPACE_ID::Message() {
+  ProjectResponse* const _this = this; (void)_this;
+  new (&_impl_) Impl_{
+      decltype(_impl_.project_){nullptr}
+    , /*decltype(_impl_._cached_size_)*/{}};
+
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  if (from._internal_has_project()) {
+    _this->_impl_.project_ = new ::priemman::v1::Project(*from._impl_.project_);
+  }
+  // @@protoc_insertion_point(copy_constructor:priemman.v1.ProjectResponse)
+}
+
+inline void ProjectResponse::SharedCtor(
+    ::_pb::Arena* arena, bool is_message_owned) {
+  (void)arena;
+  (void)is_message_owned;
+  new (&_impl_) Impl_{
+      decltype(_impl_.project_){nullptr}
+    , /*decltype(_impl_._cached_size_)*/{}
+  };
+}
+
+ProjectResponse::~ProjectResponse() {
+  // @@protoc_insertion_point(destructor:priemman.v1.ProjectResponse)
+  if (auto *arena = _internal_metadata_.DeleteReturnArena<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>()) {
+  (void)arena;
+    return;
+  }
+  SharedDtor();
+}
+
+inline void ProjectResponse::SharedDtor() {
+  GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
+  if (this != internal_default_instance()) delete _impl_.project_;
+}
+
+void ProjectResponse::SetCachedSize(int size) const {
+  _impl_._cached_size_.Set(size);
+}
+
+void ProjectResponse::Clear() {
+// @@protoc_insertion_point(message_clear_start:priemman.v1.ProjectResponse)
+  uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  if (GetArenaForAllocation() == nullptr && _impl_.project_ != nullptr) {
+    delete _impl_.project_;
+  }
+  _impl_.project_ = nullptr;
+  _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+}
+
+const char* ProjectResponse::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  while (!ctx->Done(&ptr)) {
+    uint32_t tag;
+    ptr = ::_pbi::ReadTag(ptr, &tag);
+    switch (tag >> 3) {
+      // .priemman.v1.Project project = 1;
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 10)) {
+          ptr = ctx->ParseMessage(_internal_mutable_project(), ptr);
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      default:
+        goto handle_unusual;
+    }  // switch
+  handle_unusual:
+    if ((tag == 0) || ((tag & 7) == 4)) {
+      CHK_(ptr);
+      ctx->SetLastTag(tag);
+      goto message_done;
+    }
+    ptr = UnknownFieldParse(
+        tag,
+        _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
+        ptr, ctx);
+    CHK_(ptr != nullptr);
+  }  // while
+message_done:
+  return ptr;
+failure:
+  ptr = nullptr;
+  goto message_done;
+#undef CHK_
+}
+
+uint8_t* ProjectResponse::_InternalSerialize(
+    uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
+  // @@protoc_insertion_point(serialize_to_array_start:priemman.v1.ProjectResponse)
+  uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // .priemman.v1.Project project = 1;
+  if (this->_internal_has_project()) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+      InternalWriteMessage(1, _Internal::project(this),
+        _Internal::project(this).GetCachedSize(), target, stream);
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:priemman.v1.ProjectResponse)
+  return target;
+}
+
+size_t ProjectResponse::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:priemman.v1.ProjectResponse)
+  size_t total_size = 0;
+
+  uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  // .priemman.v1.Project project = 1;
+  if (this->_internal_has_project()) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
+        *_impl_.project_);
+  }
+
+  return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
+}
+
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData ProjectResponse::_class_data_ = {
+    ::PROTOBUF_NAMESPACE_ID::Message::CopyWithSourceCheck,
+    ProjectResponse::MergeImpl
+};
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*ProjectResponse::GetClassData() const { return &_class_data_; }
+
+
+void ProjectResponse::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg) {
+  auto* const _this = static_cast<ProjectResponse*>(&to_msg);
+  auto& from = static_cast<const ProjectResponse&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:priemman.v1.ProjectResponse)
+  GOOGLE_DCHECK_NE(&from, _this);
+  uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (from._internal_has_project()) {
+    _this->_internal_mutable_project()->::priemman::v1::Project::MergeFrom(
+        from._internal_project());
+  }
+  _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+}
+
+void ProjectResponse::CopyFrom(const ProjectResponse& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:priemman.v1.ProjectResponse)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool ProjectResponse::IsInitialized() const {
+  return true;
+}
+
+void ProjectResponse::InternalSwap(ProjectResponse* other) {
+  using std::swap;
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  swap(_impl_.project_, other->_impl_.project_);
+}
+
+::PROTOBUF_NAMESPACE_ID::Metadata ProjectResponse::GetMetadata() const {
+  return ::_pbi::AssignDescriptors(
+      &descriptor_table_project_2eproto_getter, &descriptor_table_project_2eproto_once,
+      file_level_metadata_project_2eproto[10]);
+}
+
+// ===================================================================
+
+class CollectionInput::_Internal {
+ public:
+};
+
+void CollectionInput::clear_project_ids() {
+  _impl_.project_ids_.Clear();
+}
+CollectionInput::CollectionInput(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                         bool is_message_owned)
+  : ::PROTOBUF_NAMESPACE_ID::Message(arena, is_message_owned) {
+  SharedCtor(arena, is_message_owned);
+  // @@protoc_insertion_point(arena_constructor:priemman.v1.CollectionInput)
+}
+CollectionInput::CollectionInput(const CollectionInput& from)
+  : ::PROTOBUF_NAMESPACE_ID::Message() {
+  CollectionInput* const _this = this; (void)_this;
+  new (&_impl_) Impl_{
+      decltype(_impl_.project_ids_){from._impl_.project_ids_}
+    , decltype(_impl_.title_){}
+    , decltype(_impl_.description_){}
+    , decltype(_impl_.visibility_){}
+    , /*decltype(_impl_._cached_size_)*/{}};
+
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  _impl_.title_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+    _impl_.title_.Set("", GetArenaForAllocation());
+  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (!from._internal_title().empty()) {
+    _this->_impl_.title_.Set(from._internal_title(), 
+      _this->GetArenaForAllocation());
+  }
+  _impl_.description_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+    _impl_.description_.Set("", GetArenaForAllocation());
+  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (!from._internal_description().empty()) {
+    _this->_impl_.description_.Set(from._internal_description(), 
+      _this->GetArenaForAllocation());
+  }
+  _this->_impl_.visibility_ = from._impl_.visibility_;
+  // @@protoc_insertion_point(copy_constructor:priemman.v1.CollectionInput)
+}
+
+inline void CollectionInput::SharedCtor(
+    ::_pb::Arena* arena, bool is_message_owned) {
+  (void)arena;
+  (void)is_message_owned;
+  new (&_impl_) Impl_{
+      decltype(_impl_.project_ids_){arena}
+    , decltype(_impl_.title_){}
+    , decltype(_impl_.description_){}
+    , decltype(_impl_.visibility_){0}
+    , /*decltype(_impl_._cached_size_)*/{}
+  };
+  _impl_.title_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+    _impl_.title_.Set("", GetArenaForAllocation());
+  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  _impl_.description_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+    _impl_.description_.Set("", GetArenaForAllocation());
+  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+}
+
+CollectionInput::~CollectionInput() {
+  // @@protoc_insertion_point(destructor:priemman.v1.CollectionInput)
+  if (auto *arena = _internal_metadata_.DeleteReturnArena<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>()) {
+  (void)arena;
+    return;
+  }
+  SharedDtor();
+}
+
+inline void CollectionInput::SharedDtor() {
+  GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
+  _impl_.project_ids_.~RepeatedPtrField();
+  _impl_.title_.Destroy();
+  _impl_.description_.Destroy();
+}
+
+void CollectionInput::SetCachedSize(int size) const {
+  _impl_._cached_size_.Set(size);
+}
+
+void CollectionInput::Clear() {
+// @@protoc_insertion_point(message_clear_start:priemman.v1.CollectionInput)
+  uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  _impl_.project_ids_.Clear();
+  _impl_.title_.ClearToEmpty();
+  _impl_.description_.ClearToEmpty();
+  _impl_.visibility_ = 0;
+  _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+}
+
+const char* CollectionInput::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  while (!ctx->Done(&ptr)) {
+    uint32_t tag;
+    ptr = ::_pbi::ReadTag(ptr, &tag);
+    switch (tag >> 3) {
+      // string title = 1;
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 10)) {
+          auto str = _internal_mutable_title();
+          ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
+          CHK_(ptr);
+          CHK_(::_pbi::VerifyUTF8(str, "priemman.v1.CollectionInput.title"));
+        } else
+          goto handle_unusual;
+        continue;
+      // string description = 2;
+      case 2:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 18)) {
+          auto str = _internal_mutable_description();
+          ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
+          CHK_(ptr);
+          CHK_(::_pbi::VerifyUTF8(str, "priemman.v1.CollectionInput.description"));
+        } else
+          goto handle_unusual;
+        continue;
+      // .priemman.v1.CollectionVisibility visibility = 3;
+      case 3:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 24)) {
+          uint64_t val = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
+          CHK_(ptr);
+          _internal_set_visibility(static_cast<::priemman::v1::CollectionVisibility>(val));
+        } else
+          goto handle_unusual;
+        continue;
+      // repeated .priemman.v1.ObjectId project_ids = 4;
+      case 4:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 34)) {
+          ptr -= 1;
+          do {
+            ptr += 1;
+            ptr = ctx->ParseMessage(_internal_add_project_ids(), ptr);
+            CHK_(ptr);
+            if (!ctx->DataAvailable(ptr)) break;
+          } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<34>(ptr));
+        } else
+          goto handle_unusual;
+        continue;
+      default:
+        goto handle_unusual;
+    }  // switch
+  handle_unusual:
+    if ((tag == 0) || ((tag & 7) == 4)) {
+      CHK_(ptr);
+      ctx->SetLastTag(tag);
+      goto message_done;
+    }
+    ptr = UnknownFieldParse(
+        tag,
+        _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
+        ptr, ctx);
+    CHK_(ptr != nullptr);
+  }  // while
+message_done:
+  return ptr;
+failure:
+  ptr = nullptr;
+  goto message_done;
+#undef CHK_
+}
+
+uint8_t* CollectionInput::_InternalSerialize(
+    uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
+  // @@protoc_insertion_point(serialize_to_array_start:priemman.v1.CollectionInput)
+  uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // string title = 1;
+  if (!this->_internal_title().empty()) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+      this->_internal_title().data(), static_cast<int>(this->_internal_title().length()),
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+      "priemman.v1.CollectionInput.title");
+    target = stream->WriteStringMaybeAliased(
+        1, this->_internal_title(), target);
+  }
+
+  // string description = 2;
+  if (!this->_internal_description().empty()) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+      this->_internal_description().data(), static_cast<int>(this->_internal_description().length()),
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+      "priemman.v1.CollectionInput.description");
+    target = stream->WriteStringMaybeAliased(
+        2, this->_internal_description(), target);
+  }
+
+  // .priemman.v1.CollectionVisibility visibility = 3;
+  if (this->_internal_visibility() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::_pbi::WireFormatLite::WriteEnumToArray(
+      3, this->_internal_visibility(), target);
+  }
+
+  // repeated .priemman.v1.ObjectId project_ids = 4;
+  for (unsigned i = 0,
+      n = static_cast<unsigned>(this->_internal_project_ids_size()); i < n; i++) {
+    const auto& repfield = this->_internal_project_ids(i);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+        InternalWriteMessage(4, repfield, repfield.GetCachedSize(), target, stream);
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:priemman.v1.CollectionInput)
+  return target;
+}
+
+size_t CollectionInput::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:priemman.v1.CollectionInput)
+  size_t total_size = 0;
+
+  uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  // repeated .priemman.v1.ObjectId project_ids = 4;
+  total_size += 1UL * this->_internal_project_ids_size();
+  for (const auto& msg : this->_impl_.project_ids_) {
+    total_size +=
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(msg);
+  }
+
+  // string title = 1;
+  if (!this->_internal_title().empty()) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+        this->_internal_title());
+  }
+
+  // string description = 2;
+  if (!this->_internal_description().empty()) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+        this->_internal_description());
+  }
+
+  // .priemman.v1.CollectionVisibility visibility = 3;
+  if (this->_internal_visibility() != 0) {
+    total_size += 1 +
+      ::_pbi::WireFormatLite::EnumSize(this->_internal_visibility());
+  }
+
+  return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
+}
+
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData CollectionInput::_class_data_ = {
+    ::PROTOBUF_NAMESPACE_ID::Message::CopyWithSourceCheck,
+    CollectionInput::MergeImpl
+};
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*CollectionInput::GetClassData() const { return &_class_data_; }
+
+
+void CollectionInput::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg) {
+  auto* const _this = static_cast<CollectionInput*>(&to_msg);
+  auto& from = static_cast<const CollectionInput&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:priemman.v1.CollectionInput)
+  GOOGLE_DCHECK_NE(&from, _this);
+  uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  _this->_impl_.project_ids_.MergeFrom(from._impl_.project_ids_);
+  if (!from._internal_title().empty()) {
+    _this->_internal_set_title(from._internal_title());
+  }
+  if (!from._internal_description().empty()) {
+    _this->_internal_set_description(from._internal_description());
+  }
+  if (from._internal_visibility() != 0) {
+    _this->_internal_set_visibility(from._internal_visibility());
+  }
+  _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+}
+
+void CollectionInput::CopyFrom(const CollectionInput& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:priemman.v1.CollectionInput)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool CollectionInput::IsInitialized() const {
+  return true;
+}
+
+void CollectionInput::InternalSwap(CollectionInput* other) {
+  using std::swap;
+  auto* lhs_arena = GetArenaForAllocation();
+  auto* rhs_arena = other->GetArenaForAllocation();
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  _impl_.project_ids_.InternalSwap(&other->_impl_.project_ids_);
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
+      &_impl_.title_, lhs_arena,
+      &other->_impl_.title_, rhs_arena
+  );
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
+      &_impl_.description_, lhs_arena,
+      &other->_impl_.description_, rhs_arena
+  );
+  swap(_impl_.visibility_, other->_impl_.visibility_);
+}
+
+::PROTOBUF_NAMESPACE_ID::Metadata CollectionInput::GetMetadata() const {
+  return ::_pbi::AssignDescriptors(
+      &descriptor_table_project_2eproto_getter, &descriptor_table_project_2eproto_once,
+      file_level_metadata_project_2eproto[11]);
+}
+
+// ===================================================================
+
+class CreateCollectionRequest::_Internal {
+ public:
+  static const ::priemman::v1::CollectionInput& input(const CreateCollectionRequest* msg);
+};
+
+const ::priemman::v1::CollectionInput&
+CreateCollectionRequest::_Internal::input(const CreateCollectionRequest* msg) {
+  return *msg->_impl_.input_;
+}
+CreateCollectionRequest::CreateCollectionRequest(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                         bool is_message_owned)
+  : ::PROTOBUF_NAMESPACE_ID::Message(arena, is_message_owned) {
+  SharedCtor(arena, is_message_owned);
+  // @@protoc_insertion_point(arena_constructor:priemman.v1.CreateCollectionRequest)
+}
+CreateCollectionRequest::CreateCollectionRequest(const CreateCollectionRequest& from)
+  : ::PROTOBUF_NAMESPACE_ID::Message() {
+  CreateCollectionRequest* const _this = this; (void)_this;
+  new (&_impl_) Impl_{
+      decltype(_impl_.input_){nullptr}
+    , /*decltype(_impl_._cached_size_)*/{}};
+
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  if (from._internal_has_input()) {
+    _this->_impl_.input_ = new ::priemman::v1::CollectionInput(*from._impl_.input_);
+  }
+  // @@protoc_insertion_point(copy_constructor:priemman.v1.CreateCollectionRequest)
+}
+
+inline void CreateCollectionRequest::SharedCtor(
+    ::_pb::Arena* arena, bool is_message_owned) {
+  (void)arena;
+  (void)is_message_owned;
+  new (&_impl_) Impl_{
+      decltype(_impl_.input_){nullptr}
+    , /*decltype(_impl_._cached_size_)*/{}
+  };
+}
+
+CreateCollectionRequest::~CreateCollectionRequest() {
+  // @@protoc_insertion_point(destructor:priemman.v1.CreateCollectionRequest)
+  if (auto *arena = _internal_metadata_.DeleteReturnArena<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>()) {
+  (void)arena;
+    return;
+  }
+  SharedDtor();
+}
+
+inline void CreateCollectionRequest::SharedDtor() {
+  GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
+  if (this != internal_default_instance()) delete _impl_.input_;
+}
+
+void CreateCollectionRequest::SetCachedSize(int size) const {
+  _impl_._cached_size_.Set(size);
+}
+
+void CreateCollectionRequest::Clear() {
+// @@protoc_insertion_point(message_clear_start:priemman.v1.CreateCollectionRequest)
+  uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  if (GetArenaForAllocation() == nullptr && _impl_.input_ != nullptr) {
+    delete _impl_.input_;
+  }
+  _impl_.input_ = nullptr;
+  _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+}
+
+const char* CreateCollectionRequest::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  while (!ctx->Done(&ptr)) {
+    uint32_t tag;
+    ptr = ::_pbi::ReadTag(ptr, &tag);
+    switch (tag >> 3) {
+      // .priemman.v1.CollectionInput input = 1;
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 10)) {
+          ptr = ctx->ParseMessage(_internal_mutable_input(), ptr);
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      default:
+        goto handle_unusual;
+    }  // switch
+  handle_unusual:
+    if ((tag == 0) || ((tag & 7) == 4)) {
+      CHK_(ptr);
+      ctx->SetLastTag(tag);
+      goto message_done;
+    }
+    ptr = UnknownFieldParse(
+        tag,
+        _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
+        ptr, ctx);
+    CHK_(ptr != nullptr);
+  }  // while
+message_done:
+  return ptr;
+failure:
+  ptr = nullptr;
+  goto message_done;
+#undef CHK_
+}
+
+uint8_t* CreateCollectionRequest::_InternalSerialize(
+    uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
+  // @@protoc_insertion_point(serialize_to_array_start:priemman.v1.CreateCollectionRequest)
+  uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // .priemman.v1.CollectionInput input = 1;
+  if (this->_internal_has_input()) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+      InternalWriteMessage(1, _Internal::input(this),
+        _Internal::input(this).GetCachedSize(), target, stream);
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:priemman.v1.CreateCollectionRequest)
+  return target;
+}
+
+size_t CreateCollectionRequest::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:priemman.v1.CreateCollectionRequest)
+  size_t total_size = 0;
+
+  uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  // .priemman.v1.CollectionInput input = 1;
+  if (this->_internal_has_input()) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
+        *_impl_.input_);
+  }
+
+  return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
+}
+
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData CreateCollectionRequest::_class_data_ = {
+    ::PROTOBUF_NAMESPACE_ID::Message::CopyWithSourceCheck,
+    CreateCollectionRequest::MergeImpl
+};
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*CreateCollectionRequest::GetClassData() const { return &_class_data_; }
+
+
+void CreateCollectionRequest::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg) {
+  auto* const _this = static_cast<CreateCollectionRequest*>(&to_msg);
+  auto& from = static_cast<const CreateCollectionRequest&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:priemman.v1.CreateCollectionRequest)
+  GOOGLE_DCHECK_NE(&from, _this);
+  uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (from._internal_has_input()) {
+    _this->_internal_mutable_input()->::priemman::v1::CollectionInput::MergeFrom(
+        from._internal_input());
+  }
+  _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+}
+
+void CreateCollectionRequest::CopyFrom(const CreateCollectionRequest& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:priemman.v1.CreateCollectionRequest)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool CreateCollectionRequest::IsInitialized() const {
+  return true;
+}
+
+void CreateCollectionRequest::InternalSwap(CreateCollectionRequest* other) {
+  using std::swap;
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  swap(_impl_.input_, other->_impl_.input_);
+}
+
+::PROTOBUF_NAMESPACE_ID::Metadata CreateCollectionRequest::GetMetadata() const {
+  return ::_pbi::AssignDescriptors(
+      &descriptor_table_project_2eproto_getter, &descriptor_table_project_2eproto_once,
+      file_level_metadata_project_2eproto[12]);
+}
+
+// ===================================================================
+
+class UpdateCollectionRequest::_Internal {
+ public:
+  static const ::priemman::v1::ObjectId& id(const UpdateCollectionRequest* msg);
+  static const ::priemman::v1::CollectionInput& input(const UpdateCollectionRequest* msg);
+};
+
+const ::priemman::v1::ObjectId&
+UpdateCollectionRequest::_Internal::id(const UpdateCollectionRequest* msg) {
+  return *msg->_impl_.id_;
+}
+const ::priemman::v1::CollectionInput&
+UpdateCollectionRequest::_Internal::input(const UpdateCollectionRequest* msg) {
+  return *msg->_impl_.input_;
+}
+void UpdateCollectionRequest::clear_id() {
+  if (GetArenaForAllocation() == nullptr && _impl_.id_ != nullptr) {
+    delete _impl_.id_;
+  }
+  _impl_.id_ = nullptr;
+}
+UpdateCollectionRequest::UpdateCollectionRequest(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                         bool is_message_owned)
+  : ::PROTOBUF_NAMESPACE_ID::Message(arena, is_message_owned) {
+  SharedCtor(arena, is_message_owned);
+  // @@protoc_insertion_point(arena_constructor:priemman.v1.UpdateCollectionRequest)
+}
+UpdateCollectionRequest::UpdateCollectionRequest(const UpdateCollectionRequest& from)
+  : ::PROTOBUF_NAMESPACE_ID::Message() {
+  UpdateCollectionRequest* const _this = this; (void)_this;
+  new (&_impl_) Impl_{
+      decltype(_impl_.id_){nullptr}
+    , decltype(_impl_.input_){nullptr}
+    , /*decltype(_impl_._cached_size_)*/{}};
+
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  if (from._internal_has_id()) {
+    _this->_impl_.id_ = new ::priemman::v1::ObjectId(*from._impl_.id_);
+  }
+  if (from._internal_has_input()) {
+    _this->_impl_.input_ = new ::priemman::v1::CollectionInput(*from._impl_.input_);
+  }
+  // @@protoc_insertion_point(copy_constructor:priemman.v1.UpdateCollectionRequest)
+}
+
+inline void UpdateCollectionRequest::SharedCtor(
+    ::_pb::Arena* arena, bool is_message_owned) {
+  (void)arena;
+  (void)is_message_owned;
+  new (&_impl_) Impl_{
+      decltype(_impl_.id_){nullptr}
+    , decltype(_impl_.input_){nullptr}
+    , /*decltype(_impl_._cached_size_)*/{}
+  };
+}
+
+UpdateCollectionRequest::~UpdateCollectionRequest() {
+  // @@protoc_insertion_point(destructor:priemman.v1.UpdateCollectionRequest)
+  if (auto *arena = _internal_metadata_.DeleteReturnArena<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>()) {
+  (void)arena;
+    return;
+  }
+  SharedDtor();
+}
+
+inline void UpdateCollectionRequest::SharedDtor() {
+  GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
+  if (this != internal_default_instance()) delete _impl_.id_;
+  if (this != internal_default_instance()) delete _impl_.input_;
+}
+
+void UpdateCollectionRequest::SetCachedSize(int size) const {
+  _impl_._cached_size_.Set(size);
+}
+
+void UpdateCollectionRequest::Clear() {
+// @@protoc_insertion_point(message_clear_start:priemman.v1.UpdateCollectionRequest)
+  uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  if (GetArenaForAllocation() == nullptr && _impl_.id_ != nullptr) {
+    delete _impl_.id_;
+  }
+  _impl_.id_ = nullptr;
+  if (GetArenaForAllocation() == nullptr && _impl_.input_ != nullptr) {
+    delete _impl_.input_;
+  }
+  _impl_.input_ = nullptr;
+  _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+}
+
+const char* UpdateCollectionRequest::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  while (!ctx->Done(&ptr)) {
+    uint32_t tag;
+    ptr = ::_pbi::ReadTag(ptr, &tag);
+    switch (tag >> 3) {
+      // .priemman.v1.ObjectId id = 1;
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 10)) {
+          ptr = ctx->ParseMessage(_internal_mutable_id(), ptr);
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      // .priemman.v1.CollectionInput input = 2;
+      case 2:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 18)) {
+          ptr = ctx->ParseMessage(_internal_mutable_input(), ptr);
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      default:
+        goto handle_unusual;
+    }  // switch
+  handle_unusual:
+    if ((tag == 0) || ((tag & 7) == 4)) {
+      CHK_(ptr);
+      ctx->SetLastTag(tag);
+      goto message_done;
+    }
+    ptr = UnknownFieldParse(
+        tag,
+        _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
+        ptr, ctx);
+    CHK_(ptr != nullptr);
+  }  // while
+message_done:
+  return ptr;
+failure:
+  ptr = nullptr;
+  goto message_done;
+#undef CHK_
+}
+
+uint8_t* UpdateCollectionRequest::_InternalSerialize(
+    uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
+  // @@protoc_insertion_point(serialize_to_array_start:priemman.v1.UpdateCollectionRequest)
+  uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // .priemman.v1.ObjectId id = 1;
+  if (this->_internal_has_id()) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+      InternalWriteMessage(1, _Internal::id(this),
+        _Internal::id(this).GetCachedSize(), target, stream);
+  }
+
+  // .priemman.v1.CollectionInput input = 2;
+  if (this->_internal_has_input()) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+      InternalWriteMessage(2, _Internal::input(this),
+        _Internal::input(this).GetCachedSize(), target, stream);
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:priemman.v1.UpdateCollectionRequest)
+  return target;
+}
+
+size_t UpdateCollectionRequest::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:priemman.v1.UpdateCollectionRequest)
+  size_t total_size = 0;
+
+  uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  // .priemman.v1.ObjectId id = 1;
+  if (this->_internal_has_id()) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
+        *_impl_.id_);
+  }
+
+  // .priemman.v1.CollectionInput input = 2;
+  if (this->_internal_has_input()) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
+        *_impl_.input_);
+  }
+
+  return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
+}
+
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData UpdateCollectionRequest::_class_data_ = {
+    ::PROTOBUF_NAMESPACE_ID::Message::CopyWithSourceCheck,
+    UpdateCollectionRequest::MergeImpl
+};
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*UpdateCollectionRequest::GetClassData() const { return &_class_data_; }
+
+
+void UpdateCollectionRequest::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg) {
+  auto* const _this = static_cast<UpdateCollectionRequest*>(&to_msg);
+  auto& from = static_cast<const UpdateCollectionRequest&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:priemman.v1.UpdateCollectionRequest)
+  GOOGLE_DCHECK_NE(&from, _this);
+  uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (from._internal_has_id()) {
+    _this->_internal_mutable_id()->::priemman::v1::ObjectId::MergeFrom(
+        from._internal_id());
+  }
+  if (from._internal_has_input()) {
+    _this->_internal_mutable_input()->::priemman::v1::CollectionInput::MergeFrom(
+        from._internal_input());
+  }
+  _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+}
+
+void UpdateCollectionRequest::CopyFrom(const UpdateCollectionRequest& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:priemman.v1.UpdateCollectionRequest)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool UpdateCollectionRequest::IsInitialized() const {
+  return true;
+}
+
+void UpdateCollectionRequest::InternalSwap(UpdateCollectionRequest* other) {
+  using std::swap;
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  ::PROTOBUF_NAMESPACE_ID::internal::memswap<
+      PROTOBUF_FIELD_OFFSET(UpdateCollectionRequest, _impl_.input_)
+      + sizeof(UpdateCollectionRequest::_impl_.input_)
+      - PROTOBUF_FIELD_OFFSET(UpdateCollectionRequest, _impl_.id_)>(
+          reinterpret_cast<char*>(&_impl_.id_),
+          reinterpret_cast<char*>(&other->_impl_.id_));
+}
+
+::PROTOBUF_NAMESPACE_ID::Metadata UpdateCollectionRequest::GetMetadata() const {
+  return ::_pbi::AssignDescriptors(
+      &descriptor_table_project_2eproto_getter, &descriptor_table_project_2eproto_once,
+      file_level_metadata_project_2eproto[13]);
+}
+
+// ===================================================================
+
+class CollectionResponse::_Internal {
+ public:
+  static const ::priemman::v1::Collection& collection(const CollectionResponse* msg);
+};
+
+const ::priemman::v1::Collection&
+CollectionResponse::_Internal::collection(const CollectionResponse* msg) {
+  return *msg->_impl_.collection_;
+}
+CollectionResponse::CollectionResponse(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                         bool is_message_owned)
+  : ::PROTOBUF_NAMESPACE_ID::Message(arena, is_message_owned) {
+  SharedCtor(arena, is_message_owned);
+  // @@protoc_insertion_point(arena_constructor:priemman.v1.CollectionResponse)
+}
+CollectionResponse::CollectionResponse(const CollectionResponse& from)
+  : ::PROTOBUF_NAMESPACE_ID::Message() {
+  CollectionResponse* const _this = this; (void)_this;
+  new (&_impl_) Impl_{
+      decltype(_impl_.collection_){nullptr}
+    , /*decltype(_impl_._cached_size_)*/{}};
+
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  if (from._internal_has_collection()) {
+    _this->_impl_.collection_ = new ::priemman::v1::Collection(*from._impl_.collection_);
+  }
+  // @@protoc_insertion_point(copy_constructor:priemman.v1.CollectionResponse)
+}
+
+inline void CollectionResponse::SharedCtor(
+    ::_pb::Arena* arena, bool is_message_owned) {
+  (void)arena;
+  (void)is_message_owned;
+  new (&_impl_) Impl_{
+      decltype(_impl_.collection_){nullptr}
+    , /*decltype(_impl_._cached_size_)*/{}
+  };
+}
+
+CollectionResponse::~CollectionResponse() {
+  // @@protoc_insertion_point(destructor:priemman.v1.CollectionResponse)
+  if (auto *arena = _internal_metadata_.DeleteReturnArena<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>()) {
+  (void)arena;
+    return;
+  }
+  SharedDtor();
+}
+
+inline void CollectionResponse::SharedDtor() {
+  GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
+  if (this != internal_default_instance()) delete _impl_.collection_;
+}
+
+void CollectionResponse::SetCachedSize(int size) const {
+  _impl_._cached_size_.Set(size);
+}
+
+void CollectionResponse::Clear() {
+// @@protoc_insertion_point(message_clear_start:priemman.v1.CollectionResponse)
+  uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  if (GetArenaForAllocation() == nullptr && _impl_.collection_ != nullptr) {
+    delete _impl_.collection_;
+  }
+  _impl_.collection_ = nullptr;
+  _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+}
+
+const char* CollectionResponse::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  while (!ctx->Done(&ptr)) {
+    uint32_t tag;
+    ptr = ::_pbi::ReadTag(ptr, &tag);
+    switch (tag >> 3) {
+      // .priemman.v1.Collection collection = 1;
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 10)) {
+          ptr = ctx->ParseMessage(_internal_mutable_collection(), ptr);
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      default:
+        goto handle_unusual;
+    }  // switch
+  handle_unusual:
+    if ((tag == 0) || ((tag & 7) == 4)) {
+      CHK_(ptr);
+      ctx->SetLastTag(tag);
+      goto message_done;
+    }
+    ptr = UnknownFieldParse(
+        tag,
+        _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
+        ptr, ctx);
+    CHK_(ptr != nullptr);
+  }  // while
+message_done:
+  return ptr;
+failure:
+  ptr = nullptr;
+  goto message_done;
+#undef CHK_
+}
+
+uint8_t* CollectionResponse::_InternalSerialize(
+    uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
+  // @@protoc_insertion_point(serialize_to_array_start:priemman.v1.CollectionResponse)
+  uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // .priemman.v1.Collection collection = 1;
+  if (this->_internal_has_collection()) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+      InternalWriteMessage(1, _Internal::collection(this),
+        _Internal::collection(this).GetCachedSize(), target, stream);
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:priemman.v1.CollectionResponse)
+  return target;
+}
+
+size_t CollectionResponse::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:priemman.v1.CollectionResponse)
+  size_t total_size = 0;
+
+  uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  // .priemman.v1.Collection collection = 1;
+  if (this->_internal_has_collection()) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
+        *_impl_.collection_);
+  }
+
+  return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
+}
+
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData CollectionResponse::_class_data_ = {
+    ::PROTOBUF_NAMESPACE_ID::Message::CopyWithSourceCheck,
+    CollectionResponse::MergeImpl
+};
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*CollectionResponse::GetClassData() const { return &_class_data_; }
+
+
+void CollectionResponse::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg) {
+  auto* const _this = static_cast<CollectionResponse*>(&to_msg);
+  auto& from = static_cast<const CollectionResponse&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:priemman.v1.CollectionResponse)
+  GOOGLE_DCHECK_NE(&from, _this);
+  uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (from._internal_has_collection()) {
+    _this->_internal_mutable_collection()->::priemman::v1::Collection::MergeFrom(
+        from._internal_collection());
+  }
+  _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+}
+
+void CollectionResponse::CopyFrom(const CollectionResponse& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:priemman.v1.CollectionResponse)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool CollectionResponse::IsInitialized() const {
+  return true;
+}
+
+void CollectionResponse::InternalSwap(CollectionResponse* other) {
+  using std::swap;
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  swap(_impl_.collection_, other->_impl_.collection_);
+}
+
+::PROTOBUF_NAMESPACE_ID::Metadata CollectionResponse::GetMetadata() const {
+  return ::_pbi::AssignDescriptors(
+      &descriptor_table_project_2eproto_getter, &descriptor_table_project_2eproto_once,
+      file_level_metadata_project_2eproto[14]);
+}
+
+// ===================================================================
+
+class ListCollectionsResponse::_Internal {
+ public:
+};
+
+ListCollectionsResponse::ListCollectionsResponse(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                         bool is_message_owned)
+  : ::PROTOBUF_NAMESPACE_ID::Message(arena, is_message_owned) {
+  SharedCtor(arena, is_message_owned);
+  // @@protoc_insertion_point(arena_constructor:priemman.v1.ListCollectionsResponse)
+}
+ListCollectionsResponse::ListCollectionsResponse(const ListCollectionsResponse& from)
+  : ::PROTOBUF_NAMESPACE_ID::Message() {
+  ListCollectionsResponse* const _this = this; (void)_this;
+  new (&_impl_) Impl_{
+      decltype(_impl_.collections_){from._impl_.collections_}
+    , /*decltype(_impl_._cached_size_)*/{}};
+
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  // @@protoc_insertion_point(copy_constructor:priemman.v1.ListCollectionsResponse)
+}
+
+inline void ListCollectionsResponse::SharedCtor(
+    ::_pb::Arena* arena, bool is_message_owned) {
+  (void)arena;
+  (void)is_message_owned;
+  new (&_impl_) Impl_{
+      decltype(_impl_.collections_){arena}
+    , /*decltype(_impl_._cached_size_)*/{}
+  };
+}
+
+ListCollectionsResponse::~ListCollectionsResponse() {
+  // @@protoc_insertion_point(destructor:priemman.v1.ListCollectionsResponse)
+  if (auto *arena = _internal_metadata_.DeleteReturnArena<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>()) {
+  (void)arena;
+    return;
+  }
+  SharedDtor();
+}
+
+inline void ListCollectionsResponse::SharedDtor() {
+  GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
+  _impl_.collections_.~RepeatedPtrField();
+}
+
+void ListCollectionsResponse::SetCachedSize(int size) const {
+  _impl_._cached_size_.Set(size);
+}
+
+void ListCollectionsResponse::Clear() {
+// @@protoc_insertion_point(message_clear_start:priemman.v1.ListCollectionsResponse)
+  uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  _impl_.collections_.Clear();
+  _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+}
+
+const char* ListCollectionsResponse::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  while (!ctx->Done(&ptr)) {
+    uint32_t tag;
+    ptr = ::_pbi::ReadTag(ptr, &tag);
+    switch (tag >> 3) {
+      // repeated .priemman.v1.Collection collections = 1;
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 10)) {
+          ptr -= 1;
+          do {
+            ptr += 1;
+            ptr = ctx->ParseMessage(_internal_add_collections(), ptr);
+            CHK_(ptr);
+            if (!ctx->DataAvailable(ptr)) break;
+          } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<10>(ptr));
+        } else
+          goto handle_unusual;
+        continue;
+      default:
+        goto handle_unusual;
+    }  // switch
+  handle_unusual:
+    if ((tag == 0) || ((tag & 7) == 4)) {
+      CHK_(ptr);
+      ctx->SetLastTag(tag);
+      goto message_done;
+    }
+    ptr = UnknownFieldParse(
+        tag,
+        _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
+        ptr, ctx);
+    CHK_(ptr != nullptr);
+  }  // while
+message_done:
+  return ptr;
+failure:
+  ptr = nullptr;
+  goto message_done;
+#undef CHK_
+}
+
+uint8_t* ListCollectionsResponse::_InternalSerialize(
+    uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
+  // @@protoc_insertion_point(serialize_to_array_start:priemman.v1.ListCollectionsResponse)
+  uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // repeated .priemman.v1.Collection collections = 1;
+  for (unsigned i = 0,
+      n = static_cast<unsigned>(this->_internal_collections_size()); i < n; i++) {
+    const auto& repfield = this->_internal_collections(i);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+        InternalWriteMessage(1, repfield, repfield.GetCachedSize(), target, stream);
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:priemman.v1.ListCollectionsResponse)
+  return target;
+}
+
+size_t ListCollectionsResponse::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:priemman.v1.ListCollectionsResponse)
+  size_t total_size = 0;
+
+  uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  // repeated .priemman.v1.Collection collections = 1;
+  total_size += 1UL * this->_internal_collections_size();
+  for (const auto& msg : this->_impl_.collections_) {
+    total_size +=
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(msg);
+  }
+
+  return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
+}
+
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData ListCollectionsResponse::_class_data_ = {
+    ::PROTOBUF_NAMESPACE_ID::Message::CopyWithSourceCheck,
+    ListCollectionsResponse::MergeImpl
+};
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*ListCollectionsResponse::GetClassData() const { return &_class_data_; }
+
+
+void ListCollectionsResponse::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg) {
+  auto* const _this = static_cast<ListCollectionsResponse*>(&to_msg);
+  auto& from = static_cast<const ListCollectionsResponse&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:priemman.v1.ListCollectionsResponse)
+  GOOGLE_DCHECK_NE(&from, _this);
+  uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  _this->_impl_.collections_.MergeFrom(from._impl_.collections_);
+  _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+}
+
+void ListCollectionsResponse::CopyFrom(const ListCollectionsResponse& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:priemman.v1.ListCollectionsResponse)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool ListCollectionsResponse::IsInitialized() const {
+  return true;
+}
+
+void ListCollectionsResponse::InternalSwap(ListCollectionsResponse* other) {
+  using std::swap;
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  _impl_.collections_.InternalSwap(&other->_impl_.collections_);
+}
+
+::PROTOBUF_NAMESPACE_ID::Metadata ListCollectionsResponse::GetMetadata() const {
+  return ::_pbi::AssignDescriptors(
+      &descriptor_table_project_2eproto_getter, &descriptor_table_project_2eproto_once,
+      file_level_metadata_project_2eproto[15]);
+}
+
+// ===================================================================
+
+class DeleteCollectionRequest::_Internal {
+ public:
+  static const ::priemman::v1::ObjectId& id(const DeleteCollectionRequest* msg);
+};
+
+const ::priemman::v1::ObjectId&
+DeleteCollectionRequest::_Internal::id(const DeleteCollectionRequest* msg) {
+  return *msg->_impl_.id_;
+}
+void DeleteCollectionRequest::clear_id() {
+  if (GetArenaForAllocation() == nullptr && _impl_.id_ != nullptr) {
+    delete _impl_.id_;
+  }
+  _impl_.id_ = nullptr;
+}
+DeleteCollectionRequest::DeleteCollectionRequest(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                         bool is_message_owned)
+  : ::PROTOBUF_NAMESPACE_ID::Message(arena, is_message_owned) {
+  SharedCtor(arena, is_message_owned);
+  // @@protoc_insertion_point(arena_constructor:priemman.v1.DeleteCollectionRequest)
+}
+DeleteCollectionRequest::DeleteCollectionRequest(const DeleteCollectionRequest& from)
+  : ::PROTOBUF_NAMESPACE_ID::Message() {
+  DeleteCollectionRequest* const _this = this; (void)_this;
+  new (&_impl_) Impl_{
+      decltype(_impl_.id_){nullptr}
+    , /*decltype(_impl_._cached_size_)*/{}};
+
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  if (from._internal_has_id()) {
+    _this->_impl_.id_ = new ::priemman::v1::ObjectId(*from._impl_.id_);
+  }
+  // @@protoc_insertion_point(copy_constructor:priemman.v1.DeleteCollectionRequest)
+}
+
+inline void DeleteCollectionRequest::SharedCtor(
+    ::_pb::Arena* arena, bool is_message_owned) {
+  (void)arena;
+  (void)is_message_owned;
+  new (&_impl_) Impl_{
+      decltype(_impl_.id_){nullptr}
+    , /*decltype(_impl_._cached_size_)*/{}
+  };
+}
+
+DeleteCollectionRequest::~DeleteCollectionRequest() {
+  // @@protoc_insertion_point(destructor:priemman.v1.DeleteCollectionRequest)
+  if (auto *arena = _internal_metadata_.DeleteReturnArena<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>()) {
+  (void)arena;
+    return;
+  }
+  SharedDtor();
+}
+
+inline void DeleteCollectionRequest::SharedDtor() {
+  GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
+  if (this != internal_default_instance()) delete _impl_.id_;
+}
+
+void DeleteCollectionRequest::SetCachedSize(int size) const {
+  _impl_._cached_size_.Set(size);
+}
+
+void DeleteCollectionRequest::Clear() {
+// @@protoc_insertion_point(message_clear_start:priemman.v1.DeleteCollectionRequest)
+  uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  if (GetArenaForAllocation() == nullptr && _impl_.id_ != nullptr) {
+    delete _impl_.id_;
+  }
+  _impl_.id_ = nullptr;
+  _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+}
+
+const char* DeleteCollectionRequest::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  while (!ctx->Done(&ptr)) {
+    uint32_t tag;
+    ptr = ::_pbi::ReadTag(ptr, &tag);
+    switch (tag >> 3) {
+      // .priemman.v1.ObjectId id = 1;
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 10)) {
+          ptr = ctx->ParseMessage(_internal_mutable_id(), ptr);
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      default:
+        goto handle_unusual;
+    }  // switch
+  handle_unusual:
+    if ((tag == 0) || ((tag & 7) == 4)) {
+      CHK_(ptr);
+      ctx->SetLastTag(tag);
+      goto message_done;
+    }
+    ptr = UnknownFieldParse(
+        tag,
+        _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
+        ptr, ctx);
+    CHK_(ptr != nullptr);
+  }  // while
+message_done:
+  return ptr;
+failure:
+  ptr = nullptr;
+  goto message_done;
+#undef CHK_
+}
+
+uint8_t* DeleteCollectionRequest::_InternalSerialize(
+    uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
+  // @@protoc_insertion_point(serialize_to_array_start:priemman.v1.DeleteCollectionRequest)
+  uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // .priemman.v1.ObjectId id = 1;
+  if (this->_internal_has_id()) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+      InternalWriteMessage(1, _Internal::id(this),
+        _Internal::id(this).GetCachedSize(), target, stream);
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:priemman.v1.DeleteCollectionRequest)
+  return target;
+}
+
+size_t DeleteCollectionRequest::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:priemman.v1.DeleteCollectionRequest)
+  size_t total_size = 0;
+
+  uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  // .priemman.v1.ObjectId id = 1;
+  if (this->_internal_has_id()) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
+        *_impl_.id_);
+  }
+
+  return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
+}
+
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData DeleteCollectionRequest::_class_data_ = {
+    ::PROTOBUF_NAMESPACE_ID::Message::CopyWithSourceCheck,
+    DeleteCollectionRequest::MergeImpl
+};
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*DeleteCollectionRequest::GetClassData() const { return &_class_data_; }
+
+
+void DeleteCollectionRequest::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg) {
+  auto* const _this = static_cast<DeleteCollectionRequest*>(&to_msg);
+  auto& from = static_cast<const DeleteCollectionRequest&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:priemman.v1.DeleteCollectionRequest)
+  GOOGLE_DCHECK_NE(&from, _this);
+  uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (from._internal_has_id()) {
+    _this->_internal_mutable_id()->::priemman::v1::ObjectId::MergeFrom(
+        from._internal_id());
+  }
+  _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+}
+
+void DeleteCollectionRequest::CopyFrom(const DeleteCollectionRequest& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:priemman.v1.DeleteCollectionRequest)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool DeleteCollectionRequest::IsInitialized() const {
+  return true;
+}
+
+void DeleteCollectionRequest::InternalSwap(DeleteCollectionRequest* other) {
+  using std::swap;
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  swap(_impl_.id_, other->_impl_.id_);
+}
+
+::PROTOBUF_NAMESPACE_ID::Metadata DeleteCollectionRequest::GetMetadata() const {
+  return ::_pbi::AssignDescriptors(
+      &descriptor_table_project_2eproto_getter, &descriptor_table_project_2eproto_once,
+      file_level_metadata_project_2eproto[16]);
+}
+
 // @@protoc_insertion_point(namespace_scope)
 }  // namespace v1
 }  // namespace priemman
@@ -3115,6 +5960,46 @@ Arena::CreateMaybeMessage< ::priemman::v1::ListProjectsRequest >(Arena* arena) {
 template<> PROTOBUF_NOINLINE ::priemman::v1::ListProjectsResponse*
 Arena::CreateMaybeMessage< ::priemman::v1::ListProjectsResponse >(Arena* arena) {
   return Arena::CreateMessageInternal< ::priemman::v1::ListProjectsResponse >(arena);
+}
+template<> PROTOBUF_NOINLINE ::priemman::v1::ProjectInput*
+Arena::CreateMaybeMessage< ::priemman::v1::ProjectInput >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::priemman::v1::ProjectInput >(arena);
+}
+template<> PROTOBUF_NOINLINE ::priemman::v1::CreateProjectRequest*
+Arena::CreateMaybeMessage< ::priemman::v1::CreateProjectRequest >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::priemman::v1::CreateProjectRequest >(arena);
+}
+template<> PROTOBUF_NOINLINE ::priemman::v1::UpdateProjectRequest*
+Arena::CreateMaybeMessage< ::priemman::v1::UpdateProjectRequest >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::priemman::v1::UpdateProjectRequest >(arena);
+}
+template<> PROTOBUF_NOINLINE ::priemman::v1::ProjectResponse*
+Arena::CreateMaybeMessage< ::priemman::v1::ProjectResponse >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::priemman::v1::ProjectResponse >(arena);
+}
+template<> PROTOBUF_NOINLINE ::priemman::v1::CollectionInput*
+Arena::CreateMaybeMessage< ::priemman::v1::CollectionInput >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::priemman::v1::CollectionInput >(arena);
+}
+template<> PROTOBUF_NOINLINE ::priemman::v1::CreateCollectionRequest*
+Arena::CreateMaybeMessage< ::priemman::v1::CreateCollectionRequest >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::priemman::v1::CreateCollectionRequest >(arena);
+}
+template<> PROTOBUF_NOINLINE ::priemman::v1::UpdateCollectionRequest*
+Arena::CreateMaybeMessage< ::priemman::v1::UpdateCollectionRequest >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::priemman::v1::UpdateCollectionRequest >(arena);
+}
+template<> PROTOBUF_NOINLINE ::priemman::v1::CollectionResponse*
+Arena::CreateMaybeMessage< ::priemman::v1::CollectionResponse >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::priemman::v1::CollectionResponse >(arena);
+}
+template<> PROTOBUF_NOINLINE ::priemman::v1::ListCollectionsResponse*
+Arena::CreateMaybeMessage< ::priemman::v1::ListCollectionsResponse >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::priemman::v1::ListCollectionsResponse >(arena);
+}
+template<> PROTOBUF_NOINLINE ::priemman::v1::DeleteCollectionRequest*
+Arena::CreateMaybeMessage< ::priemman::v1::DeleteCollectionRequest >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::priemman::v1::DeleteCollectionRequest >(arena);
 }
 PROTOBUF_NAMESPACE_CLOSE
 

@@ -24,3 +24,7 @@ message Result {
   string value = 4;
   ErrorDetail error_detail = 5;
 }
+
+message DeleteResponse {
+    bool success = 1;
+}

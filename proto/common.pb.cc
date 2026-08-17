@@ -92,9 +92,22 @@ struct ResultDefaultTypeInternal {
   };
 };
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 ResultDefaultTypeInternal _Result_default_instance_;
+PROTOBUF_CONSTEXPR DeleteResponse::DeleteResponse(
+    ::_pbi::ConstantInitialized): _impl_{
+    /*decltype(_impl_.success_)*/false
+  , /*decltype(_impl_._cached_size_)*/{}} {}
+struct DeleteResponseDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR DeleteResponseDefaultTypeInternal()
+      : _instance(::_pbi::ConstantInitialized{}) {}
+  ~DeleteResponseDefaultTypeInternal() {}
+  union {
+    DeleteResponse _instance;
+  };
+};
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 DeleteResponseDefaultTypeInternal _DeleteResponse_default_instance_;
 }  // namespace v1
 }  // namespace priemman
-static ::_pb::Metadata file_level_metadata_common_2eproto[5];
+static ::_pb::Metadata file_level_metadata_common_2eproto[6];
 static constexpr ::_pb::EnumDescriptor const** file_level_enum_descriptors_common_2eproto = nullptr;
 static constexpr ::_pb::ServiceDescriptor const** file_level_service_descriptors_common_2eproto = nullptr;
 
@@ -144,6 +157,13 @@ const uint32_t TableStruct_common_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE(p
   PROTOBUF_FIELD_OFFSET(::priemman::v1::Result, _impl_.message_),
   PROTOBUF_FIELD_OFFSET(::priemman::v1::Result, _impl_.value_),
   PROTOBUF_FIELD_OFFSET(::priemman::v1::Result, _impl_.error_detail_),
+  ~0u,  // no _has_bits_
+  PROTOBUF_FIELD_OFFSET(::priemman::v1::DeleteResponse, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  ~0u,  // no _inlined_string_donated_
+  PROTOBUF_FIELD_OFFSET(::priemman::v1::DeleteResponse, _impl_.success_),
 };
 static const ::_pbi::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
   { 0, -1, -1, sizeof(::priemman::v1::ObjectId)},
@@ -151,6 +171,7 @@ static const ::_pbi::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protode
   { 15, 23, -1, sizeof(::priemman::v1::ErrorDetail_MetaEntry_DoNotUse)},
   { 25, -1, -1, sizeof(::priemman::v1::ErrorDetail)},
   { 34, -1, -1, sizeof(::priemman::v1::Result)},
+  { 45, -1, -1, sizeof(::priemman::v1::DeleteResponse)},
 };
 
 static const ::_pb::Message* const file_default_instances[] = {
@@ -159,6 +180,7 @@ static const ::_pb::Message* const file_default_instances[] = {
   &::priemman::v1::_ErrorDetail_MetaEntry_DoNotUse_default_instance_._instance,
   &::priemman::v1::_ErrorDetail_default_instance_._instance,
   &::priemman::v1::_Result_default_instance_._instance,
+  &::priemman::v1::_DeleteResponse_default_instance_._instance,
 };
 
 const char descriptor_table_protodef_common_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) =
@@ -171,17 +193,18 @@ const char descriptor_table_protodef_common_2eproto[] PROTOBUF_SECTION_VARIABLE(
   "\022\013\n\003key\030\001 \001(\t\022\r\n\005value\030\002 \001(\t:\0028\001\"}\n\006Resu"
   "lt\022\020\n\010is_error\030\001 \001(\010\022\021\n\thas_value\030\002 \001(\010\022"
   "\017\n\007message\030\003 \001(\t\022\r\n\005value\030\004 \001(\t\022.\n\014error"
-  "_detail\030\005 \001(\0132\030.priemman.v1.ErrorDetailb"
-  "\006proto3"
+  "_detail\030\005 \001(\0132\030.priemman.v1.ErrorDetail\""
+  "!\n\016DeleteResponse\022\017\n\007success\030\001 \001(\010b\006prot"
+  "o3"
   ;
 static const ::_pbi::DescriptorTable* const descriptor_table_common_2eproto_deps[1] = {
   &::descriptor_table_google_2fprotobuf_2ftimestamp_2eproto,
 };
 static ::_pbi::once_flag descriptor_table_common_2eproto_once;
 const ::_pbi::DescriptorTable descriptor_table_common_2eproto = {
-    false, false, 407, descriptor_table_protodef_common_2eproto,
+    false, false, 442, descriptor_table_protodef_common_2eproto,
     "common.proto",
-    &descriptor_table_common_2eproto_once, descriptor_table_common_2eproto_deps, 1, 5,
+    &descriptor_table_common_2eproto_once, descriptor_table_common_2eproto_deps, 1, 6,
     schemas, file_default_instances, TableStruct_common_2eproto::offsets,
     file_level_metadata_common_2eproto, file_level_enum_descriptors_common_2eproto,
     file_level_service_descriptors_common_2eproto,
@@ -1340,6 +1363,184 @@ void Result::InternalSwap(Result* other) {
       file_level_metadata_common_2eproto[4]);
 }
 
+// ===================================================================
+
+class DeleteResponse::_Internal {
+ public:
+};
+
+DeleteResponse::DeleteResponse(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                         bool is_message_owned)
+  : ::PROTOBUF_NAMESPACE_ID::Message(arena, is_message_owned) {
+  SharedCtor(arena, is_message_owned);
+  // @@protoc_insertion_point(arena_constructor:priemman.v1.DeleteResponse)
+}
+DeleteResponse::DeleteResponse(const DeleteResponse& from)
+  : ::PROTOBUF_NAMESPACE_ID::Message() {
+  DeleteResponse* const _this = this; (void)_this;
+  new (&_impl_) Impl_{
+      decltype(_impl_.success_){}
+    , /*decltype(_impl_._cached_size_)*/{}};
+
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  _this->_impl_.success_ = from._impl_.success_;
+  // @@protoc_insertion_point(copy_constructor:priemman.v1.DeleteResponse)
+}
+
+inline void DeleteResponse::SharedCtor(
+    ::_pb::Arena* arena, bool is_message_owned) {
+  (void)arena;
+  (void)is_message_owned;
+  new (&_impl_) Impl_{
+      decltype(_impl_.success_){false}
+    , /*decltype(_impl_._cached_size_)*/{}
+  };
+}
+
+DeleteResponse::~DeleteResponse() {
+  // @@protoc_insertion_point(destructor:priemman.v1.DeleteResponse)
+  if (auto *arena = _internal_metadata_.DeleteReturnArena<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>()) {
+  (void)arena;
+    return;
+  }
+  SharedDtor();
+}
+
+inline void DeleteResponse::SharedDtor() {
+  GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
+}
+
+void DeleteResponse::SetCachedSize(int size) const {
+  _impl_._cached_size_.Set(size);
+}
+
+void DeleteResponse::Clear() {
+// @@protoc_insertion_point(message_clear_start:priemman.v1.DeleteResponse)
+  uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  _impl_.success_ = false;
+  _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+}
+
+const char* DeleteResponse::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  while (!ctx->Done(&ptr)) {
+    uint32_t tag;
+    ptr = ::_pbi::ReadTag(ptr, &tag);
+    switch (tag >> 3) {
+      // bool success = 1;
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 8)) {
+          _impl_.success_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      default:
+        goto handle_unusual;
+    }  // switch
+  handle_unusual:
+    if ((tag == 0) || ((tag & 7) == 4)) {
+      CHK_(ptr);
+      ctx->SetLastTag(tag);
+      goto message_done;
+    }
+    ptr = UnknownFieldParse(
+        tag,
+        _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
+        ptr, ctx);
+    CHK_(ptr != nullptr);
+  }  // while
+message_done:
+  return ptr;
+failure:
+  ptr = nullptr;
+  goto message_done;
+#undef CHK_
+}
+
+uint8_t* DeleteResponse::_InternalSerialize(
+    uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
+  // @@protoc_insertion_point(serialize_to_array_start:priemman.v1.DeleteResponse)
+  uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // bool success = 1;
+  if (this->_internal_success() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::_pbi::WireFormatLite::WriteBoolToArray(1, this->_internal_success(), target);
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:priemman.v1.DeleteResponse)
+  return target;
+}
+
+size_t DeleteResponse::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:priemman.v1.DeleteResponse)
+  size_t total_size = 0;
+
+  uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  // bool success = 1;
+  if (this->_internal_success() != 0) {
+    total_size += 1 + 1;
+  }
+
+  return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
+}
+
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData DeleteResponse::_class_data_ = {
+    ::PROTOBUF_NAMESPACE_ID::Message::CopyWithSourceCheck,
+    DeleteResponse::MergeImpl
+};
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*DeleteResponse::GetClassData() const { return &_class_data_; }
+
+
+void DeleteResponse::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg) {
+  auto* const _this = static_cast<DeleteResponse*>(&to_msg);
+  auto& from = static_cast<const DeleteResponse&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:priemman.v1.DeleteResponse)
+  GOOGLE_DCHECK_NE(&from, _this);
+  uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (from._internal_success() != 0) {
+    _this->_internal_set_success(from._internal_success());
+  }
+  _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+}
+
+void DeleteResponse::CopyFrom(const DeleteResponse& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:priemman.v1.DeleteResponse)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool DeleteResponse::IsInitialized() const {
+  return true;
+}
+
+void DeleteResponse::InternalSwap(DeleteResponse* other) {
+  using std::swap;
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  swap(_impl_.success_, other->_impl_.success_);
+}
+
+::PROTOBUF_NAMESPACE_ID::Metadata DeleteResponse::GetMetadata() const {
+  return ::_pbi::AssignDescriptors(
+      &descriptor_table_common_2eproto_getter, &descriptor_table_common_2eproto_once,
+      file_level_metadata_common_2eproto[5]);
+}
+
 // @@protoc_insertion_point(namespace_scope)
 }  // namespace v1
 }  // namespace priemman
@@ -1363,6 +1564,10 @@ Arena::CreateMaybeMessage< ::priemman::v1::ErrorDetail >(Arena* arena) {
 template<> PROTOBUF_NOINLINE ::priemman::v1::Result*
 Arena::CreateMaybeMessage< ::priemman::v1::Result >(Arena* arena) {
   return Arena::CreateMessageInternal< ::priemman::v1::Result >(arena);
+}
+template<> PROTOBUF_NOINLINE ::priemman::v1::DeleteResponse*
+Arena::CreateMaybeMessage< ::priemman::v1::DeleteResponse >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::priemman::v1::DeleteResponse >(arena);
 }
 PROTOBUF_NAMESPACE_CLOSE
 
