@@ -7,6 +7,8 @@
 #include <userver/server/handlers/http_handler_base.hpp>
 #include <userver/storages/mysql/cluster.hpp>
 #include <userver/storages/mysql/component.hpp>
+#include <userver/yaml_config/yaml_config.hpp>
+#include <userver/yaml_config/merge_schemas.hpp>
 #include <src/component/SMTP/SMTP.hpp>
 #include <src/database/otp_repository.hpp>
 
@@ -26,13 +28,16 @@ public:
         userver::server::request::RequestContext& context
     ) const override;
 
+    static userver::yaml_config::Schema GetStaticConfigSchema();
+
 private:
     static std::string GenerateOtpCode();
-    static std::string BuildOtpEmailHtml(const std::string& otp_code);
+    std::string BuildOtpEmailHtml(const std::string& email, const std::string& otp_code) const;
 
     std::shared_ptr<userver::storages::mysql::Cluster> _mysql_cluster;
     daberdev::components::SMTPClientComponent* _smtp_component{nullptr};
     database::OtpRepository _otp_repo;
+    std::string _email_template;
 };
 
 }  // namespace priemman::auth

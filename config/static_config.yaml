@@ -29,6 +29,26 @@ components_manager:
             append:
                 - cors-middleware
 
+# ============== Dynamic Config (content type untuk file statis) ==============
+        dynamic-config:
+            defaults:
+                USERVER_FILES_CONTENT_TYPE_MAP:
+                    .css: "text/css"
+                    .gif: "image/gif"
+                    .htm: "text/html; charset=utf-8"
+                    .html: "text/html; charset=utf-8"
+                    .ico: "image/x-icon"
+                    .jpeg: "image/jpeg"
+                    .jpg: "image/jpeg"
+                    .js: "application/javascript"
+                    .json: "application/json"
+                    .md: "text/markdown"
+                    .png: "image/png"
+                    .svg: "image/svg+xml"
+                    .txt: "text/plain; charset=utf-8"
+                    .woff: "font/woff"
+                    .woff2: "font/woff2"
+
 # ============== Cloudinary Component ==============
         cloudinary-client-component:
             cloud_name: $cloudinary-cloud-name
@@ -45,7 +65,25 @@ components_manager:
             ttl-seconds: 86400       # orphan > 24 jam dihapus
             batch-limit: 100
 
+# ============== Static Files (Landing Page) ==============
+        fs-cache-static:
+            dir: $static-dir
+            dir#fallback: ../static
+            fs-task-processor: fs-task-processor
+
 # ============== Handlers ==============
+        handler-static:  # Landing page statis di path /
+            fs-cache-component: fs-cache-static
+            path: /
+            method: GET
+            task_processor: main-task-processor
+            directory-file: index.html
+
+        handler-api-info:
+            path: /v1/info
+            method: GET,OPTIONS
+            task_processor: main-task-processor
+
         handler-project-create:
             path: /v1/projects
             method: POST,OPTIONS
@@ -92,6 +130,8 @@ components_manager:
             path: /v1/auth/send-otp
             method: POST,OPTIONS
             task_processor: main-task-processor
+            email-template-path: $otp-email-template-path
+            email-template-path#fallback: ../templates/otp_email.html
 
         handler-verify-otp:
             path: /v1/auth/verify-otp

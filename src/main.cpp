@@ -1,11 +1,18 @@
 #include <print>
 
+// WORKAROUND(userver 3.1): engine/io/common.hpp harus diproses sebelum header yang
+// membuka namespace engine::io::impl (mis. components/fs_cache.hpp via inotify.hpp),
+// jika tidak lookup impl::AwaitableBase di common.hpp gagal terkompilasi.
+#include <userver/engine/io/common.hpp>
+
 #include <userver/clients/dns/component.hpp>
 #include <userver/clients/http/client.hpp>
 #include <userver/clients/http/component_core.hpp>
+#include <userver/components/fs_cache.hpp>
 #include <userver/components/minimal_server_component_list.hpp>
 #include <userver/logging/component.hpp>
 #include <userver/logging/log.hpp>
+#include <userver/server/handlers/http_handler_static.hpp>
 #include <userver/storages/mysql.hpp>
 #include <userver/storages/mysql/component.hpp>
 #include <userver/storages/secdist/component.hpp>
@@ -22,6 +29,7 @@
 #include <src/handlers/auth/oauth_initiate_handler.hpp>
 #include <src/handlers/auth/oauth_callback_handler.hpp>
 #include <src/handlers/ping.hpp>
+#include <src/handlers/api_info_handler.hpp>
 #include <src/handlers/user/basic_info_handler.hpp>
 #include <src/handlers/user/connected_accounts_handler.hpp>
 #include <src/handlers/user/work_experience_handler.hpp>
@@ -47,6 +55,8 @@ auto main(int argc, char* argv[]) -> int {
         .Append<userver::clients::dns::Component>()
         .Append<userver::clients::http::MiddlewarePipelineComponent>()
         .Append<userver::server::middlewares::CorsFactory>()
+        .Append<userver::components::FsCache>("fs-cache-static")
+        .Append<userver::server::handlers::HttpHandlerStatic>("handler-static")
 
         .Append<daberdev::components::SMTPClientComponent>("daberdev-smtp-component-client")
         .Append<daberdev::components::OAuthGoogleComponent>("daberdev-oauth-google-component")
@@ -76,6 +86,7 @@ auto main(int argc, char* argv[]) -> int {
         .Append<priemman::handlers::user::BasicInfoHandler>()
         .Append<priemman::handlers::user::WorkExperienceHandler>()
         .Append<priemman::handlers::user::ConnectedAccountsHandler>()
+        .Append<priemman::ApiInfoHandler>("handler-api-info")
         .Append<priemman::PingHandler>("handler-ping");
 
     std::println("=========================================");
