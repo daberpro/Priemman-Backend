@@ -165,6 +165,7 @@ void ProjectRepository::ReplaceStrings(
 void ProjectRepository::ReplaceMedia(
     const std::string& project_id, const std::vector<ProjectMediaRow>& media
 ) const {
+    // Hapus semua media lama
     _mysql_cluster->Execute(
         userver::storages::mysql::ClusterHostType::kPrimary,
         userver::storages::mysql::Query{
@@ -173,16 +174,17 @@ void ProjectRepository::ReplaceMedia(
         project_id
     );
 
+    // Insert media baru
     for (const auto& m : media) {
         _mysql_cluster->Execute(
             userver::storages::mysql::ClusterHostType::kPrimary,
             userver::storages::mysql::Query{
                 R"sql(
-                    INSERT INTO project_media (id, project_id, url, media_type, sort_order)
-                    VALUES (?, ?, ?, ?, ?)
+                    INSERT INTO project_media (id, project_id, url, media_type, sort_order, cloudinary_public_id)
+                    VALUES (?, ?, ?, ?, ?, ?)
                 )sql"
             },
-            m.id, project_id, m.url, m.media_type, m.sort_order
+            m.id, project_id, m.url, m.media_type, m.sort_order, m.cloudinary_public_id
         );
     }
 }
@@ -233,7 +235,7 @@ std::vector<ProjectMediaRow> ProjectRepository::ListMedia(
         userver::storages::mysql::ClusterHostType::kSecondary,
         userver::storages::mysql::Query{
             R"sql(
-                SELECT id, url, media_type, CAST(sort_order AS SIGNED)
+                SELECT id, url, media_type, CAST(sort_order AS SIGNED), cloudinary_public_id
                 FROM project_media
                 WHERE project_id = ?
                 ORDER BY sort_order ASC
@@ -241,6 +243,21 @@ std::vector<ProjectMediaRow> ProjectRepository::ListMedia(
         },
         project_id
     ).AsVector<ProjectMediaRow>();
+}
+
+bool ProjectRepository::IsMediaReferenced(
+    const std::string& project_id, const std::string& cloudinary_public_id
+) const {
+    return _mysql_cluster->Execute(
+        userver::storages::mysql::ClusterHostType::kSecondary,
+        userver::storages::mysql::Query{
+            R"sql(
+                SELECT COUNT(*) FROM project_media
+                WHERE project_id = ? AND cloudinary_public_id = ?
+            )sql"
+        },
+        project_id, cloudinary_public_id
+    ).AsOptionalSingleField<std::int64_t>().value_or(0) > 0;
 }
 
 std::vector<ProjectCollaboratorRow> ProjectRepository::ListCollaborators(

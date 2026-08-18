@@ -354,6 +354,7 @@ class Media final :
 
   enum : int {
     kUrlFieldNumber = 1,
+    kPublicIdFieldNumber = 5,
     kIdFieldNumber = 4,
     kTypeFieldNumber = 2,
     kOrderFieldNumber = 3,
@@ -370,6 +371,20 @@ class Media final :
   const std::string& _internal_url() const;
   inline PROTOBUF_ALWAYS_INLINE void _internal_set_url(const std::string& value);
   std::string* _internal_mutable_url();
+  public:
+
+  // string public_id = 5;
+  void clear_public_id();
+  const std::string& public_id() const;
+  template <typename ArgT0 = const std::string&, typename... ArgT>
+  void set_public_id(ArgT0&& arg0, ArgT... args);
+  std::string* mutable_public_id();
+  PROTOBUF_NODISCARD std::string* release_public_id();
+  void set_allocated_public_id(std::string* public_id);
+  private:
+  const std::string& _internal_public_id() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_public_id(const std::string& value);
+  std::string* _internal_mutable_public_id();
   public:
 
   // .priemman.v1.ObjectId id = 4;
@@ -417,6 +432,7 @@ class Media final :
   typedef void DestructorSkippable_;
   struct Impl_ {
     ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr url_;
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr public_id_;
     ::priemman::v1::ObjectId* id_;
     int type_;
     int32_t order_;
@@ -3882,6 +3898,56 @@ inline void Media::set_allocated_id(::priemman::v1::ObjectId* id) {
   }
   _impl_.id_ = id;
   // @@protoc_insertion_point(field_set_allocated:priemman.v1.Media.id)
+}
+
+// string public_id = 5;
+inline void Media::clear_public_id() {
+  _impl_.public_id_.ClearToEmpty();
+}
+inline const std::string& Media::public_id() const {
+  // @@protoc_insertion_point(field_get:priemman.v1.Media.public_id)
+  return _internal_public_id();
+}
+template <typename ArgT0, typename... ArgT>
+inline PROTOBUF_ALWAYS_INLINE
+void Media::set_public_id(ArgT0&& arg0, ArgT... args) {
+ 
+ _impl_.public_id_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
+  // @@protoc_insertion_point(field_set:priemman.v1.Media.public_id)
+}
+inline std::string* Media::mutable_public_id() {
+  std::string* _s = _internal_mutable_public_id();
+  // @@protoc_insertion_point(field_mutable:priemman.v1.Media.public_id)
+  return _s;
+}
+inline const std::string& Media::_internal_public_id() const {
+  return _impl_.public_id_.Get();
+}
+inline void Media::_internal_set_public_id(const std::string& value) {
+  
+  _impl_.public_id_.Set(value, GetArenaForAllocation());
+}
+inline std::string* Media::_internal_mutable_public_id() {
+  
+  return _impl_.public_id_.Mutable(GetArenaForAllocation());
+}
+inline std::string* Media::release_public_id() {
+  // @@protoc_insertion_point(field_release:priemman.v1.Media.public_id)
+  return _impl_.public_id_.Release();
+}
+inline void Media::set_allocated_public_id(std::string* public_id) {
+  if (public_id != nullptr) {
+    
+  } else {
+    
+  }
+  _impl_.public_id_.SetAllocated(public_id, GetArenaForAllocation());
+#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (_impl_.public_id_.IsDefault()) {
+    _impl_.public_id_.Set("", GetArenaForAllocation());
+  }
+#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:priemman.v1.Media.public_id)
 }
 
 // -------------------------------------------------------------------

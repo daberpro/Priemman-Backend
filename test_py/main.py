@@ -6,18 +6,24 @@ Fitur:
   - Kalau token invalid (401), auto-clear file dan minta login ulang sekali.
   - Logout otomatis menghapus `.session`.
   - Menu interaktif untuk test semua endpoint.
+  - Upload media ke Cloudinary via /v1/media/upload
 
 Jalankan:  python test_py/main.py
 """
 
 import os
 import sys
+import time
+import hashlib
 import requests
+import mimetypes
+from pathlib import Path
 
 import auth_pb2
 import user_pb2
 import common_pb2
 import project_pb2
+import media_pb2
 
 # ============================================================
 # KONFIGURASI
@@ -39,6 +45,7 @@ CREATE_PROJECT_URL = f"{BASE_URL}/v1/projects"
 LIST_PROJECTS_URL = f"{BASE_URL}/v1/projects/list"
 PROJECT_DETAIL_URL = f"{BASE_URL}/v1/projects/{{}}"  # format dengan .format(id)
 COLLECTIONS_URL = f"{BASE_URL}/v1/collections"
+UPLOAD_MEDIA_URL = f"{BASE_URL}/v1/media/upload"
 
 SESSION_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), ".session")
 
@@ -313,7 +320,7 @@ def delete_work_experience(token: str, work_id: str) -> bool:
     resp = http.delete(DELETE_WORK_EXP_URL, data=req.SerializeToString(), headers=auth_headers(token))
 
     if resp.status_code == 200 and is_proto(resp):
-        result = common_pb2.DeleteResponse()   # <-- dari common.proto
+        result = common_pb2.DeleteResponse()
         result.ParseFromString(resp.content)
         show(resp.status_code, f"success: {result.success}")
         return result.success
@@ -351,7 +358,7 @@ def delete_connected_account(token: str) -> bool:
     resp = http.delete(DELETE_CONNECTED_URL, data=req.SerializeToString(), headers=auth_headers(token))
 
     if resp.status_code == 200 and is_proto(resp):
-        result = common_pb2.DeleteResponse()   # <-- dari common.proto
+        result = common_pb2.DeleteResponse()
         result.ParseFromString(resp.content)
         show(resp.status_code, f"success: {result.success}")
         return result.success
@@ -361,10 +368,138 @@ def delete_connected_account(token: str) -> bool:
 
 
 # ============================================================
+# MEDIA UPLOAD FUNCTIONS
+# ============================================================
+
+def upload_media(token: str, file_path: str) -> media_pb2.UploadMediaResponse | None:
+    print(f"\n== [UPLOAD] Upload Media: {file_path} ==")
+
+    if not os.path.exists(file_path):
+        print(f"File tidak ditemukan: {file_path}")
+        return None
+
+    # Baca file
+    with open(file_path, "rb") as f:
+        file_data = f.read()
+
+    # Tentukan content-type dari ekstensi file
+    content_type, _ = mimetypes.guess_type(file_path)
+    if not content_type:
+        content_type = "application/octet-stream"
+
+    # Siapkan multipart form data
+    files = {
+        "file": (os.path.basename(file_path), file_data, content_type)
+    }
+
+    headers = {
+        "Authorization": f"Bearer {token}",
+        # Jangan set Content-Type, biarkan requests yang set multipart boundary
+    }
+
+    print(f"  Uploading {len(file_data)} bytes...")
+    resp = http.post(UPLOAD_MEDIA_URL, files=files, headers=headers)
+
+    if resp.status_code == 200 and is_proto(resp):
+        out = media_pb2.UploadMediaResponse()
+        out.ParseFromString(resp.content)
+
+        # Enum MediaType didefinisikan di project.proto, jadi ada di project_pb2
+        media_type_name = {
+            project_pb2.MEDIA_TYPE_IMAGE: "IMAGE",
+            project_pb2.MEDIA_TYPE_VIDEO: "VIDEO",
+            project_pb2.MEDIA_TYPE_UNSPECIFIED: "UNSPECIFIED",
+        }.get(out.type, "UNKNOWN")
+
+        show(resp.status_code,
+             f"id            : {out.id.value}\n"
+             f"url           : {out.url}\n"
+             f"public_id     : {out.public_id}\n"
+             f"type          : {media_type_name}\n"
+             f"resource_type : {out.resource_type}")
+        return out
+
+    show_error(resp)
+    return None
+
+
+# ============================================================
+# CLOUDINARY DELETE (signed destroy, sama seperti Client::Delete backend)
+# ============================================================
+
+def load_cloudinary_creds() -> tuple | None:
+    """Baca kredensial Cloudinary dari config/config_vars.yaml (parse sederhana)."""
+    cfg_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                            "..", "config", "config_vars.yaml")
+    if not os.path.exists(cfg_path):
+        return None
+    keys = ("cloudinary-cloud-name", "cloudinary-api-key", "cloudinary-api-secret")
+    vals: dict[str, str] = {}
+    with open(cfg_path, "r") as f:
+        for line in f:
+            for k in keys:
+                if line.startswith(k + ":"):
+                    vals[k] = line.split(":", 1)[1].strip().strip("'\"")
+    if len(vals) == 3:
+        return vals["cloudinary-cloud-name"], vals["cloudinary-api-key"], vals["cloudinary-api-secret"]
+    return None
+
+
+def delete_cloudinary_media(public_id: str) -> str | None:
+    """Hapus media langsung dari Cloudinary.
+
+    Return nilai `result` dari Cloudinary ("ok" / "not found"), atau None kalau gagal.
+    """
+    creds = load_cloudinary_creds()
+    if creds is None:
+        print("  Kredensial Cloudinary tidak ditemukan di config/config_vars.yaml")
+        return None
+    cloud_name, api_key, api_secret = creds
+
+    ts = str(int(time.time()))
+    # Signature: parameter urut alfabetis (public_id, timestamp) + api_secret, SHA-1
+    to_sign = f"public_id={public_id}&timestamp={ts}" + api_secret
+    signature = hashlib.sha1(to_sign.encode()).hexdigest()
+
+    url = f"https://api.cloudinary.com/v1_1/{cloud_name}/image/destroy"
+    try:
+        resp = http.post(url, data={
+            "public_id": public_id,
+            "api_key": api_key,
+            "timestamp": ts,
+            "signature": signature,
+        }, timeout=30)
+    except requests.RequestException as e:
+        print(f"  Request ke Cloudinary gagal: {e}")
+        return None
+
+    if resp.status_code != 200:
+        print(f"  Cloudinary destroy gagal: HTTP {resp.status_code} {resp.text[:200]}")
+        return None
+    return resp.json().get("result")
+
+
+def delete_uploaded_media(public_id: str) -> bool:
+    if not public_id:
+        print("Tidak ada public_id yang bisa dihapus.")
+        return False
+    print(f"\n== [DELETE] Menghapus media dari Cloudinary: {public_id} ==")
+    result = delete_cloudinary_media(public_id)
+    if result == "ok":
+        print("  Media berhasil dihapus dari Cloudinary.")
+        return True
+    if result == "not found":
+        print("  Media tidak ditemukan di Cloudinary (mungkin sudah terhapus).")
+        return True
+    print("  Gagal menghapus media.")
+    return False
+
+
+# ============================================================
 # PROJECT & COLLECTION API FUNCTIONS
 # ============================================================
 
-def test_create_project(token: str) -> str | None:
+def test_create_project(token: str, media_public_id: str = "", media_url: str = "") -> str | None:
     print("\n== [H] CREATE Project Showcase ==")
     req = project_pb2.CreateProjectRequest()
     req.input.title = "Priemman Portfolio Backend"
@@ -376,9 +511,14 @@ def test_create_project(token: str) -> str | None:
     req.input.status = project_pb2.PROJECT_STATUS_PUBLISHED
 
     media = req.input.media.add()
-    media.url = "https://images.unsplash.com/photo-1555066931-4365d14bab8c"
+    if media_url:
+        media.url = media_url
+    else:
+        media.url = "https://images.unsplash.com/photo-1555066931-4365d14bab8c"
     media.type = project_pb2.MEDIA_TYPE_IMAGE
     media.order = 1
+    if media_public_id:
+        media.public_id = media_public_id
 
     resp = http.post(CREATE_PROJECT_URL, data=req.SerializeToString(), headers=auth_headers(token))
 
@@ -391,7 +531,10 @@ def test_create_project(token: str) -> str | None:
              f"slug        : {p.slug}\n"
              f"title       : {p.title}\n"
              f"status      : {p.status}\n"
-             f"visibility  : {p.visibility}")
+             f"visibility  : {p.visibility}\n"
+             f"media_count : {len(p.media)}")
+        if len(p.media) > 0:
+            print(f"  Media public_id: {p.media[0].public_id}")
         return p.id.value
 
     show_error(resp)
@@ -416,7 +559,7 @@ def test_list_projects(token: str) -> list[str]:
     return project_ids
 
 
-def test_update_project(token: str, project_id: str) -> bool:
+def test_update_project(token: str, project_id: str, media_public_id: str = "", media_url: str = "") -> bool:
     print(f"\n== [J] UPDATE Project (ID: {project_id}) ==")
     req = project_pb2.UpdateProjectRequest()
     req.id.value = project_id
@@ -425,6 +568,14 @@ def test_update_project(token: str, project_id: str) -> bool:
     req.input.tools.extend(["C++20", "Userver", "Docker"])
     req.input.visibility = project_pb2.PROJECT_VISIBILITY_PUBLIC
     req.input.status = project_pb2.PROJECT_STATUS_PUBLISHED
+
+    if media_url or media_public_id:
+        media = req.input.media.add()
+        media.url = media_url or "https://images.unsplash.com/photo-1555066931-4365d14bab8c"
+        media.type = project_pb2.MEDIA_TYPE_IMAGE
+        media.order = 1
+        if media_public_id:
+            media.public_id = media_public_id
 
     url = PROJECT_DETAIL_URL.format(project_id)
     print(f"  URL: {url}")
@@ -444,11 +595,10 @@ def test_delete_project(token: str, project_id: str) -> bool:
     print(f"\n== [K] DELETE Project (ID: {project_id}) ==")
     url = PROJECT_DETAIL_URL.format(project_id)
     print(f"  URL: {url}")
-    # DELETE project tidak butuh body (ID ada di path parameter)
     resp = http.delete(url, headers=auth_headers(token))
 
     if resp.status_code == 200 and is_proto(resp):
-        out = common_pb2.DeleteResponse()   # <-- dari common.proto
+        out = common_pb2.DeleteResponse()
         out.ParseFromString(resp.content)
         show(resp.status_code, f"success: {out.success}")
         return out.success
@@ -487,7 +637,7 @@ def test_delete_collection(token: str, collection_id: str) -> bool:
     resp = http.delete(COLLECTIONS_URL, data=req.SerializeToString(), headers=auth_headers(token))
 
     if resp.status_code == 200 and is_proto(resp):
-        out = common_pb2.DeleteResponse()   # <-- dari common.proto
+        out = common_pb2.DeleteResponse()
         out.ParseFromString(resp.content)
         show(resp.status_code, f"success: {out.success}")
         return out.success
@@ -540,14 +690,22 @@ def main() -> None:
     print("MENU TEST")
     print("=" * 60)
 
+    # Store uploaded media info
+    uploaded_media = {
+        "public_id": "",
+        "url": "",
+    }
+
     while True:
         print("\nApa yang ingin kamu test?")
         print("  1. User API (Profile, Work Experience, Connected Accounts)")
         print("  2. Projects & Collections API")
-        print("  3. Logout & Exit")
+        print("  3. Media Upload (Cloudinary)")
+        print("  4. Logout & Exit")
+        print("  5. Delete Media (Cloudinary, manual public_id)")
         print("  0. Exit (tanpa logout)")
 
-        choice = input("\nPilih [0-3]: ").strip()
+        choice = input("\nPilih [0-5]: ").strip()
 
         if choice == "1":
             print("\n" + "=" * 60)
@@ -589,17 +747,26 @@ def main() -> None:
             print("TESTING PROJECTS & COLLECTIONS API")
             print("=" * 60)
 
+            # Gunakan media dari upload sebelumnya jika ada
+            media_public_id = uploaded_media.get("public_id", "")
+            media_url = uploaded_media.get("url", "")
+
+            if media_public_id:
+                print(f"\n  Menggunakan media yang diupload sebelumnya:")
+                print(f"    public_id: {media_public_id}")
+                print(f"    url: {media_url}")
+
             sub_choice = input("\nTest Create Project? [y/N]: ").strip().lower()
             new_project_id = None
             if sub_choice == "y":
-                new_project_id = test_create_project(token)
+                new_project_id = test_create_project(token, media_public_id, media_url)
 
             test_list_projects(token)
 
             if new_project_id:
                 sub_choice = input(f"\nUpdate the new project ({new_project_id})? [y/N]: ").strip().lower()
                 if sub_choice == "y":
-                    test_update_project(token, new_project_id)
+                    test_update_project(token, new_project_id, media_public_id, media_url)
 
             sub_choice = input("\nTest Create Collection? [y/N]: ").strip().lower()
             new_collection_id = None
@@ -617,6 +784,57 @@ def main() -> None:
                     test_delete_project(token, new_project_id)
 
         elif choice == "3":
+            print("\n" + "=" * 60)
+            print("MEDIA UPLOAD (CLOUDINARY)")
+            print("=" * 60)
+
+            print("\nContoh path file:")
+            print("  ~/Pictures/photo.jpg")
+            print("  ~/Downloads/video.mp4")
+            print("  ./test_image.png")
+
+            file_path = input("\nMasukkan path file: ").strip()
+
+            # Expand user home directory
+            file_path = os.path.expanduser(file_path)
+
+            if not file_path:
+                print("Path kosong.")
+            elif not os.path.exists(file_path):
+                print(f"File tidak ditemukan: {file_path}")
+            else:
+                result = upload_media(token, file_path)
+                if result:
+                    uploaded_media["public_id"] = result.public_id
+                    uploaded_media["url"] = result.url
+                    print(f"\n  Media tersimpan untuk digunakan di project:")
+                    print(f"    public_id: {uploaded_media['public_id']}")
+                    print(f"    url: {uploaded_media['url']}")
+
+                    sub_choice = input("\nLangsung hapus media ini dari Cloudinary? [y/N]: ").strip().lower()
+                    if sub_choice == "y":
+                        if delete_uploaded_media(result.public_id):
+                            uploaded_media["public_id"] = ""
+                            uploaded_media["url"] = ""
+
+        elif choice == "5":
+            print("\n" + "=" * 60)
+            print("DELETE MEDIA (CLOUDINARY)")
+            print("=" * 60)
+
+            if uploaded_media["public_id"]:
+                print(f"\n  Media terakhir yang diupload: {uploaded_media['public_id']}")
+
+            pid = input("Masukkan public_id (kosong = pakai media terakhir): ").strip()
+            if not pid:
+                pid = uploaded_media["public_id"]
+
+            if delete_uploaded_media(pid) and pid == uploaded_media["public_id"]:
+                uploaded_media["public_id"] = ""
+                uploaded_media["url"] = ""
+                print("  (media tersimpan untuk project ikut dibersihkan)")
+
+        elif choice == "4":
             print("\n== Logout ==")
             logout(token)
             break

@@ -1,0 +1,14 @@
+syntax = "proto3";
+package priemman.v1;
+
+import "common.proto";
+import "project.proto";   // Mendefinisikan enum MediaType
+
+message UploadMediaResponse {
+    string url = 1;                // URL delivery Cloudinary dengan f_auto,q_auto (AVIF/WebP otomatis)
+    MediaType type = 2;            // Gunakan enum dari project.proto: IMAGE/VIDEO
+    int32 order = 3;               // Urutan (opsional, bisa diisi client)
+    ObjectId id = 4;               // ID unik untuk media ini (dibuat server/client)
+    string public_id = 5;          // Public ID dari Cloudinary (wajib untuk operasi hapus)
+    string resource_type = 6;      // "image", "video", atau "raw" dari Cloudinary
+}

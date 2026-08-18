@@ -29,6 +29,9 @@
 #include <src/handlers/projects/project_create_handler.hpp>
 #include <src/handlers/projects/project_detail_handler.hpp>
 #include <src/handlers/projects/project_list_handler.hpp>
+#include <src/handlers/media/upload_media_handler.hpp>
+#include <src/component/Cloudinary/CloudinaryClientComponent.hpp>
+#include <src/component/Cloudinary/MediaSweeperComponent.hpp>
 
 #include <src/component/SMTP/SMTP.hpp>
 #include <src/component/OAuth/Google/OAuthGoogleComponent.hpp>
@@ -48,6 +51,8 @@ auto main(int argc, char* argv[]) -> int {
         .Append<daberdev::components::SMTPClientComponent>("daberdev-smtp-component-client")
         .Append<daberdev::components::OAuthGoogleComponent>("daberdev-oauth-google-component")
         .Append<daberdev::components::OAuthGithubComponent>("daberdev-oauth-github-component")
+        .Append<priemman::cloudinary::CloudinaryComponent>("cloudinary-client-component")
+        .Append<priemman::cloudinary::MediaSweeperComponent>("media-sweeper")
 
         // Auth Handlers
         .Append<priemman::auth::SendOtpHandler>("handler-send-otp")
@@ -63,6 +68,9 @@ auto main(int argc, char* argv[]) -> int {
         .Append<priemman::handlers::projects::ProjectListHandler>()
         .Append<priemman::handlers::projects::ProjectDetailHandler>()
         .Append<priemman::handlers::projects::CollectionHandler>()
+
+        // Media Handlers
+        .Append<priemman::handlers::media::UploadMediaHandler>()
 
         // User Handlers
         .Append<priemman::handlers::user::BasicInfoHandler>()

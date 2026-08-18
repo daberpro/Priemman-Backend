@@ -32,6 +32,7 @@ struct ProjectMediaRow {
     std::string url;
     std::string media_type;   // 'IMAGE' | 'VIDEO'
     std::int64_t sort_order;
+    std::string cloudinary_public_id; // <-- tambahan
 };
 
 struct ProjectCollaboratorRow {
@@ -63,6 +64,12 @@ public:
     std::vector<std::string> ListStrings(const std::string& project_id,
                                          const std::string& kind) const;
     std::vector<ProjectMediaRow> ListMedia(const std::string& project_id) const;
+
+    // Apakah public_id ini masih direferensikan oleh project tertentu?
+    // Dipakai saat update project: media in_use boleh dikirim ulang selama
+    // memang sudah terpasang di project ini.
+    bool IsMediaReferenced(const std::string& project_id,
+                           const std::string& cloudinary_public_id) const;
     std::vector<ProjectCollaboratorRow> ListCollaborators(const std::string& project_id) const;
 
     std::vector<ProjectRow> ListByOwner(const std::string& owner_id,

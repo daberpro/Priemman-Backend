@@ -22,6 +22,7 @@ Jalankan:
 
 import hashlib
 import os
+import time
 import uuid
 
 import pytest
@@ -30,6 +31,7 @@ from google.protobuf import timestamp_pb2
 
 import auth_pb2
 import common_pb2
+import media_pb2
 import project_pb2
 import user_pb2
 
@@ -467,6 +469,169 @@ class TestProjects:
         r = requests.get(f"{base_url}/v1/projects/{uuid.uuid4().hex}",
                          headers=auth_hdr(user["token"]))
         assert r.status_code == 404
+
+
+# ============================================================
+# MEDIA (CLOUDINARY)
+# ============================================================
+
+MEDIA_TEST_IMAGE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "test.png")
+
+
+def cloudinary_creds() -> tuple | None:
+    """Baca kredensial Cloudinary dari config/config_vars.yaml (parse sederhana)."""
+    cfg_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                            "..", "config", "config_vars.yaml")
+    if not os.path.exists(cfg_path):
+        return None
+    keys = ("cloudinary-cloud-name", "cloudinary-api-key", "cloudinary-api-secret")
+    vals: dict[str, str] = {}
+    with open(cfg_path, "r") as f:
+        for line in f:
+            for k in keys:
+                if line.startswith(k + ":"):
+                    vals[k] = line.split(":", 1)[1].strip().strip("'\"")
+    if len(vals) == 3:
+        return vals["cloudinary-cloud-name"], vals["cloudinary-api-key"], vals["cloudinary-api-secret"]
+    return None
+
+
+def cloudinary_destroy(public_id: str) -> str | None:
+    """Signed destroy langsung ke Cloudinary (sama seperti Client::Delete backend).
+
+    Return nilai `result` dari Cloudinary ("ok" / "not found"), atau None kalau gagal.
+    """
+    creds = cloudinary_creds()
+    if creds is None:
+        return None
+    cloud_name, api_key, api_secret = creds
+    ts = str(int(time.time()))
+    to_sign = f"public_id={public_id}&timestamp={ts}" + api_secret
+    signature = hashlib.sha1(to_sign.encode()).hexdigest()
+    url = f"https://api.cloudinary.com/v1_1/{cloud_name}/image/destroy"
+    resp = requests.post(url, data={
+        "public_id": public_id,
+        "api_key": api_key,
+        "timestamp": ts,
+        "signature": signature,
+    }, timeout=30)
+    if resp.status_code != 200:
+        return None
+    return resp.json().get("result")
+
+
+def cloudinary_exists(public_id: str) -> bool | None:
+    """Cek aset masih ada di Cloudinary via Admin API (read-only, tidak menghapus).
+
+    Return True/False, atau None kalau kredensial tidak ada / error jaringan.
+    """
+    creds = cloudinary_creds()
+    if creds is None:
+        return None
+    cloud_name, api_key, api_secret = creds
+    url = (f"https://api.cloudinary.com/v1_1/{cloud_name}"
+           f"/resources/image/upload/{public_id}")
+    try:
+        resp = requests.get(url, auth=(api_key, api_secret), timeout=15)
+    except requests.RequestException:
+        return None
+    if resp.status_code == 200:
+        return True
+    if resp.status_code == 404:
+        return False
+    return None
+
+
+def upload_test_image(base_url: str, token: str):
+    """Upload test.png ke backend, return UploadMediaResponse."""
+    if not os.path.exists(MEDIA_TEST_IMAGE):
+        pytest.skip("test.png tidak ada di test_py/")
+    with open(MEDIA_TEST_IMAGE, "rb") as f:
+        files = {"file": ("test.png", f.read(), "image/png")}
+    # multipart: JANGAN pakai Content-Type protobuf, biarkan requests isi boundary
+    r = requests.post(f"{base_url}/v1/media/upload", files=files,
+                      headers={"Authorization": f"Bearer {token}"})
+    assert r.status_code == 200, f"upload gagal: {r.status_code} {r.text[:300]}"
+    return parse(media_pb2.UploadMediaResponse, r)
+
+
+class TestMedia:
+    def test_upload_requires_auth(self, base_url):
+        r = requests.post(f"{base_url}/v1/media/upload")
+        assert r.status_code == 401
+
+    def test_upload_media(self, base_url, user):
+        out = upload_test_image(base_url, user["token"])
+        assert out.url.startswith("https://res.cloudinary.com/")
+        assert out.public_id
+        assert out.id.value
+        assert out.type == project_pb2.MEDIA_TYPE_IMAGE
+        assert out.resource_type == "image"
+
+        # cleanup supaya tidak menumpuk di Cloudinary
+        if cloudinary_creds() is not None:
+            cloudinary_destroy(out.public_id)
+
+    def test_project_delete_returns_media_to_orphan(self, base_url, db, user):
+        """Lifecycle: upload -> pakai di project -> delete project.
+
+        Perilaku baru (grace period): delete project TIDAK langsung menghapus
+        aset dari Cloudinary — media dikembalikan ke status orphan dan
+        penghapusan diserahkan ke sweeper (TTL 24 jam). Di sini kita tidak
+        menunggu 24 jam, jadi diverifikasi lewat status di DB + aset yang
+        masih ada di Cloudinary.
+        """
+        if cloudinary_creds() is None:
+            pytest.skip("kredensial Cloudinary tidak ada di config_vars.yaml")
+
+        media = upload_test_image(base_url, user["token"])
+
+        def db_media_status() -> str | None:
+            with db.cursor() as cur:
+                cur.execute(
+                    "SELECT status FROM media_uploads WHERE public_id = %s",
+                    (media.public_id,),
+                )
+                row = cur.fetchone()
+            return row[0] if row else None
+
+        try:
+            # setelah upload, media tercatat sebagai orphan
+            assert db_media_status() == "orphan", \
+                "media seharusnya tercatat orphan setelah upload"
+
+            # buat project yang memakai media tersebut
+            req = project_pb2.CreateProjectRequest()
+            req.input.title = "Media Lifecycle"
+            req.input.description = "d"
+            req.input.status = project_pb2.PROJECT_STATUS_DRAFT
+            req.input.visibility = project_pb2.PROJECT_VISIBILITY_PUBLIC
+            m = req.input.media.add()
+            m.url = media.url
+            m.type = project_pb2.MEDIA_TYPE_IMAGE
+            m.order = 1
+            m.public_id = media.public_id
+            r = requests.post(f"{base_url}/v1/projects",
+                              data=req.SerializeToString(), headers=auth_hdr(user["token"]))
+            proj = assert_proto_ok(r, project_pb2.ProjectResponse).project
+
+            # setelah di-attach, status berubah jadi in_use
+            assert db_media_status() == "in_use", \
+                "media seharusnya in_use setelah dipakai project"
+
+            # hapus project -> media kembali ke orphan, BUKAN langsung dihapus
+            r = requests.delete(f"{base_url}/v1/projects/{proj.id.value}",
+                                headers=auth_hdr(user["token"]))
+            assert_proto_ok(r, common_pb2.DeleteResponse)
+            assert db_media_status() == "orphan", \
+                "media seharusnya kembali orphan setelah delete project (grace period)"
+
+            # aset masih ada di Cloudinary — penghapusannya menunggu sweeper
+            assert cloudinary_exists(media.public_id) is True, \
+                "aset seharusnya masih ada di Cloudinary menunggu sweeper"
+        finally:
+            # cleanup manual supaya tidak menunggu sweeper 24 jam
+            cloudinary_destroy(media.public_id)
 
 
 # ============================================================

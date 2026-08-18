@@ -41,6 +41,15 @@ std::string ProjectCreateHandler::HandleRequestThrow(
         return ErrorResult("INVALID_TITLE", "Title is required");
     }
 
+    // Validasi media Cloudinary: harus tercatat, milik sendiri, dan masih orphan.
+    // Ditolak tegas sebelum project dibuat supaya tidak ada project setengah jadi.
+    const auto public_ids = helpers::CollectPublicIds(input.media());
+    if (const auto err = helpers::ValidateMediaForCreate(_media, public_ids, *user_id);
+        !err.empty()) {
+        res.SetStatus(HttpStatus::kBadRequest);
+        return ErrorResult("INVALID_MEDIA", err);
+    }
+
     // Slug unik per owner
     const std::string base_slug = helpers::Slugify(input.title());
     std::string slug = base_slug;
@@ -58,6 +67,7 @@ std::string ProjectCreateHandler::HandleRequestThrow(
 
     const std::string id = _projects.Create(row);
     helpers::SaveChildren(_projects, id, input);
+    helpers::AttachMedia(_media, public_ids, *user_id);
 
     auto created = _projects.FindById(id);
     priemman::v1::ProjectResponse response;
