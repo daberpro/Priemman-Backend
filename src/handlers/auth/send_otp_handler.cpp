@@ -4,6 +4,8 @@
 #include <cctype>
 #include <cstring>
 #include <format>
+#include <fstream>
+#include <iterator>
 #include <random>
 
 #include <openssl/rand.h>
@@ -17,23 +19,26 @@ namespace priemman::auth {
 
 namespace {
 constexpr std::string_view kOtpPlaceholder = "{{OTP_CODE}}";
+constexpr std::string_view kEmailPlaceholder = "{{EMAIL}}";
+constexpr std::string_view kDefaultEmailTemplatePath = "../templates/otp_email.html";
 
-constexpr std::string_view kOtpEmailTemplate = R"HTML(
+// Fallback sederhana bila file template tidak ditemukan saat startup
+constexpr std::string_view kFallbackEmailTemplate = R"HTML(
 <!DOCTYPE html>
 <html lang="id">
 <head><meta charset="UTF-8"><title>Kode Verifikasi Priemman</title></head>
-<body style="margin:0; padding:0; background-color:#f4f4f7; font-family: sans-serif;">
-<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color:#f4f4f7; padding: 40px 0;">
+<body style="margin:0; padding:0; background-color:#f4f4f7; font-family:sans-serif;">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color:#f4f4f7; padding:40px 0;">
 <tr><td align="center">
-<table role="presentation" width="480" cellpadding="0" cellspacing="0" style="background-color:#ffffff; border-radius: 12px; overflow:hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.06);">
-<tr><td style="background-color:#111827; padding: 32px 40px; text-align:center;">
+<table role="presentation" width="480" cellpadding="0" cellspacing="0" style="background-color:#ffffff; border-radius:12px; overflow:hidden;">
+<tr><td style="background-color:#111827; padding:32px 40px; text-align:center;">
 <span style="font-size:20px; font-weight:700; color:#ffffff;">Priemman Studio</span>
 </td></tr>
-<tr><td style="padding: 40px;">
+<tr><td style="padding:40px;">
 <h1 style="margin:0 0 16px 0; font-size:22px; color:#111827;">Kode verifikasi kamu</h1>
 <p style="margin:0 0 28px 0; font-size:15px; color:#4b5563;">Gunakan kode di bawah ini untuk masuk. Berlaku selama <strong>5 menit</strong>.</p>
-<div style="background-color:#f9fafb; border: 1px solid #e5e7eb; border-radius: 10px; padding: 24px; text-align:center;">
-<span style="font-size:36px; font-weight:700; letter-spacing: 10px; color:#111827; font-family: monospace;">{{OTP_CODE}}</span>
+<div style="background-color:#f9fafb; border:1px solid #e5e7eb; border-radius:10px; padding:24px; text-align:center;">
+<span style="font-size:36px; font-weight:700; letter-spacing:10px; color:#111827; font-family:monospace;">{{OTP_CODE}}</span>
 </div>
 </td></tr>
 </table>
@@ -46,6 +51,38 @@ std::string NormalizeEmail(std::string email) {
     std::transform(email.begin(), email.end(), email.begin(),
                    [](unsigned char c) { return static_cast<char>(std::tolower(c)); });
     return email;
+}
+
+void ReplaceAllOccurrences(std::string& haystack, std::string_view needle, std::string_view replacement) {
+    std::size_t pos = 0;
+    while ((pos = haystack.find(needle, pos)) != std::string::npos) {
+        haystack.replace(pos, needle.length(), replacement);
+        pos += replacement.length();
+    }
+}
+
+std::string LoadEmailTemplate(const userver::components::ComponentConfig& config) {
+    const auto template_path = config["email-template-path"].As<std::string>(
+        std::string{kDefaultEmailTemplatePath});
+
+    std::ifstream template_file{template_path};
+    if (!template_file.is_open()) {
+        LOG_ERROR() << "OTP email template not found at '" << template_path
+                    << "', falling back to built-in template";
+        return std::string{kFallbackEmailTemplate};
+    }
+
+    std::string content{
+        std::istreambuf_iterator<char>{template_file},
+        std::istreambuf_iterator<char>{}};
+    if (content.empty()) {
+        LOG_ERROR() << "OTP email template at '" << template_path
+                    << "' is empty, falling back to built-in template";
+        return std::string{kFallbackEmailTemplate};
+    }
+
+    LOG_INFO() << "Loaded OTP email template from " << template_path;
+    return content;
 }
 }  // namespace
 
@@ -60,7 +97,20 @@ SendOtpHandler::SendOtpHandler(
       _smtp_component(
           &context.FindComponent<daberdev::components::SMTPClientComponent>("daberdev-smtp-component-client")
       ),
-      _otp_repo(&_mysql_cluster) {
+      _otp_repo(&_mysql_cluster),
+      _email_template(LoadEmailTemplate(config)) {
+}
+
+userver::yaml_config::Schema SendOtpHandler::GetStaticConfigSchema() {
+    return userver::yaml_config::MergeSchemas<userver::server::handlers::HttpHandlerBase>(R"(
+        type: object
+        description: Send OTP handler config
+        additionalProperties: false
+        properties:
+            email-template-path:
+                type: string
+                description: Path to the OTP email HTML template file
+    )");
 }
 
 std::string SendOtpHandler::GenerateOtpCode() {
@@ -75,12 +125,10 @@ std::string SendOtpHandler::GenerateOtpCode() {
     return std::to_string(100000 + (value % 900000));
 }
 
-std::string SendOtpHandler::BuildOtpEmailHtml(const std::string& otp_code) {
-    std::string html{kOtpEmailTemplate};
-    auto pos = html.find(kOtpPlaceholder);
-    if (pos != std::string::npos) {
-        html.replace(pos, kOtpPlaceholder.length(), otp_code);
-    }
+std::string SendOtpHandler::BuildOtpEmailHtml(const std::string& email, const std::string& otp_code) const {
+    std::string html{_email_template};
+    ReplaceAllOccurrences(html, kOtpPlaceholder, otp_code);
+    ReplaceAllOccurrences(html, kEmailPlaceholder, email);
     return html;
 }
 
@@ -132,7 +180,7 @@ std::string SendOtpHandler::HandleRequestThrow(
     _smtp_component->SendEmailAsync(
         email,
         "Kode Verifikasi Priemman Studio",
-        BuildOtpEmailHtml(otp_code)
+        BuildOtpEmailHtml(email, otp_code)
     );
 
     response.set_success(true);
