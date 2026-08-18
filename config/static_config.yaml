@@ -29,41 +29,64 @@ components_manager:
             append:
                 - cors-middleware
 
+# ============== Cloudinary Component ==============
+        cloudinary-client-component:
+            cloud_name: $cloudinary-cloud-name
+            cloud_name#fallback: "dummy-cloud"
+            api_key: $cloudinary-api-key
+            api_key#fallback: "dummy-key"
+            api_secret: $cloudinary-api-secret
+            api_secret#fallback: "dummy-secret"
+
+# ============== Media Orphan Sweeper ==============
+        media-sweeper:
+            task-processor: main-task-processor
+            interval-seconds: 3600   # sweep tiap 1 jam
+            ttl-seconds: 86400       # orphan > 24 jam dihapus
+            batch-limit: 100
+
 # ============== Handlers ==============
         handler-project-create:
             path: /v1/projects
             method: POST,OPTIONS
             task_processor: main-task-processor
+            # TIDAK ADA cloudinary config di sini
 
         handler-project-list:
             path: /v1/projects/list
             method: GET,OPTIONS
             task_processor: main-task-processor
+            # TIDAK ADA cloudinary config di sini
 
         handler-project-detail:
             path: /v1/projects/{id}
             method: GET,PUT,DELETE,OPTIONS
             task_processor: main-task-processor
+            # TIDAK ADA cloudinary config di sini
 
         handler-collection:
             path: /v1/collections
             method: GET,POST,PUT,DELETE,OPTIONS
             task_processor: main-task-processor
+            # TIDAK ADA cloudinary config di sini
 
         handler-basic-info:
             path: /v1/users/me
             method: GET,PUT,PATCH,OPTIONS
             task_processor: main-task-processor
+            # TIDAK ADA cloudinary config di sini
 
         handler-work-experience:
             path: /v1/users/me/work-experiences
             method: GET,POST,DELETE,OPTIONS
             task_processor: main-task-processor
+            # TIDAK ADA cloudinary config di sini
 
         handler-connected-accounts:
             path: /v1/users/me/connected-accounts
             method: GET,DELETE,OPTIONS
             task_processor: main-task-processor
+            # TIDAK ADA cloudinary config di sini
 
         handler-send-otp:
             path: /v1/auth/send-otp
@@ -104,6 +127,12 @@ components_manager:
             path: /v1/auth/callback/github
             method: GET,OPTIONS
             task_processor: main-task-processor
+
+        handler-upload-media:
+            path: /v1/media/upload
+            method: POST,OPTIONS
+            task_processor: main-task-processor
+            # TIDAK ADA cloudinary config di sini
 
 # ============== DB ==============
         database:

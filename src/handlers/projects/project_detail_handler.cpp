@@ -6,6 +6,8 @@
 #include <src/handlers/projects/project_helpers.hpp>
 #include <src/handlers/projects/project_proto_convert.hpp>
 
+#include <unordered_set>
+
 namespace priemman::handlers::projects {
 
 namespace {
@@ -77,12 +79,25 @@ std::string ProjectDetailHandler::HandleRequestThrow(
 
         const auto& input = req.input();
 
-        // Cek kepemilikan + ambil slug lama (slug tetap stabil)
         auto existing = _projects.FindById(id);
         if (!existing.has_value() || existing->owner_id != *user_id) {
             res.SetStatus(HttpStatus::kNotFound);
             return ErrorResult("NOT_FOUND", "Project not found");
         }
+
+        // Validasi media Cloudinary sebelum menyimpan apapun.
+        // Media in_use yang memang sudah terpasang di project ini boleh
+        // dikirim ulang; milik orang lain / tidak dikenal ditolak tegas.
+        const auto public_ids = helpers::CollectPublicIds(input.media());
+        if (const auto err = helpers::ValidateMediaForUpdate(
+                _media, _projects, id, public_ids, *user_id);
+            !err.empty()) {
+            res.SetStatus(HttpStatus::kBadRequest);
+            return ErrorResult("INVALID_MEDIA", err);
+        }
+
+        // Simpan media lama sebelum update
+        auto old_media = _projects.ListMedia(id);
 
         database::ProjectRow row;
         row.id = id;
@@ -99,6 +114,25 @@ std::string ProjectDetailHandler::HandleRequestThrow(
         }
 
         helpers::SaveChildren(_projects, id, input);
+        helpers::AttachMedia(_media, public_ids, *user_id);
+
+        // Ambil media baru dan kembalikan yang tidak terpakai ke orphan.
+        // Penghapusan dari Cloudinary diserahkan ke sweeper (grace period).
+        auto new_media = _projects.ListMedia(id);
+
+        std::unordered_set<std::string> new_public_ids;
+        for (const auto& m : new_media) {
+            if (!m.cloudinary_public_id.empty()) {
+                new_public_ids.insert(m.cloudinary_public_id);
+            }
+        }
+
+        for (const auto& old : old_media) {
+            if (!old.cloudinary_public_id.empty() &&
+                new_public_ids.find(old.cloudinary_public_id) == new_public_ids.end()) {
+                _media.DetachIfUnreferenced(old.cloudinary_public_id);
+            }
+        }
 
         auto updated = _projects.FindById(id);
         priemman::v1::ProjectResponse response;
@@ -116,10 +150,22 @@ std::string ProjectDetailHandler::HandleRequestThrow(
     }
 
     if (method == HttpMethod::kDelete) {
+        // Ambil media project sebelum dihapus
+        auto media_list = _projects.ListMedia(id);
+
         if (!_projects.Delete(id, *user_id)) {
             res.SetStatus(HttpStatus::kNotFound);
             return ErrorResult("NOT_FOUND", "Project not found");
         }
+
+        // Kembalikan semua media ke orphan — sweeper yang akan menghapusnya
+        // dari Cloudinary setelah grace period.
+        for (const auto& m : media_list) {
+            if (!m.cloudinary_public_id.empty()) {
+                _media.DetachIfUnreferenced(m.cloudinary_public_id);
+            }
+        }
+
         priemman::v1::DeleteResponse response;
         response.set_success(true);
         return response.SerializeAsString();

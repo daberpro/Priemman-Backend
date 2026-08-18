@@ -13,12 +13,15 @@
 #include <userver/server/http/http_status.hpp>
 #include <userver/storages/mysql/cluster.hpp>
 #include <userver/storages/mysql/component.hpp>
+#include <userver/clients/http/component.hpp>
 
+#include <src/component/Cloudinary/CloudinaryClient.hpp>
 #include <src/database/account_repository.hpp>
 #include <src/database/session_repository.hpp>
 #include <src/database/user_repository.hpp>
 #include <src/database/project_repository.hpp>
 #include <src/database/collection_repository.hpp>
+#include <src/database/media_repository.hpp>
 
 namespace priemman::handlers {
 
@@ -48,7 +51,8 @@ public:
           _users(&_mysql_cluster),
           _accounts(&_mysql_cluster),
           _projects(&_mysql_cluster),
-          _collections(&_mysql_cluster) {
+          _collections(&_mysql_cluster),
+          _media(&_mysql_cluster){
     }
 
 protected:
@@ -84,6 +88,7 @@ protected:
     database::AccountRepository _accounts;
     database::ProjectRepository _projects;
     database::CollectionRepository _collections;
+    database::MediaRepository _media;
 };
 
 }  // namespace priemman::handlers

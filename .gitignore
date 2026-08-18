@@ -83,3 +83,7 @@ test_py/.session
 test_py/*_pb2.py
 test_py/__pycache__/
 test_py/.pytest_cache/
+
+*:Zone.Identifier
+*.pb.cc
+*.pb.h

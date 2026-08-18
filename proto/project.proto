@@ -28,6 +28,7 @@ message Media {
   MediaType type = 2;
   int32 order = 3;
   ObjectId id = 4;
+  string public_id = 5; // <-- tambahan
 }
 
 message Collaborator {

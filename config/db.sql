@@ -249,15 +249,36 @@ CREATE TABLE IF NOT EXISTS project_media (
     url TEXT NOT NULL,
     media_type ENUM('IMAGE', 'VIDEO') NOT NULL,
     sort_order INT UNSIGNED NOT NULL DEFAULT 0,
+    cloudinary_public_id VARCHAR(255) NOT NULL DEFAULT '',
 
     PRIMARY KEY (id),
     KEY idx_project_media_project_order (project_id, sort_order),
+    KEY idx_project_media_public_id (cloudinary_public_id),
 
     CONSTRAINT fk_project_media_project
         FOREIGN KEY (project_id)
         REFERENCES projects(id)
         ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Sinkronisasi untuk DB lama yang sudah punya project_media tanpa kolom public id
+SET @col_exists := (
+    SELECT COUNT(*)
+    FROM information_schema.COLUMNS
+    WHERE TABLE_SCHEMA = DATABASE()
+      AND TABLE_NAME = 'project_media'
+      AND COLUMN_NAME = 'cloudinary_public_id'
+);
+
+SET @sql := IF(
+    @col_exists = 0,
+    'ALTER TABLE project_media ADD COLUMN cloudinary_public_id VARCHAR(255) NOT NULL DEFAULT '''', ADD KEY idx_project_media_public_id (cloudinary_public_id)',
+    'SELECT 1'
+);
+
+PREPARE stmt FROM @sql;
+EXECUTE stmt;
+DEALLOCATE PREPARE stmt;
 
 SET @fk_exists := (
     SELECT COUNT(*)
@@ -336,6 +357,32 @@ CREATE TABLE IF NOT EXISTS collection_projects (
     CONSTRAINT fk_collection_projects_project
         FOREIGN KEY (project_id)
         REFERENCES projects(id)
+        ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- ============================================================
+-- MEDIA UPLOADS (tracking aset Cloudinary untuk orphan cleanup)
+-- ============================================================
+
+-- status:
+--   'orphan'  = sudah diupload tapi belum terikat ke project
+--               (akan dihapus sweeper setelah melewati TTL)
+--   'in_use'  = sedang dipakai oleh satu/lebih project
+CREATE TABLE IF NOT EXISTS media_uploads (
+    public_id VARCHAR(255) NOT NULL,
+    user_id CHAR(36) NOT NULL,
+    resource_type VARCHAR(20) NOT NULL DEFAULT 'image',
+    status ENUM('orphan', 'in_use') NOT NULL DEFAULT 'orphan',
+    created_at DATETIME(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
+    attached_at DATETIME(6) NULL,
+
+    PRIMARY KEY (public_id),
+    KEY idx_media_uploads_user_id (user_id),
+    KEY idx_media_uploads_sweep (status, created_at),
+
+    CONSTRAINT fk_media_uploads_user
+        FOREIGN KEY (user_id)
+        REFERENCES users(id)
         ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 

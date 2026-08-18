@@ -3,11 +3,13 @@
 #include <cctype>
 #include <optional>
 #include <string>
+#include <unordered_set>
 #include <vector>
 
 #include <proto/project.pb.h>
 #include <userver/utils/uuid4.hpp>
 
+#include <src/database/media_repository.hpp>
 #include <src/database/project_repository.hpp>
 
 namespace priemman::handlers::projects::helpers {
@@ -40,6 +42,7 @@ inline std::vector<database::ProjectMediaRow> BuildMediaRows(
         row.url = m.url();
         row.media_type = m.type() == priemman::v1::MEDIA_TYPE_VIDEO ? "VIDEO" : "IMAGE";
         row.sort_order = m.order();
+        row.cloudinary_public_id = m.public_id(); // <-- ambil
         rows.push_back(std::move(row));
     }
     return rows;
@@ -55,6 +58,74 @@ inline std::vector<database::ProjectCollaboratorRow> BuildCollabRows(
         }
     }
     return rows;
+}
+
+// Kumpulkan public_id unik dan tidak kosong dari media di input
+inline std::vector<std::string> CollectPublicIds(
+    const google::protobuf::RepeatedPtrField<priemman::v1::Media>& media
+) {
+    std::unordered_set<std::string> seen;
+    std::vector<std::string> out;
+    for (const auto& m : media) {
+        if (!m.public_id().empty() && seen.insert(m.public_id()).second) {
+            out.push_back(m.public_id());
+        }
+    }
+    return out;
+}
+
+// CREATE: media harus tercatat, milik user ini, dan masih orphan.
+// Return pesan error, kosong kalau valid.
+inline std::string ValidateMediaForCreate(
+    const database::MediaRepository& media_repo,
+    const std::vector<std::string>& public_ids,
+    const std::string& user_id
+) {
+    for (const auto& pid : public_ids) {
+        auto row = media_repo.FindByPublicId(pid);
+        if (!row.has_value() || row->user_id != user_id) {
+            return "Media '" + pid + "' is invalid or does not belong to you";
+        }
+        if (row->status != "orphan") {
+            return "Media '" + pid + "' is already used by another project";
+        }
+    }
+    return {};
+}
+
+// UPDATE: sama seperti create, tetapi media in_use yang memang sudah
+// terpasang di project ini boleh dikirim ulang.
+inline std::string ValidateMediaForUpdate(
+    const database::MediaRepository& media_repo,
+    const database::ProjectRepository& projects,
+    const std::string& project_id,
+    const std::vector<std::string>& public_ids,
+    const std::string& user_id
+) {
+    for (const auto& pid : public_ids) {
+        auto row = media_repo.FindByPublicId(pid);
+        if (!row.has_value() || row->user_id != user_id) {
+            return "Media '" + pid + "' is invalid or does not belong to you";
+        }
+        if (row->status == "orphan") continue;
+        if (row->status == "in_use" &&
+            projects.IsMediaReferenced(project_id, pid)) {
+            continue;
+        }
+        return "Media '" + pid + "' is already used by another project";
+    }
+    return {};
+}
+
+// Flip orphan -> in_use untuk semua media yang baru disimpan.
+inline void AttachMedia(
+    const database::MediaRepository& media_repo,
+    const std::vector<std::string>& public_ids,
+    const std::string& user_id
+) {
+    for (const auto& pid : public_ids) {
+        media_repo.MarkInUse(pid, user_id);
+    }
 }
 
 inline void SaveChildren(

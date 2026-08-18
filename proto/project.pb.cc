@@ -25,6 +25,7 @@ namespace v1 {
 PROTOBUF_CONSTEXPR Media::Media(
     ::_pbi::ConstantInitialized): _impl_{
     /*decltype(_impl_.url_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
+  , /*decltype(_impl_.public_id_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
   , /*decltype(_impl_.id_)*/nullptr
   , /*decltype(_impl_.type_)*/0
   , /*decltype(_impl_.order_)*/0
@@ -307,6 +308,7 @@ const uint32_t TableStruct_project_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE(
   PROTOBUF_FIELD_OFFSET(::priemman::v1::Media, _impl_.type_),
   PROTOBUF_FIELD_OFFSET(::priemman::v1::Media, _impl_.order_),
   PROTOBUF_FIELD_OFFSET(::priemman::v1::Media, _impl_.id_),
+  PROTOBUF_FIELD_OFFSET(::priemman::v1::Media, _impl_.public_id_),
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::priemman::v1::Collaborator, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -466,22 +468,22 @@ const uint32_t TableStruct_project_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE(
 };
 static const ::_pbi::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
   { 0, -1, -1, sizeof(::priemman::v1::Media)},
-  { 10, -1, -1, sizeof(::priemman::v1::Collaborator)},
-  { 18, -1, -1, sizeof(::priemman::v1::ProjectMetrics)},
-  { 27, -1, -1, sizeof(::priemman::v1::Project)},
-  { 50, -1, -1, sizeof(::priemman::v1::Collection)},
-  { 64, -1, -1, sizeof(::priemman::v1::ListProjectsRequest)},
-  { 74, -1, -1, sizeof(::priemman::v1::ListProjectsResponse)},
-  { 82, -1, -1, sizeof(::priemman::v1::ProjectInput)},
-  { 98, -1, -1, sizeof(::priemman::v1::CreateProjectRequest)},
-  { 105, -1, -1, sizeof(::priemman::v1::UpdateProjectRequest)},
-  { 113, -1, -1, sizeof(::priemman::v1::ProjectResponse)},
-  { 120, -1, -1, sizeof(::priemman::v1::CollectionInput)},
-  { 130, -1, -1, sizeof(::priemman::v1::CreateCollectionRequest)},
-  { 137, -1, -1, sizeof(::priemman::v1::UpdateCollectionRequest)},
-  { 145, -1, -1, sizeof(::priemman::v1::CollectionResponse)},
-  { 152, -1, -1, sizeof(::priemman::v1::ListCollectionsResponse)},
-  { 159, -1, -1, sizeof(::priemman::v1::DeleteCollectionRequest)},
+  { 11, -1, -1, sizeof(::priemman::v1::Collaborator)},
+  { 19, -1, -1, sizeof(::priemman::v1::ProjectMetrics)},
+  { 28, -1, -1, sizeof(::priemman::v1::Project)},
+  { 51, -1, -1, sizeof(::priemman::v1::Collection)},
+  { 65, -1, -1, sizeof(::priemman::v1::ListProjectsRequest)},
+  { 75, -1, -1, sizeof(::priemman::v1::ListProjectsResponse)},
+  { 83, -1, -1, sizeof(::priemman::v1::ProjectInput)},
+  { 99, -1, -1, sizeof(::priemman::v1::CreateProjectRequest)},
+  { 106, -1, -1, sizeof(::priemman::v1::UpdateProjectRequest)},
+  { 114, -1, -1, sizeof(::priemman::v1::ProjectResponse)},
+  { 121, -1, -1, sizeof(::priemman::v1::CollectionInput)},
+  { 131, -1, -1, sizeof(::priemman::v1::CreateCollectionRequest)},
+  { 138, -1, -1, sizeof(::priemman::v1::UpdateCollectionRequest)},
+  { 146, -1, -1, sizeof(::priemman::v1::CollectionResponse)},
+  { 153, -1, -1, sizeof(::priemman::v1::ListCollectionsResponse)},
+  { 160, -1, -1, sizeof(::priemman::v1::DeleteCollectionRequest)},
 };
 
 static const ::_pb::Message* const file_default_instances[] = {
@@ -506,82 +508,82 @@ static const ::_pb::Message* const file_default_instances[] = {
 
 const char descriptor_table_protodef_project_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) =
   "\n\rproject.proto\022\013priemman.v1\032\014common.pro"
-  "to\032\037google/protobuf/timestamp.proto\"l\n\005M"
+  "to\032\037google/protobuf/timestamp.proto\"\177\n\005M"
   "edia\022\013\n\003url\030\001 \001(\t\022$\n\004type\030\002 \001(\0162\026.priemm"
   "an.v1.MediaType\022\r\n\005order\030\003 \001(\005\022!\n\002id\030\004 \001"
-  "(\0132\025.priemman.v1.ObjectId\"D\n\014Collaborato"
-  "r\022&\n\007user_id\030\001 \001(\0132\025.priemman.v1.ObjectI"
-  "d\022\014\n\004role\030\002 \001(\t\"=\n\016ProjectMetrics\022\r\n\005vie"
-  "ws\030\001 \001(\003\022\r\n\005likes\030\002 \001(\003\022\r\n\005saves\030\003 \001(\003\"\306"
-  "\004\n\007Project\022!\n\002id\030\001 \001(\0132\025.priemman.v1.Obj"
-  "ectId\022\'\n\010owner_id\030\002 \001(\0132\025.priemman.v1.Ob"
-  "jectId\022\r\n\005title\030\003 \001(\t\022\014\n\004slug\030\004 \001(\t\022\023\n\013d"
-  "escription\030\005 \001(\t\022\r\n\005tools\030\006 \003(\t\022\023\n\013disci"
-  "plines\030\007 \003(\t\022\014\n\004tags\030\010 \003(\t\022\026\n\016cover_medi"
-  "a_id\030\t \001(\t\022!\n\005media\030\n \003(\0132\022.priemman.v1."
-  "Media\0220\n\rcollaborators\030\013 \003(\0132\031.priemman."
-  "v1.Collaborator\0222\n\nvisibility\030\014 \001(\0162\036.pr"
-  "iemman.v1.ProjectVisibility\022*\n\006status\030\r "
-  "\001(\0162\032.priemman.v1.ProjectStatus\022,\n\007metri"
-  "cs\030\016 \001(\0132\033.priemman.v1.ProjectMetrics\022.\n"
-  "\ncreated_at\030\017 \001(\0132\032.google.protobuf.Time"
-  "stamp\022.\n\nupdated_at\030\020 \001(\0132\032.google.proto"
-  "buf.Timestamp\0220\n\014published_at\030\021 \001(\0132\032.go"
-  "ogle.protobuf.Timestamp\"\277\002\n\nCollection\022!"
-  "\n\002id\030\001 \001(\0132\025.priemman.v1.ObjectId\022\'\n\010own"
-  "er_id\030\002 \001(\0132\025.priemman.v1.ObjectId\022\r\n\005ti"
-  "tle\030\003 \001(\t\022\023\n\013description\030\004 \001(\t\022*\n\013projec"
-  "t_ids\030\005 \003(\0132\025.priemman.v1.ObjectId\0225\n\nvi"
-  "sibility\030\006 \001(\0162!.priemman.v1.CollectionV"
-  "isibility\022.\n\ncreated_at\030\007 \001(\0132\032.google.p"
-  "rotobuf.Timestamp\022.\n\nupdated_at\030\010 \001(\0132\032."
-  "google.protobuf.Timestamp\"\230\001\n\023ListProjec"
-  "tsRequest\022\'\n\010owner_id\030\001 \001(\0132\025.priemman.v"
-  "1.ObjectId\0221\n\rstatus_filter\030\002 \001(\0162\032.prie"
-  "mman.v1.ProjectStatus\022\021\n\tpage_size\030\003 \001(\005"
-  "\022\022\n\npage_token\030\004 \001(\t\"W\n\024ListProjectsResp"
-  "onse\022&\n\010projects\030\001 \003(\0132\024.priemman.v1.Pro"
-  "ject\022\027\n\017next_page_token\030\002 \001(\t\"\261\002\n\014Projec"
-  "tInput\022\r\n\005title\030\001 \001(\t\022\023\n\013description\030\002 \001"
-  "(\t\022\r\n\005tools\030\003 \003(\t\022\023\n\013disciplines\030\004 \003(\t\022\014"
-  "\n\004tags\030\005 \003(\t\022!\n\005media\030\006 \003(\0132\022.priemman.v"
-  "1.Media\0220\n\rcollaborators\030\007 \003(\0132\031.priemma"
-  "n.v1.Collaborator\0222\n\nvisibility\030\010 \001(\0162\036."
-  "priemman.v1.ProjectVisibility\022*\n\006status\030"
-  "\t \001(\0162\032.priemman.v1.ProjectStatus\022\026\n\016cov"
-  "er_media_id\030\n \001(\t\"@\n\024CreateProjectReques"
-  "t\022(\n\005input\030\001 \001(\0132\031.priemman.v1.ProjectIn"
-  "put\"c\n\024UpdateProjectRequest\022!\n\002id\030\001 \001(\0132"
-  "\025.priemman.v1.ObjectId\022(\n\005input\030\002 \001(\0132\031."
-  "priemman.v1.ProjectInput\"8\n\017ProjectRespo"
-  "nse\022%\n\007project\030\001 \001(\0132\024.priemman.v1.Proje"
-  "ct\"\230\001\n\017CollectionInput\022\r\n\005title\030\001 \001(\t\022\023\n"
-  "\013description\030\002 \001(\t\0225\n\nvisibility\030\003 \001(\0162!"
-  ".priemman.v1.CollectionVisibility\022*\n\013pro"
-  "ject_ids\030\004 \003(\0132\025.priemman.v1.ObjectId\"F\n"
-  "\027CreateCollectionRequest\022+\n\005input\030\001 \001(\0132"
-  "\034.priemman.v1.CollectionInput\"i\n\027UpdateC"
-  "ollectionRequest\022!\n\002id\030\001 \001(\0132\025.priemman."
-  "v1.ObjectId\022+\n\005input\030\002 \001(\0132\034.priemman.v1"
-  ".CollectionInput\"A\n\022CollectionResponse\022+"
-  "\n\ncollection\030\001 \001(\0132\027.priemman.v1.Collect"
-  "ion\"G\n\027ListCollectionsResponse\022,\n\013collec"
-  "tions\030\001 \003(\0132\027.priemman.v1.Collection\"<\n\027"
-  "DeleteCollectionRequest\022!\n\002id\030\001 \001(\0132\025.pr"
-  "iemman.v1.ObjectId*\225\001\n\021ProjectVisibility"
-  "\022\"\n\036PROJECT_VISIBILITY_UNSPECIFIED\020\000\022\035\n\031"
-  "PROJECT_VISIBILITY_PUBLIC\020\001\022\037\n\033PROJECT_V"
-  "ISIBILITY_UNLISTED\020\002\022\034\n\030PROJECT_VISIBILI"
-  "TY_DRAFT\020\003*\204\001\n\rProjectStatus\022\036\n\032PROJECT_"
-  "STATUS_UNSPECIFIED\020\000\022\030\n\024PROJECT_STATUS_D"
-  "RAFT\020\001\022\034\n\030PROJECT_STATUS_PUBLISHED\020\002\022\033\n\027"
-  "PROJECT_STATUS_ARCHIVED\020\003*S\n\tMediaType\022\032"
-  "\n\026MEDIA_TYPE_UNSPECIFIED\020\000\022\024\n\020MEDIA_TYPE"
-  "_IMAGE\020\001\022\024\n\020MEDIA_TYPE_VIDEO\020\002*\202\001\n\024Colle"
-  "ctionVisibility\022%\n!COLLECTION_VISIBILITY"
-  "_UNSPECIFIED\020\000\022 \n\034COLLECTION_VISIBILITY_"
-  "PUBLIC\020\001\022!\n\035COLLECTION_VISIBILITY_PRIVAT"
-  "E\020\002b\006proto3"
+  "(\0132\025.priemman.v1.ObjectId\022\021\n\tpublic_id\030\005"
+  " \001(\t\"D\n\014Collaborator\022&\n\007user_id\030\001 \001(\0132\025."
+  "priemman.v1.ObjectId\022\014\n\004role\030\002 \001(\t\"=\n\016Pr"
+  "ojectMetrics\022\r\n\005views\030\001 \001(\003\022\r\n\005likes\030\002 \001"
+  "(\003\022\r\n\005saves\030\003 \001(\003\"\306\004\n\007Project\022!\n\002id\030\001 \001("
+  "\0132\025.priemman.v1.ObjectId\022\'\n\010owner_id\030\002 \001"
+  "(\0132\025.priemman.v1.ObjectId\022\r\n\005title\030\003 \001(\t"
+  "\022\014\n\004slug\030\004 \001(\t\022\023\n\013description\030\005 \001(\t\022\r\n\005t"
+  "ools\030\006 \003(\t\022\023\n\013disciplines\030\007 \003(\t\022\014\n\004tags\030"
+  "\010 \003(\t\022\026\n\016cover_media_id\030\t \001(\t\022!\n\005media\030\n"
+  " \003(\0132\022.priemman.v1.Media\0220\n\rcollaborator"
+  "s\030\013 \003(\0132\031.priemman.v1.Collaborator\0222\n\nvi"
+  "sibility\030\014 \001(\0162\036.priemman.v1.ProjectVisi"
+  "bility\022*\n\006status\030\r \001(\0162\032.priemman.v1.Pro"
+  "jectStatus\022,\n\007metrics\030\016 \001(\0132\033.priemman.v"
+  "1.ProjectMetrics\022.\n\ncreated_at\030\017 \001(\0132\032.g"
+  "oogle.protobuf.Timestamp\022.\n\nupdated_at\030\020"
+  " \001(\0132\032.google.protobuf.Timestamp\0220\n\014publ"
+  "ished_at\030\021 \001(\0132\032.google.protobuf.Timesta"
+  "mp\"\277\002\n\nCollection\022!\n\002id\030\001 \001(\0132\025.priemman"
+  ".v1.ObjectId\022\'\n\010owner_id\030\002 \001(\0132\025.priemma"
+  "n.v1.ObjectId\022\r\n\005title\030\003 \001(\t\022\023\n\013descript"
+  "ion\030\004 \001(\t\022*\n\013project_ids\030\005 \003(\0132\025.priemma"
+  "n.v1.ObjectId\0225\n\nvisibility\030\006 \001(\0162!.prie"
+  "mman.v1.CollectionVisibility\022.\n\ncreated_"
+  "at\030\007 \001(\0132\032.google.protobuf.Timestamp\022.\n\n"
+  "updated_at\030\010 \001(\0132\032.google.protobuf.Times"
+  "tamp\"\230\001\n\023ListProjectsRequest\022\'\n\010owner_id"
+  "\030\001 \001(\0132\025.priemman.v1.ObjectId\0221\n\rstatus_"
+  "filter\030\002 \001(\0162\032.priemman.v1.ProjectStatus"
+  "\022\021\n\tpage_size\030\003 \001(\005\022\022\n\npage_token\030\004 \001(\t\""
+  "W\n\024ListProjectsResponse\022&\n\010projects\030\001 \003("
+  "\0132\024.priemman.v1.Project\022\027\n\017next_page_tok"
+  "en\030\002 \001(\t\"\261\002\n\014ProjectInput\022\r\n\005title\030\001 \001(\t"
+  "\022\023\n\013description\030\002 \001(\t\022\r\n\005tools\030\003 \003(\t\022\023\n\013"
+  "disciplines\030\004 \003(\t\022\014\n\004tags\030\005 \003(\t\022!\n\005media"
+  "\030\006 \003(\0132\022.priemman.v1.Media\0220\n\rcollaborat"
+  "ors\030\007 \003(\0132\031.priemman.v1.Collaborator\0222\n\n"
+  "visibility\030\010 \001(\0162\036.priemman.v1.ProjectVi"
+  "sibility\022*\n\006status\030\t \001(\0162\032.priemman.v1.P"
+  "rojectStatus\022\026\n\016cover_media_id\030\n \001(\t\"@\n\024"
+  "CreateProjectRequest\022(\n\005input\030\001 \001(\0132\031.pr"
+  "iemman.v1.ProjectInput\"c\n\024UpdateProjectR"
+  "equest\022!\n\002id\030\001 \001(\0132\025.priemman.v1.ObjectI"
+  "d\022(\n\005input\030\002 \001(\0132\031.priemman.v1.ProjectIn"
+  "put\"8\n\017ProjectResponse\022%\n\007project\030\001 \001(\0132"
+  "\024.priemman.v1.Project\"\230\001\n\017CollectionInpu"
+  "t\022\r\n\005title\030\001 \001(\t\022\023\n\013description\030\002 \001(\t\0225\n"
+  "\nvisibility\030\003 \001(\0162!.priemman.v1.Collecti"
+  "onVisibility\022*\n\013project_ids\030\004 \003(\0132\025.prie"
+  "mman.v1.ObjectId\"F\n\027CreateCollectionRequ"
+  "est\022+\n\005input\030\001 \001(\0132\034.priemman.v1.Collect"
+  "ionInput\"i\n\027UpdateCollectionRequest\022!\n\002i"
+  "d\030\001 \001(\0132\025.priemman.v1.ObjectId\022+\n\005input\030"
+  "\002 \001(\0132\034.priemman.v1.CollectionInput\"A\n\022C"
+  "ollectionResponse\022+\n\ncollection\030\001 \001(\0132\027."
+  "priemman.v1.Collection\"G\n\027ListCollection"
+  "sResponse\022,\n\013collections\030\001 \003(\0132\027.priemma"
+  "n.v1.Collection\"<\n\027DeleteCollectionReque"
+  "st\022!\n\002id\030\001 \001(\0132\025.priemman.v1.ObjectId*\225\001"
+  "\n\021ProjectVisibility\022\"\n\036PROJECT_VISIBILIT"
+  "Y_UNSPECIFIED\020\000\022\035\n\031PROJECT_VISIBILITY_PU"
+  "BLIC\020\001\022\037\n\033PROJECT_VISIBILITY_UNLISTED\020\002\022"
+  "\034\n\030PROJECT_VISIBILITY_DRAFT\020\003*\204\001\n\rProjec"
+  "tStatus\022\036\n\032PROJECT_STATUS_UNSPECIFIED\020\000\022"
+  "\030\n\024PROJECT_STATUS_DRAFT\020\001\022\034\n\030PROJECT_STA"
+  "TUS_PUBLISHED\020\002\022\033\n\027PROJECT_STATUS_ARCHIV"
+  "ED\020\003*S\n\tMediaType\022\032\n\026MEDIA_TYPE_UNSPECIF"
+  "IED\020\000\022\024\n\020MEDIA_TYPE_IMAGE\020\001\022\024\n\020MEDIA_TYP"
+  "E_VIDEO\020\002*\202\001\n\024CollectionVisibility\022%\n!CO"
+  "LLECTION_VISIBILITY_UNSPECIFIED\020\000\022 \n\034COL"
+  "LECTION_VISIBILITY_PUBLIC\020\001\022!\n\035COLLECTIO"
+  "N_VISIBILITY_PRIVATE\020\002b\006proto3"
   ;
 static const ::_pbi::DescriptorTable* const descriptor_table_project_2eproto_deps[2] = {
   &::descriptor_table_common_2eproto,
@@ -589,7 +591,7 @@ static const ::_pbi::DescriptorTable* const descriptor_table_project_2eproto_dep
 };
 static ::_pbi::once_flag descriptor_table_project_2eproto_once;
 const ::_pbi::DescriptorTable descriptor_table_project_2eproto = {
-    false, false, 3051, descriptor_table_protodef_project_2eproto,
+    false, false, 3070, descriptor_table_protodef_project_2eproto,
     "project.proto",
     &descriptor_table_project_2eproto_once, descriptor_table_project_2eproto_deps, 2, 17,
     schemas, file_default_instances, TableStruct_project_2eproto::offsets,
@@ -695,6 +697,7 @@ Media::Media(const Media& from)
   Media* const _this = this; (void)_this;
   new (&_impl_) Impl_{
       decltype(_impl_.url_){}
+    , decltype(_impl_.public_id_){}
     , decltype(_impl_.id_){nullptr}
     , decltype(_impl_.type_){}
     , decltype(_impl_.order_){}
@@ -707,6 +710,14 @@ Media::Media(const Media& from)
   #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
   if (!from._internal_url().empty()) {
     _this->_impl_.url_.Set(from._internal_url(), 
+      _this->GetArenaForAllocation());
+  }
+  _impl_.public_id_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+    _impl_.public_id_.Set("", GetArenaForAllocation());
+  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (!from._internal_public_id().empty()) {
+    _this->_impl_.public_id_.Set(from._internal_public_id(), 
       _this->GetArenaForAllocation());
   }
   if (from._internal_has_id()) {
@@ -724,6 +735,7 @@ inline void Media::SharedCtor(
   (void)is_message_owned;
   new (&_impl_) Impl_{
       decltype(_impl_.url_){}
+    , decltype(_impl_.public_id_){}
     , decltype(_impl_.id_){nullptr}
     , decltype(_impl_.type_){0}
     , decltype(_impl_.order_){0}
@@ -732,6 +744,10 @@ inline void Media::SharedCtor(
   _impl_.url_.InitDefault();
   #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
     _impl_.url_.Set("", GetArenaForAllocation());
+  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  _impl_.public_id_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+    _impl_.public_id_.Set("", GetArenaForAllocation());
   #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
 }
 
@@ -747,6 +763,7 @@ Media::~Media() {
 inline void Media::SharedDtor() {
   GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
   _impl_.url_.Destroy();
+  _impl_.public_id_.Destroy();
   if (this != internal_default_instance()) delete _impl_.id_;
 }
 
@@ -761,6 +778,7 @@ void Media::Clear() {
   (void) cached_has_bits;
 
   _impl_.url_.ClearToEmpty();
+  _impl_.public_id_.ClearToEmpty();
   if (GetArenaForAllocation() == nullptr && _impl_.id_ != nullptr) {
     delete _impl_.id_;
   }
@@ -809,6 +827,16 @@ const char* Media::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
         if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 34)) {
           ptr = ctx->ParseMessage(_internal_mutable_id(), ptr);
           CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      // string public_id = 5;
+      case 5:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 42)) {
+          auto str = _internal_mutable_public_id();
+          ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
+          CHK_(ptr);
+          CHK_(::_pbi::VerifyUTF8(str, "priemman.v1.Media.public_id"));
         } else
           goto handle_unusual;
         continue;
@@ -871,6 +899,16 @@ uint8_t* Media::_InternalSerialize(
         _Internal::id(this).GetCachedSize(), target, stream);
   }
 
+  // string public_id = 5;
+  if (!this->_internal_public_id().empty()) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+      this->_internal_public_id().data(), static_cast<int>(this->_internal_public_id().length()),
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+      "priemman.v1.Media.public_id");
+    target = stream->WriteStringMaybeAliased(
+        5, this->_internal_public_id(), target);
+  }
+
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
     target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
         _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
@@ -892,6 +930,13 @@ size_t Media::ByteSizeLong() const {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
         this->_internal_url());
+  }
+
+  // string public_id = 5;
+  if (!this->_internal_public_id().empty()) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+        this->_internal_public_id());
   }
 
   // .priemman.v1.ObjectId id = 4;
@@ -933,6 +978,9 @@ void Media::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF
   if (!from._internal_url().empty()) {
     _this->_internal_set_url(from._internal_url());
   }
+  if (!from._internal_public_id().empty()) {
+    _this->_internal_set_public_id(from._internal_public_id());
+  }
   if (from._internal_has_id()) {
     _this->_internal_mutable_id()->::priemman::v1::ObjectId::MergeFrom(
         from._internal_id());
@@ -965,6 +1013,10 @@ void Media::InternalSwap(Media* other) {
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
       &_impl_.url_, lhs_arena,
       &other->_impl_.url_, rhs_arena
+  );
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
+      &_impl_.public_id_, lhs_arena,
+      &other->_impl_.public_id_, rhs_arena
   );
   ::PROTOBUF_NAMESPACE_ID::internal::memswap<
       PROTOBUF_FIELD_OFFSET(Media, _impl_.order_)

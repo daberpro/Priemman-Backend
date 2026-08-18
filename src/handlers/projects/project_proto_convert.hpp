@@ -68,6 +68,7 @@ inline priemman::v1::Project ToProto(
             ? priemman::v1::MEDIA_TYPE_VIDEO
             : priemman::v1::MEDIA_TYPE_IMAGE);
         pm->set_order(static_cast<std::int32_t>(m.sort_order));
+        pm->set_public_id(m.cloudinary_public_id);   // tambahkan setelah set_order
     }
 
     for (const auto& c : collabs) {
