@@ -1,0 +1,64 @@
+components_manager:
+    components:
+        server:
+            listener:
+                port: $frontend-port
+                port#fallback: 3000
+                task_processor: main-task-processor
+
+        logging:
+            fs-task-processor: fs-task-processor
+            loggers:
+                default:
+                    file_path: $log-file-path
+                    file_path#fallback: '@stderr'
+                    level: $log-level
+                    level#fallback: info
+
+        dynamic-config:
+            defaults: {}
+
+        rate-limiter-middleware:
+            requests-per-minute: 300
+            exempt-path-prefixes:
+                - /_next/
+
+        session-middleware: {}
+
+        default-server-middleware-pipeline-builder:
+            append:
+                - rate-limiter-middleware
+                - session-middleware
+
+        fs-cache-web:
+            dir: $web-dist-dir
+            dir#fallback: ../frontend/web/out
+            fs-task-processor: fs-task-processor
+
+        handler-pages:
+            fs-cache-component: fs-cache-web
+            path: /*
+            method: GET,HEAD,OPTIONS
+            task_processor: main-task-processor
+
+        database:
+            max_pool_size: 10
+            initial_pool_size: 2
+
+        secdist:
+            provider: default-secdist-provider
+
+        default-secdist-provider:
+            config: ../config/secdist.json
+            format: json
+            missing-ok: true
+
+        dns-client:
+            fs-task-processor: fs-task-processor
+
+    task_processors:
+        main-task-processor:
+            worker_threads#env: WORKER_THREADS
+            worker_threads#fallback: 2
+        fs-task-processor:
+            worker_threads: 1

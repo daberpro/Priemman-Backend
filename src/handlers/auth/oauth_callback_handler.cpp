@@ -1,4 +1,6 @@
 #include "oauth_callback_handler.hpp"
+#include "session_cookie.hpp"
+
 #include <algorithm>
 #include <cctype>
 #include <string>
@@ -40,10 +42,6 @@ std::string NormalizeEmail(std::string email) {
         return static_cast<char>(std::toupper(c));
     });
     return email;
-}
-
-std::string BuildSessionCookie(const std::string& token) {
-    return "session=" + token + "; Path=/; HttpOnly; SameSite=Lax; Max-Age=2592000";
 }
 
 }

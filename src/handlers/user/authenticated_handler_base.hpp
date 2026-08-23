@@ -17,6 +17,7 @@
 
 #include <src/component/Cloudinary/CloudinaryClient.hpp>
 #include <src/database/account_repository.hpp>
+#include <src/database/creator_upgrade_repository.hpp>
 #include <src/database/session_repository.hpp>
 #include <src/database/user_repository.hpp>
 #include <src/database/project_repository.hpp>
@@ -52,7 +53,8 @@ public:
           _accounts(&_mysql_cluster),
           _projects(&_mysql_cluster),
           _collections(&_mysql_cluster),
-          _media(&_mysql_cluster){
+          _media(&_mysql_cluster),
+          _upgrades(&_mysql_cluster){
     }
 
 protected:
@@ -67,19 +69,50 @@ protected:
         return user_id;
     }
 
-    // Return user_id kalau token valid, nullopt kalau tidak (tanpa set status).
+    std::optional<database::SessionIdentity> TryAuthIdentity(
+        const userver::server::http::HttpRequest& request
+    ) const {
+        std::string token;
+
+        const auto header = request.GetHeader("Authorization");
+        constexpr std::string_view kBearer = "Bearer ";
+        if (header.size() > kBearer.size() &&
+            header.compare(0, kBearer.size(), kBearer) == 0) {
+            token = std::string{header.substr(kBearer.size())};
+        } else if (request.HasCookie("session")) {
+            token = request.GetCookie("session");
+        }
+
+        if (token.empty()) {
+            return std::nullopt;
+        }
+        return _sessions.FindIdentityByToken(token);
+    }
+
+    std::optional<std::string> RequireAdmin(
+        const userver::server::http::HttpRequest& request
+    ) const {
+        auto& response = request.GetHttpResponse();
+        auto identity = TryAuthIdentity(request);
+        if (!identity.has_value()) {
+            response.SetStatus(userver::server::http::HttpStatus::kUnauthorized);
+            return std::nullopt;
+        }
+        if (identity->role != "admin") {
+            response.SetStatus(userver::server::http::HttpStatus::kForbidden);
+            return std::nullopt;
+        }
+        return identity->user_id;
+    }
+
     std::optional<std::string> TryAuth(
         const userver::server::http::HttpRequest& request
     ) const {
-        const auto header = request.GetHeader("Authorization");
-        constexpr std::string_view kBearer = "Bearer ";
-        if (header.size() <= kBearer.size() ||
-            header.compare(0, kBearer.size(), kBearer) != 0) {
+        auto identity = TryAuthIdentity(request);
+        if (!identity.has_value()) {
             return std::nullopt;
         }
-        return _sessions.FindUserIdByToken(
-            std::string{header.substr(kBearer.size())}
-        );
+        return identity->user_id;
     }
 
     std::shared_ptr<userver::storages::mysql::Cluster> _mysql_cluster;
@@ -89,6 +122,7 @@ protected:
     database::ProjectRepository _projects;
     database::CollectionRepository _collections;
     database::MediaRepository _media;
+    database::CreatorUpgradeRepository _upgrades;
 };
 
 }  // namespace priemman::handlers

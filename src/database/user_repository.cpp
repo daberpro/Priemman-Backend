@@ -1,9 +1,20 @@
 #include "user_repository.hpp"
+#include <stdexcept>
 #include <userver/storages/mysql/cluster_host_type.hpp>
 #include <userver/storages/mysql/query.hpp>
 #include <userver/utils/uuid4.hpp>
 
 namespace priemman::database {
+
+namespace {
+
+void ValidateRole(const std::string& role) {
+    if (role != "user" && role != "creator" && role != "admin") {
+        throw std::invalid_argument("Invalid role: " + role);
+    }
+}
+
+}  // namespace
 
 UserRepository::UserRepository(std::shared_ptr<userver::storages::mysql::Cluster>* mysql_cluster)
     : _mysql_cluster(*mysql_cluster) {}
@@ -12,7 +23,7 @@ std::optional<User> UserRepository::FindById(const std::string& id) const {
     return _mysql_cluster->Execute(
         userver::storages::mysql::ClusterHostType::kSecondary,
         userver::storages::mysql::Query{R"sql(
-            SELECT id, email, first_name, last_name, headline, company, city, country, website_url, avatar_url, is_onboarded
+            SELECT id, email, first_name, last_name, headline, company, city, country, website_url, avatar_url, is_onboarded, role
             FROM users WHERE id = ? LIMIT 1
         )sql"},
         id
@@ -23,7 +34,7 @@ std::optional<User> UserRepository::FindByEmail(const std::string& email) const 
     return _mysql_cluster->Execute(
         userver::storages::mysql::ClusterHostType::kSecondary,
         userver::storages::mysql::Query{R"sql(
-            SELECT id, email, first_name, last_name, headline, company, city, country, website_url, avatar_url, is_onboarded
+            SELECT id, email, first_name, last_name, headline, company, city, country, website_url, avatar_url, is_onboarded, role
             FROM users WHERE email = ? LIMIT 1
         )sql"},
         email
@@ -36,7 +47,7 @@ FindOrCreateResult UserRepository::FindOrCreateFromOAuth(const OAuthUserData& oa
         userver::storages::mysql::ClusterHostType::kSecondary,
         userver::storages::mysql::Query{R"sql(
             SELECT u.id, u.email, u.first_name, u.last_name, u.headline, u.company,
-                   u.city, u.country, u.website_url, u.avatar_url, u.is_onboarded
+                   u.city, u.country, u.website_url, u.avatar_url, u.is_onboarded, u.role
             FROM oauth_accounts oa
             INNER JOIN users u ON u.id = oa.user_id
             WHERE oa.provider = ? AND oa.provider_user_id = ?
@@ -68,6 +79,7 @@ FindOrCreateResult UserRepository::FindOrCreateFromOAuth(const OAuthUserData& oa
         user.headline = ""; user.company = ""; user.city = ""; user.country = "";
         user.website_url = ""; user.avatar_url = oauth.avatar_url;
         user.is_onboarded = 0; // std::int8_t
+        user.role = "user";    // default DB, INSERT tidak menyertakan role
 
         _mysql_cluster->Execute(
             userver::storages::mysql::ClusterHostType::kPrimary,
@@ -170,6 +182,7 @@ FindOrCreateResult UserRepository::FindOrCreateFromEmail(const std::string& emai
     user.website_url = "";
     user.avatar_url = "";
     user.is_onboarded = 0; // std::int8_t
+    user.role = "user";    // default DB, INSERT tidak menyertakan role
 
     _mysql_cluster->Execute(
         userver::storages::mysql::ClusterHostType::kPrimary,
@@ -190,6 +203,56 @@ FindOrCreateResult UserRepository::FindOrCreateFromEmail(const std::string& emai
     );
 
     return {.user = user, .is_new_user = true};
+}
+
+std::vector<AdminUserRow> UserRepository::ListUsers(
+    std::int64_t limit,
+    std::int64_t offset,
+    const std::string& role_filter
+) const {
+    std::string query = R"sql(
+        SELECT id, email, first_name, last_name, role,
+               DATE_FORMAT(created_at, '%Y-%m-%dT%H:%i:%sZ')
+        FROM users
+    )sql";
+    if (!role_filter.empty()) {
+        ValidateRole(role_filter);
+        query += " WHERE role = '" + role_filter + "'";
+    }
+    query += " ORDER BY created_at DESC LIMIT ? OFFSET ?";
+
+    return _mysql_cluster->Execute(
+        userver::storages::mysql::ClusterHostType::kSecondary,
+        userver::storages::mysql::Query{query},
+        limit, offset
+    ).AsVector<AdminUserRow>();
+}
+
+std::int64_t UserRepository::CountUsers(const std::string& role_filter) const {
+    std::string query = "SELECT COUNT(*) FROM users";
+    if (!role_filter.empty()) {
+        ValidateRole(role_filter);
+        query += " WHERE role = '" + role_filter + "'";
+    }
+
+    return _mysql_cluster->Execute(
+        userver::storages::mysql::ClusterHostType::kSecondary,
+        userver::storages::mysql::Query{query}
+    ).AsOptionalSingleField<std::int64_t>().value_or(0);
+}
+
+bool UserRepository::SetRole(const std::string& user_id, const std::string& role) const {
+    ValidateRole(role);
+
+    const auto result = _mysql_cluster->Execute(
+        userver::storages::mysql::ClusterHostType::kPrimary,
+        userver::storages::mysql::Query{R"sql(
+            UPDATE users SET role = ? WHERE id = ?
+        )sql"},
+        role, user_id
+    ).AsExecutionResult();
+
+    return result.rows_affected > 0;
 }
 
 }

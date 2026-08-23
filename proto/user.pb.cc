@@ -88,6 +88,7 @@ PROTOBUF_CONSTEXPR User::User(
   , /*decltype(_impl_.created_at_)*/nullptr
   , /*decltype(_impl_.updated_at_)*/nullptr
   , /*decltype(_impl_.is_onboarded_)*/false
+  , /*decltype(_impl_.role_)*/0
   , /*decltype(_impl_._cached_size_)*/{}} {}
 struct UserDefaultTypeInternal {
   PROTOBUF_CONSTEXPR UserDefaultTypeInternal()
@@ -181,10 +182,169 @@ struct DeleteConnectedAccountRequestDefaultTypeInternal {
   };
 };
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 DeleteConnectedAccountRequestDefaultTypeInternal _DeleteConnectedAccountRequest_default_instance_;
+PROTOBUF_CONSTEXPR UpgradeStatus::UpgradeStatus(
+    ::_pbi::ConstantInitialized): _impl_{
+    /*decltype(_impl_.status_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
+  , /*decltype(_impl_.invoice_id_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
+  , /*decltype(_impl_.currency_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
+  , /*decltype(_impl_.rejection_reason_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
+  , /*decltype(_impl_.request_id_)*/nullptr
+  , /*decltype(_impl_.requested_at_)*/nullptr
+  , /*decltype(_impl_.reviewed_at_)*/nullptr
+  , /*decltype(_impl_.paid_at_)*/nullptr
+  , /*decltype(_impl_.invoice_amount_)*/int64_t{0}
+  , /*decltype(_impl_._cached_size_)*/{}} {}
+struct UpgradeStatusDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR UpgradeStatusDefaultTypeInternal()
+      : _instance(::_pbi::ConstantInitialized{}) {}
+  ~UpgradeStatusDefaultTypeInternal() {}
+  union {
+    UpgradeStatus _instance;
+  };
+};
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 UpgradeStatusDefaultTypeInternal _UpgradeStatus_default_instance_;
+PROTOBUF_CONSTEXPR CreateUpgradeRequestResponse::CreateUpgradeRequestResponse(
+    ::_pbi::ConstantInitialized): _impl_{
+    /*decltype(_impl_.status_)*/nullptr
+  , /*decltype(_impl_.success_)*/false
+  , /*decltype(_impl_._cached_size_)*/{}} {}
+struct CreateUpgradeRequestResponseDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR CreateUpgradeRequestResponseDefaultTypeInternal()
+      : _instance(::_pbi::ConstantInitialized{}) {}
+  ~CreateUpgradeRequestResponseDefaultTypeInternal() {}
+  union {
+    CreateUpgradeRequestResponse _instance;
+  };
+};
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 CreateUpgradeRequestResponseDefaultTypeInternal _CreateUpgradeRequestResponse_default_instance_;
+PROTOBUF_CONSTEXPR AdminUserEntry::AdminUserEntry(
+    ::_pbi::ConstantInitialized): _impl_{
+    /*decltype(_impl_.email_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
+  , /*decltype(_impl_.first_name_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
+  , /*decltype(_impl_.last_name_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
+  , /*decltype(_impl_.id_)*/nullptr
+  , /*decltype(_impl_.created_at_)*/nullptr
+  , /*decltype(_impl_.role_)*/0
+  , /*decltype(_impl_._cached_size_)*/{}} {}
+struct AdminUserEntryDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR AdminUserEntryDefaultTypeInternal()
+      : _instance(::_pbi::ConstantInitialized{}) {}
+  ~AdminUserEntryDefaultTypeInternal() {}
+  union {
+    AdminUserEntry _instance;
+  };
+};
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 AdminUserEntryDefaultTypeInternal _AdminUserEntry_default_instance_;
+PROTOBUF_CONSTEXPR AdminListUsersResponse::AdminListUsersResponse(
+    ::_pbi::ConstantInitialized): _impl_{
+    /*decltype(_impl_.users_)*/{}
+  , /*decltype(_impl_.total_)*/0
+  , /*decltype(_impl_.limit_)*/0
+  , /*decltype(_impl_.offset_)*/0
+  , /*decltype(_impl_._cached_size_)*/{}} {}
+struct AdminListUsersResponseDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR AdminListUsersResponseDefaultTypeInternal()
+      : _instance(::_pbi::ConstantInitialized{}) {}
+  ~AdminListUsersResponseDefaultTypeInternal() {}
+  union {
+    AdminListUsersResponse _instance;
+  };
+};
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 AdminListUsersResponseDefaultTypeInternal _AdminListUsersResponse_default_instance_;
+PROTOBUF_CONSTEXPR UpgradeRequestEntry::UpgradeRequestEntry(
+    ::_pbi::ConstantInitialized): _impl_{
+    /*decltype(_impl_.email_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
+  , /*decltype(_impl_.status_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
+  , /*decltype(_impl_.invoice_id_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
+  , /*decltype(_impl_.currency_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
+  , /*decltype(_impl_.rejection_reason_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
+  , /*decltype(_impl_.id_)*/nullptr
+  , /*decltype(_impl_.user_id_)*/nullptr
+  , /*decltype(_impl_.requested_at_)*/nullptr
+  , /*decltype(_impl_.invoice_amount_)*/int64_t{0}
+  , /*decltype(_impl_._cached_size_)*/{}} {}
+struct UpgradeRequestEntryDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR UpgradeRequestEntryDefaultTypeInternal()
+      : _instance(::_pbi::ConstantInitialized{}) {}
+  ~UpgradeRequestEntryDefaultTypeInternal() {}
+  union {
+    UpgradeRequestEntry _instance;
+  };
+};
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 UpgradeRequestEntryDefaultTypeInternal _UpgradeRequestEntry_default_instance_;
+PROTOBUF_CONSTEXPR AdminListUpgradeRequestsResponse::AdminListUpgradeRequestsResponse(
+    ::_pbi::ConstantInitialized): _impl_{
+    /*decltype(_impl_.requests_)*/{}
+  , /*decltype(_impl_._cached_size_)*/{}} {}
+struct AdminListUpgradeRequestsResponseDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR AdminListUpgradeRequestsResponseDefaultTypeInternal()
+      : _instance(::_pbi::ConstantInitialized{}) {}
+  ~AdminListUpgradeRequestsResponseDefaultTypeInternal() {}
+  union {
+    AdminListUpgradeRequestsResponse _instance;
+  };
+};
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 AdminListUpgradeRequestsResponseDefaultTypeInternal _AdminListUpgradeRequestsResponse_default_instance_;
+PROTOBUF_CONSTEXPR AdminReviewUpgradeRequest::AdminReviewUpgradeRequest(
+    ::_pbi::ConstantInitialized): _impl_{
+    /*decltype(_impl_.rejection_reason_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
+  , /*decltype(_impl_.id_)*/nullptr
+  , /*decltype(_impl_.approve_)*/false
+  , /*decltype(_impl_._cached_size_)*/{}} {}
+struct AdminReviewUpgradeRequestDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR AdminReviewUpgradeRequestDefaultTypeInternal()
+      : _instance(::_pbi::ConstantInitialized{}) {}
+  ~AdminReviewUpgradeRequestDefaultTypeInternal() {}
+  union {
+    AdminReviewUpgradeRequest _instance;
+  };
+};
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 AdminReviewUpgradeRequestDefaultTypeInternal _AdminReviewUpgradeRequest_default_instance_;
+PROTOBUF_CONSTEXPR AdminReviewUpgradeResponse::AdminReviewUpgradeResponse(
+    ::_pbi::ConstantInitialized): _impl_{
+    /*decltype(_impl_.request_)*/nullptr
+  , /*decltype(_impl_.success_)*/false
+  , /*decltype(_impl_._cached_size_)*/{}} {}
+struct AdminReviewUpgradeResponseDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR AdminReviewUpgradeResponseDefaultTypeInternal()
+      : _instance(::_pbi::ConstantInitialized{}) {}
+  ~AdminReviewUpgradeResponseDefaultTypeInternal() {}
+  union {
+    AdminReviewUpgradeResponse _instance;
+  };
+};
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 AdminReviewUpgradeResponseDefaultTypeInternal _AdminReviewUpgradeResponse_default_instance_;
+PROTOBUF_CONSTEXPR AdminConfirmPaymentRequest::AdminConfirmPaymentRequest(
+    ::_pbi::ConstantInitialized): _impl_{
+    /*decltype(_impl_.id_)*/nullptr
+  , /*decltype(_impl_._cached_size_)*/{}} {}
+struct AdminConfirmPaymentRequestDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR AdminConfirmPaymentRequestDefaultTypeInternal()
+      : _instance(::_pbi::ConstantInitialized{}) {}
+  ~AdminConfirmPaymentRequestDefaultTypeInternal() {}
+  union {
+    AdminConfirmPaymentRequest _instance;
+  };
+};
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 AdminConfirmPaymentRequestDefaultTypeInternal _AdminConfirmPaymentRequest_default_instance_;
+PROTOBUF_CONSTEXPR AdminConfirmPaymentResponse::AdminConfirmPaymentResponse(
+    ::_pbi::ConstantInitialized): _impl_{
+    /*decltype(_impl_.user_id_)*/nullptr
+  , /*decltype(_impl_.success_)*/false
+  , /*decltype(_impl_._cached_size_)*/{}} {}
+struct AdminConfirmPaymentResponseDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR AdminConfirmPaymentResponseDefaultTypeInternal()
+      : _instance(::_pbi::ConstantInitialized{}) {}
+  ~AdminConfirmPaymentResponseDefaultTypeInternal() {}
+  union {
+    AdminConfirmPaymentResponse _instance;
+  };
+};
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 AdminConfirmPaymentResponseDefaultTypeInternal _AdminConfirmPaymentResponse_default_instance_;
 }  // namespace v1
 }  // namespace priemman
-static ::_pb::Metadata file_level_metadata_user_2eproto[10];
-static const ::_pb::EnumDescriptor* file_level_enum_descriptors_user_2eproto[1];
+static ::_pb::Metadata file_level_metadata_user_2eproto[20];
+static const ::_pb::EnumDescriptor* file_level_enum_descriptors_user_2eproto[2];
 static constexpr ::_pb::ServiceDescriptor const** file_level_service_descriptors_user_2eproto = nullptr;
 
 const uint32_t TableStruct_user_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
@@ -240,6 +400,7 @@ const uint32_t TableStruct_user_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE(pro
   PROTOBUF_FIELD_OFFSET(::priemman::v1::User, _impl_.about_me_),
   PROTOBUF_FIELD_OFFSET(::priemman::v1::User, _impl_.created_at_),
   PROTOBUF_FIELD_OFFSET(::priemman::v1::User, _impl_.updated_at_),
+  PROTOBUF_FIELD_OFFSET(::priemman::v1::User, _impl_.role_),
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::priemman::v1::UpdateBasicInfoRequest, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -287,18 +448,127 @@ const uint32_t TableStruct_user_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE(pro
   ~0u,  // no _weak_field_map_
   ~0u,  // no _inlined_string_donated_
   PROTOBUF_FIELD_OFFSET(::priemman::v1::DeleteConnectedAccountRequest, _impl_.platform_),
+  ~0u,  // no _has_bits_
+  PROTOBUF_FIELD_OFFSET(::priemman::v1::UpgradeStatus, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  ~0u,  // no _inlined_string_donated_
+  PROTOBUF_FIELD_OFFSET(::priemman::v1::UpgradeStatus, _impl_.status_),
+  PROTOBUF_FIELD_OFFSET(::priemman::v1::UpgradeStatus, _impl_.request_id_),
+  PROTOBUF_FIELD_OFFSET(::priemman::v1::UpgradeStatus, _impl_.invoice_id_),
+  PROTOBUF_FIELD_OFFSET(::priemman::v1::UpgradeStatus, _impl_.invoice_amount_),
+  PROTOBUF_FIELD_OFFSET(::priemman::v1::UpgradeStatus, _impl_.currency_),
+  PROTOBUF_FIELD_OFFSET(::priemman::v1::UpgradeStatus, _impl_.rejection_reason_),
+  PROTOBUF_FIELD_OFFSET(::priemman::v1::UpgradeStatus, _impl_.requested_at_),
+  PROTOBUF_FIELD_OFFSET(::priemman::v1::UpgradeStatus, _impl_.reviewed_at_),
+  PROTOBUF_FIELD_OFFSET(::priemman::v1::UpgradeStatus, _impl_.paid_at_),
+  ~0u,  // no _has_bits_
+  PROTOBUF_FIELD_OFFSET(::priemman::v1::CreateUpgradeRequestResponse, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  ~0u,  // no _inlined_string_donated_
+  PROTOBUF_FIELD_OFFSET(::priemman::v1::CreateUpgradeRequestResponse, _impl_.success_),
+  PROTOBUF_FIELD_OFFSET(::priemman::v1::CreateUpgradeRequestResponse, _impl_.status_),
+  ~0u,  // no _has_bits_
+  PROTOBUF_FIELD_OFFSET(::priemman::v1::AdminUserEntry, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  ~0u,  // no _inlined_string_donated_
+  PROTOBUF_FIELD_OFFSET(::priemman::v1::AdminUserEntry, _impl_.id_),
+  PROTOBUF_FIELD_OFFSET(::priemman::v1::AdminUserEntry, _impl_.email_),
+  PROTOBUF_FIELD_OFFSET(::priemman::v1::AdminUserEntry, _impl_.first_name_),
+  PROTOBUF_FIELD_OFFSET(::priemman::v1::AdminUserEntry, _impl_.last_name_),
+  PROTOBUF_FIELD_OFFSET(::priemman::v1::AdminUserEntry, _impl_.role_),
+  PROTOBUF_FIELD_OFFSET(::priemman::v1::AdminUserEntry, _impl_.created_at_),
+  ~0u,  // no _has_bits_
+  PROTOBUF_FIELD_OFFSET(::priemman::v1::AdminListUsersResponse, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  ~0u,  // no _inlined_string_donated_
+  PROTOBUF_FIELD_OFFSET(::priemman::v1::AdminListUsersResponse, _impl_.users_),
+  PROTOBUF_FIELD_OFFSET(::priemman::v1::AdminListUsersResponse, _impl_.total_),
+  PROTOBUF_FIELD_OFFSET(::priemman::v1::AdminListUsersResponse, _impl_.limit_),
+  PROTOBUF_FIELD_OFFSET(::priemman::v1::AdminListUsersResponse, _impl_.offset_),
+  ~0u,  // no _has_bits_
+  PROTOBUF_FIELD_OFFSET(::priemman::v1::UpgradeRequestEntry, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  ~0u,  // no _inlined_string_donated_
+  PROTOBUF_FIELD_OFFSET(::priemman::v1::UpgradeRequestEntry, _impl_.id_),
+  PROTOBUF_FIELD_OFFSET(::priemman::v1::UpgradeRequestEntry, _impl_.user_id_),
+  PROTOBUF_FIELD_OFFSET(::priemman::v1::UpgradeRequestEntry, _impl_.email_),
+  PROTOBUF_FIELD_OFFSET(::priemman::v1::UpgradeRequestEntry, _impl_.status_),
+  PROTOBUF_FIELD_OFFSET(::priemman::v1::UpgradeRequestEntry, _impl_.invoice_id_),
+  PROTOBUF_FIELD_OFFSET(::priemman::v1::UpgradeRequestEntry, _impl_.invoice_amount_),
+  PROTOBUF_FIELD_OFFSET(::priemman::v1::UpgradeRequestEntry, _impl_.currency_),
+  PROTOBUF_FIELD_OFFSET(::priemman::v1::UpgradeRequestEntry, _impl_.rejection_reason_),
+  PROTOBUF_FIELD_OFFSET(::priemman::v1::UpgradeRequestEntry, _impl_.requested_at_),
+  ~0u,  // no _has_bits_
+  PROTOBUF_FIELD_OFFSET(::priemman::v1::AdminListUpgradeRequestsResponse, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  ~0u,  // no _inlined_string_donated_
+  PROTOBUF_FIELD_OFFSET(::priemman::v1::AdminListUpgradeRequestsResponse, _impl_.requests_),
+  ~0u,  // no _has_bits_
+  PROTOBUF_FIELD_OFFSET(::priemman::v1::AdminReviewUpgradeRequest, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  ~0u,  // no _inlined_string_donated_
+  PROTOBUF_FIELD_OFFSET(::priemman::v1::AdminReviewUpgradeRequest, _impl_.id_),
+  PROTOBUF_FIELD_OFFSET(::priemman::v1::AdminReviewUpgradeRequest, _impl_.approve_),
+  PROTOBUF_FIELD_OFFSET(::priemman::v1::AdminReviewUpgradeRequest, _impl_.rejection_reason_),
+  ~0u,  // no _has_bits_
+  PROTOBUF_FIELD_OFFSET(::priemman::v1::AdminReviewUpgradeResponse, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  ~0u,  // no _inlined_string_donated_
+  PROTOBUF_FIELD_OFFSET(::priemman::v1::AdminReviewUpgradeResponse, _impl_.success_),
+  PROTOBUF_FIELD_OFFSET(::priemman::v1::AdminReviewUpgradeResponse, _impl_.request_),
+  ~0u,  // no _has_bits_
+  PROTOBUF_FIELD_OFFSET(::priemman::v1::AdminConfirmPaymentRequest, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  ~0u,  // no _inlined_string_donated_
+  PROTOBUF_FIELD_OFFSET(::priemman::v1::AdminConfirmPaymentRequest, _impl_.id_),
+  ~0u,  // no _has_bits_
+  PROTOBUF_FIELD_OFFSET(::priemman::v1::AdminConfirmPaymentResponse, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  ~0u,  // no _inlined_string_donated_
+  PROTOBUF_FIELD_OFFSET(::priemman::v1::AdminConfirmPaymentResponse, _impl_.success_),
+  PROTOBUF_FIELD_OFFSET(::priemman::v1::AdminConfirmPaymentResponse, _impl_.user_id_),
 };
 static const ::_pbi::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
   { 0, -1, -1, sizeof(::priemman::v1::WorkExperience)},
   { 13, -1, -1, sizeof(::priemman::v1::ConnectedAccount)},
   { 23, -1, -1, sizeof(::priemman::v1::AboutMe)},
   { 31, -1, -1, sizeof(::priemman::v1::User)},
-  { 52, -1, -1, sizeof(::priemman::v1::UpdateBasicInfoRequest)},
-  { 64, -1, -1, sizeof(::priemman::v1::UpsertWorkExperienceRequest)},
-  { 71, -1, -1, sizeof(::priemman::v1::ListWorkExperienceResponse)},
-  { 78, -1, -1, sizeof(::priemman::v1::DeleteWorkExperienceRequest)},
-  { 85, -1, -1, sizeof(::priemman::v1::ListConnectedAccountsResponse)},
-  { 92, -1, -1, sizeof(::priemman::v1::DeleteConnectedAccountRequest)},
+  { 53, -1, -1, sizeof(::priemman::v1::UpdateBasicInfoRequest)},
+  { 65, -1, -1, sizeof(::priemman::v1::UpsertWorkExperienceRequest)},
+  { 72, -1, -1, sizeof(::priemman::v1::ListWorkExperienceResponse)},
+  { 79, -1, -1, sizeof(::priemman::v1::DeleteWorkExperienceRequest)},
+  { 86, -1, -1, sizeof(::priemman::v1::ListConnectedAccountsResponse)},
+  { 93, -1, -1, sizeof(::priemman::v1::DeleteConnectedAccountRequest)},
+  { 100, -1, -1, sizeof(::priemman::v1::UpgradeStatus)},
+  { 115, -1, -1, sizeof(::priemman::v1::CreateUpgradeRequestResponse)},
+  { 123, -1, -1, sizeof(::priemman::v1::AdminUserEntry)},
+  { 135, -1, -1, sizeof(::priemman::v1::AdminListUsersResponse)},
+  { 145, -1, -1, sizeof(::priemman::v1::UpgradeRequestEntry)},
+  { 160, -1, -1, sizeof(::priemman::v1::AdminListUpgradeRequestsResponse)},
+  { 167, -1, -1, sizeof(::priemman::v1::AdminReviewUpgradeRequest)},
+  { 176, -1, -1, sizeof(::priemman::v1::AdminReviewUpgradeResponse)},
+  { 184, -1, -1, sizeof(::priemman::v1::AdminConfirmPaymentRequest)},
+  { 191, -1, -1, sizeof(::priemman::v1::AdminConfirmPaymentResponse)},
 };
 
 static const ::_pb::Message* const file_default_instances[] = {
@@ -312,6 +582,16 @@ static const ::_pb::Message* const file_default_instances[] = {
   &::priemman::v1::_DeleteWorkExperienceRequest_default_instance_._instance,
   &::priemman::v1::_ListConnectedAccountsResponse_default_instance_._instance,
   &::priemman::v1::_DeleteConnectedAccountRequest_default_instance_._instance,
+  &::priemman::v1::_UpgradeStatus_default_instance_._instance,
+  &::priemman::v1::_CreateUpgradeRequestResponse_default_instance_._instance,
+  &::priemman::v1::_AdminUserEntry_default_instance_._instance,
+  &::priemman::v1::_AdminListUsersResponse_default_instance_._instance,
+  &::priemman::v1::_UpgradeRequestEntry_default_instance_._instance,
+  &::priemman::v1::_AdminListUpgradeRequestsResponse_default_instance_._instance,
+  &::priemman::v1::_AdminReviewUpgradeRequest_default_instance_._instance,
+  &::priemman::v1::_AdminReviewUpgradeResponse_default_instance_._instance,
+  &::priemman::v1::_AdminConfirmPaymentRequest_default_instance_._instance,
+  &::priemman::v1::_AdminConfirmPaymentResponse_default_instance_._instance,
 };
 
 const char descriptor_table_protodef_user_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) =
@@ -327,7 +607,7 @@ const char descriptor_table_protodef_user_2eproto[] PROTOBUF_SECTION_VARIABLE(pr
   "form\022\025\n\rhandle_or_url\030\002 \001(\t\022\020\n\010verified\030"
   "\003 \001(\010\0220\n\014connected_at\030\004 \001(\0132\032.google.pro"
   "tobuf.Timestamp\"-\n\007AboutMe\022\r\n\005title\030\001 \001("
-  "\t\022\023\n\013description\030\002 \001(\t\"\343\003\n\004User\022!\n\002id\030\001 "
+  "\t\022\023\n\013description\030\002 \001(\t\"\210\004\n\004User\022!\n\002id\030\001 "
   "\001(\0132\025.priemman.v1.ObjectId\022\r\n\005email\030\002 \001("
   "\t\022\022\n\nfirst_name\030\003 \001(\t\022\021\n\tlast_name\030\004 \001(\t"
   "\022\020\n\010headline\030\005 \001(\t\022\017\n\007company\030\006 \001(\t\022\'\n\010l"
@@ -339,25 +619,64 @@ const char descriptor_table_protodef_user_2eproto[] PROTOBUF_SECTION_VARIABLE(pr
   "ectedAccount\022&\n\010about_me\030\r \001(\0132\024.priemma"
   "n.v1.AboutMe\022.\n\ncreated_at\030\016 \001(\0132\032.googl"
   "e.protobuf.Timestamp\022.\n\nupdated_at\030\017 \001(\013"
-  "2\032.google.protobuf.Timestamp\"\240\001\n\026UpdateB"
-  "asicInfoRequest\022\022\n\nfirst_name\030\001 \001(\t\022\021\n\tl"
-  "ast_name\030\002 \001(\t\022\020\n\010headline\030\003 \001(\t\022\017\n\007comp"
-  "any\030\004 \001(\t\022\'\n\010location\030\005 \001(\0132\025.priemman.v"
-  "1.Location\022\023\n\013website_url\030\006 \001(\t\"I\n\033Upser"
-  "tWorkExperienceRequest\022*\n\005entry\030\001 \001(\0132\033."
-  "priemman.v1.WorkExperience\"J\n\032ListWorkEx"
-  "perienceResponse\022,\n\007entries\030\001 \003(\0132\033.prie"
-  "mman.v1.WorkExperience\"@\n\033DeleteWorkExpe"
-  "rienceRequest\022!\n\002id\030\001 \001(\0132\025.priemman.v1."
-  "ObjectId\"P\n\035ListConnectedAccountsRespons"
-  "e\022/\n\010accounts\030\001 \003(\0132\035.priemman.v1.Connec"
-  "tedAccount\"Q\n\035DeleteConnectedAccountRequ"
-  "est\0220\n\010platform\030\001 \001(\0162\036.priemman.v1.Conn"
-  "ectedPlatform*\231\001\n\021ConnectedPlatform\022\"\n\036C"
-  "ONNECTED_PLATFORM_UNSPECIFIED\020\000\022 \n\034CONNE"
-  "CTED_PLATFORM_INSTAGRAM\020\001\022\037\n\033CONNECTED_P"
-  "LATFORM_LINKEDIN\020\002\022\035\n\031CONNECTED_PLATFORM"
-  "_GITHUB\020\003b\006proto3"
+  "2\032.google.protobuf.Timestamp\022#\n\004role\030\020 \001"
+  "(\0162\025.priemman.v1.UserRole\"\240\001\n\026UpdateBasi"
+  "cInfoRequest\022\022\n\nfirst_name\030\001 \001(\t\022\021\n\tlast"
+  "_name\030\002 \001(\t\022\020\n\010headline\030\003 \001(\t\022\017\n\007company"
+  "\030\004 \001(\t\022\'\n\010location\030\005 \001(\0132\025.priemman.v1.L"
+  "ocation\022\023\n\013website_url\030\006 \001(\t\"I\n\033UpsertWo"
+  "rkExperienceRequest\022*\n\005entry\030\001 \001(\0132\033.pri"
+  "emman.v1.WorkExperience\"J\n\032ListWorkExper"
+  "ienceResponse\022,\n\007entries\030\001 \003(\0132\033.priemma"
+  "n.v1.WorkExperience\"@\n\033DeleteWorkExperie"
+  "nceRequest\022!\n\002id\030\001 \001(\0132\025.priemman.v1.Obj"
+  "ectId\"P\n\035ListConnectedAccountsResponse\022/"
+  "\n\010accounts\030\001 \003(\0132\035.priemman.v1.Connected"
+  "Account\"Q\n\035DeleteConnectedAccountRequest"
+  "\0220\n\010platform\030\001 \001(\0162\036.priemman.v1.Connect"
+  "edPlatform\"\262\002\n\rUpgradeStatus\022\016\n\006status\030\001"
+  " \001(\t\022)\n\nrequest_id\030\002 \001(\0132\025.priemman.v1.O"
+  "bjectId\022\022\n\ninvoice_id\030\003 \001(\t\022\026\n\016invoice_a"
+  "mount\030\004 \001(\003\022\020\n\010currency\030\005 \001(\t\022\030\n\020rejecti"
+  "on_reason\030\006 \001(\t\0220\n\014requested_at\030\007 \001(\0132\032."
+  "google.protobuf.Timestamp\022/\n\013reviewed_at"
+  "\030\010 \001(\0132\032.google.protobuf.Timestamp\022+\n\007pa"
+  "id_at\030\t \001(\0132\032.google.protobuf.Timestamp\""
+  "[\n\034CreateUpgradeRequestResponse\022\017\n\007succe"
+  "ss\030\001 \001(\010\022*\n\006status\030\002 \001(\0132\032.priemman.v1.U"
+  "pgradeStatus\"\276\001\n\016AdminUserEntry\022!\n\002id\030\001 "
+  "\001(\0132\025.priemman.v1.ObjectId\022\r\n\005email\030\002 \001("
+  "\t\022\022\n\nfirst_name\030\003 \001(\t\022\021\n\tlast_name\030\004 \001(\t"
+  "\022#\n\004role\030\005 \001(\0162\025.priemman.v1.UserRole\022.\n"
+  "\ncreated_at\030\006 \001(\0132\032.google.protobuf.Time"
+  "stamp\"r\n\026AdminListUsersResponse\022*\n\005users"
+  "\030\001 \003(\0132\033.priemman.v1.AdminUserEntry\022\r\n\005t"
+  "otal\030\002 \001(\005\022\r\n\005limit\030\003 \001(\005\022\016\n\006offset\030\004 \001("
+  "\005\"\211\002\n\023UpgradeRequestEntry\022!\n\002id\030\001 \001(\0132\025."
+  "priemman.v1.ObjectId\022&\n\007user_id\030\002 \001(\0132\025."
+  "priemman.v1.ObjectId\022\r\n\005email\030\003 \001(\t\022\016\n\006s"
+  "tatus\030\004 \001(\t\022\022\n\ninvoice_id\030\005 \001(\t\022\026\n\016invoi"
+  "ce_amount\030\006 \001(\003\022\020\n\010currency\030\007 \001(\t\022\030\n\020rej"
+  "ection_reason\030\010 \001(\t\0220\n\014requested_at\030\t \001("
+  "\0132\032.google.protobuf.Timestamp\"V\n AdminLi"
+  "stUpgradeRequestsResponse\0222\n\010requests\030\001 "
+  "\003(\0132 .priemman.v1.UpgradeRequestEntry\"i\n"
+  "\031AdminReviewUpgradeRequest\022!\n\002id\030\001 \001(\0132\025"
+  ".priemman.v1.ObjectId\022\017\n\007approve\030\002 \001(\010\022\030"
+  "\n\020rejection_reason\030\003 \001(\t\"`\n\032AdminReviewU"
+  "pgradeResponse\022\017\n\007success\030\001 \001(\010\0221\n\007reque"
+  "st\030\002 \001(\0132 .priemman.v1.UpgradeRequestEnt"
+  "ry\"\?\n\032AdminConfirmPaymentRequest\022!\n\002id\030\001"
+  " \001(\0132\025.priemman.v1.ObjectId\"V\n\033AdminConf"
+  "irmPaymentResponse\022\017\n\007success\030\001 \001(\010\022&\n\007u"
+  "ser_id\030\002 \001(\0132\025.priemman.v1.ObjectId*\231\001\n\021"
+  "ConnectedPlatform\022\"\n\036CONNECTED_PLATFORM_"
+  "UNSPECIFIED\020\000\022 \n\034CONNECTED_PLATFORM_INST"
+  "AGRAM\020\001\022\037\n\033CONNECTED_PLATFORM_LINKEDIN\020\002"
+  "\022\035\n\031CONNECTED_PLATFORM_GITHUB\020\003*e\n\010UserR"
+  "ole\022\031\n\025USER_ROLE_UNSPECIFIED\020\000\022\022\n\016USER_R"
+  "OLE_USER\020\001\022\025\n\021USER_ROLE_CREATOR\020\002\022\023\n\017USE"
+  "R_ROLE_ADMIN\020\003b\006proto3"
   ;
 static const ::_pbi::DescriptorTable* const descriptor_table_user_2eproto_deps[2] = {
   &::descriptor_table_common_2eproto,
@@ -365,9 +684,9 @@ static const ::_pbi::DescriptorTable* const descriptor_table_user_2eproto_deps[2
 };
 static ::_pbi::once_flag descriptor_table_user_2eproto_once;
 const ::_pbi::DescriptorTable descriptor_table_user_2eproto = {
-    false, false, 1697, descriptor_table_protodef_user_2eproto,
+    false, false, 3262, descriptor_table_protodef_user_2eproto,
     "user.proto",
-    &descriptor_table_user_2eproto_once, descriptor_table_user_2eproto_deps, 2, 10,
+    &descriptor_table_user_2eproto_once, descriptor_table_user_2eproto_deps, 2, 20,
     schemas, file_default_instances, TableStruct_user_2eproto::offsets,
     file_level_metadata_user_2eproto, file_level_enum_descriptors_user_2eproto,
     file_level_service_descriptors_user_2eproto,
@@ -385,6 +704,22 @@ const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* ConnectedPlatform_descriptor() {
   return file_level_enum_descriptors_user_2eproto[0];
 }
 bool ConnectedPlatform_IsValid(int value) {
+  switch (value) {
+    case 0:
+    case 1:
+    case 2:
+    case 3:
+      return true;
+    default:
+      return false;
+  }
+}
+
+const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* UserRole_descriptor() {
+  ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&descriptor_table_user_2eproto);
+  return file_level_enum_descriptors_user_2eproto[1];
+}
+bool UserRole_IsValid(int value) {
   switch (value) {
     case 0:
     case 1:
@@ -1519,6 +1854,7 @@ User::User(const User& from)
     , decltype(_impl_.created_at_){nullptr}
     , decltype(_impl_.updated_at_){nullptr}
     , decltype(_impl_.is_onboarded_){}
+    , decltype(_impl_.role_){}
     , /*decltype(_impl_._cached_size_)*/{}};
 
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
@@ -1593,7 +1929,9 @@ User::User(const User& from)
   if (from._internal_has_updated_at()) {
     _this->_impl_.updated_at_ = new ::PROTOBUF_NAMESPACE_ID::Timestamp(*from._impl_.updated_at_);
   }
-  _this->_impl_.is_onboarded_ = from._impl_.is_onboarded_;
+  ::memcpy(&_impl_.is_onboarded_, &from._impl_.is_onboarded_,
+    static_cast<size_t>(reinterpret_cast<char*>(&_impl_.role_) -
+    reinterpret_cast<char*>(&_impl_.is_onboarded_)) + sizeof(_impl_.role_));
   // @@protoc_insertion_point(copy_constructor:priemman.v1.User)
 }
 
@@ -1617,6 +1955,7 @@ inline void User::SharedCtor(
     , decltype(_impl_.created_at_){nullptr}
     , decltype(_impl_.updated_at_){nullptr}
     , decltype(_impl_.is_onboarded_){false}
+    , decltype(_impl_.role_){0}
     , /*decltype(_impl_._cached_size_)*/{}
   };
   _impl_.email_.InitDefault();
@@ -1715,7 +2054,9 @@ void User::Clear() {
     delete _impl_.updated_at_;
   }
   _impl_.updated_at_ = nullptr;
-  _impl_.is_onboarded_ = false;
+  ::memset(&_impl_.is_onboarded_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&_impl_.role_) -
+      reinterpret_cast<char*>(&_impl_.is_onboarded_)) + sizeof(_impl_.role_));
   _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
@@ -1866,6 +2207,15 @@ const char* User::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
         if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 122)) {
           ptr = ctx->ParseMessage(_internal_mutable_updated_at(), ptr);
           CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      // .priemman.v1.UserRole role = 16;
+      case 16:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 128)) {
+          uint64_t val = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
+          CHK_(ptr);
+          _internal_set_role(static_cast<::priemman::v1::UserRole>(val));
         } else
           goto handle_unusual;
         continue;
@@ -2025,6 +2375,13 @@ uint8_t* User::_InternalSerialize(
         _Internal::updated_at(this).GetCachedSize(), target, stream);
   }
 
+  // .priemman.v1.UserRole role = 16;
+  if (this->_internal_role() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::_pbi::WireFormatLite::WriteEnumToArray(
+      16, this->_internal_role(), target);
+  }
+
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
     target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
         _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
@@ -2144,6 +2501,12 @@ size_t User::ByteSizeLong() const {
     total_size += 1 + 1;
   }
 
+  // .priemman.v1.UserRole role = 16;
+  if (this->_internal_role() != 0) {
+    total_size += 2 +
+      ::_pbi::WireFormatLite::EnumSize(this->_internal_role());
+  }
+
   return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
 }
 
@@ -2208,6 +2571,9 @@ void User::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_
   if (from._internal_is_onboarded() != 0) {
     _this->_internal_set_is_onboarded(from._internal_is_onboarded());
   }
+  if (from._internal_role() != 0) {
+    _this->_internal_set_role(from._internal_role());
+  }
   _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
 }
 
@@ -2258,8 +2624,8 @@ void User::InternalSwap(User* other) {
       &other->_impl_.avatar_url_, rhs_arena
   );
   ::PROTOBUF_NAMESPACE_ID::internal::memswap<
-      PROTOBUF_FIELD_OFFSET(User, _impl_.is_onboarded_)
-      + sizeof(User::_impl_.is_onboarded_)
+      PROTOBUF_FIELD_OFFSET(User, _impl_.role_)
+      + sizeof(User::_impl_.role_)
       - PROTOBUF_FIELD_OFFSET(User, _impl_.id_)>(
           reinterpret_cast<char*>(&_impl_.id_),
           reinterpret_cast<char*>(&other->_impl_.id_));
@@ -3665,6 +4031,3200 @@ void DeleteConnectedAccountRequest::InternalSwap(DeleteConnectedAccountRequest* 
       file_level_metadata_user_2eproto[9]);
 }
 
+// ===================================================================
+
+class UpgradeStatus::_Internal {
+ public:
+  static const ::priemman::v1::ObjectId& request_id(const UpgradeStatus* msg);
+  static const ::PROTOBUF_NAMESPACE_ID::Timestamp& requested_at(const UpgradeStatus* msg);
+  static const ::PROTOBUF_NAMESPACE_ID::Timestamp& reviewed_at(const UpgradeStatus* msg);
+  static const ::PROTOBUF_NAMESPACE_ID::Timestamp& paid_at(const UpgradeStatus* msg);
+};
+
+const ::priemman::v1::ObjectId&
+UpgradeStatus::_Internal::request_id(const UpgradeStatus* msg) {
+  return *msg->_impl_.request_id_;
+}
+const ::PROTOBUF_NAMESPACE_ID::Timestamp&
+UpgradeStatus::_Internal::requested_at(const UpgradeStatus* msg) {
+  return *msg->_impl_.requested_at_;
+}
+const ::PROTOBUF_NAMESPACE_ID::Timestamp&
+UpgradeStatus::_Internal::reviewed_at(const UpgradeStatus* msg) {
+  return *msg->_impl_.reviewed_at_;
+}
+const ::PROTOBUF_NAMESPACE_ID::Timestamp&
+UpgradeStatus::_Internal::paid_at(const UpgradeStatus* msg) {
+  return *msg->_impl_.paid_at_;
+}
+void UpgradeStatus::clear_request_id() {
+  if (GetArenaForAllocation() == nullptr && _impl_.request_id_ != nullptr) {
+    delete _impl_.request_id_;
+  }
+  _impl_.request_id_ = nullptr;
+}
+void UpgradeStatus::clear_requested_at() {
+  if (GetArenaForAllocation() == nullptr && _impl_.requested_at_ != nullptr) {
+    delete _impl_.requested_at_;
+  }
+  _impl_.requested_at_ = nullptr;
+}
+void UpgradeStatus::clear_reviewed_at() {
+  if (GetArenaForAllocation() == nullptr && _impl_.reviewed_at_ != nullptr) {
+    delete _impl_.reviewed_at_;
+  }
+  _impl_.reviewed_at_ = nullptr;
+}
+void UpgradeStatus::clear_paid_at() {
+  if (GetArenaForAllocation() == nullptr && _impl_.paid_at_ != nullptr) {
+    delete _impl_.paid_at_;
+  }
+  _impl_.paid_at_ = nullptr;
+}
+UpgradeStatus::UpgradeStatus(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                         bool is_message_owned)
+  : ::PROTOBUF_NAMESPACE_ID::Message(arena, is_message_owned) {
+  SharedCtor(arena, is_message_owned);
+  // @@protoc_insertion_point(arena_constructor:priemman.v1.UpgradeStatus)
+}
+UpgradeStatus::UpgradeStatus(const UpgradeStatus& from)
+  : ::PROTOBUF_NAMESPACE_ID::Message() {
+  UpgradeStatus* const _this = this; (void)_this;
+  new (&_impl_) Impl_{
+      decltype(_impl_.status_){}
+    , decltype(_impl_.invoice_id_){}
+    , decltype(_impl_.currency_){}
+    , decltype(_impl_.rejection_reason_){}
+    , decltype(_impl_.request_id_){nullptr}
+    , decltype(_impl_.requested_at_){nullptr}
+    , decltype(_impl_.reviewed_at_){nullptr}
+    , decltype(_impl_.paid_at_){nullptr}
+    , decltype(_impl_.invoice_amount_){}
+    , /*decltype(_impl_._cached_size_)*/{}};
+
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  _impl_.status_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+    _impl_.status_.Set("", GetArenaForAllocation());
+  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (!from._internal_status().empty()) {
+    _this->_impl_.status_.Set(from._internal_status(), 
+      _this->GetArenaForAllocation());
+  }
+  _impl_.invoice_id_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+    _impl_.invoice_id_.Set("", GetArenaForAllocation());
+  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (!from._internal_invoice_id().empty()) {
+    _this->_impl_.invoice_id_.Set(from._internal_invoice_id(), 
+      _this->GetArenaForAllocation());
+  }
+  _impl_.currency_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+    _impl_.currency_.Set("", GetArenaForAllocation());
+  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (!from._internal_currency().empty()) {
+    _this->_impl_.currency_.Set(from._internal_currency(), 
+      _this->GetArenaForAllocation());
+  }
+  _impl_.rejection_reason_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+    _impl_.rejection_reason_.Set("", GetArenaForAllocation());
+  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (!from._internal_rejection_reason().empty()) {
+    _this->_impl_.rejection_reason_.Set(from._internal_rejection_reason(), 
+      _this->GetArenaForAllocation());
+  }
+  if (from._internal_has_request_id()) {
+    _this->_impl_.request_id_ = new ::priemman::v1::ObjectId(*from._impl_.request_id_);
+  }
+  if (from._internal_has_requested_at()) {
+    _this->_impl_.requested_at_ = new ::PROTOBUF_NAMESPACE_ID::Timestamp(*from._impl_.requested_at_);
+  }
+  if (from._internal_has_reviewed_at()) {
+    _this->_impl_.reviewed_at_ = new ::PROTOBUF_NAMESPACE_ID::Timestamp(*from._impl_.reviewed_at_);
+  }
+  if (from._internal_has_paid_at()) {
+    _this->_impl_.paid_at_ = new ::PROTOBUF_NAMESPACE_ID::Timestamp(*from._impl_.paid_at_);
+  }
+  _this->_impl_.invoice_amount_ = from._impl_.invoice_amount_;
+  // @@protoc_insertion_point(copy_constructor:priemman.v1.UpgradeStatus)
+}
+
+inline void UpgradeStatus::SharedCtor(
+    ::_pb::Arena* arena, bool is_message_owned) {
+  (void)arena;
+  (void)is_message_owned;
+  new (&_impl_) Impl_{
+      decltype(_impl_.status_){}
+    , decltype(_impl_.invoice_id_){}
+    , decltype(_impl_.currency_){}
+    , decltype(_impl_.rejection_reason_){}
+    , decltype(_impl_.request_id_){nullptr}
+    , decltype(_impl_.requested_at_){nullptr}
+    , decltype(_impl_.reviewed_at_){nullptr}
+    , decltype(_impl_.paid_at_){nullptr}
+    , decltype(_impl_.invoice_amount_){int64_t{0}}
+    , /*decltype(_impl_._cached_size_)*/{}
+  };
+  _impl_.status_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+    _impl_.status_.Set("", GetArenaForAllocation());
+  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  _impl_.invoice_id_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+    _impl_.invoice_id_.Set("", GetArenaForAllocation());
+  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  _impl_.currency_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+    _impl_.currency_.Set("", GetArenaForAllocation());
+  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  _impl_.rejection_reason_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+    _impl_.rejection_reason_.Set("", GetArenaForAllocation());
+  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+}
+
+UpgradeStatus::~UpgradeStatus() {
+  // @@protoc_insertion_point(destructor:priemman.v1.UpgradeStatus)
+  if (auto *arena = _internal_metadata_.DeleteReturnArena<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>()) {
+  (void)arena;
+    return;
+  }
+  SharedDtor();
+}
+
+inline void UpgradeStatus::SharedDtor() {
+  GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
+  _impl_.status_.Destroy();
+  _impl_.invoice_id_.Destroy();
+  _impl_.currency_.Destroy();
+  _impl_.rejection_reason_.Destroy();
+  if (this != internal_default_instance()) delete _impl_.request_id_;
+  if (this != internal_default_instance()) delete _impl_.requested_at_;
+  if (this != internal_default_instance()) delete _impl_.reviewed_at_;
+  if (this != internal_default_instance()) delete _impl_.paid_at_;
+}
+
+void UpgradeStatus::SetCachedSize(int size) const {
+  _impl_._cached_size_.Set(size);
+}
+
+void UpgradeStatus::Clear() {
+// @@protoc_insertion_point(message_clear_start:priemman.v1.UpgradeStatus)
+  uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  _impl_.status_.ClearToEmpty();
+  _impl_.invoice_id_.ClearToEmpty();
+  _impl_.currency_.ClearToEmpty();
+  _impl_.rejection_reason_.ClearToEmpty();
+  if (GetArenaForAllocation() == nullptr && _impl_.request_id_ != nullptr) {
+    delete _impl_.request_id_;
+  }
+  _impl_.request_id_ = nullptr;
+  if (GetArenaForAllocation() == nullptr && _impl_.requested_at_ != nullptr) {
+    delete _impl_.requested_at_;
+  }
+  _impl_.requested_at_ = nullptr;
+  if (GetArenaForAllocation() == nullptr && _impl_.reviewed_at_ != nullptr) {
+    delete _impl_.reviewed_at_;
+  }
+  _impl_.reviewed_at_ = nullptr;
+  if (GetArenaForAllocation() == nullptr && _impl_.paid_at_ != nullptr) {
+    delete _impl_.paid_at_;
+  }
+  _impl_.paid_at_ = nullptr;
+  _impl_.invoice_amount_ = int64_t{0};
+  _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+}
+
+const char* UpgradeStatus::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  while (!ctx->Done(&ptr)) {
+    uint32_t tag;
+    ptr = ::_pbi::ReadTag(ptr, &tag);
+    switch (tag >> 3) {
+      // string status = 1;
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 10)) {
+          auto str = _internal_mutable_status();
+          ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
+          CHK_(ptr);
+          CHK_(::_pbi::VerifyUTF8(str, "priemman.v1.UpgradeStatus.status"));
+        } else
+          goto handle_unusual;
+        continue;
+      // .priemman.v1.ObjectId request_id = 2;
+      case 2:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 18)) {
+          ptr = ctx->ParseMessage(_internal_mutable_request_id(), ptr);
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      // string invoice_id = 3;
+      case 3:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 26)) {
+          auto str = _internal_mutable_invoice_id();
+          ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
+          CHK_(ptr);
+          CHK_(::_pbi::VerifyUTF8(str, "priemman.v1.UpgradeStatus.invoice_id"));
+        } else
+          goto handle_unusual;
+        continue;
+      // int64 invoice_amount = 4;
+      case 4:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 32)) {
+          _impl_.invoice_amount_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      // string currency = 5;
+      case 5:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 42)) {
+          auto str = _internal_mutable_currency();
+          ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
+          CHK_(ptr);
+          CHK_(::_pbi::VerifyUTF8(str, "priemman.v1.UpgradeStatus.currency"));
+        } else
+          goto handle_unusual;
+        continue;
+      // string rejection_reason = 6;
+      case 6:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 50)) {
+          auto str = _internal_mutable_rejection_reason();
+          ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
+          CHK_(ptr);
+          CHK_(::_pbi::VerifyUTF8(str, "priemman.v1.UpgradeStatus.rejection_reason"));
+        } else
+          goto handle_unusual;
+        continue;
+      // .google.protobuf.Timestamp requested_at = 7;
+      case 7:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 58)) {
+          ptr = ctx->ParseMessage(_internal_mutable_requested_at(), ptr);
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      // .google.protobuf.Timestamp reviewed_at = 8;
+      case 8:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 66)) {
+          ptr = ctx->ParseMessage(_internal_mutable_reviewed_at(), ptr);
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      // .google.protobuf.Timestamp paid_at = 9;
+      case 9:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 74)) {
+          ptr = ctx->ParseMessage(_internal_mutable_paid_at(), ptr);
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      default:
+        goto handle_unusual;
+    }  // switch
+  handle_unusual:
+    if ((tag == 0) || ((tag & 7) == 4)) {
+      CHK_(ptr);
+      ctx->SetLastTag(tag);
+      goto message_done;
+    }
+    ptr = UnknownFieldParse(
+        tag,
+        _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
+        ptr, ctx);
+    CHK_(ptr != nullptr);
+  }  // while
+message_done:
+  return ptr;
+failure:
+  ptr = nullptr;
+  goto message_done;
+#undef CHK_
+}
+
+uint8_t* UpgradeStatus::_InternalSerialize(
+    uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
+  // @@protoc_insertion_point(serialize_to_array_start:priemman.v1.UpgradeStatus)
+  uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // string status = 1;
+  if (!this->_internal_status().empty()) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+      this->_internal_status().data(), static_cast<int>(this->_internal_status().length()),
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+      "priemman.v1.UpgradeStatus.status");
+    target = stream->WriteStringMaybeAliased(
+        1, this->_internal_status(), target);
+  }
+
+  // .priemman.v1.ObjectId request_id = 2;
+  if (this->_internal_has_request_id()) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+      InternalWriteMessage(2, _Internal::request_id(this),
+        _Internal::request_id(this).GetCachedSize(), target, stream);
+  }
+
+  // string invoice_id = 3;
+  if (!this->_internal_invoice_id().empty()) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+      this->_internal_invoice_id().data(), static_cast<int>(this->_internal_invoice_id().length()),
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+      "priemman.v1.UpgradeStatus.invoice_id");
+    target = stream->WriteStringMaybeAliased(
+        3, this->_internal_invoice_id(), target);
+  }
+
+  // int64 invoice_amount = 4;
+  if (this->_internal_invoice_amount() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::_pbi::WireFormatLite::WriteInt64ToArray(4, this->_internal_invoice_amount(), target);
+  }
+
+  // string currency = 5;
+  if (!this->_internal_currency().empty()) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+      this->_internal_currency().data(), static_cast<int>(this->_internal_currency().length()),
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+      "priemman.v1.UpgradeStatus.currency");
+    target = stream->WriteStringMaybeAliased(
+        5, this->_internal_currency(), target);
+  }
+
+  // string rejection_reason = 6;
+  if (!this->_internal_rejection_reason().empty()) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+      this->_internal_rejection_reason().data(), static_cast<int>(this->_internal_rejection_reason().length()),
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+      "priemman.v1.UpgradeStatus.rejection_reason");
+    target = stream->WriteStringMaybeAliased(
+        6, this->_internal_rejection_reason(), target);
+  }
+
+  // .google.protobuf.Timestamp requested_at = 7;
+  if (this->_internal_has_requested_at()) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+      InternalWriteMessage(7, _Internal::requested_at(this),
+        _Internal::requested_at(this).GetCachedSize(), target, stream);
+  }
+
+  // .google.protobuf.Timestamp reviewed_at = 8;
+  if (this->_internal_has_reviewed_at()) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+      InternalWriteMessage(8, _Internal::reviewed_at(this),
+        _Internal::reviewed_at(this).GetCachedSize(), target, stream);
+  }
+
+  // .google.protobuf.Timestamp paid_at = 9;
+  if (this->_internal_has_paid_at()) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+      InternalWriteMessage(9, _Internal::paid_at(this),
+        _Internal::paid_at(this).GetCachedSize(), target, stream);
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:priemman.v1.UpgradeStatus)
+  return target;
+}
+
+size_t UpgradeStatus::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:priemman.v1.UpgradeStatus)
+  size_t total_size = 0;
+
+  uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  // string status = 1;
+  if (!this->_internal_status().empty()) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+        this->_internal_status());
+  }
+
+  // string invoice_id = 3;
+  if (!this->_internal_invoice_id().empty()) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+        this->_internal_invoice_id());
+  }
+
+  // string currency = 5;
+  if (!this->_internal_currency().empty()) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+        this->_internal_currency());
+  }
+
+  // string rejection_reason = 6;
+  if (!this->_internal_rejection_reason().empty()) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+        this->_internal_rejection_reason());
+  }
+
+  // .priemman.v1.ObjectId request_id = 2;
+  if (this->_internal_has_request_id()) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
+        *_impl_.request_id_);
+  }
+
+  // .google.protobuf.Timestamp requested_at = 7;
+  if (this->_internal_has_requested_at()) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
+        *_impl_.requested_at_);
+  }
+
+  // .google.protobuf.Timestamp reviewed_at = 8;
+  if (this->_internal_has_reviewed_at()) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
+        *_impl_.reviewed_at_);
+  }
+
+  // .google.protobuf.Timestamp paid_at = 9;
+  if (this->_internal_has_paid_at()) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
+        *_impl_.paid_at_);
+  }
+
+  // int64 invoice_amount = 4;
+  if (this->_internal_invoice_amount() != 0) {
+    total_size += ::_pbi::WireFormatLite::Int64SizePlusOne(this->_internal_invoice_amount());
+  }
+
+  return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
+}
+
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData UpgradeStatus::_class_data_ = {
+    ::PROTOBUF_NAMESPACE_ID::Message::CopyWithSourceCheck,
+    UpgradeStatus::MergeImpl
+};
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*UpgradeStatus::GetClassData() const { return &_class_data_; }
+
+
+void UpgradeStatus::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg) {
+  auto* const _this = static_cast<UpgradeStatus*>(&to_msg);
+  auto& from = static_cast<const UpgradeStatus&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:priemman.v1.UpgradeStatus)
+  GOOGLE_DCHECK_NE(&from, _this);
+  uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (!from._internal_status().empty()) {
+    _this->_internal_set_status(from._internal_status());
+  }
+  if (!from._internal_invoice_id().empty()) {
+    _this->_internal_set_invoice_id(from._internal_invoice_id());
+  }
+  if (!from._internal_currency().empty()) {
+    _this->_internal_set_currency(from._internal_currency());
+  }
+  if (!from._internal_rejection_reason().empty()) {
+    _this->_internal_set_rejection_reason(from._internal_rejection_reason());
+  }
+  if (from._internal_has_request_id()) {
+    _this->_internal_mutable_request_id()->::priemman::v1::ObjectId::MergeFrom(
+        from._internal_request_id());
+  }
+  if (from._internal_has_requested_at()) {
+    _this->_internal_mutable_requested_at()->::PROTOBUF_NAMESPACE_ID::Timestamp::MergeFrom(
+        from._internal_requested_at());
+  }
+  if (from._internal_has_reviewed_at()) {
+    _this->_internal_mutable_reviewed_at()->::PROTOBUF_NAMESPACE_ID::Timestamp::MergeFrom(
+        from._internal_reviewed_at());
+  }
+  if (from._internal_has_paid_at()) {
+    _this->_internal_mutable_paid_at()->::PROTOBUF_NAMESPACE_ID::Timestamp::MergeFrom(
+        from._internal_paid_at());
+  }
+  if (from._internal_invoice_amount() != 0) {
+    _this->_internal_set_invoice_amount(from._internal_invoice_amount());
+  }
+  _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+}
+
+void UpgradeStatus::CopyFrom(const UpgradeStatus& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:priemman.v1.UpgradeStatus)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool UpgradeStatus::IsInitialized() const {
+  return true;
+}
+
+void UpgradeStatus::InternalSwap(UpgradeStatus* other) {
+  using std::swap;
+  auto* lhs_arena = GetArenaForAllocation();
+  auto* rhs_arena = other->GetArenaForAllocation();
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
+      &_impl_.status_, lhs_arena,
+      &other->_impl_.status_, rhs_arena
+  );
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
+      &_impl_.invoice_id_, lhs_arena,
+      &other->_impl_.invoice_id_, rhs_arena
+  );
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
+      &_impl_.currency_, lhs_arena,
+      &other->_impl_.currency_, rhs_arena
+  );
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
+      &_impl_.rejection_reason_, lhs_arena,
+      &other->_impl_.rejection_reason_, rhs_arena
+  );
+  ::PROTOBUF_NAMESPACE_ID::internal::memswap<
+      PROTOBUF_FIELD_OFFSET(UpgradeStatus, _impl_.invoice_amount_)
+      + sizeof(UpgradeStatus::_impl_.invoice_amount_)
+      - PROTOBUF_FIELD_OFFSET(UpgradeStatus, _impl_.request_id_)>(
+          reinterpret_cast<char*>(&_impl_.request_id_),
+          reinterpret_cast<char*>(&other->_impl_.request_id_));
+}
+
+::PROTOBUF_NAMESPACE_ID::Metadata UpgradeStatus::GetMetadata() const {
+  return ::_pbi::AssignDescriptors(
+      &descriptor_table_user_2eproto_getter, &descriptor_table_user_2eproto_once,
+      file_level_metadata_user_2eproto[10]);
+}
+
+// ===================================================================
+
+class CreateUpgradeRequestResponse::_Internal {
+ public:
+  static const ::priemman::v1::UpgradeStatus& status(const CreateUpgradeRequestResponse* msg);
+};
+
+const ::priemman::v1::UpgradeStatus&
+CreateUpgradeRequestResponse::_Internal::status(const CreateUpgradeRequestResponse* msg) {
+  return *msg->_impl_.status_;
+}
+CreateUpgradeRequestResponse::CreateUpgradeRequestResponse(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                         bool is_message_owned)
+  : ::PROTOBUF_NAMESPACE_ID::Message(arena, is_message_owned) {
+  SharedCtor(arena, is_message_owned);
+  // @@protoc_insertion_point(arena_constructor:priemman.v1.CreateUpgradeRequestResponse)
+}
+CreateUpgradeRequestResponse::CreateUpgradeRequestResponse(const CreateUpgradeRequestResponse& from)
+  : ::PROTOBUF_NAMESPACE_ID::Message() {
+  CreateUpgradeRequestResponse* const _this = this; (void)_this;
+  new (&_impl_) Impl_{
+      decltype(_impl_.status_){nullptr}
+    , decltype(_impl_.success_){}
+    , /*decltype(_impl_._cached_size_)*/{}};
+
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  if (from._internal_has_status()) {
+    _this->_impl_.status_ = new ::priemman::v1::UpgradeStatus(*from._impl_.status_);
+  }
+  _this->_impl_.success_ = from._impl_.success_;
+  // @@protoc_insertion_point(copy_constructor:priemman.v1.CreateUpgradeRequestResponse)
+}
+
+inline void CreateUpgradeRequestResponse::SharedCtor(
+    ::_pb::Arena* arena, bool is_message_owned) {
+  (void)arena;
+  (void)is_message_owned;
+  new (&_impl_) Impl_{
+      decltype(_impl_.status_){nullptr}
+    , decltype(_impl_.success_){false}
+    , /*decltype(_impl_._cached_size_)*/{}
+  };
+}
+
+CreateUpgradeRequestResponse::~CreateUpgradeRequestResponse() {
+  // @@protoc_insertion_point(destructor:priemman.v1.CreateUpgradeRequestResponse)
+  if (auto *arena = _internal_metadata_.DeleteReturnArena<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>()) {
+  (void)arena;
+    return;
+  }
+  SharedDtor();
+}
+
+inline void CreateUpgradeRequestResponse::SharedDtor() {
+  GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
+  if (this != internal_default_instance()) delete _impl_.status_;
+}
+
+void CreateUpgradeRequestResponse::SetCachedSize(int size) const {
+  _impl_._cached_size_.Set(size);
+}
+
+void CreateUpgradeRequestResponse::Clear() {
+// @@protoc_insertion_point(message_clear_start:priemman.v1.CreateUpgradeRequestResponse)
+  uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  if (GetArenaForAllocation() == nullptr && _impl_.status_ != nullptr) {
+    delete _impl_.status_;
+  }
+  _impl_.status_ = nullptr;
+  _impl_.success_ = false;
+  _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+}
+
+const char* CreateUpgradeRequestResponse::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  while (!ctx->Done(&ptr)) {
+    uint32_t tag;
+    ptr = ::_pbi::ReadTag(ptr, &tag);
+    switch (tag >> 3) {
+      // bool success = 1;
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 8)) {
+          _impl_.success_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      // .priemman.v1.UpgradeStatus status = 2;
+      case 2:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 18)) {
+          ptr = ctx->ParseMessage(_internal_mutable_status(), ptr);
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      default:
+        goto handle_unusual;
+    }  // switch
+  handle_unusual:
+    if ((tag == 0) || ((tag & 7) == 4)) {
+      CHK_(ptr);
+      ctx->SetLastTag(tag);
+      goto message_done;
+    }
+    ptr = UnknownFieldParse(
+        tag,
+        _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
+        ptr, ctx);
+    CHK_(ptr != nullptr);
+  }  // while
+message_done:
+  return ptr;
+failure:
+  ptr = nullptr;
+  goto message_done;
+#undef CHK_
+}
+
+uint8_t* CreateUpgradeRequestResponse::_InternalSerialize(
+    uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
+  // @@protoc_insertion_point(serialize_to_array_start:priemman.v1.CreateUpgradeRequestResponse)
+  uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // bool success = 1;
+  if (this->_internal_success() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::_pbi::WireFormatLite::WriteBoolToArray(1, this->_internal_success(), target);
+  }
+
+  // .priemman.v1.UpgradeStatus status = 2;
+  if (this->_internal_has_status()) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+      InternalWriteMessage(2, _Internal::status(this),
+        _Internal::status(this).GetCachedSize(), target, stream);
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:priemman.v1.CreateUpgradeRequestResponse)
+  return target;
+}
+
+size_t CreateUpgradeRequestResponse::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:priemman.v1.CreateUpgradeRequestResponse)
+  size_t total_size = 0;
+
+  uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  // .priemman.v1.UpgradeStatus status = 2;
+  if (this->_internal_has_status()) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
+        *_impl_.status_);
+  }
+
+  // bool success = 1;
+  if (this->_internal_success() != 0) {
+    total_size += 1 + 1;
+  }
+
+  return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
+}
+
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData CreateUpgradeRequestResponse::_class_data_ = {
+    ::PROTOBUF_NAMESPACE_ID::Message::CopyWithSourceCheck,
+    CreateUpgradeRequestResponse::MergeImpl
+};
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*CreateUpgradeRequestResponse::GetClassData() const { return &_class_data_; }
+
+
+void CreateUpgradeRequestResponse::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg) {
+  auto* const _this = static_cast<CreateUpgradeRequestResponse*>(&to_msg);
+  auto& from = static_cast<const CreateUpgradeRequestResponse&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:priemman.v1.CreateUpgradeRequestResponse)
+  GOOGLE_DCHECK_NE(&from, _this);
+  uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (from._internal_has_status()) {
+    _this->_internal_mutable_status()->::priemman::v1::UpgradeStatus::MergeFrom(
+        from._internal_status());
+  }
+  if (from._internal_success() != 0) {
+    _this->_internal_set_success(from._internal_success());
+  }
+  _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+}
+
+void CreateUpgradeRequestResponse::CopyFrom(const CreateUpgradeRequestResponse& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:priemman.v1.CreateUpgradeRequestResponse)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool CreateUpgradeRequestResponse::IsInitialized() const {
+  return true;
+}
+
+void CreateUpgradeRequestResponse::InternalSwap(CreateUpgradeRequestResponse* other) {
+  using std::swap;
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  ::PROTOBUF_NAMESPACE_ID::internal::memswap<
+      PROTOBUF_FIELD_OFFSET(CreateUpgradeRequestResponse, _impl_.success_)
+      + sizeof(CreateUpgradeRequestResponse::_impl_.success_)
+      - PROTOBUF_FIELD_OFFSET(CreateUpgradeRequestResponse, _impl_.status_)>(
+          reinterpret_cast<char*>(&_impl_.status_),
+          reinterpret_cast<char*>(&other->_impl_.status_));
+}
+
+::PROTOBUF_NAMESPACE_ID::Metadata CreateUpgradeRequestResponse::GetMetadata() const {
+  return ::_pbi::AssignDescriptors(
+      &descriptor_table_user_2eproto_getter, &descriptor_table_user_2eproto_once,
+      file_level_metadata_user_2eproto[11]);
+}
+
+// ===================================================================
+
+class AdminUserEntry::_Internal {
+ public:
+  static const ::priemman::v1::ObjectId& id(const AdminUserEntry* msg);
+  static const ::PROTOBUF_NAMESPACE_ID::Timestamp& created_at(const AdminUserEntry* msg);
+};
+
+const ::priemman::v1::ObjectId&
+AdminUserEntry::_Internal::id(const AdminUserEntry* msg) {
+  return *msg->_impl_.id_;
+}
+const ::PROTOBUF_NAMESPACE_ID::Timestamp&
+AdminUserEntry::_Internal::created_at(const AdminUserEntry* msg) {
+  return *msg->_impl_.created_at_;
+}
+void AdminUserEntry::clear_id() {
+  if (GetArenaForAllocation() == nullptr && _impl_.id_ != nullptr) {
+    delete _impl_.id_;
+  }
+  _impl_.id_ = nullptr;
+}
+void AdminUserEntry::clear_created_at() {
+  if (GetArenaForAllocation() == nullptr && _impl_.created_at_ != nullptr) {
+    delete _impl_.created_at_;
+  }
+  _impl_.created_at_ = nullptr;
+}
+AdminUserEntry::AdminUserEntry(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                         bool is_message_owned)
+  : ::PROTOBUF_NAMESPACE_ID::Message(arena, is_message_owned) {
+  SharedCtor(arena, is_message_owned);
+  // @@protoc_insertion_point(arena_constructor:priemman.v1.AdminUserEntry)
+}
+AdminUserEntry::AdminUserEntry(const AdminUserEntry& from)
+  : ::PROTOBUF_NAMESPACE_ID::Message() {
+  AdminUserEntry* const _this = this; (void)_this;
+  new (&_impl_) Impl_{
+      decltype(_impl_.email_){}
+    , decltype(_impl_.first_name_){}
+    , decltype(_impl_.last_name_){}
+    , decltype(_impl_.id_){nullptr}
+    , decltype(_impl_.created_at_){nullptr}
+    , decltype(_impl_.role_){}
+    , /*decltype(_impl_._cached_size_)*/{}};
+
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  _impl_.email_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+    _impl_.email_.Set("", GetArenaForAllocation());
+  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (!from._internal_email().empty()) {
+    _this->_impl_.email_.Set(from._internal_email(), 
+      _this->GetArenaForAllocation());
+  }
+  _impl_.first_name_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+    _impl_.first_name_.Set("", GetArenaForAllocation());
+  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (!from._internal_first_name().empty()) {
+    _this->_impl_.first_name_.Set(from._internal_first_name(), 
+      _this->GetArenaForAllocation());
+  }
+  _impl_.last_name_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+    _impl_.last_name_.Set("", GetArenaForAllocation());
+  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (!from._internal_last_name().empty()) {
+    _this->_impl_.last_name_.Set(from._internal_last_name(), 
+      _this->GetArenaForAllocation());
+  }
+  if (from._internal_has_id()) {
+    _this->_impl_.id_ = new ::priemman::v1::ObjectId(*from._impl_.id_);
+  }
+  if (from._internal_has_created_at()) {
+    _this->_impl_.created_at_ = new ::PROTOBUF_NAMESPACE_ID::Timestamp(*from._impl_.created_at_);
+  }
+  _this->_impl_.role_ = from._impl_.role_;
+  // @@protoc_insertion_point(copy_constructor:priemman.v1.AdminUserEntry)
+}
+
+inline void AdminUserEntry::SharedCtor(
+    ::_pb::Arena* arena, bool is_message_owned) {
+  (void)arena;
+  (void)is_message_owned;
+  new (&_impl_) Impl_{
+      decltype(_impl_.email_){}
+    , decltype(_impl_.first_name_){}
+    , decltype(_impl_.last_name_){}
+    , decltype(_impl_.id_){nullptr}
+    , decltype(_impl_.created_at_){nullptr}
+    , decltype(_impl_.role_){0}
+    , /*decltype(_impl_._cached_size_)*/{}
+  };
+  _impl_.email_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+    _impl_.email_.Set("", GetArenaForAllocation());
+  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  _impl_.first_name_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+    _impl_.first_name_.Set("", GetArenaForAllocation());
+  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  _impl_.last_name_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+    _impl_.last_name_.Set("", GetArenaForAllocation());
+  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+}
+
+AdminUserEntry::~AdminUserEntry() {
+  // @@protoc_insertion_point(destructor:priemman.v1.AdminUserEntry)
+  if (auto *arena = _internal_metadata_.DeleteReturnArena<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>()) {
+  (void)arena;
+    return;
+  }
+  SharedDtor();
+}
+
+inline void AdminUserEntry::SharedDtor() {
+  GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
+  _impl_.email_.Destroy();
+  _impl_.first_name_.Destroy();
+  _impl_.last_name_.Destroy();
+  if (this != internal_default_instance()) delete _impl_.id_;
+  if (this != internal_default_instance()) delete _impl_.created_at_;
+}
+
+void AdminUserEntry::SetCachedSize(int size) const {
+  _impl_._cached_size_.Set(size);
+}
+
+void AdminUserEntry::Clear() {
+// @@protoc_insertion_point(message_clear_start:priemman.v1.AdminUserEntry)
+  uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  _impl_.email_.ClearToEmpty();
+  _impl_.first_name_.ClearToEmpty();
+  _impl_.last_name_.ClearToEmpty();
+  if (GetArenaForAllocation() == nullptr && _impl_.id_ != nullptr) {
+    delete _impl_.id_;
+  }
+  _impl_.id_ = nullptr;
+  if (GetArenaForAllocation() == nullptr && _impl_.created_at_ != nullptr) {
+    delete _impl_.created_at_;
+  }
+  _impl_.created_at_ = nullptr;
+  _impl_.role_ = 0;
+  _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+}
+
+const char* AdminUserEntry::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  while (!ctx->Done(&ptr)) {
+    uint32_t tag;
+    ptr = ::_pbi::ReadTag(ptr, &tag);
+    switch (tag >> 3) {
+      // .priemman.v1.ObjectId id = 1;
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 10)) {
+          ptr = ctx->ParseMessage(_internal_mutable_id(), ptr);
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      // string email = 2;
+      case 2:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 18)) {
+          auto str = _internal_mutable_email();
+          ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
+          CHK_(ptr);
+          CHK_(::_pbi::VerifyUTF8(str, "priemman.v1.AdminUserEntry.email"));
+        } else
+          goto handle_unusual;
+        continue;
+      // string first_name = 3;
+      case 3:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 26)) {
+          auto str = _internal_mutable_first_name();
+          ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
+          CHK_(ptr);
+          CHK_(::_pbi::VerifyUTF8(str, "priemman.v1.AdminUserEntry.first_name"));
+        } else
+          goto handle_unusual;
+        continue;
+      // string last_name = 4;
+      case 4:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 34)) {
+          auto str = _internal_mutable_last_name();
+          ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
+          CHK_(ptr);
+          CHK_(::_pbi::VerifyUTF8(str, "priemman.v1.AdminUserEntry.last_name"));
+        } else
+          goto handle_unusual;
+        continue;
+      // .priemman.v1.UserRole role = 5;
+      case 5:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 40)) {
+          uint64_t val = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
+          CHK_(ptr);
+          _internal_set_role(static_cast<::priemman::v1::UserRole>(val));
+        } else
+          goto handle_unusual;
+        continue;
+      // .google.protobuf.Timestamp created_at = 6;
+      case 6:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 50)) {
+          ptr = ctx->ParseMessage(_internal_mutable_created_at(), ptr);
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      default:
+        goto handle_unusual;
+    }  // switch
+  handle_unusual:
+    if ((tag == 0) || ((tag & 7) == 4)) {
+      CHK_(ptr);
+      ctx->SetLastTag(tag);
+      goto message_done;
+    }
+    ptr = UnknownFieldParse(
+        tag,
+        _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
+        ptr, ctx);
+    CHK_(ptr != nullptr);
+  }  // while
+message_done:
+  return ptr;
+failure:
+  ptr = nullptr;
+  goto message_done;
+#undef CHK_
+}
+
+uint8_t* AdminUserEntry::_InternalSerialize(
+    uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
+  // @@protoc_insertion_point(serialize_to_array_start:priemman.v1.AdminUserEntry)
+  uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // .priemman.v1.ObjectId id = 1;
+  if (this->_internal_has_id()) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+      InternalWriteMessage(1, _Internal::id(this),
+        _Internal::id(this).GetCachedSize(), target, stream);
+  }
+
+  // string email = 2;
+  if (!this->_internal_email().empty()) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+      this->_internal_email().data(), static_cast<int>(this->_internal_email().length()),
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+      "priemman.v1.AdminUserEntry.email");
+    target = stream->WriteStringMaybeAliased(
+        2, this->_internal_email(), target);
+  }
+
+  // string first_name = 3;
+  if (!this->_internal_first_name().empty()) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+      this->_internal_first_name().data(), static_cast<int>(this->_internal_first_name().length()),
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+      "priemman.v1.AdminUserEntry.first_name");
+    target = stream->WriteStringMaybeAliased(
+        3, this->_internal_first_name(), target);
+  }
+
+  // string last_name = 4;
+  if (!this->_internal_last_name().empty()) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+      this->_internal_last_name().data(), static_cast<int>(this->_internal_last_name().length()),
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+      "priemman.v1.AdminUserEntry.last_name");
+    target = stream->WriteStringMaybeAliased(
+        4, this->_internal_last_name(), target);
+  }
+
+  // .priemman.v1.UserRole role = 5;
+  if (this->_internal_role() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::_pbi::WireFormatLite::WriteEnumToArray(
+      5, this->_internal_role(), target);
+  }
+
+  // .google.protobuf.Timestamp created_at = 6;
+  if (this->_internal_has_created_at()) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+      InternalWriteMessage(6, _Internal::created_at(this),
+        _Internal::created_at(this).GetCachedSize(), target, stream);
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:priemman.v1.AdminUserEntry)
+  return target;
+}
+
+size_t AdminUserEntry::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:priemman.v1.AdminUserEntry)
+  size_t total_size = 0;
+
+  uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  // string email = 2;
+  if (!this->_internal_email().empty()) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+        this->_internal_email());
+  }
+
+  // string first_name = 3;
+  if (!this->_internal_first_name().empty()) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+        this->_internal_first_name());
+  }
+
+  // string last_name = 4;
+  if (!this->_internal_last_name().empty()) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+        this->_internal_last_name());
+  }
+
+  // .priemman.v1.ObjectId id = 1;
+  if (this->_internal_has_id()) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
+        *_impl_.id_);
+  }
+
+  // .google.protobuf.Timestamp created_at = 6;
+  if (this->_internal_has_created_at()) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
+        *_impl_.created_at_);
+  }
+
+  // .priemman.v1.UserRole role = 5;
+  if (this->_internal_role() != 0) {
+    total_size += 1 +
+      ::_pbi::WireFormatLite::EnumSize(this->_internal_role());
+  }
+
+  return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
+}
+
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData AdminUserEntry::_class_data_ = {
+    ::PROTOBUF_NAMESPACE_ID::Message::CopyWithSourceCheck,
+    AdminUserEntry::MergeImpl
+};
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*AdminUserEntry::GetClassData() const { return &_class_data_; }
+
+
+void AdminUserEntry::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg) {
+  auto* const _this = static_cast<AdminUserEntry*>(&to_msg);
+  auto& from = static_cast<const AdminUserEntry&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:priemman.v1.AdminUserEntry)
+  GOOGLE_DCHECK_NE(&from, _this);
+  uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (!from._internal_email().empty()) {
+    _this->_internal_set_email(from._internal_email());
+  }
+  if (!from._internal_first_name().empty()) {
+    _this->_internal_set_first_name(from._internal_first_name());
+  }
+  if (!from._internal_last_name().empty()) {
+    _this->_internal_set_last_name(from._internal_last_name());
+  }
+  if (from._internal_has_id()) {
+    _this->_internal_mutable_id()->::priemman::v1::ObjectId::MergeFrom(
+        from._internal_id());
+  }
+  if (from._internal_has_created_at()) {
+    _this->_internal_mutable_created_at()->::PROTOBUF_NAMESPACE_ID::Timestamp::MergeFrom(
+        from._internal_created_at());
+  }
+  if (from._internal_role() != 0) {
+    _this->_internal_set_role(from._internal_role());
+  }
+  _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+}
+
+void AdminUserEntry::CopyFrom(const AdminUserEntry& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:priemman.v1.AdminUserEntry)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool AdminUserEntry::IsInitialized() const {
+  return true;
+}
+
+void AdminUserEntry::InternalSwap(AdminUserEntry* other) {
+  using std::swap;
+  auto* lhs_arena = GetArenaForAllocation();
+  auto* rhs_arena = other->GetArenaForAllocation();
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
+      &_impl_.email_, lhs_arena,
+      &other->_impl_.email_, rhs_arena
+  );
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
+      &_impl_.first_name_, lhs_arena,
+      &other->_impl_.first_name_, rhs_arena
+  );
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
+      &_impl_.last_name_, lhs_arena,
+      &other->_impl_.last_name_, rhs_arena
+  );
+  ::PROTOBUF_NAMESPACE_ID::internal::memswap<
+      PROTOBUF_FIELD_OFFSET(AdminUserEntry, _impl_.role_)
+      + sizeof(AdminUserEntry::_impl_.role_)
+      - PROTOBUF_FIELD_OFFSET(AdminUserEntry, _impl_.id_)>(
+          reinterpret_cast<char*>(&_impl_.id_),
+          reinterpret_cast<char*>(&other->_impl_.id_));
+}
+
+::PROTOBUF_NAMESPACE_ID::Metadata AdminUserEntry::GetMetadata() const {
+  return ::_pbi::AssignDescriptors(
+      &descriptor_table_user_2eproto_getter, &descriptor_table_user_2eproto_once,
+      file_level_metadata_user_2eproto[12]);
+}
+
+// ===================================================================
+
+class AdminListUsersResponse::_Internal {
+ public:
+};
+
+AdminListUsersResponse::AdminListUsersResponse(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                         bool is_message_owned)
+  : ::PROTOBUF_NAMESPACE_ID::Message(arena, is_message_owned) {
+  SharedCtor(arena, is_message_owned);
+  // @@protoc_insertion_point(arena_constructor:priemman.v1.AdminListUsersResponse)
+}
+AdminListUsersResponse::AdminListUsersResponse(const AdminListUsersResponse& from)
+  : ::PROTOBUF_NAMESPACE_ID::Message() {
+  AdminListUsersResponse* const _this = this; (void)_this;
+  new (&_impl_) Impl_{
+      decltype(_impl_.users_){from._impl_.users_}
+    , decltype(_impl_.total_){}
+    , decltype(_impl_.limit_){}
+    , decltype(_impl_.offset_){}
+    , /*decltype(_impl_._cached_size_)*/{}};
+
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  ::memcpy(&_impl_.total_, &from._impl_.total_,
+    static_cast<size_t>(reinterpret_cast<char*>(&_impl_.offset_) -
+    reinterpret_cast<char*>(&_impl_.total_)) + sizeof(_impl_.offset_));
+  // @@protoc_insertion_point(copy_constructor:priemman.v1.AdminListUsersResponse)
+}
+
+inline void AdminListUsersResponse::SharedCtor(
+    ::_pb::Arena* arena, bool is_message_owned) {
+  (void)arena;
+  (void)is_message_owned;
+  new (&_impl_) Impl_{
+      decltype(_impl_.users_){arena}
+    , decltype(_impl_.total_){0}
+    , decltype(_impl_.limit_){0}
+    , decltype(_impl_.offset_){0}
+    , /*decltype(_impl_._cached_size_)*/{}
+  };
+}
+
+AdminListUsersResponse::~AdminListUsersResponse() {
+  // @@protoc_insertion_point(destructor:priemman.v1.AdminListUsersResponse)
+  if (auto *arena = _internal_metadata_.DeleteReturnArena<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>()) {
+  (void)arena;
+    return;
+  }
+  SharedDtor();
+}
+
+inline void AdminListUsersResponse::SharedDtor() {
+  GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
+  _impl_.users_.~RepeatedPtrField();
+}
+
+void AdminListUsersResponse::SetCachedSize(int size) const {
+  _impl_._cached_size_.Set(size);
+}
+
+void AdminListUsersResponse::Clear() {
+// @@protoc_insertion_point(message_clear_start:priemman.v1.AdminListUsersResponse)
+  uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  _impl_.users_.Clear();
+  ::memset(&_impl_.total_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&_impl_.offset_) -
+      reinterpret_cast<char*>(&_impl_.total_)) + sizeof(_impl_.offset_));
+  _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+}
+
+const char* AdminListUsersResponse::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  while (!ctx->Done(&ptr)) {
+    uint32_t tag;
+    ptr = ::_pbi::ReadTag(ptr, &tag);
+    switch (tag >> 3) {
+      // repeated .priemman.v1.AdminUserEntry users = 1;
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 10)) {
+          ptr -= 1;
+          do {
+            ptr += 1;
+            ptr = ctx->ParseMessage(_internal_add_users(), ptr);
+            CHK_(ptr);
+            if (!ctx->DataAvailable(ptr)) break;
+          } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<10>(ptr));
+        } else
+          goto handle_unusual;
+        continue;
+      // int32 total = 2;
+      case 2:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 16)) {
+          _impl_.total_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      // int32 limit = 3;
+      case 3:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 24)) {
+          _impl_.limit_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      // int32 offset = 4;
+      case 4:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 32)) {
+          _impl_.offset_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      default:
+        goto handle_unusual;
+    }  // switch
+  handle_unusual:
+    if ((tag == 0) || ((tag & 7) == 4)) {
+      CHK_(ptr);
+      ctx->SetLastTag(tag);
+      goto message_done;
+    }
+    ptr = UnknownFieldParse(
+        tag,
+        _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
+        ptr, ctx);
+    CHK_(ptr != nullptr);
+  }  // while
+message_done:
+  return ptr;
+failure:
+  ptr = nullptr;
+  goto message_done;
+#undef CHK_
+}
+
+uint8_t* AdminListUsersResponse::_InternalSerialize(
+    uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
+  // @@protoc_insertion_point(serialize_to_array_start:priemman.v1.AdminListUsersResponse)
+  uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // repeated .priemman.v1.AdminUserEntry users = 1;
+  for (unsigned i = 0,
+      n = static_cast<unsigned>(this->_internal_users_size()); i < n; i++) {
+    const auto& repfield = this->_internal_users(i);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+        InternalWriteMessage(1, repfield, repfield.GetCachedSize(), target, stream);
+  }
+
+  // int32 total = 2;
+  if (this->_internal_total() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::_pbi::WireFormatLite::WriteInt32ToArray(2, this->_internal_total(), target);
+  }
+
+  // int32 limit = 3;
+  if (this->_internal_limit() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::_pbi::WireFormatLite::WriteInt32ToArray(3, this->_internal_limit(), target);
+  }
+
+  // int32 offset = 4;
+  if (this->_internal_offset() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::_pbi::WireFormatLite::WriteInt32ToArray(4, this->_internal_offset(), target);
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:priemman.v1.AdminListUsersResponse)
+  return target;
+}
+
+size_t AdminListUsersResponse::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:priemman.v1.AdminListUsersResponse)
+  size_t total_size = 0;
+
+  uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  // repeated .priemman.v1.AdminUserEntry users = 1;
+  total_size += 1UL * this->_internal_users_size();
+  for (const auto& msg : this->_impl_.users_) {
+    total_size +=
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(msg);
+  }
+
+  // int32 total = 2;
+  if (this->_internal_total() != 0) {
+    total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(this->_internal_total());
+  }
+
+  // int32 limit = 3;
+  if (this->_internal_limit() != 0) {
+    total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(this->_internal_limit());
+  }
+
+  // int32 offset = 4;
+  if (this->_internal_offset() != 0) {
+    total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(this->_internal_offset());
+  }
+
+  return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
+}
+
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData AdminListUsersResponse::_class_data_ = {
+    ::PROTOBUF_NAMESPACE_ID::Message::CopyWithSourceCheck,
+    AdminListUsersResponse::MergeImpl
+};
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*AdminListUsersResponse::GetClassData() const { return &_class_data_; }
+
+
+void AdminListUsersResponse::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg) {
+  auto* const _this = static_cast<AdminListUsersResponse*>(&to_msg);
+  auto& from = static_cast<const AdminListUsersResponse&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:priemman.v1.AdminListUsersResponse)
+  GOOGLE_DCHECK_NE(&from, _this);
+  uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  _this->_impl_.users_.MergeFrom(from._impl_.users_);
+  if (from._internal_total() != 0) {
+    _this->_internal_set_total(from._internal_total());
+  }
+  if (from._internal_limit() != 0) {
+    _this->_internal_set_limit(from._internal_limit());
+  }
+  if (from._internal_offset() != 0) {
+    _this->_internal_set_offset(from._internal_offset());
+  }
+  _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+}
+
+void AdminListUsersResponse::CopyFrom(const AdminListUsersResponse& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:priemman.v1.AdminListUsersResponse)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool AdminListUsersResponse::IsInitialized() const {
+  return true;
+}
+
+void AdminListUsersResponse::InternalSwap(AdminListUsersResponse* other) {
+  using std::swap;
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  _impl_.users_.InternalSwap(&other->_impl_.users_);
+  ::PROTOBUF_NAMESPACE_ID::internal::memswap<
+      PROTOBUF_FIELD_OFFSET(AdminListUsersResponse, _impl_.offset_)
+      + sizeof(AdminListUsersResponse::_impl_.offset_)
+      - PROTOBUF_FIELD_OFFSET(AdminListUsersResponse, _impl_.total_)>(
+          reinterpret_cast<char*>(&_impl_.total_),
+          reinterpret_cast<char*>(&other->_impl_.total_));
+}
+
+::PROTOBUF_NAMESPACE_ID::Metadata AdminListUsersResponse::GetMetadata() const {
+  return ::_pbi::AssignDescriptors(
+      &descriptor_table_user_2eproto_getter, &descriptor_table_user_2eproto_once,
+      file_level_metadata_user_2eproto[13]);
+}
+
+// ===================================================================
+
+class UpgradeRequestEntry::_Internal {
+ public:
+  static const ::priemman::v1::ObjectId& id(const UpgradeRequestEntry* msg);
+  static const ::priemman::v1::ObjectId& user_id(const UpgradeRequestEntry* msg);
+  static const ::PROTOBUF_NAMESPACE_ID::Timestamp& requested_at(const UpgradeRequestEntry* msg);
+};
+
+const ::priemman::v1::ObjectId&
+UpgradeRequestEntry::_Internal::id(const UpgradeRequestEntry* msg) {
+  return *msg->_impl_.id_;
+}
+const ::priemman::v1::ObjectId&
+UpgradeRequestEntry::_Internal::user_id(const UpgradeRequestEntry* msg) {
+  return *msg->_impl_.user_id_;
+}
+const ::PROTOBUF_NAMESPACE_ID::Timestamp&
+UpgradeRequestEntry::_Internal::requested_at(const UpgradeRequestEntry* msg) {
+  return *msg->_impl_.requested_at_;
+}
+void UpgradeRequestEntry::clear_id() {
+  if (GetArenaForAllocation() == nullptr && _impl_.id_ != nullptr) {
+    delete _impl_.id_;
+  }
+  _impl_.id_ = nullptr;
+}
+void UpgradeRequestEntry::clear_user_id() {
+  if (GetArenaForAllocation() == nullptr && _impl_.user_id_ != nullptr) {
+    delete _impl_.user_id_;
+  }
+  _impl_.user_id_ = nullptr;
+}
+void UpgradeRequestEntry::clear_requested_at() {
+  if (GetArenaForAllocation() == nullptr && _impl_.requested_at_ != nullptr) {
+    delete _impl_.requested_at_;
+  }
+  _impl_.requested_at_ = nullptr;
+}
+UpgradeRequestEntry::UpgradeRequestEntry(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                         bool is_message_owned)
+  : ::PROTOBUF_NAMESPACE_ID::Message(arena, is_message_owned) {
+  SharedCtor(arena, is_message_owned);
+  // @@protoc_insertion_point(arena_constructor:priemman.v1.UpgradeRequestEntry)
+}
+UpgradeRequestEntry::UpgradeRequestEntry(const UpgradeRequestEntry& from)
+  : ::PROTOBUF_NAMESPACE_ID::Message() {
+  UpgradeRequestEntry* const _this = this; (void)_this;
+  new (&_impl_) Impl_{
+      decltype(_impl_.email_){}
+    , decltype(_impl_.status_){}
+    , decltype(_impl_.invoice_id_){}
+    , decltype(_impl_.currency_){}
+    , decltype(_impl_.rejection_reason_){}
+    , decltype(_impl_.id_){nullptr}
+    , decltype(_impl_.user_id_){nullptr}
+    , decltype(_impl_.requested_at_){nullptr}
+    , decltype(_impl_.invoice_amount_){}
+    , /*decltype(_impl_._cached_size_)*/{}};
+
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  _impl_.email_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+    _impl_.email_.Set("", GetArenaForAllocation());
+  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (!from._internal_email().empty()) {
+    _this->_impl_.email_.Set(from._internal_email(), 
+      _this->GetArenaForAllocation());
+  }
+  _impl_.status_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+    _impl_.status_.Set("", GetArenaForAllocation());
+  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (!from._internal_status().empty()) {
+    _this->_impl_.status_.Set(from._internal_status(), 
+      _this->GetArenaForAllocation());
+  }
+  _impl_.invoice_id_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+    _impl_.invoice_id_.Set("", GetArenaForAllocation());
+  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (!from._internal_invoice_id().empty()) {
+    _this->_impl_.invoice_id_.Set(from._internal_invoice_id(), 
+      _this->GetArenaForAllocation());
+  }
+  _impl_.currency_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+    _impl_.currency_.Set("", GetArenaForAllocation());
+  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (!from._internal_currency().empty()) {
+    _this->_impl_.currency_.Set(from._internal_currency(), 
+      _this->GetArenaForAllocation());
+  }
+  _impl_.rejection_reason_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+    _impl_.rejection_reason_.Set("", GetArenaForAllocation());
+  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (!from._internal_rejection_reason().empty()) {
+    _this->_impl_.rejection_reason_.Set(from._internal_rejection_reason(), 
+      _this->GetArenaForAllocation());
+  }
+  if (from._internal_has_id()) {
+    _this->_impl_.id_ = new ::priemman::v1::ObjectId(*from._impl_.id_);
+  }
+  if (from._internal_has_user_id()) {
+    _this->_impl_.user_id_ = new ::priemman::v1::ObjectId(*from._impl_.user_id_);
+  }
+  if (from._internal_has_requested_at()) {
+    _this->_impl_.requested_at_ = new ::PROTOBUF_NAMESPACE_ID::Timestamp(*from._impl_.requested_at_);
+  }
+  _this->_impl_.invoice_amount_ = from._impl_.invoice_amount_;
+  // @@protoc_insertion_point(copy_constructor:priemman.v1.UpgradeRequestEntry)
+}
+
+inline void UpgradeRequestEntry::SharedCtor(
+    ::_pb::Arena* arena, bool is_message_owned) {
+  (void)arena;
+  (void)is_message_owned;
+  new (&_impl_) Impl_{
+      decltype(_impl_.email_){}
+    , decltype(_impl_.status_){}
+    , decltype(_impl_.invoice_id_){}
+    , decltype(_impl_.currency_){}
+    , decltype(_impl_.rejection_reason_){}
+    , decltype(_impl_.id_){nullptr}
+    , decltype(_impl_.user_id_){nullptr}
+    , decltype(_impl_.requested_at_){nullptr}
+    , decltype(_impl_.invoice_amount_){int64_t{0}}
+    , /*decltype(_impl_._cached_size_)*/{}
+  };
+  _impl_.email_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+    _impl_.email_.Set("", GetArenaForAllocation());
+  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  _impl_.status_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+    _impl_.status_.Set("", GetArenaForAllocation());
+  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  _impl_.invoice_id_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+    _impl_.invoice_id_.Set("", GetArenaForAllocation());
+  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  _impl_.currency_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+    _impl_.currency_.Set("", GetArenaForAllocation());
+  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  _impl_.rejection_reason_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+    _impl_.rejection_reason_.Set("", GetArenaForAllocation());
+  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+}
+
+UpgradeRequestEntry::~UpgradeRequestEntry() {
+  // @@protoc_insertion_point(destructor:priemman.v1.UpgradeRequestEntry)
+  if (auto *arena = _internal_metadata_.DeleteReturnArena<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>()) {
+  (void)arena;
+    return;
+  }
+  SharedDtor();
+}
+
+inline void UpgradeRequestEntry::SharedDtor() {
+  GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
+  _impl_.email_.Destroy();
+  _impl_.status_.Destroy();
+  _impl_.invoice_id_.Destroy();
+  _impl_.currency_.Destroy();
+  _impl_.rejection_reason_.Destroy();
+  if (this != internal_default_instance()) delete _impl_.id_;
+  if (this != internal_default_instance()) delete _impl_.user_id_;
+  if (this != internal_default_instance()) delete _impl_.requested_at_;
+}
+
+void UpgradeRequestEntry::SetCachedSize(int size) const {
+  _impl_._cached_size_.Set(size);
+}
+
+void UpgradeRequestEntry::Clear() {
+// @@protoc_insertion_point(message_clear_start:priemman.v1.UpgradeRequestEntry)
+  uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  _impl_.email_.ClearToEmpty();
+  _impl_.status_.ClearToEmpty();
+  _impl_.invoice_id_.ClearToEmpty();
+  _impl_.currency_.ClearToEmpty();
+  _impl_.rejection_reason_.ClearToEmpty();
+  if (GetArenaForAllocation() == nullptr && _impl_.id_ != nullptr) {
+    delete _impl_.id_;
+  }
+  _impl_.id_ = nullptr;
+  if (GetArenaForAllocation() == nullptr && _impl_.user_id_ != nullptr) {
+    delete _impl_.user_id_;
+  }
+  _impl_.user_id_ = nullptr;
+  if (GetArenaForAllocation() == nullptr && _impl_.requested_at_ != nullptr) {
+    delete _impl_.requested_at_;
+  }
+  _impl_.requested_at_ = nullptr;
+  _impl_.invoice_amount_ = int64_t{0};
+  _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+}
+
+const char* UpgradeRequestEntry::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  while (!ctx->Done(&ptr)) {
+    uint32_t tag;
+    ptr = ::_pbi::ReadTag(ptr, &tag);
+    switch (tag >> 3) {
+      // .priemman.v1.ObjectId id = 1;
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 10)) {
+          ptr = ctx->ParseMessage(_internal_mutable_id(), ptr);
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      // .priemman.v1.ObjectId user_id = 2;
+      case 2:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 18)) {
+          ptr = ctx->ParseMessage(_internal_mutable_user_id(), ptr);
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      // string email = 3;
+      case 3:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 26)) {
+          auto str = _internal_mutable_email();
+          ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
+          CHK_(ptr);
+          CHK_(::_pbi::VerifyUTF8(str, "priemman.v1.UpgradeRequestEntry.email"));
+        } else
+          goto handle_unusual;
+        continue;
+      // string status = 4;
+      case 4:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 34)) {
+          auto str = _internal_mutable_status();
+          ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
+          CHK_(ptr);
+          CHK_(::_pbi::VerifyUTF8(str, "priemman.v1.UpgradeRequestEntry.status"));
+        } else
+          goto handle_unusual;
+        continue;
+      // string invoice_id = 5;
+      case 5:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 42)) {
+          auto str = _internal_mutable_invoice_id();
+          ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
+          CHK_(ptr);
+          CHK_(::_pbi::VerifyUTF8(str, "priemman.v1.UpgradeRequestEntry.invoice_id"));
+        } else
+          goto handle_unusual;
+        continue;
+      // int64 invoice_amount = 6;
+      case 6:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 48)) {
+          _impl_.invoice_amount_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      // string currency = 7;
+      case 7:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 58)) {
+          auto str = _internal_mutable_currency();
+          ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
+          CHK_(ptr);
+          CHK_(::_pbi::VerifyUTF8(str, "priemman.v1.UpgradeRequestEntry.currency"));
+        } else
+          goto handle_unusual;
+        continue;
+      // string rejection_reason = 8;
+      case 8:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 66)) {
+          auto str = _internal_mutable_rejection_reason();
+          ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
+          CHK_(ptr);
+          CHK_(::_pbi::VerifyUTF8(str, "priemman.v1.UpgradeRequestEntry.rejection_reason"));
+        } else
+          goto handle_unusual;
+        continue;
+      // .google.protobuf.Timestamp requested_at = 9;
+      case 9:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 74)) {
+          ptr = ctx->ParseMessage(_internal_mutable_requested_at(), ptr);
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      default:
+        goto handle_unusual;
+    }  // switch
+  handle_unusual:
+    if ((tag == 0) || ((tag & 7) == 4)) {
+      CHK_(ptr);
+      ctx->SetLastTag(tag);
+      goto message_done;
+    }
+    ptr = UnknownFieldParse(
+        tag,
+        _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
+        ptr, ctx);
+    CHK_(ptr != nullptr);
+  }  // while
+message_done:
+  return ptr;
+failure:
+  ptr = nullptr;
+  goto message_done;
+#undef CHK_
+}
+
+uint8_t* UpgradeRequestEntry::_InternalSerialize(
+    uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
+  // @@protoc_insertion_point(serialize_to_array_start:priemman.v1.UpgradeRequestEntry)
+  uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // .priemman.v1.ObjectId id = 1;
+  if (this->_internal_has_id()) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+      InternalWriteMessage(1, _Internal::id(this),
+        _Internal::id(this).GetCachedSize(), target, stream);
+  }
+
+  // .priemman.v1.ObjectId user_id = 2;
+  if (this->_internal_has_user_id()) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+      InternalWriteMessage(2, _Internal::user_id(this),
+        _Internal::user_id(this).GetCachedSize(), target, stream);
+  }
+
+  // string email = 3;
+  if (!this->_internal_email().empty()) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+      this->_internal_email().data(), static_cast<int>(this->_internal_email().length()),
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+      "priemman.v1.UpgradeRequestEntry.email");
+    target = stream->WriteStringMaybeAliased(
+        3, this->_internal_email(), target);
+  }
+
+  // string status = 4;
+  if (!this->_internal_status().empty()) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+      this->_internal_status().data(), static_cast<int>(this->_internal_status().length()),
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+      "priemman.v1.UpgradeRequestEntry.status");
+    target = stream->WriteStringMaybeAliased(
+        4, this->_internal_status(), target);
+  }
+
+  // string invoice_id = 5;
+  if (!this->_internal_invoice_id().empty()) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+      this->_internal_invoice_id().data(), static_cast<int>(this->_internal_invoice_id().length()),
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+      "priemman.v1.UpgradeRequestEntry.invoice_id");
+    target = stream->WriteStringMaybeAliased(
+        5, this->_internal_invoice_id(), target);
+  }
+
+  // int64 invoice_amount = 6;
+  if (this->_internal_invoice_amount() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::_pbi::WireFormatLite::WriteInt64ToArray(6, this->_internal_invoice_amount(), target);
+  }
+
+  // string currency = 7;
+  if (!this->_internal_currency().empty()) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+      this->_internal_currency().data(), static_cast<int>(this->_internal_currency().length()),
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+      "priemman.v1.UpgradeRequestEntry.currency");
+    target = stream->WriteStringMaybeAliased(
+        7, this->_internal_currency(), target);
+  }
+
+  // string rejection_reason = 8;
+  if (!this->_internal_rejection_reason().empty()) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+      this->_internal_rejection_reason().data(), static_cast<int>(this->_internal_rejection_reason().length()),
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+      "priemman.v1.UpgradeRequestEntry.rejection_reason");
+    target = stream->WriteStringMaybeAliased(
+        8, this->_internal_rejection_reason(), target);
+  }
+
+  // .google.protobuf.Timestamp requested_at = 9;
+  if (this->_internal_has_requested_at()) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+      InternalWriteMessage(9, _Internal::requested_at(this),
+        _Internal::requested_at(this).GetCachedSize(), target, stream);
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:priemman.v1.UpgradeRequestEntry)
+  return target;
+}
+
+size_t UpgradeRequestEntry::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:priemman.v1.UpgradeRequestEntry)
+  size_t total_size = 0;
+
+  uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  // string email = 3;
+  if (!this->_internal_email().empty()) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+        this->_internal_email());
+  }
+
+  // string status = 4;
+  if (!this->_internal_status().empty()) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+        this->_internal_status());
+  }
+
+  // string invoice_id = 5;
+  if (!this->_internal_invoice_id().empty()) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+        this->_internal_invoice_id());
+  }
+
+  // string currency = 7;
+  if (!this->_internal_currency().empty()) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+        this->_internal_currency());
+  }
+
+  // string rejection_reason = 8;
+  if (!this->_internal_rejection_reason().empty()) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+        this->_internal_rejection_reason());
+  }
+
+  // .priemman.v1.ObjectId id = 1;
+  if (this->_internal_has_id()) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
+        *_impl_.id_);
+  }
+
+  // .priemman.v1.ObjectId user_id = 2;
+  if (this->_internal_has_user_id()) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
+        *_impl_.user_id_);
+  }
+
+  // .google.protobuf.Timestamp requested_at = 9;
+  if (this->_internal_has_requested_at()) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
+        *_impl_.requested_at_);
+  }
+
+  // int64 invoice_amount = 6;
+  if (this->_internal_invoice_amount() != 0) {
+    total_size += ::_pbi::WireFormatLite::Int64SizePlusOne(this->_internal_invoice_amount());
+  }
+
+  return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
+}
+
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData UpgradeRequestEntry::_class_data_ = {
+    ::PROTOBUF_NAMESPACE_ID::Message::CopyWithSourceCheck,
+    UpgradeRequestEntry::MergeImpl
+};
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*UpgradeRequestEntry::GetClassData() const { return &_class_data_; }
+
+
+void UpgradeRequestEntry::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg) {
+  auto* const _this = static_cast<UpgradeRequestEntry*>(&to_msg);
+  auto& from = static_cast<const UpgradeRequestEntry&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:priemman.v1.UpgradeRequestEntry)
+  GOOGLE_DCHECK_NE(&from, _this);
+  uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (!from._internal_email().empty()) {
+    _this->_internal_set_email(from._internal_email());
+  }
+  if (!from._internal_status().empty()) {
+    _this->_internal_set_status(from._internal_status());
+  }
+  if (!from._internal_invoice_id().empty()) {
+    _this->_internal_set_invoice_id(from._internal_invoice_id());
+  }
+  if (!from._internal_currency().empty()) {
+    _this->_internal_set_currency(from._internal_currency());
+  }
+  if (!from._internal_rejection_reason().empty()) {
+    _this->_internal_set_rejection_reason(from._internal_rejection_reason());
+  }
+  if (from._internal_has_id()) {
+    _this->_internal_mutable_id()->::priemman::v1::ObjectId::MergeFrom(
+        from._internal_id());
+  }
+  if (from._internal_has_user_id()) {
+    _this->_internal_mutable_user_id()->::priemman::v1::ObjectId::MergeFrom(
+        from._internal_user_id());
+  }
+  if (from._internal_has_requested_at()) {
+    _this->_internal_mutable_requested_at()->::PROTOBUF_NAMESPACE_ID::Timestamp::MergeFrom(
+        from._internal_requested_at());
+  }
+  if (from._internal_invoice_amount() != 0) {
+    _this->_internal_set_invoice_amount(from._internal_invoice_amount());
+  }
+  _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+}
+
+void UpgradeRequestEntry::CopyFrom(const UpgradeRequestEntry& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:priemman.v1.UpgradeRequestEntry)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool UpgradeRequestEntry::IsInitialized() const {
+  return true;
+}
+
+void UpgradeRequestEntry::InternalSwap(UpgradeRequestEntry* other) {
+  using std::swap;
+  auto* lhs_arena = GetArenaForAllocation();
+  auto* rhs_arena = other->GetArenaForAllocation();
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
+      &_impl_.email_, lhs_arena,
+      &other->_impl_.email_, rhs_arena
+  );
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
+      &_impl_.status_, lhs_arena,
+      &other->_impl_.status_, rhs_arena
+  );
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
+      &_impl_.invoice_id_, lhs_arena,
+      &other->_impl_.invoice_id_, rhs_arena
+  );
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
+      &_impl_.currency_, lhs_arena,
+      &other->_impl_.currency_, rhs_arena
+  );
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
+      &_impl_.rejection_reason_, lhs_arena,
+      &other->_impl_.rejection_reason_, rhs_arena
+  );
+  ::PROTOBUF_NAMESPACE_ID::internal::memswap<
+      PROTOBUF_FIELD_OFFSET(UpgradeRequestEntry, _impl_.invoice_amount_)
+      + sizeof(UpgradeRequestEntry::_impl_.invoice_amount_)
+      - PROTOBUF_FIELD_OFFSET(UpgradeRequestEntry, _impl_.id_)>(
+          reinterpret_cast<char*>(&_impl_.id_),
+          reinterpret_cast<char*>(&other->_impl_.id_));
+}
+
+::PROTOBUF_NAMESPACE_ID::Metadata UpgradeRequestEntry::GetMetadata() const {
+  return ::_pbi::AssignDescriptors(
+      &descriptor_table_user_2eproto_getter, &descriptor_table_user_2eproto_once,
+      file_level_metadata_user_2eproto[14]);
+}
+
+// ===================================================================
+
+class AdminListUpgradeRequestsResponse::_Internal {
+ public:
+};
+
+AdminListUpgradeRequestsResponse::AdminListUpgradeRequestsResponse(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                         bool is_message_owned)
+  : ::PROTOBUF_NAMESPACE_ID::Message(arena, is_message_owned) {
+  SharedCtor(arena, is_message_owned);
+  // @@protoc_insertion_point(arena_constructor:priemman.v1.AdminListUpgradeRequestsResponse)
+}
+AdminListUpgradeRequestsResponse::AdminListUpgradeRequestsResponse(const AdminListUpgradeRequestsResponse& from)
+  : ::PROTOBUF_NAMESPACE_ID::Message() {
+  AdminListUpgradeRequestsResponse* const _this = this; (void)_this;
+  new (&_impl_) Impl_{
+      decltype(_impl_.requests_){from._impl_.requests_}
+    , /*decltype(_impl_._cached_size_)*/{}};
+
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  // @@protoc_insertion_point(copy_constructor:priemman.v1.AdminListUpgradeRequestsResponse)
+}
+
+inline void AdminListUpgradeRequestsResponse::SharedCtor(
+    ::_pb::Arena* arena, bool is_message_owned) {
+  (void)arena;
+  (void)is_message_owned;
+  new (&_impl_) Impl_{
+      decltype(_impl_.requests_){arena}
+    , /*decltype(_impl_._cached_size_)*/{}
+  };
+}
+
+AdminListUpgradeRequestsResponse::~AdminListUpgradeRequestsResponse() {
+  // @@protoc_insertion_point(destructor:priemman.v1.AdminListUpgradeRequestsResponse)
+  if (auto *arena = _internal_metadata_.DeleteReturnArena<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>()) {
+  (void)arena;
+    return;
+  }
+  SharedDtor();
+}
+
+inline void AdminListUpgradeRequestsResponse::SharedDtor() {
+  GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
+  _impl_.requests_.~RepeatedPtrField();
+}
+
+void AdminListUpgradeRequestsResponse::SetCachedSize(int size) const {
+  _impl_._cached_size_.Set(size);
+}
+
+void AdminListUpgradeRequestsResponse::Clear() {
+// @@protoc_insertion_point(message_clear_start:priemman.v1.AdminListUpgradeRequestsResponse)
+  uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  _impl_.requests_.Clear();
+  _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+}
+
+const char* AdminListUpgradeRequestsResponse::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  while (!ctx->Done(&ptr)) {
+    uint32_t tag;
+    ptr = ::_pbi::ReadTag(ptr, &tag);
+    switch (tag >> 3) {
+      // repeated .priemman.v1.UpgradeRequestEntry requests = 1;
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 10)) {
+          ptr -= 1;
+          do {
+            ptr += 1;
+            ptr = ctx->ParseMessage(_internal_add_requests(), ptr);
+            CHK_(ptr);
+            if (!ctx->DataAvailable(ptr)) break;
+          } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<10>(ptr));
+        } else
+          goto handle_unusual;
+        continue;
+      default:
+        goto handle_unusual;
+    }  // switch
+  handle_unusual:
+    if ((tag == 0) || ((tag & 7) == 4)) {
+      CHK_(ptr);
+      ctx->SetLastTag(tag);
+      goto message_done;
+    }
+    ptr = UnknownFieldParse(
+        tag,
+        _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
+        ptr, ctx);
+    CHK_(ptr != nullptr);
+  }  // while
+message_done:
+  return ptr;
+failure:
+  ptr = nullptr;
+  goto message_done;
+#undef CHK_
+}
+
+uint8_t* AdminListUpgradeRequestsResponse::_InternalSerialize(
+    uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
+  // @@protoc_insertion_point(serialize_to_array_start:priemman.v1.AdminListUpgradeRequestsResponse)
+  uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // repeated .priemman.v1.UpgradeRequestEntry requests = 1;
+  for (unsigned i = 0,
+      n = static_cast<unsigned>(this->_internal_requests_size()); i < n; i++) {
+    const auto& repfield = this->_internal_requests(i);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+        InternalWriteMessage(1, repfield, repfield.GetCachedSize(), target, stream);
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:priemman.v1.AdminListUpgradeRequestsResponse)
+  return target;
+}
+
+size_t AdminListUpgradeRequestsResponse::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:priemman.v1.AdminListUpgradeRequestsResponse)
+  size_t total_size = 0;
+
+  uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  // repeated .priemman.v1.UpgradeRequestEntry requests = 1;
+  total_size += 1UL * this->_internal_requests_size();
+  for (const auto& msg : this->_impl_.requests_) {
+    total_size +=
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(msg);
+  }
+
+  return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
+}
+
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData AdminListUpgradeRequestsResponse::_class_data_ = {
+    ::PROTOBUF_NAMESPACE_ID::Message::CopyWithSourceCheck,
+    AdminListUpgradeRequestsResponse::MergeImpl
+};
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*AdminListUpgradeRequestsResponse::GetClassData() const { return &_class_data_; }
+
+
+void AdminListUpgradeRequestsResponse::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg) {
+  auto* const _this = static_cast<AdminListUpgradeRequestsResponse*>(&to_msg);
+  auto& from = static_cast<const AdminListUpgradeRequestsResponse&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:priemman.v1.AdminListUpgradeRequestsResponse)
+  GOOGLE_DCHECK_NE(&from, _this);
+  uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  _this->_impl_.requests_.MergeFrom(from._impl_.requests_);
+  _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+}
+
+void AdminListUpgradeRequestsResponse::CopyFrom(const AdminListUpgradeRequestsResponse& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:priemman.v1.AdminListUpgradeRequestsResponse)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool AdminListUpgradeRequestsResponse::IsInitialized() const {
+  return true;
+}
+
+void AdminListUpgradeRequestsResponse::InternalSwap(AdminListUpgradeRequestsResponse* other) {
+  using std::swap;
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  _impl_.requests_.InternalSwap(&other->_impl_.requests_);
+}
+
+::PROTOBUF_NAMESPACE_ID::Metadata AdminListUpgradeRequestsResponse::GetMetadata() const {
+  return ::_pbi::AssignDescriptors(
+      &descriptor_table_user_2eproto_getter, &descriptor_table_user_2eproto_once,
+      file_level_metadata_user_2eproto[15]);
+}
+
+// ===================================================================
+
+class AdminReviewUpgradeRequest::_Internal {
+ public:
+  static const ::priemman::v1::ObjectId& id(const AdminReviewUpgradeRequest* msg);
+};
+
+const ::priemman::v1::ObjectId&
+AdminReviewUpgradeRequest::_Internal::id(const AdminReviewUpgradeRequest* msg) {
+  return *msg->_impl_.id_;
+}
+void AdminReviewUpgradeRequest::clear_id() {
+  if (GetArenaForAllocation() == nullptr && _impl_.id_ != nullptr) {
+    delete _impl_.id_;
+  }
+  _impl_.id_ = nullptr;
+}
+AdminReviewUpgradeRequest::AdminReviewUpgradeRequest(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                         bool is_message_owned)
+  : ::PROTOBUF_NAMESPACE_ID::Message(arena, is_message_owned) {
+  SharedCtor(arena, is_message_owned);
+  // @@protoc_insertion_point(arena_constructor:priemman.v1.AdminReviewUpgradeRequest)
+}
+AdminReviewUpgradeRequest::AdminReviewUpgradeRequest(const AdminReviewUpgradeRequest& from)
+  : ::PROTOBUF_NAMESPACE_ID::Message() {
+  AdminReviewUpgradeRequest* const _this = this; (void)_this;
+  new (&_impl_) Impl_{
+      decltype(_impl_.rejection_reason_){}
+    , decltype(_impl_.id_){nullptr}
+    , decltype(_impl_.approve_){}
+    , /*decltype(_impl_._cached_size_)*/{}};
+
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  _impl_.rejection_reason_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+    _impl_.rejection_reason_.Set("", GetArenaForAllocation());
+  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (!from._internal_rejection_reason().empty()) {
+    _this->_impl_.rejection_reason_.Set(from._internal_rejection_reason(), 
+      _this->GetArenaForAllocation());
+  }
+  if (from._internal_has_id()) {
+    _this->_impl_.id_ = new ::priemman::v1::ObjectId(*from._impl_.id_);
+  }
+  _this->_impl_.approve_ = from._impl_.approve_;
+  // @@protoc_insertion_point(copy_constructor:priemman.v1.AdminReviewUpgradeRequest)
+}
+
+inline void AdminReviewUpgradeRequest::SharedCtor(
+    ::_pb::Arena* arena, bool is_message_owned) {
+  (void)arena;
+  (void)is_message_owned;
+  new (&_impl_) Impl_{
+      decltype(_impl_.rejection_reason_){}
+    , decltype(_impl_.id_){nullptr}
+    , decltype(_impl_.approve_){false}
+    , /*decltype(_impl_._cached_size_)*/{}
+  };
+  _impl_.rejection_reason_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+    _impl_.rejection_reason_.Set("", GetArenaForAllocation());
+  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+}
+
+AdminReviewUpgradeRequest::~AdminReviewUpgradeRequest() {
+  // @@protoc_insertion_point(destructor:priemman.v1.AdminReviewUpgradeRequest)
+  if (auto *arena = _internal_metadata_.DeleteReturnArena<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>()) {
+  (void)arena;
+    return;
+  }
+  SharedDtor();
+}
+
+inline void AdminReviewUpgradeRequest::SharedDtor() {
+  GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
+  _impl_.rejection_reason_.Destroy();
+  if (this != internal_default_instance()) delete _impl_.id_;
+}
+
+void AdminReviewUpgradeRequest::SetCachedSize(int size) const {
+  _impl_._cached_size_.Set(size);
+}
+
+void AdminReviewUpgradeRequest::Clear() {
+// @@protoc_insertion_point(message_clear_start:priemman.v1.AdminReviewUpgradeRequest)
+  uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  _impl_.rejection_reason_.ClearToEmpty();
+  if (GetArenaForAllocation() == nullptr && _impl_.id_ != nullptr) {
+    delete _impl_.id_;
+  }
+  _impl_.id_ = nullptr;
+  _impl_.approve_ = false;
+  _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+}
+
+const char* AdminReviewUpgradeRequest::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  while (!ctx->Done(&ptr)) {
+    uint32_t tag;
+    ptr = ::_pbi::ReadTag(ptr, &tag);
+    switch (tag >> 3) {
+      // .priemman.v1.ObjectId id = 1;
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 10)) {
+          ptr = ctx->ParseMessage(_internal_mutable_id(), ptr);
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      // bool approve = 2;
+      case 2:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 16)) {
+          _impl_.approve_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      // string rejection_reason = 3;
+      case 3:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 26)) {
+          auto str = _internal_mutable_rejection_reason();
+          ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
+          CHK_(ptr);
+          CHK_(::_pbi::VerifyUTF8(str, "priemman.v1.AdminReviewUpgradeRequest.rejection_reason"));
+        } else
+          goto handle_unusual;
+        continue;
+      default:
+        goto handle_unusual;
+    }  // switch
+  handle_unusual:
+    if ((tag == 0) || ((tag & 7) == 4)) {
+      CHK_(ptr);
+      ctx->SetLastTag(tag);
+      goto message_done;
+    }
+    ptr = UnknownFieldParse(
+        tag,
+        _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
+        ptr, ctx);
+    CHK_(ptr != nullptr);
+  }  // while
+message_done:
+  return ptr;
+failure:
+  ptr = nullptr;
+  goto message_done;
+#undef CHK_
+}
+
+uint8_t* AdminReviewUpgradeRequest::_InternalSerialize(
+    uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
+  // @@protoc_insertion_point(serialize_to_array_start:priemman.v1.AdminReviewUpgradeRequest)
+  uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // .priemman.v1.ObjectId id = 1;
+  if (this->_internal_has_id()) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+      InternalWriteMessage(1, _Internal::id(this),
+        _Internal::id(this).GetCachedSize(), target, stream);
+  }
+
+  // bool approve = 2;
+  if (this->_internal_approve() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::_pbi::WireFormatLite::WriteBoolToArray(2, this->_internal_approve(), target);
+  }
+
+  // string rejection_reason = 3;
+  if (!this->_internal_rejection_reason().empty()) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+      this->_internal_rejection_reason().data(), static_cast<int>(this->_internal_rejection_reason().length()),
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+      "priemman.v1.AdminReviewUpgradeRequest.rejection_reason");
+    target = stream->WriteStringMaybeAliased(
+        3, this->_internal_rejection_reason(), target);
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:priemman.v1.AdminReviewUpgradeRequest)
+  return target;
+}
+
+size_t AdminReviewUpgradeRequest::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:priemman.v1.AdminReviewUpgradeRequest)
+  size_t total_size = 0;
+
+  uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  // string rejection_reason = 3;
+  if (!this->_internal_rejection_reason().empty()) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+        this->_internal_rejection_reason());
+  }
+
+  // .priemman.v1.ObjectId id = 1;
+  if (this->_internal_has_id()) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
+        *_impl_.id_);
+  }
+
+  // bool approve = 2;
+  if (this->_internal_approve() != 0) {
+    total_size += 1 + 1;
+  }
+
+  return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
+}
+
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData AdminReviewUpgradeRequest::_class_data_ = {
+    ::PROTOBUF_NAMESPACE_ID::Message::CopyWithSourceCheck,
+    AdminReviewUpgradeRequest::MergeImpl
+};
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*AdminReviewUpgradeRequest::GetClassData() const { return &_class_data_; }
+
+
+void AdminReviewUpgradeRequest::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg) {
+  auto* const _this = static_cast<AdminReviewUpgradeRequest*>(&to_msg);
+  auto& from = static_cast<const AdminReviewUpgradeRequest&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:priemman.v1.AdminReviewUpgradeRequest)
+  GOOGLE_DCHECK_NE(&from, _this);
+  uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (!from._internal_rejection_reason().empty()) {
+    _this->_internal_set_rejection_reason(from._internal_rejection_reason());
+  }
+  if (from._internal_has_id()) {
+    _this->_internal_mutable_id()->::priemman::v1::ObjectId::MergeFrom(
+        from._internal_id());
+  }
+  if (from._internal_approve() != 0) {
+    _this->_internal_set_approve(from._internal_approve());
+  }
+  _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+}
+
+void AdminReviewUpgradeRequest::CopyFrom(const AdminReviewUpgradeRequest& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:priemman.v1.AdminReviewUpgradeRequest)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool AdminReviewUpgradeRequest::IsInitialized() const {
+  return true;
+}
+
+void AdminReviewUpgradeRequest::InternalSwap(AdminReviewUpgradeRequest* other) {
+  using std::swap;
+  auto* lhs_arena = GetArenaForAllocation();
+  auto* rhs_arena = other->GetArenaForAllocation();
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
+      &_impl_.rejection_reason_, lhs_arena,
+      &other->_impl_.rejection_reason_, rhs_arena
+  );
+  ::PROTOBUF_NAMESPACE_ID::internal::memswap<
+      PROTOBUF_FIELD_OFFSET(AdminReviewUpgradeRequest, _impl_.approve_)
+      + sizeof(AdminReviewUpgradeRequest::_impl_.approve_)
+      - PROTOBUF_FIELD_OFFSET(AdminReviewUpgradeRequest, _impl_.id_)>(
+          reinterpret_cast<char*>(&_impl_.id_),
+          reinterpret_cast<char*>(&other->_impl_.id_));
+}
+
+::PROTOBUF_NAMESPACE_ID::Metadata AdminReviewUpgradeRequest::GetMetadata() const {
+  return ::_pbi::AssignDescriptors(
+      &descriptor_table_user_2eproto_getter, &descriptor_table_user_2eproto_once,
+      file_level_metadata_user_2eproto[16]);
+}
+
+// ===================================================================
+
+class AdminReviewUpgradeResponse::_Internal {
+ public:
+  static const ::priemman::v1::UpgradeRequestEntry& request(const AdminReviewUpgradeResponse* msg);
+};
+
+const ::priemman::v1::UpgradeRequestEntry&
+AdminReviewUpgradeResponse::_Internal::request(const AdminReviewUpgradeResponse* msg) {
+  return *msg->_impl_.request_;
+}
+AdminReviewUpgradeResponse::AdminReviewUpgradeResponse(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                         bool is_message_owned)
+  : ::PROTOBUF_NAMESPACE_ID::Message(arena, is_message_owned) {
+  SharedCtor(arena, is_message_owned);
+  // @@protoc_insertion_point(arena_constructor:priemman.v1.AdminReviewUpgradeResponse)
+}
+AdminReviewUpgradeResponse::AdminReviewUpgradeResponse(const AdminReviewUpgradeResponse& from)
+  : ::PROTOBUF_NAMESPACE_ID::Message() {
+  AdminReviewUpgradeResponse* const _this = this; (void)_this;
+  new (&_impl_) Impl_{
+      decltype(_impl_.request_){nullptr}
+    , decltype(_impl_.success_){}
+    , /*decltype(_impl_._cached_size_)*/{}};
+
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  if (from._internal_has_request()) {
+    _this->_impl_.request_ = new ::priemman::v1::UpgradeRequestEntry(*from._impl_.request_);
+  }
+  _this->_impl_.success_ = from._impl_.success_;
+  // @@protoc_insertion_point(copy_constructor:priemman.v1.AdminReviewUpgradeResponse)
+}
+
+inline void AdminReviewUpgradeResponse::SharedCtor(
+    ::_pb::Arena* arena, bool is_message_owned) {
+  (void)arena;
+  (void)is_message_owned;
+  new (&_impl_) Impl_{
+      decltype(_impl_.request_){nullptr}
+    , decltype(_impl_.success_){false}
+    , /*decltype(_impl_._cached_size_)*/{}
+  };
+}
+
+AdminReviewUpgradeResponse::~AdminReviewUpgradeResponse() {
+  // @@protoc_insertion_point(destructor:priemman.v1.AdminReviewUpgradeResponse)
+  if (auto *arena = _internal_metadata_.DeleteReturnArena<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>()) {
+  (void)arena;
+    return;
+  }
+  SharedDtor();
+}
+
+inline void AdminReviewUpgradeResponse::SharedDtor() {
+  GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
+  if (this != internal_default_instance()) delete _impl_.request_;
+}
+
+void AdminReviewUpgradeResponse::SetCachedSize(int size) const {
+  _impl_._cached_size_.Set(size);
+}
+
+void AdminReviewUpgradeResponse::Clear() {
+// @@protoc_insertion_point(message_clear_start:priemman.v1.AdminReviewUpgradeResponse)
+  uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  if (GetArenaForAllocation() == nullptr && _impl_.request_ != nullptr) {
+    delete _impl_.request_;
+  }
+  _impl_.request_ = nullptr;
+  _impl_.success_ = false;
+  _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+}
+
+const char* AdminReviewUpgradeResponse::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  while (!ctx->Done(&ptr)) {
+    uint32_t tag;
+    ptr = ::_pbi::ReadTag(ptr, &tag);
+    switch (tag >> 3) {
+      // bool success = 1;
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 8)) {
+          _impl_.success_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      // .priemman.v1.UpgradeRequestEntry request = 2;
+      case 2:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 18)) {
+          ptr = ctx->ParseMessage(_internal_mutable_request(), ptr);
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      default:
+        goto handle_unusual;
+    }  // switch
+  handle_unusual:
+    if ((tag == 0) || ((tag & 7) == 4)) {
+      CHK_(ptr);
+      ctx->SetLastTag(tag);
+      goto message_done;
+    }
+    ptr = UnknownFieldParse(
+        tag,
+        _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
+        ptr, ctx);
+    CHK_(ptr != nullptr);
+  }  // while
+message_done:
+  return ptr;
+failure:
+  ptr = nullptr;
+  goto message_done;
+#undef CHK_
+}
+
+uint8_t* AdminReviewUpgradeResponse::_InternalSerialize(
+    uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
+  // @@protoc_insertion_point(serialize_to_array_start:priemman.v1.AdminReviewUpgradeResponse)
+  uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // bool success = 1;
+  if (this->_internal_success() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::_pbi::WireFormatLite::WriteBoolToArray(1, this->_internal_success(), target);
+  }
+
+  // .priemman.v1.UpgradeRequestEntry request = 2;
+  if (this->_internal_has_request()) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+      InternalWriteMessage(2, _Internal::request(this),
+        _Internal::request(this).GetCachedSize(), target, stream);
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:priemman.v1.AdminReviewUpgradeResponse)
+  return target;
+}
+
+size_t AdminReviewUpgradeResponse::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:priemman.v1.AdminReviewUpgradeResponse)
+  size_t total_size = 0;
+
+  uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  // .priemman.v1.UpgradeRequestEntry request = 2;
+  if (this->_internal_has_request()) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
+        *_impl_.request_);
+  }
+
+  // bool success = 1;
+  if (this->_internal_success() != 0) {
+    total_size += 1 + 1;
+  }
+
+  return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
+}
+
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData AdminReviewUpgradeResponse::_class_data_ = {
+    ::PROTOBUF_NAMESPACE_ID::Message::CopyWithSourceCheck,
+    AdminReviewUpgradeResponse::MergeImpl
+};
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*AdminReviewUpgradeResponse::GetClassData() const { return &_class_data_; }
+
+
+void AdminReviewUpgradeResponse::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg) {
+  auto* const _this = static_cast<AdminReviewUpgradeResponse*>(&to_msg);
+  auto& from = static_cast<const AdminReviewUpgradeResponse&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:priemman.v1.AdminReviewUpgradeResponse)
+  GOOGLE_DCHECK_NE(&from, _this);
+  uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (from._internal_has_request()) {
+    _this->_internal_mutable_request()->::priemman::v1::UpgradeRequestEntry::MergeFrom(
+        from._internal_request());
+  }
+  if (from._internal_success() != 0) {
+    _this->_internal_set_success(from._internal_success());
+  }
+  _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+}
+
+void AdminReviewUpgradeResponse::CopyFrom(const AdminReviewUpgradeResponse& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:priemman.v1.AdminReviewUpgradeResponse)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool AdminReviewUpgradeResponse::IsInitialized() const {
+  return true;
+}
+
+void AdminReviewUpgradeResponse::InternalSwap(AdminReviewUpgradeResponse* other) {
+  using std::swap;
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  ::PROTOBUF_NAMESPACE_ID::internal::memswap<
+      PROTOBUF_FIELD_OFFSET(AdminReviewUpgradeResponse, _impl_.success_)
+      + sizeof(AdminReviewUpgradeResponse::_impl_.success_)
+      - PROTOBUF_FIELD_OFFSET(AdminReviewUpgradeResponse, _impl_.request_)>(
+          reinterpret_cast<char*>(&_impl_.request_),
+          reinterpret_cast<char*>(&other->_impl_.request_));
+}
+
+::PROTOBUF_NAMESPACE_ID::Metadata AdminReviewUpgradeResponse::GetMetadata() const {
+  return ::_pbi::AssignDescriptors(
+      &descriptor_table_user_2eproto_getter, &descriptor_table_user_2eproto_once,
+      file_level_metadata_user_2eproto[17]);
+}
+
+// ===================================================================
+
+class AdminConfirmPaymentRequest::_Internal {
+ public:
+  static const ::priemman::v1::ObjectId& id(const AdminConfirmPaymentRequest* msg);
+};
+
+const ::priemman::v1::ObjectId&
+AdminConfirmPaymentRequest::_Internal::id(const AdminConfirmPaymentRequest* msg) {
+  return *msg->_impl_.id_;
+}
+void AdminConfirmPaymentRequest::clear_id() {
+  if (GetArenaForAllocation() == nullptr && _impl_.id_ != nullptr) {
+    delete _impl_.id_;
+  }
+  _impl_.id_ = nullptr;
+}
+AdminConfirmPaymentRequest::AdminConfirmPaymentRequest(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                         bool is_message_owned)
+  : ::PROTOBUF_NAMESPACE_ID::Message(arena, is_message_owned) {
+  SharedCtor(arena, is_message_owned);
+  // @@protoc_insertion_point(arena_constructor:priemman.v1.AdminConfirmPaymentRequest)
+}
+AdminConfirmPaymentRequest::AdminConfirmPaymentRequest(const AdminConfirmPaymentRequest& from)
+  : ::PROTOBUF_NAMESPACE_ID::Message() {
+  AdminConfirmPaymentRequest* const _this = this; (void)_this;
+  new (&_impl_) Impl_{
+      decltype(_impl_.id_){nullptr}
+    , /*decltype(_impl_._cached_size_)*/{}};
+
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  if (from._internal_has_id()) {
+    _this->_impl_.id_ = new ::priemman::v1::ObjectId(*from._impl_.id_);
+  }
+  // @@protoc_insertion_point(copy_constructor:priemman.v1.AdminConfirmPaymentRequest)
+}
+
+inline void AdminConfirmPaymentRequest::SharedCtor(
+    ::_pb::Arena* arena, bool is_message_owned) {
+  (void)arena;
+  (void)is_message_owned;
+  new (&_impl_) Impl_{
+      decltype(_impl_.id_){nullptr}
+    , /*decltype(_impl_._cached_size_)*/{}
+  };
+}
+
+AdminConfirmPaymentRequest::~AdminConfirmPaymentRequest() {
+  // @@protoc_insertion_point(destructor:priemman.v1.AdminConfirmPaymentRequest)
+  if (auto *arena = _internal_metadata_.DeleteReturnArena<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>()) {
+  (void)arena;
+    return;
+  }
+  SharedDtor();
+}
+
+inline void AdminConfirmPaymentRequest::SharedDtor() {
+  GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
+  if (this != internal_default_instance()) delete _impl_.id_;
+}
+
+void AdminConfirmPaymentRequest::SetCachedSize(int size) const {
+  _impl_._cached_size_.Set(size);
+}
+
+void AdminConfirmPaymentRequest::Clear() {
+// @@protoc_insertion_point(message_clear_start:priemman.v1.AdminConfirmPaymentRequest)
+  uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  if (GetArenaForAllocation() == nullptr && _impl_.id_ != nullptr) {
+    delete _impl_.id_;
+  }
+  _impl_.id_ = nullptr;
+  _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+}
+
+const char* AdminConfirmPaymentRequest::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  while (!ctx->Done(&ptr)) {
+    uint32_t tag;
+    ptr = ::_pbi::ReadTag(ptr, &tag);
+    switch (tag >> 3) {
+      // .priemman.v1.ObjectId id = 1;
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 10)) {
+          ptr = ctx->ParseMessage(_internal_mutable_id(), ptr);
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      default:
+        goto handle_unusual;
+    }  // switch
+  handle_unusual:
+    if ((tag == 0) || ((tag & 7) == 4)) {
+      CHK_(ptr);
+      ctx->SetLastTag(tag);
+      goto message_done;
+    }
+    ptr = UnknownFieldParse(
+        tag,
+        _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
+        ptr, ctx);
+    CHK_(ptr != nullptr);
+  }  // while
+message_done:
+  return ptr;
+failure:
+  ptr = nullptr;
+  goto message_done;
+#undef CHK_
+}
+
+uint8_t* AdminConfirmPaymentRequest::_InternalSerialize(
+    uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
+  // @@protoc_insertion_point(serialize_to_array_start:priemman.v1.AdminConfirmPaymentRequest)
+  uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // .priemman.v1.ObjectId id = 1;
+  if (this->_internal_has_id()) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+      InternalWriteMessage(1, _Internal::id(this),
+        _Internal::id(this).GetCachedSize(), target, stream);
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:priemman.v1.AdminConfirmPaymentRequest)
+  return target;
+}
+
+size_t AdminConfirmPaymentRequest::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:priemman.v1.AdminConfirmPaymentRequest)
+  size_t total_size = 0;
+
+  uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  // .priemman.v1.ObjectId id = 1;
+  if (this->_internal_has_id()) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
+        *_impl_.id_);
+  }
+
+  return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
+}
+
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData AdminConfirmPaymentRequest::_class_data_ = {
+    ::PROTOBUF_NAMESPACE_ID::Message::CopyWithSourceCheck,
+    AdminConfirmPaymentRequest::MergeImpl
+};
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*AdminConfirmPaymentRequest::GetClassData() const { return &_class_data_; }
+
+
+void AdminConfirmPaymentRequest::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg) {
+  auto* const _this = static_cast<AdminConfirmPaymentRequest*>(&to_msg);
+  auto& from = static_cast<const AdminConfirmPaymentRequest&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:priemman.v1.AdminConfirmPaymentRequest)
+  GOOGLE_DCHECK_NE(&from, _this);
+  uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (from._internal_has_id()) {
+    _this->_internal_mutable_id()->::priemman::v1::ObjectId::MergeFrom(
+        from._internal_id());
+  }
+  _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+}
+
+void AdminConfirmPaymentRequest::CopyFrom(const AdminConfirmPaymentRequest& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:priemman.v1.AdminConfirmPaymentRequest)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool AdminConfirmPaymentRequest::IsInitialized() const {
+  return true;
+}
+
+void AdminConfirmPaymentRequest::InternalSwap(AdminConfirmPaymentRequest* other) {
+  using std::swap;
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  swap(_impl_.id_, other->_impl_.id_);
+}
+
+::PROTOBUF_NAMESPACE_ID::Metadata AdminConfirmPaymentRequest::GetMetadata() const {
+  return ::_pbi::AssignDescriptors(
+      &descriptor_table_user_2eproto_getter, &descriptor_table_user_2eproto_once,
+      file_level_metadata_user_2eproto[18]);
+}
+
+// ===================================================================
+
+class AdminConfirmPaymentResponse::_Internal {
+ public:
+  static const ::priemman::v1::ObjectId& user_id(const AdminConfirmPaymentResponse* msg);
+};
+
+const ::priemman::v1::ObjectId&
+AdminConfirmPaymentResponse::_Internal::user_id(const AdminConfirmPaymentResponse* msg) {
+  return *msg->_impl_.user_id_;
+}
+void AdminConfirmPaymentResponse::clear_user_id() {
+  if (GetArenaForAllocation() == nullptr && _impl_.user_id_ != nullptr) {
+    delete _impl_.user_id_;
+  }
+  _impl_.user_id_ = nullptr;
+}
+AdminConfirmPaymentResponse::AdminConfirmPaymentResponse(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                         bool is_message_owned)
+  : ::PROTOBUF_NAMESPACE_ID::Message(arena, is_message_owned) {
+  SharedCtor(arena, is_message_owned);
+  // @@protoc_insertion_point(arena_constructor:priemman.v1.AdminConfirmPaymentResponse)
+}
+AdminConfirmPaymentResponse::AdminConfirmPaymentResponse(const AdminConfirmPaymentResponse& from)
+  : ::PROTOBUF_NAMESPACE_ID::Message() {
+  AdminConfirmPaymentResponse* const _this = this; (void)_this;
+  new (&_impl_) Impl_{
+      decltype(_impl_.user_id_){nullptr}
+    , decltype(_impl_.success_){}
+    , /*decltype(_impl_._cached_size_)*/{}};
+
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  if (from._internal_has_user_id()) {
+    _this->_impl_.user_id_ = new ::priemman::v1::ObjectId(*from._impl_.user_id_);
+  }
+  _this->_impl_.success_ = from._impl_.success_;
+  // @@protoc_insertion_point(copy_constructor:priemman.v1.AdminConfirmPaymentResponse)
+}
+
+inline void AdminConfirmPaymentResponse::SharedCtor(
+    ::_pb::Arena* arena, bool is_message_owned) {
+  (void)arena;
+  (void)is_message_owned;
+  new (&_impl_) Impl_{
+      decltype(_impl_.user_id_){nullptr}
+    , decltype(_impl_.success_){false}
+    , /*decltype(_impl_._cached_size_)*/{}
+  };
+}
+
+AdminConfirmPaymentResponse::~AdminConfirmPaymentResponse() {
+  // @@protoc_insertion_point(destructor:priemman.v1.AdminConfirmPaymentResponse)
+  if (auto *arena = _internal_metadata_.DeleteReturnArena<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>()) {
+  (void)arena;
+    return;
+  }
+  SharedDtor();
+}
+
+inline void AdminConfirmPaymentResponse::SharedDtor() {
+  GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
+  if (this != internal_default_instance()) delete _impl_.user_id_;
+}
+
+void AdminConfirmPaymentResponse::SetCachedSize(int size) const {
+  _impl_._cached_size_.Set(size);
+}
+
+void AdminConfirmPaymentResponse::Clear() {
+// @@protoc_insertion_point(message_clear_start:priemman.v1.AdminConfirmPaymentResponse)
+  uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  if (GetArenaForAllocation() == nullptr && _impl_.user_id_ != nullptr) {
+    delete _impl_.user_id_;
+  }
+  _impl_.user_id_ = nullptr;
+  _impl_.success_ = false;
+  _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+}
+
+const char* AdminConfirmPaymentResponse::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  while (!ctx->Done(&ptr)) {
+    uint32_t tag;
+    ptr = ::_pbi::ReadTag(ptr, &tag);
+    switch (tag >> 3) {
+      // bool success = 1;
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 8)) {
+          _impl_.success_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      // .priemman.v1.ObjectId user_id = 2;
+      case 2:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 18)) {
+          ptr = ctx->ParseMessage(_internal_mutable_user_id(), ptr);
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      default:
+        goto handle_unusual;
+    }  // switch
+  handle_unusual:
+    if ((tag == 0) || ((tag & 7) == 4)) {
+      CHK_(ptr);
+      ctx->SetLastTag(tag);
+      goto message_done;
+    }
+    ptr = UnknownFieldParse(
+        tag,
+        _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
+        ptr, ctx);
+    CHK_(ptr != nullptr);
+  }  // while
+message_done:
+  return ptr;
+failure:
+  ptr = nullptr;
+  goto message_done;
+#undef CHK_
+}
+
+uint8_t* AdminConfirmPaymentResponse::_InternalSerialize(
+    uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
+  // @@protoc_insertion_point(serialize_to_array_start:priemman.v1.AdminConfirmPaymentResponse)
+  uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // bool success = 1;
+  if (this->_internal_success() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::_pbi::WireFormatLite::WriteBoolToArray(1, this->_internal_success(), target);
+  }
+
+  // .priemman.v1.ObjectId user_id = 2;
+  if (this->_internal_has_user_id()) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+      InternalWriteMessage(2, _Internal::user_id(this),
+        _Internal::user_id(this).GetCachedSize(), target, stream);
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:priemman.v1.AdminConfirmPaymentResponse)
+  return target;
+}
+
+size_t AdminConfirmPaymentResponse::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:priemman.v1.AdminConfirmPaymentResponse)
+  size_t total_size = 0;
+
+  uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  // .priemman.v1.ObjectId user_id = 2;
+  if (this->_internal_has_user_id()) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
+        *_impl_.user_id_);
+  }
+
+  // bool success = 1;
+  if (this->_internal_success() != 0) {
+    total_size += 1 + 1;
+  }
+
+  return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
+}
+
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData AdminConfirmPaymentResponse::_class_data_ = {
+    ::PROTOBUF_NAMESPACE_ID::Message::CopyWithSourceCheck,
+    AdminConfirmPaymentResponse::MergeImpl
+};
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*AdminConfirmPaymentResponse::GetClassData() const { return &_class_data_; }
+
+
+void AdminConfirmPaymentResponse::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg) {
+  auto* const _this = static_cast<AdminConfirmPaymentResponse*>(&to_msg);
+  auto& from = static_cast<const AdminConfirmPaymentResponse&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:priemman.v1.AdminConfirmPaymentResponse)
+  GOOGLE_DCHECK_NE(&from, _this);
+  uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (from._internal_has_user_id()) {
+    _this->_internal_mutable_user_id()->::priemman::v1::ObjectId::MergeFrom(
+        from._internal_user_id());
+  }
+  if (from._internal_success() != 0) {
+    _this->_internal_set_success(from._internal_success());
+  }
+  _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+}
+
+void AdminConfirmPaymentResponse::CopyFrom(const AdminConfirmPaymentResponse& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:priemman.v1.AdminConfirmPaymentResponse)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool AdminConfirmPaymentResponse::IsInitialized() const {
+  return true;
+}
+
+void AdminConfirmPaymentResponse::InternalSwap(AdminConfirmPaymentResponse* other) {
+  using std::swap;
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  ::PROTOBUF_NAMESPACE_ID::internal::memswap<
+      PROTOBUF_FIELD_OFFSET(AdminConfirmPaymentResponse, _impl_.success_)
+      + sizeof(AdminConfirmPaymentResponse::_impl_.success_)
+      - PROTOBUF_FIELD_OFFSET(AdminConfirmPaymentResponse, _impl_.user_id_)>(
+          reinterpret_cast<char*>(&_impl_.user_id_),
+          reinterpret_cast<char*>(&other->_impl_.user_id_));
+}
+
+::PROTOBUF_NAMESPACE_ID::Metadata AdminConfirmPaymentResponse::GetMetadata() const {
+  return ::_pbi::AssignDescriptors(
+      &descriptor_table_user_2eproto_getter, &descriptor_table_user_2eproto_once,
+      file_level_metadata_user_2eproto[19]);
+}
+
 // @@protoc_insertion_point(namespace_scope)
 }  // namespace v1
 }  // namespace priemman
@@ -3708,6 +7268,46 @@ Arena::CreateMaybeMessage< ::priemman::v1::ListConnectedAccountsResponse >(Arena
 template<> PROTOBUF_NOINLINE ::priemman::v1::DeleteConnectedAccountRequest*
 Arena::CreateMaybeMessage< ::priemman::v1::DeleteConnectedAccountRequest >(Arena* arena) {
   return Arena::CreateMessageInternal< ::priemman::v1::DeleteConnectedAccountRequest >(arena);
+}
+template<> PROTOBUF_NOINLINE ::priemman::v1::UpgradeStatus*
+Arena::CreateMaybeMessage< ::priemman::v1::UpgradeStatus >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::priemman::v1::UpgradeStatus >(arena);
+}
+template<> PROTOBUF_NOINLINE ::priemman::v1::CreateUpgradeRequestResponse*
+Arena::CreateMaybeMessage< ::priemman::v1::CreateUpgradeRequestResponse >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::priemman::v1::CreateUpgradeRequestResponse >(arena);
+}
+template<> PROTOBUF_NOINLINE ::priemman::v1::AdminUserEntry*
+Arena::CreateMaybeMessage< ::priemman::v1::AdminUserEntry >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::priemman::v1::AdminUserEntry >(arena);
+}
+template<> PROTOBUF_NOINLINE ::priemman::v1::AdminListUsersResponse*
+Arena::CreateMaybeMessage< ::priemman::v1::AdminListUsersResponse >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::priemman::v1::AdminListUsersResponse >(arena);
+}
+template<> PROTOBUF_NOINLINE ::priemman::v1::UpgradeRequestEntry*
+Arena::CreateMaybeMessage< ::priemman::v1::UpgradeRequestEntry >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::priemman::v1::UpgradeRequestEntry >(arena);
+}
+template<> PROTOBUF_NOINLINE ::priemman::v1::AdminListUpgradeRequestsResponse*
+Arena::CreateMaybeMessage< ::priemman::v1::AdminListUpgradeRequestsResponse >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::priemman::v1::AdminListUpgradeRequestsResponse >(arena);
+}
+template<> PROTOBUF_NOINLINE ::priemman::v1::AdminReviewUpgradeRequest*
+Arena::CreateMaybeMessage< ::priemman::v1::AdminReviewUpgradeRequest >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::priemman::v1::AdminReviewUpgradeRequest >(arena);
+}
+template<> PROTOBUF_NOINLINE ::priemman::v1::AdminReviewUpgradeResponse*
+Arena::CreateMaybeMessage< ::priemman::v1::AdminReviewUpgradeResponse >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::priemman::v1::AdminReviewUpgradeResponse >(arena);
+}
+template<> PROTOBUF_NOINLINE ::priemman::v1::AdminConfirmPaymentRequest*
+Arena::CreateMaybeMessage< ::priemman::v1::AdminConfirmPaymentRequest >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::priemman::v1::AdminConfirmPaymentRequest >(arena);
+}
+template<> PROTOBUF_NOINLINE ::priemman::v1::AdminConfirmPaymentResponse*
+Arena::CreateMaybeMessage< ::priemman::v1::AdminConfirmPaymentResponse >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::priemman::v1::AdminConfirmPaymentResponse >(arena);
 }
 PROTOBUF_NAMESPACE_CLOSE
 

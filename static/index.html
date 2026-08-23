@@ -44,7 +44,6 @@
         }
         .container { width: min(960px, 92%); margin: 0 auto; }
 
-        /* ===== Navbar ===== */
         .nav {
             width: min(1180px, calc(100% - 48px));
             margin: 16px auto 0;
@@ -65,10 +64,9 @@
             align-items: center;
         }
         .logo-pill img { height: 22px; display: block; }
-        .brand-name { font-family: "Playfair Display", serif; font-weight: 700; font-size: 20px; letter-spacing: 0.3px; }
+        .brand-name { font-family: "Playfair Display", serif; font-weight: 700; font-size: 20px; letter-spacing: 0.3px; white-space: nowrap; }
         .brand-name .brand-tag { color: var(--accent); }
 
-        /* ===== CTA buttons (white label + purple arrow) ===== */
         .cta { display: inline-flex; align-items: stretch; text-decoration: none; }
         .cta-label {
             background: #f4f4f5; color: #111111; font-weight: 600; font-size: 14.5px;
@@ -81,40 +79,31 @@
             border-radius: 0 12px 12px 0; transition: background 0.15s;
         }
         .cta:hover .cta-arrow { background: var(--accent-deep); }
+        .cta:focus-visible, .brand:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
         .cta-sm .cta-label { padding: 9px 18px; font-size: 13.5px; border-radius: 10px 0 0 10px; }
         .cta-sm .cta-arrow { width: 40px; border-radius: 0 10px 10px 0; }
 
-        /* ===== Hero ===== */
         .hero {
             display: flex; flex-direction: column; align-items: center;
-            text-align: center; padding: 72px 24px 40px;
+            text-align: center; padding: clamp(44px, 8vw, 72px) 24px 40px;
         }
-        .status-badge {
-            display: inline-flex; align-items: center; gap: 8px;
-            background: var(--card); border: 1px solid var(--border);
-            border-radius: 999px; padding: 8px 18px;
-            font-size: 13px; color: var(--muted);
-        }
-        .status-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--muted); }
-        .status-badge.online .status-dot { background: var(--green); box-shadow: 0 0 8px var(--green); }
-        .status-badge.online { color: var(--green); border-color: rgba(52, 211, 153, 0.35); }
-        .status-badge.offline .status-dot { background: var(--red); }
-        .status-badge.offline { color: var(--red); border-color: rgba(248, 113, 113, 0.35); }
+        .status-line { font-size: 13.5px; letter-spacing: 0.4px; color: var(--muted); }
+        .status-line.ok { color: var(--green); }
+        .status-line.bad { color: var(--red); }
         .hero h1 {
             font-family: "Playfair Display", serif; font-weight: 600;
-            font-size: clamp(38px, 6vw, 76px); line-height: 1.1;
-            margin-top: 30px; letter-spacing: 0.5px;
+            font-size: clamp(36px, 6vw, 76px); line-height: 1.1;
+            margin-top: 26px; letter-spacing: 0.5px;
         }
         .hero h1 em { color: var(--accent); font-style: italic; }
         .hero .sub {
             margin-top: 20px; color: var(--muted);
-            font-size: clamp(15px, 1.6vw, 17px); line-height: 1.65; max-width: 640px;
+            font-size: clamp(15px, 1.6vw, 17px); line-height: 1.65; max-width: 680px;
         }
         .hero .cta { margin-top: 36px; }
 
-        /* ===== Info grid ===== */
         .info-grid {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
             gap: 14px; padding: 24px 0 8px;
         }
         .info-card {
@@ -122,11 +111,10 @@
             border-radius: var(--radius); padding: 18px 20px;
         }
         .info-card .label { font-size: 12px; text-transform: uppercase; letter-spacing: 1.2px; color: var(--muted); }
-        .info-card .value { margin-top: 8px; font-size: 17px; font-weight: 600; word-break: break-all; }
+        .info-card .value { margin-top: 8px; font-size: 17px; font-weight: 600; word-break: break-word; }
         .info-card .value a { color: var(--accent); text-decoration: none; }
         .info-card .value a:hover { text-decoration: underline; }
 
-        /* ===== Endpoints ===== */
         .section-title {
             font-family: "Playfair Display", serif;
             margin: 36px 0 14px; font-size: 24px; font-weight: 600;
@@ -142,16 +130,15 @@
         }
         .endpoint:last-child { border-bottom: none; }
         .method {
-            min-width: 58px; text-align: center; padding: 3px 0;
+            flex: 0 0 auto; min-width: 58px; text-align: center; padding: 3px 0;
             border-radius: 6px; font-weight: 700; font-size: 11.5px;
             background: var(--accent-soft); color: var(--accent);
         }
         .method.post { background: rgba(52, 211, 153, 0.12); color: var(--green); }
-        .endpoint .path { color: var(--text); }
-        .endpoint .desc { margin-left: auto; color: var(--muted); font-family: inherit; font-size: 12.5px; }
+        .endpoint .path { color: var(--text); word-break: break-all; }
+        .endpoint .desc { margin-left: auto; color: var(--muted); font-family: inherit; font-size: 12.5px; text-align: right; }
         .endpoints-fallback { padding: 18px 20px; color: var(--muted); font-size: 14px; }
 
-        /* ===== Footer ===== */
         .foot {
             margin-top: auto;
             display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px;
@@ -162,10 +149,25 @@
         .foot a { color: var(--accent); text-decoration: none; }
         .foot a:hover { text-decoration: underline; }
 
-        @media (max-width: 560px) {
-            .nav { width: calc(100% - 24px); }
-            .cta-sm .cta-label { padding: 8px 14px; font-size: 12.5px; }
-            .foot { padding: 16px 20px; }
+        @media (max-width: 720px) {
+            .page { margin: 8px; border-radius: 20px; min-height: calc(100vh - 16px); }
+            .nav { width: calc(100% - 28px); margin-top: 12px; }
+            .container { width: 92%; }
+            .endpoint { flex-wrap: wrap; gap: 8px 14px; padding: 12px 16px; }
+            .endpoint .desc { margin-left: 0; width: 100%; text-align: left; padding-left: 72px; }
+        }
+        @media (max-width: 480px) {
+            .brand-name { font-size: 17px; }
+            .logo-pill { padding: 4px 6px; }
+            .logo-pill img { height: 18px; }
+            .cta-sm .cta-label { padding: 8px 12px; font-size: 12.5px; }
+            .cta-sm .cta-arrow { width: 34px; }
+            .cta-label { padding: 11px 20px; font-size: 13.5px; }
+            .cta-arrow { width: 40px; }
+            .info-grid { grid-template-columns: 1fr 1fr; }
+            .foot { padding: 16px 18px; flex-direction: column; text-align: center; }
+            .endpoint { font-size: 12.5px; }
+            .endpoint .desc { padding-left: 0; }
         }
     </style>
 </head>
@@ -189,14 +191,12 @@
         </nav>
 
         <header class="hero">
-            <div class="status-badge" id="status-badge">
-                <span class="status-dot"></span>
-                <span id="status-text">Checking server status&hellip;</span>
-            </div>
+            <p class="status-line" id="status-text">Checking server status&hellip;</p>
             <h1>Priemman <em>API Server</em></h1>
             <p class="sub">
                 REST API backend untuk platform Priemman &mdash; autentikasi (OTP &amp; OAuth),
-                manajemen profil pengguna, proyek, koleksi, dan media.
+                profil pengguna, proyek, koleksi, media, alur upgrade creator, dan endpoint admin,
+                dengan proteksi rate limiting per IP.
             </p>
             <a class="cta" href="#endpoints">
                 <span class="cta-label">Explore Endpoints</span>
@@ -223,6 +223,10 @@
                     <div class="value" id="info-framework">&mdash;</div>
                 </div>
                 <div class="info-card">
+                    <div class="label">Rate Limit</div>
+                    <div class="value" id="info-rate-limit">&mdash;</div>
+                </div>
+                <div class="info-card">
                     <div class="label">Repository</div>
                     <div class="value" id="info-repository">&mdash;</div>
                 </div>
@@ -244,32 +248,30 @@
         (function () {
             document.getElementById("year").textContent = new Date().getFullYear();
 
-            // Server status check
+            var statusEl = document.getElementById("status-text");
+
             fetch("/ping", { method: "GET" })
                 .then(function (res) {
-                    var badge = document.getElementById("status-badge");
-                    var text = document.getElementById("status-text");
                     if (res.ok) {
-                        badge.classList.add("online");
-                        text.textContent = "Operational";
+                        statusEl.classList.add("ok");
+                        statusEl.textContent = "Server status: Operational";
                     } else {
-                        badge.classList.add("offline");
-                        text.textContent = "Degraded (HTTP " + res.status + ")";
+                        statusEl.classList.add("bad");
+                        statusEl.textContent = "Server status: Degraded (HTTP " + res.status + ")";
                     }
                 })
                 .catch(function () {
-                    var badge = document.getElementById("status-badge");
-                    badge.classList.add("offline");
-                    document.getElementById("status-text").textContent = "Unreachable";
+                    statusEl.classList.add("bad");
+                    statusEl.textContent = "Server status: Unreachable";
                 });
 
-            // API info (version, made by, endpoints, ...)
             fetch("/v1/info", { method: "GET", headers: { "Accept": "application/json" } })
                 .then(function (res) { if (!res.ok) throw new Error("HTTP " + res.status); return res.json(); })
                 .then(function (info) {
                     document.getElementById("info-version").textContent = info.version || "-";
                     document.getElementById("info-made-by").textContent = info.made_by || "-";
                     document.getElementById("info-framework").textContent = info.framework || "-";
+                    document.getElementById("info-rate-limit").textContent = info.rate_limit || "-";
 
                     var repoEl = document.getElementById("info-repository");
                     if (info.repository) {

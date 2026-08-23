@@ -87,3 +87,5 @@ test_py/.pytest_cache/
 *:Zone.Identifier
 *.pb.cc
 *.pb.h
+
+FE_GUIDE.md

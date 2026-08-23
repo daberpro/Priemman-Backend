@@ -14,6 +14,11 @@ struct Session {
     std::string user_id;
 };
 
+struct SessionIdentity {
+    std::string user_id;
+    std::string role;
+};
+
 class SessionRepository {
 public:
     explicit SessionRepository(
@@ -29,6 +34,10 @@ public:
     ) const;
 
     std::optional<std::string> FindUserIdByToken(
+        const std::string& token
+    ) const;
+
+    std::optional<SessionIdentity> FindIdentityByToken(
         const std::string& token
     ) const;
 

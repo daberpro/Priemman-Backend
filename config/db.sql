@@ -27,6 +27,7 @@ CREATE TABLE IF NOT EXISTS users (
     website_url TEXT NOT NULL,
     avatar_url TEXT NOT NULL,
     is_onboarded BOOLEAN NOT NULL DEFAULT FALSE,
+    role ENUM('user', 'creator', 'admin') NOT NULL DEFAULT 'user',
     about_title VARCHAR(255) NOT NULL DEFAULT '',
     about_description TEXT NOT NULL,
     created_at DATETIME(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
@@ -130,10 +131,35 @@ CREATE TABLE IF NOT EXISTS otp_challenges (
     attempts INT UNSIGNED NOT NULL DEFAULT 0,
     last_sent_at DATETIME(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
     created_at DATETIME(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
+    is_locked TINYINT(1) NOT NULL DEFAULT 0,
+    ip_address VARCHAR(45) NULL,
+    locked_until DATETIME(6) NULL,
 
     PRIMARY KEY (id),
     KEY idx_otp_email_created (email, created_at),
     KEY idx_otp_expires_at (expires_at)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS creator_upgrades (
+    id CHAR(36) NOT NULL,
+    user_id CHAR(36) NOT NULL,
+    status ENUM('pending', 'approved', 'rejected', 'paid') NOT NULL DEFAULT 'pending',
+    invoice_id VARCHAR(36) NULL,
+    invoice_amount BIGINT NULL,
+    currency VARCHAR(3) NOT NULL DEFAULT 'IDR',
+    rejection_reason VARCHAR(255) NOT NULL DEFAULT '',
+    requested_at DATETIME(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
+    reviewed_at DATETIME(6) NULL,
+    paid_at DATETIME(6) NULL,
+
+    PRIMARY KEY (id),
+    KEY idx_creator_upgrades_user (user_id, requested_at),
+    KEY idx_creator_upgrades_status (status),
+
+    CONSTRAINT fk_creator_upgrades_user
+        FOREIGN KEY (user_id)
+        REFERENCES users(id)
+        ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Store only a hash of the bearer session token.
