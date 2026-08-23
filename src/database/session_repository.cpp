@@ -144,4 +144,26 @@ std::optional<std::string> SessionRepository::FindUserIdByToken(
     ).AsOptionalSingleField<std::string>();
 }
 
+std::optional<SessionIdentity> SessionRepository::FindIdentityByToken(
+    const std::string& token
+) const {
+    const std::string token_hash = HashToken(token);
+
+    return _mysql_cluster->Execute(
+        userver::storages::mysql::ClusterHostType::kSecondary,
+        userver::storages::mysql::Query{
+            R"sql(
+                SELECT s.user_id, u.role
+                FROM sessions s
+                INNER JOIN users u ON u.id = s.user_id
+                WHERE s.token_hash = ?
+                  AND s.revoked_at IS NULL
+                  AND s.expires_at > NOW(6)
+                LIMIT 1
+            )sql"
+        },
+        token_hash
+    ).AsOptionalSingleRow<SessionIdentity>();
+}
+
 }  // namespace priemman::database

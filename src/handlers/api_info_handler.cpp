@@ -9,13 +9,15 @@ namespace priemman {
 namespace {
 
 constexpr std::string_view kApiName = "Priemman API";
-constexpr std::string_view kApiVersion = "1.0.0";
+constexpr std::string_view kApiVersion = "1.1.0";
 constexpr std::string_view kApiMadeBy = "daberpro";
 constexpr std::string_view kApiDescription =
     "REST API backend for the Priemman platform, providing authentication (OTP & OAuth), "
-    "user profiles, projects, collections, and media management.";
+    "user profiles, projects, collections, media management, the creator upgrade flow, "
+    "and admin endpoints, protected by per-IP rate limiting.";
 constexpr std::string_view kApiFramework = "C++23 + userver";
 constexpr std::string_view kApiRepository = "https://github.com/daberpro/Priemman-Backend";
+constexpr std::string_view kApiRateLimit = "60 requests/minute/IP";
 
 struct EndpointInfo {
     std::string_view method;
@@ -36,11 +38,17 @@ constexpr EndpointInfo kEndpoints[] = {
     {"GET", "/v1/users/me", "Get/update basic user info"},
     {"GET", "/v1/users/me/work-experiences", "Manage work experiences"},
     {"GET", "/v1/users/me/connected-accounts", "Manage connected accounts"},
+    {"GET", "/v1/users/me/upgrade", "Get latest creator upgrade request status"},
+    {"POST", "/v1/users/me/upgrade", "Request an upgrade from user to creator"},
     {"POST", "/v1/projects", "Create a project"},
     {"GET", "/v1/projects/list", "List projects"},
     {"GET", "/v1/projects/{id}", "Get/update/delete a project"},
     {"GET", "/v1/collections", "Manage collections"},
     {"POST", "/v1/media/upload", "Upload media"},
+    {"GET", "/v1/admin/users", "List users with pagination and role filter (admin)"},
+    {"GET", "/v1/admin/upgrades", "List upgrade requests by status (admin)"},
+    {"POST", "/v1/admin/upgrades/review", "Approve or reject an upgrade request (admin)"},
+    {"POST", "/v1/admin/upgrades/confirm-payment", "Confirm payment and promote user to creator (admin)"},
 };
 
 }  // namespace
@@ -58,6 +66,7 @@ std::string ApiInfoHandler::HandleRequestThrow(
     builder["description"] = std::string{kApiDescription};
     builder["framework"] = std::string{kApiFramework};
     builder["repository"] = std::string{kApiRepository};
+    builder["rate_limit"] = std::string{kApiRateLimit};
     builder["status_url"] = "/ping";
 
     userver::formats::json::ValueBuilder endpoints;

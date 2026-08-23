@@ -2,6 +2,7 @@
 #include <cstdint>
 #include <optional>
 #include <string>
+#include <vector>
 #include <userver/storages/mysql/cluster.hpp>
 
 namespace priemman::database {
@@ -18,6 +19,16 @@ struct User {
     std::string website_url;
     std::string avatar_url;
     std::int8_t is_onboarded; // Diubah ke std::int8_t
+    std::string role;
+};
+
+struct AdminUserRow {
+    std::string id;
+    std::string email;
+    std::string first_name;
+    std::string last_name;
+    std::string role;
+    std::optional<std::string> created_at;
 };
 
 struct OAuthUserData {
@@ -59,6 +70,14 @@ public:
     FindOrCreateResult FindOrCreateFromEmail(const std::string& email) const;
     void UpdateBasicInfo(const std::string& user_id, const BasicInfoPatch& patch) const;
     std::optional<AboutInfo> FindAbout(const std::string& user_id) const;
+
+    std::vector<AdminUserRow> ListUsers(
+        std::int64_t limit,
+        std::int64_t offset,
+        const std::string& role_filter
+    ) const;
+    std::int64_t CountUsers(const std::string& role_filter) const;
+    bool SetRole(const std::string& user_id, const std::string& role) const;
 private:
     std::shared_ptr<userver::storages::mysql::Cluster> _mysql_cluster{nullptr};
 };

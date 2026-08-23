@@ -1,9 +1,12 @@
 #include "verify_otp_handler.hpp"
+#include "session_cookie.hpp"
+#include "src/database/otp_repository.hpp"
 
 #include <algorithm>
 #include <cctype>
 
 #include <proto/auth.pb.h>
+#include <string>
 #include <userver/formats/json/serialize.hpp>
 #include <userver/formats/json/value_builder.hpp>
 #include <userver/server/http/http_response.hpp>
@@ -47,19 +50,45 @@ std::string VerifyOtpHandler::HandleRequestThrow(
     }
 
     const std::string email = NormalizeEmail(req.email());
-    const std::string otp_hash = database::OtpRepository::HashOtp(req.otp());
+    const std::string otp_hash = req.otp();
+    const std::string ip_address = request.GetRemoteAddress().PrimaryAddressString();
 
-    const bool valid = _otp_repo.VerifyAndConsume(email, otp_hash);
+    const database::OtpResult valid = _otp_repo.VerifyAndConsume(email, otp_hash, ip_address);
 
-    if (!valid) {
-        res.SetStatus(userver::server::http::HttpStatus::kUnauthorized);
-        userver::formats::json::ValueBuilder err;
-        err["error"] = "invalid_or_expired_otp";
-        return userver::formats::json::ToString(err.ExtractValue());
+    switch (valid) {
+        case database::OtpResult::kInvalidCode:{
+            res.SetStatus(userver::server::http::HttpStatus::kUnauthorized);
+            userver::formats::json::ValueBuilder err;
+            err["error"] = "invalid_otp_code";
+            return userver::formats::json::ToString(err.ExtractValue());
+        }
+        case database::OtpResult::kNotFoundOrExpired:{
+            res.SetStatus(userver::server::http::HttpStatus::kUnauthorized);
+            userver::formats::json::ValueBuilder err;
+            err["error"] = "invalid_or_expired_otp";
+            return userver::formats::json::ToString(err.ExtractValue());
+        }
+        case database::OtpResult::kEmailSuspended:{
+            res.SetStatus(userver::server::http::HttpStatus::kUnauthorized);
+            userver::formats::json::ValueBuilder err;
+            err["error"] = "email_suspended";
+            return userver::formats::json::ToString(err.ExtractValue());
+        }
+        case database::OtpResult::kIpSuspended:{
+            res.SetStatus(userver::server::http::HttpStatus::kUnauthorized);
+            userver::formats::json::ValueBuilder err;
+            err["error"] = "ip_suspended";
+            return userver::formats::json::ToString(err.ExtractValue());
+        }
+        case database::OtpResult::kSuccess:{
+            break;
+        }
     }
 
     auto result = _users.FindOrCreateFromEmail(email);
     auto session = _sessions.Create(result.user.id);
+
+    res.SetHeader(std::string("Set-Cookie"), BuildSessionCookie(session.token));
 
     priemman::v1::VerifyOtpResponse response;
     response.set_session_token(session.token);

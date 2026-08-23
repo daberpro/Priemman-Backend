@@ -19,6 +19,8 @@ struct ProjectRow {
     std::optional<std::string> cover_media_id;
     std::string visibility;   // 'PUBLIC' | 'UNLISTED' | 'DRAFT'
     std::string status;       // 'DRAFT' | 'PUBLISHED' | 'ARCHIVED'
+    // views/likes/saves dibaca lewat CAST(... AS SIGNED) di query SELECT,
+    // jadi bind di sini harus signed.
     std::int64_t views;
     std::int64_t likes;
     std::int64_t saves;
@@ -31,7 +33,7 @@ struct ProjectMediaRow {
     std::string id;
     std::string url;
     std::string media_type;   // 'IMAGE' | 'VIDEO'
-    std::int64_t sort_order;
+    std::int64_t sort_order; // dibaca lewat CAST(sort_order AS SIGNED)
     std::string cloudinary_public_id; // <-- tambahan
 };
 

@@ -7,9 +7,17 @@
 #include <proto/user.pb.h>
 
 #include <src/database/account_repository.hpp>
+#include <src/database/creator_upgrade_repository.hpp>
 #include <src/database/user_repository.hpp>
 
 namespace priemman::handlers::mapper {
+
+inline priemman::v1::UserRole StringToUserRole(const std::string& s) {
+    if (s == "creator") return priemman::v1::USER_ROLE_CREATOR;
+    if (s == "admin") return priemman::v1::USER_ROLE_ADMIN;
+    if (s == "user") return priemman::v1::USER_ROLE_USER;
+    return priemman::v1::USER_ROLE_UNSPECIFIED;
+}
 
 // Timestamp (UTC) -> string SQL "YYYY-MM-DD HH:MM:SS[.ffffff]"
 inline std::optional<std::string> TimestampToSql(
@@ -90,6 +98,7 @@ inline priemman::v1::User ToUserProto(
     p.set_website_url(u.website_url);
     p.set_avatar_url(u.avatar_url);
     p.set_is_onboarded(u.is_onboarded != 0);
+    p.set_role(StringToUserRole(u.role));
     if (about.has_value()) {
         p.mutable_about_me()->set_title(about->title);
         p.mutable_about_me()->set_description(about->description);
@@ -97,6 +106,36 @@ inline priemman::v1::User ToUserProto(
     for (const auto& w : wx) *p.add_work_experience() = ToProto(w);
     for (const auto& a : ca) *p.add_connected_accounts() = ToProto(a);
     return p;
+}
+
+inline void FillUpgradeStatus(
+    const database::UpgradeRow& r,
+    priemman::v1::UpgradeStatus* out
+) {
+    out->set_status(r.status);
+    out->mutable_request_id()->set_value(r.id);
+    out->set_invoice_id(r.invoice_id.value_or(""));
+    out->set_invoice_amount(r.invoice_amount.value_or(0));
+    out->set_currency(r.currency);
+    out->set_rejection_reason(r.rejection_reason);
+    SqlToTimestamp(r.requested_at, out->mutable_requested_at());
+    SqlToTimestamp(r.reviewed_at, out->mutable_reviewed_at());
+    SqlToTimestamp(r.paid_at, out->mutable_paid_at());
+}
+
+inline void FillUpgradeRequestEntry(
+    const database::UpgradeRequestRow& r,
+    priemman::v1::UpgradeRequestEntry* out
+) {
+    out->mutable_id()->set_value(r.id);
+    out->mutable_user_id()->set_value(r.user_id);
+    out->set_email(r.email);
+    out->set_status(r.status);
+    out->set_invoice_id(r.invoice_id.value_or(""));
+    out->set_invoice_amount(r.invoice_amount.value_or(0));
+    out->set_currency(r.currency);
+    out->set_rejection_reason(r.rejection_reason);
+    SqlToTimestamp(r.requested_at, out->mutable_requested_at());
 }
 
 }  // namespace priemman::handlers::mapper

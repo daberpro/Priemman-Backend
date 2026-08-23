@@ -33,11 +33,15 @@
 #include <src/handlers/user/basic_info_handler.hpp>
 #include <src/handlers/user/connected_accounts_handler.hpp>
 #include <src/handlers/user/work_experience_handler.hpp>
+#include <src/handlers/user/upgrade_handler.hpp>
+#include <src/handlers/admin/admin_users_handler.hpp>
+#include <src/handlers/admin/admin_upgrades_handler.hpp>
 #include <src/handlers/projects/collection_handler.hpp>
 #include <src/handlers/projects/project_create_handler.hpp>
 #include <src/handlers/projects/project_detail_handler.hpp>
 #include <src/handlers/projects/project_list_handler.hpp>
 #include <src/handlers/media/upload_media_handler.hpp>
+#include <src/middleware/rate_limiter.hpp>
 #include <src/component/Cloudinary/CloudinaryClientComponent.hpp>
 #include <src/component/Cloudinary/MediaSweeperComponent.hpp>
 
@@ -55,6 +59,7 @@ auto main(int argc, char* argv[]) -> int {
         .Append<userver::clients::dns::Component>()
         .Append<userver::clients::http::MiddlewarePipelineComponent>()
         .Append<userver::server::middlewares::CorsFactory>()
+        .Append<priemman::middlewares::RateLimiterFactory>()
         .Append<userver::components::FsCache>("fs-cache-static")
         .Append<userver::server::handlers::HttpHandlerStatic>("handler-static")
 
@@ -86,6 +91,14 @@ auto main(int argc, char* argv[]) -> int {
         .Append<priemman::handlers::user::BasicInfoHandler>()
         .Append<priemman::handlers::user::WorkExperienceHandler>()
         .Append<priemman::handlers::user::ConnectedAccountsHandler>()
+        .Append<priemman::handlers::user::UpgradeHandler>()
+
+        // Admin Handlers
+        .Append<priemman::handlers::admin::AdminUsersHandler>()
+        .Append<priemman::handlers::admin::AdminUpgradeListHandler>()
+        .Append<priemman::handlers::admin::AdminUpgradeReviewHandler>()
+        .Append<priemman::handlers::admin::AdminUpgradeConfirmPaymentHandler>()
+
         .Append<priemman::ApiInfoHandler>("handler-api-info")
         .Append<priemman::PingHandler>("handler-ping");
 

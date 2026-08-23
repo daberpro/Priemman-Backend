@@ -7,6 +7,10 @@ Fitur:
   - Logout otomatis menghapus `.session`.
   - Menu interaktif untuk test semua endpoint.
   - Upload media ke Cloudinary via /v1/media/upload
+  - Uji keamanan: suspend email (3x OTP salah) & blokir IP (>=5 gagal per IP)
+  - Upgrade ke creator (request -> review admin -> invoice -> konfirmasi bayar)
+  - Admin: list users & kelola upgrade requests
+  - Uji throttle global per-IP (60 req/menit -> 429)
 
 Jalankan:  python test_py/main.py
 """
@@ -46,6 +50,12 @@ LIST_PROJECTS_URL = f"{BASE_URL}/v1/projects/list"
 PROJECT_DETAIL_URL = f"{BASE_URL}/v1/projects/{{}}"  # format dengan .format(id)
 COLLECTIONS_URL = f"{BASE_URL}/v1/collections"
 UPLOAD_MEDIA_URL = f"{BASE_URL}/v1/media/upload"
+
+UPGRADE_URL = f"{BASE_URL}/v1/users/me/upgrade"
+ADMIN_USERS_URL = f"{BASE_URL}/v1/admin/users"
+ADMIN_UPGRADES_URL = f"{BASE_URL}/v1/admin/upgrades"
+ADMIN_UPGRADES_REVIEW_URL = f"{BASE_URL}/v1/admin/upgrades/review"
+ADMIN_UPGRADES_CONFIRM_URL = f"{BASE_URL}/v1/admin/upgrades/confirm-payment"
 
 SESSION_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), ".session")
 
@@ -116,6 +126,22 @@ def auth_headers(token: str) -> dict:
         **PROTO_HEADERS,
         "Authorization": f"Bearer {token}",
     }
+
+
+ROLE_NAMES = {
+    user_pb2.USER_ROLE_UNSPECIFIED: "unspecified",
+    user_pb2.USER_ROLE_USER: "user",
+    user_pb2.USER_ROLE_CREATOR: "creator",
+    user_pb2.USER_ROLE_ADMIN: "admin",
+}
+
+
+def fmt_ts(ts) -> str:
+    """Format google.protobuf.Timestamp jadi string yang mudah dibaca."""
+    if ts is None or (ts.seconds == 0 and ts.nanos == 0):
+        return "-"
+    from datetime import datetime, timezone
+    return datetime.fromtimestamp(ts.seconds, tz=timezone.utc).strftime("%Y-%m-%d %H:%M:%S UTC")
 
 
 # ============================================================
@@ -225,6 +251,7 @@ def get_profile(token: str) -> user_pb2.User | None:
              f"website_url   : {user.website_url}\n"
              f"avatar_url    : {user.avatar_url}\n"
              f"is_onboarded  : {user.is_onboarded}\n"
+             f"role          : {ROLE_NAMES.get(user.role, user.role)}\n"
              f"work_exp_count: {len(user.work_experience)}\n"
              f"connected_count: {len(user.connected_accounts)}")
         return user
@@ -647,6 +674,292 @@ def test_delete_collection(token: str, collection_id: str) -> bool:
 
 
 # ============================================================
+# CREATOR UPGRADE & ADMIN FUNCTIONS
+# ============================================================
+
+def get_upgrade_status(token: str) -> user_pb2.UpgradeStatus | None:
+    print("\n== GET /v1/users/me/upgrade (status) ==")
+    resp = http.get(UPGRADE_URL, headers=auth_headers(token))
+
+    if resp.status_code == 200 and is_proto(resp):
+        st = user_pb2.UpgradeStatus()
+        st.ParseFromString(resp.content)
+        show(resp.status_code,
+             f"status          : {st.status}\n"
+             f"request_id      : {st.request_id.value or '-'}\n"
+             f"invoice_id      : {st.invoice_id or '-'}\n"
+             f"invoice_amount  : {st.invoice_amount or '-'} {st.currency}\n"
+             f"rejection_reason: {st.rejection_reason or '-'}\n"
+             f"requested_at    : {fmt_ts(st.requested_at)}\n"
+             f"reviewed_at     : {fmt_ts(st.reviewed_at)}\n"
+             f"paid_at         : {fmt_ts(st.paid_at)}")
+        return st
+
+    show_error(resp)
+    return None
+
+
+def request_upgrade(token: str) -> bool:
+    print("\n== POST /v1/users/me/upgrade (ajukan upgrade) ==")
+    resp = http.post(UPGRADE_URL, data=b"", headers=auth_headers(token))
+
+    if resp.status_code == 201 and is_proto(resp):
+        out = user_pb2.CreateUpgradeRequestResponse()
+        out.ParseFromString(resp.content)
+        show(resp.status_code,
+             f"success   : {out.success}\n"
+             f"status    : {out.status.status}\n"
+             f"request_id: {out.status.request_id.value}")
+        return out.success
+
+    show_error(resp)
+    return False
+
+
+def admin_list_users(token: str, limit: int = 20, offset: int = 0, role: str = "") -> user_pb2.AdminListUsersResponse | None:
+    print(f"\n== GET /v1/admin/users (limit={limit}, offset={offset}, role={role or 'semua'}) ==")
+    params = {"limit": limit, "offset": offset}
+    if role:
+        params["role"] = role
+    resp = http.get(ADMIN_USERS_URL, params=params, headers=auth_headers(token))
+
+    if resp.status_code == 200 and is_proto(resp):
+        out = user_pb2.AdminListUsersResponse()
+        out.ParseFromString(resp.content)
+        lines = [f"total : {out.total} | limit: {out.limit} | offset: {out.offset}"]
+        for u in out.users:
+            lines.append(
+                f"  {u.id.value} | {u.email} | {u.first_name} {u.last_name}".rstrip()
+                + f" | role={ROLE_NAMES.get(u.role, u.role)} | created={fmt_ts(u.created_at)}")
+        show(resp.status_code, "\n".join(lines))
+        return out
+
+    show_error(resp)
+    return None
+
+
+def admin_list_upgrades(token: str, status: str = "pending") -> list:
+    print(f"\n== GET /v1/admin/upgrades?status={status} ==")
+    resp = http.get(ADMIN_UPGRADES_URL, params={"status": status}, headers=auth_headers(token))
+
+    if resp.status_code == 200 and is_proto(resp):
+        out = user_pb2.AdminListUpgradeRequestsResponse()
+        out.ParseFromString(resp.content)
+        lines = [f"jumlah request: {len(out.requests)}"]
+        for r in out.requests:
+            lines.append(
+                f"  id={r.id.value} | user={r.user_id.value} | {r.email}\n"
+                f"    status={r.status} | invoice={r.invoice_id or '-'} "
+                f"{r.invoice_amount or ''} {r.currency} | requested={fmt_ts(r.requested_at)}")
+        show(resp.status_code, "\n".join(lines))
+        return list(out.requests)
+
+    show_error(resp)
+    return []
+
+
+def admin_review_upgrade(token: str, request_id: str, approve: bool, reason: str = "") -> bool:
+    print(f"\n== POST /v1/admin/upgrades/review ({'APPROVE' if approve else 'REJECT'}) ==")
+    req = user_pb2.AdminReviewUpgradeRequest()
+    req.id.value = request_id
+    req.approve = approve
+    req.rejection_reason = reason
+
+    resp = http.post(ADMIN_UPGRADES_REVIEW_URL, data=req.SerializeToString(), headers=auth_headers(token))
+
+    if resp.status_code == 200 and is_proto(resp):
+        out = user_pb2.AdminReviewUpgradeResponse()
+        out.ParseFromString(resp.content)
+        show(resp.status_code,
+             f"success   : {out.success}\n"
+             f"status    : {out.request.status}\n"
+             f"invoice_id: {out.request.invoice_id or '-'}\n"
+             f"amount    : {out.request.invoice_amount or '-'} {out.request.currency}")
+        return out.success
+
+    show_error(resp)
+    return False
+
+
+def admin_confirm_payment(token: str, request_id: str) -> bool:
+    print("\n== POST /v1/admin/upgrades/confirm-payment ==")
+    req = user_pb2.AdminConfirmPaymentRequest()
+    req.id.value = request_id
+
+    resp = http.post(ADMIN_UPGRADES_CONFIRM_URL, data=req.SerializeToString(), headers=auth_headers(token))
+
+    if resp.status_code == 200 and is_proto(resp):
+        out = user_pb2.AdminConfirmPaymentResponse()
+        out.ParseFromString(resp.content)
+        show(resp.status_code,
+             f"success: {out.success}\n"
+             f"user_id: {out.user_id.value}")
+        return out.success
+
+    show_error(resp)
+    return False
+
+
+def test_throttle(token: str, count: int = 80) -> None:
+    print(f"\n== UJI THROTTLE: {count}x GET /v1/users/me secara cepat ==")
+    print("(limit server: 60 request/IP/menit; sisanya harus kena 429)")
+
+    ok = 0
+    limited = 0
+    other = 0
+    first_retry_after = None
+
+    for _ in range(count):
+        resp = http.get(GET_PROFILE_URL, headers=auth_headers(token))
+        if resp.status_code == 200:
+            ok += 1
+        elif resp.status_code == 429:
+            limited += 1
+            if first_retry_after is None:
+                first_retry_after = resp.headers.get("Retry-After")
+        else:
+            other += 1
+
+    print(f"-> hasil: {ok} OK (200) | {limited} kena 429 | {other} status lain")
+    if first_retry_after is not None:
+        print(f"-> header Retry-After pertama: {first_retry_after}")
+    print("-" * 60)
+
+
+# ============================================================
+# SECURITY TEST: EMAIL SUSPEND & IP BLOCK
+# ============================================================
+
+def send_otp_status(email: str) -> tuple[int, str]:
+    """Kirim OTP, return (http_status, message) tanpa asumsi sukses."""
+    req = auth_pb2.SendOtpRequest()
+    req.email = email
+
+    resp = http.post(SEND_OTP_URL, data=req.SerializeToString(), headers=PROTO_HEADERS)
+
+    if is_proto(resp):
+        out = auth_pb2.SendOtpResponse()
+        out.ParseFromString(resp.content)
+        return resp.status_code, out.message
+    return resp.status_code, resp.text.strip()
+
+
+def verify_otp_error(email: str, otp: str) -> tuple[int, str]:
+    """Verifikasi OTP, return (http_status, error_code). error_code kosong = sukses."""
+    req = auth_pb2.VerifyOtpRequest()
+    req.email = email
+    req.otp = otp
+
+    resp = http.post(VERIFY_OTP_URL, data=req.SerializeToString(), headers=PROTO_HEADERS)
+
+    if resp.status_code == 200 and is_proto(resp):
+        return 200, ""
+    try:
+        return resp.status_code, resp.json().get("error", resp.text)
+    except ValueError:
+        return resp.status_code, resp.text.strip()
+
+
+def check_result(step: str, expected, actual) -> bool:
+    ok = actual == expected
+    label = "OK  " if ok else "FAIL"
+    print(f"  [{label}] {step} | expected={expected!r} actual={actual!r}")
+    return ok
+
+
+def check_verify(step: str, expected_err: str, status: int, err: str) -> bool:
+    """Sama seperti check_result, tapi selalu tampilkan HTTP status supaya
+    mudah membedakan 500 (body kosong) dari 401 (JSON error)."""
+    ok = err == expected_err
+    label = "OK  " if ok else "FAIL"
+    detail = f"http={status}" + (f" error={err!r}" if err else "")
+    print(f"  [{label}] {step} | expected={expected_err!r} actual={detail}")
+    return ok
+
+
+def test_email_suspend_and_ip_block() -> None:
+    print("\n" + "=" * 60)
+    print("UJI KEAMANAN: EMAIL SUSPEND & BLOKIR IP")
+    print("=" * 60)
+    print("""
+Aturan backend:
+  - 3x OTP salah untuk satu email  -> email dikunci 5 menit (email_suspended).
+  - Total >=5 kegagalan dari IP yang sama dalam 15 menit
+                                    -> IP diblokir (ip_suspended).
+  - Selama ada kunci (email/IP), send-otp ditolak dengan HTTP 429.
+
+Catatan:
+  - Butuh 2 email berbeda, dan OTP asli tidak perlu diketahui
+    (semua verifikasi sengaja memakai kode salah).
+  - Jangan jalankan ulang dalam 15 menit: IP masih terblokir
+    dan hasil test bisa melenceng.
+""")
+
+    email1 = input("Email #1 (target suspend email): ").strip().lower()
+    email2 = input("Email #2 (target akumulasi blokir IP): ").strip().lower()
+    if not email1 or not email2:
+        print("Kedua email harus diisi.")
+        return
+    if email1 == email2:
+        print("Email #1 dan #2 harus berbeda.")
+        return
+
+    wrong_otps = ["000000", "000001", "000002"]
+    results: list[bool] = []
+
+    print("\n-- Step 1: send-otp email #1 (harus 200) --")
+    status, msg = send_otp_status(email1)
+    results.append(check_result("send-otp email#1", 200, status))
+    print(f"         message: {msg}")
+
+    print("\n-- Step 2: verify email #1 dengan OTP salah 2x (invalid_otp_code) --")
+    for code in wrong_otps[:2]:
+        status, err = verify_otp_error(email1, code)
+        results.append(check_verify(f"verify email#1 otp={code}", "invalid_otp_code", status, err))
+
+    print("\n-- Step 3: send-otp email #2 (harus 200; wajib sebelum email #1 terkunci,")
+    print("           karena lock send-otp dicek per email ATAU per IP) --")
+    status, msg = send_otp_status(email2)
+    results.append(check_result("send-otp email#2", 200, status))
+    print(f"         message: {msg}")
+
+    print("\n-- Step 4: verify email #2 dengan OTP salah 2x (invalid_otp_code) --")
+    for code in wrong_otps[:2]:
+        status, err = verify_otp_error(email2, code)
+        results.append(check_verify(f"verify email#2 otp={code}", "invalid_otp_code", status, err))
+
+    print("\n-- Step 5: OTP salah ke-3 untuk email #1 -> email #1 suspend 5 menit --")
+    status, err = verify_otp_error(email1, wrong_otps[2])
+    results.append(check_verify("verify email#1 (percobaan ke-3)", "email_suspended", status, err))
+
+    print("\n-- Step 6: verify email #2 lagi -> IP diblokir (total gagal = 5 >= 5),")
+    print("           cek IP dilakukan sebelum cek challenge --")
+    status, err = verify_otp_error(email2, wrong_otps[2])
+    results.append(check_verify("verify email#2 (blokir IP)", "ip_suspended", status, err))
+
+    # Tunggu > cooldown 30 detik supaya 429 di bawah terbukti karena LOCK,
+    # bukan karena cooldown pengiriman OTP.
+    print("\n-- Menunggu 31 detik agar cooldown send-otp habis,")
+    print("   sehingga 429 berikutnya murni karena kunci suspend --")
+    time.sleep(31)
+
+    print("\n-- Step 7: send-otp ulang email #1 (harus 429, email terkunci) --")
+    status, msg = send_otp_status(email1)
+    results.append(check_result("send-otp email#1 saat locked", 429, status))
+    print(f"         message: {msg}")
+
+    print("\n-- Step 8: send-otp email #2 (harus 429, IP punya record terkunci) --")
+    status, msg = send_otp_status(email2)
+    results.append(check_result("send-otp email#2 saat IP locked", 429, status))
+    print(f"         message: {msg}")
+
+    print("\n" + "-" * 60)
+    print(f"Hasil: {sum(results)}/{len(results)} step sesuai ekspektasi")
+    print("Suspend email berlaku 5 menit; blokir IP berbasis kegagalan")
+    print("15 menit terakhir. Tunggu masa itu habis sebelum test ulang.")
+
+
+# ============================================================
 # MAIN FLOW
 # ============================================================
 
@@ -703,9 +1016,13 @@ def main() -> None:
         print("  3. Media Upload (Cloudinary)")
         print("  4. Logout & Exit")
         print("  5. Delete Media (Cloudinary, manual public_id)")
+        print("  6. Uji Keamanan: Email Suspend & Blokir IP")
+        print("  7. Upgrade ke Creator")
+        print("  8. Admin: List Users & Upgrade Requests")
+        print("  9. Uji Throttle (Rate Limiter)")
         print("  0. Exit (tanpa logout)")
 
-        choice = input("\nPilih [0-5]: ").strip()
+        choice = input("\nPilih [0-9]: ").strip()
 
         if choice == "1":
             print("\n" + "=" * 60)
@@ -833,6 +1150,66 @@ def main() -> None:
                 uploaded_media["public_id"] = ""
                 uploaded_media["url"] = ""
                 print("  (media tersimpan untuk project ikut dibersihkan)")
+
+        elif choice == "6":
+            test_email_suspend_and_ip_block()
+
+        elif choice == "7":
+            print("\n" + "=" * 60)
+            print("UPGRADE KE CREATOR")
+            print("=" * 60)
+
+            get_upgrade_status(token)
+
+            sub_choice = input("\nAjukan upgrade (POST)? [y/N]: ").strip().lower()
+            if sub_choice == "y":
+                request_upgrade(token)
+                get_upgrade_status(token)
+
+        elif choice == "8":
+            print("\n" + "=" * 60)
+            print("ADMIN: LIST USERS & UPGRADE REQUESTS")
+            print("=" * 60)
+            print("(harus login sebagai admin; user biasa akan kena 403)")
+
+            admin_list_users(token)
+
+            sub_choice = input("\nFilter role (user/creator/admin, kosong = lewati): ").strip().lower()
+            if sub_choice:
+                admin_list_users(token, role=sub_choice)
+
+            entries = admin_list_upgrades(token, "pending")
+
+            if entries:
+                sub_choice = input("\nReview salah satu request? [y/N]: ").strip().lower()
+                if sub_choice == "y":
+                    rid = input("Masukkan request_id: ").strip()
+                    verdict = input("Approve? [Y/n]: ").strip().lower()
+                    approve = verdict != "n"
+                    reason = ""
+                    if not approve:
+                        reason = input("Alasan reject: ").strip()
+                    if rid and admin_review_upgrade(token, rid, approve, reason):
+                        if approve:
+                            pay = input("Konfirmasi pembayaran (naikkan role ke creator)? [y/N]: ").strip().lower()
+                            if pay == "y":
+                                admin_confirm_payment(token, rid)
+
+            sub_choice = input("\nKonfirmasi pembayaran request lain (masukkan request_id, kosong = lewati): ").strip()
+            if sub_choice:
+                admin_confirm_payment(token, sub_choice)
+
+        elif choice == "9":
+            print("\n" + "=" * 60)
+            print("UJI THROTTLE (RATE LIMITER)")
+            print("=" * 60)
+
+            n_raw = input("Jumlah request (default 80): ").strip()
+            try:
+                count = int(n_raw) if n_raw else 80
+            except ValueError:
+                count = 80
+            test_throttle(token, count)
 
         elif choice == "4":
             print("\n== Logout ==")

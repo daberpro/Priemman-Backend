@@ -10,6 +10,13 @@ enum ConnectedPlatform {
   CONNECTED_PLATFORM_GITHUB = 3;
 }
 
+enum UserRole {
+  USER_ROLE_UNSPECIFIED = 0;
+  USER_ROLE_USER = 1;
+  USER_ROLE_CREATOR = 2;
+  USER_ROLE_ADMIN = 3;
+}
+
 message WorkExperience {
   ObjectId id = 1;
   string title = 2;
@@ -48,6 +55,7 @@ message User {
   AboutMe about_me = 13;
   google.protobuf.Timestamp created_at = 14;
   google.protobuf.Timestamp updated_at = 15;
+  UserRole role = 16;
 }
 
 // ---- Account API messages ----
@@ -77,4 +85,77 @@ message ListConnectedAccountsResponse {
 }
 message DeleteConnectedAccountRequest {
     ConnectedPlatform platform = 1;
+}
+
+// ---- Creator upgrade flow ----
+
+message UpgradeStatus {
+  string status = 1; // 'none' | 'pending' | 'approved' | 'rejected' | 'paid'
+  ObjectId request_id = 2;
+  string invoice_id = 3;
+  int64 invoice_amount = 4;
+  string currency = 5;
+  string rejection_reason = 6;
+  google.protobuf.Timestamp requested_at = 7;
+  google.protobuf.Timestamp reviewed_at = 8;
+  google.protobuf.Timestamp paid_at = 9;
+}
+
+message CreateUpgradeRequestResponse {
+  bool success = 1;
+  UpgradeStatus status = 2;
+}
+
+// ---- Admin API ----
+
+message AdminUserEntry {
+  ObjectId id = 1;
+  string email = 2;
+  string first_name = 3;
+  string last_name = 4;
+  UserRole role = 5;
+  google.protobuf.Timestamp created_at = 6;
+}
+
+message AdminListUsersResponse {
+  repeated AdminUserEntry users = 1;
+  int32 total = 2;
+  int32 limit = 3;
+  int32 offset = 4;
+}
+
+message UpgradeRequestEntry {
+  ObjectId id = 1;
+  ObjectId user_id = 2;
+  string email = 3;
+  string status = 4;
+  string invoice_id = 5;
+  int64 invoice_amount = 6;
+  string currency = 7;
+  string rejection_reason = 8;
+  google.protobuf.Timestamp requested_at = 9;
+}
+
+message AdminListUpgradeRequestsResponse {
+  repeated UpgradeRequestEntry requests = 1;
+}
+
+message AdminReviewUpgradeRequest {
+  ObjectId id = 1;
+  bool approve = 2;
+  string rejection_reason = 3;
+}
+
+message AdminReviewUpgradeResponse {
+  bool success = 1;
+  UpgradeRequestEntry request = 2;
+}
+
+message AdminConfirmPaymentRequest {
+  ObjectId id = 1;
+}
+
+message AdminConfirmPaymentResponse {
+  bool success = 1;
+  ObjectId user_id = 2;
 }

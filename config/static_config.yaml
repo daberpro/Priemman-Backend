@@ -25,9 +25,13 @@ components_manager:
                 - Authorization
             max-age-seconds: 86400
 
+        rate-limiter-middleware:
+            requests-per-minute: 60
+
         default-server-middleware-pipeline-builder:
             append:
                 - cors-middleware
+                - rate-limiter-middleware
 
 # ============== Dynamic Config (content type untuk file statis) ==============
         dynamic-config:
@@ -173,6 +177,31 @@ components_manager:
             method: POST,OPTIONS
             task_processor: main-task-processor
             # TIDAK ADA cloudinary config di sini
+
+        handler-upgrade:
+            path: /v1/users/me/upgrade
+            method: GET,POST,OPTIONS
+            task_processor: main-task-processor
+
+        handler-admin-users:
+            path: /v1/admin/users
+            method: GET,OPTIONS
+            task_processor: main-task-processor
+
+        handler-admin-upgrades:
+            path: /v1/admin/upgrades
+            method: GET,OPTIONS
+            task_processor: main-task-processor
+
+        handler-admin-upgrades-review:
+            path: /v1/admin/upgrades/review
+            method: POST,OPTIONS
+            task_processor: main-task-processor
+
+        handler-admin-upgrades-confirm-payment:
+            path: /v1/admin/upgrades/confirm-payment
+            method: POST,OPTIONS
+            task_processor: main-task-processor
 
 # ============== DB ==============
         database:
