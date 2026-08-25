@@ -57,9 +57,9 @@ std::string ErrorResult(userver::server::http::HttpResponse& res,
 
 DashboardUrls DashboardUrls::FromConfig(const userver::components::ComponentConfig& config) {
     return DashboardUrls{
-        config["dashboard-url"].As<std::string>("http://localhost:3000/dashboard"),
-        config["dashboard-creator-url"].As<std::string>("http://localhost:3000/dashboard-creator"),
-        config["dashboard-admin-url"].As<std::string>("http://localhost:3000/dashboard-admin"),
+        config["dashboard-url"].As<std::string>(),
+        config["dashboard-creator-url"].As<std::string>(),
+        config["dashboard-admin-url"].As<std::string>(),
     };
 }
 
