@@ -75,6 +75,26 @@ std::string UrlEncodeValue(const std::string& value) {
     return out;
 }
 
+// FIX #1: deteksi request RSC prefetch dari Next.js App Router
+bool IsRscRequest(const userver::server::http::HttpRequest& request) {
+    return !request.GetHeader("RSC").empty() ||
+           request.GetHeader("Accept")
+                   .find("text/x-component") != std::string::npos;
+}
+
+// FIX #2: sanitasi arg ?next= — cegah open-redirect dan loop ".txt"
+std::string SafeNext(const userver::server::http::HttpRequest& request,
+                     const std::string& fallback) {
+    const auto raw = request.GetArg("next");
+    if (!raw.empty() && raw.front() == '/' &&
+        raw.find("..") == std::string::npos &&
+        raw.find(".txt") == std::string::npos &&
+        raw.find("_rsc") == std::string::npos) {
+        return raw;
+    }
+    return fallback;
+}
+
 userver::fs::FileInfoWithDataConstPtr TryResolve(
     const userver::fs::FsCacheClient& fs,
     const std::string& rel
@@ -156,40 +176,64 @@ std::string StaticPageHandler::HandleRequestThrow(
     const bool logged_in = identity != nullptr && identity->has_value();
     const std::string role = logged_in ? identity->value().role : std::string{};
 
+    const bool is_rsc = IsRscRequest(request);
+
     const auto redirect_to = [&response](const std::string& url) -> std::string {
         response.SetStatus(userver::server::http::HttpStatus::kFound);
         response.SetHeader(std::string_view{"Location"}, url);
         return {};
     };
 
-    if ((path == "/login" || path == "/sign-in") && logged_in) {
-        return redirect_to(DashboardForRole(role));
-    }
+    // FIX #3: untuk request RSC prefetch, JANGAN pernah redirect.
+    // Balas status polos agar tidak ada chain redirect -> loop.
+    // Next.js akan menangani 401 di sisi client.
+    const auto guard_denied = [&](bool has_access) -> bool {
+        if (has_access) {
+            return false;
+        }
+        if (is_rsc) {
+            response.SetStatus(logged_in
+                ? userver::server::http::HttpStatus::kForbidden
+                : userver::server::http::HttpStatus::kUnauthorized);
+            return true;
+        }
+        return false;  // lanjut ke logika redirect normal di bawah
+    };
 
-    if (path.starts_with("/admin")) {
-        if (!logged_in) {
-            return redirect_to("/login?next=" + UrlEncodeValue(request.GetUrl()));
+    // FIX #4: "next" dibangun dari PATH saja (GetRequestPath()),
+    // bukan GetUrl(), supaya ?_rsc=... tidak ikut.
+    const std::string login_redirect =
+        "/login?next=" + UrlEncodeValue(path);
+
+    if ((path == "/login" || path == "/sign-in")) {
+        if (logged_in) {
+            if (is_rsc) {
+                // Prefetch halaman login saat sudah login:
+                // cukup balas redirect tanpa diproses ulang sebagai dokumen.
+                return redirect_to(SafeNext(request, DashboardForRole(role)));
+            }
+            return redirect_to(SafeNext(request, DashboardForRole(role)));
         }
-        if (role != "admin") {
-            return redirect_to(DashboardForRole(role));
-        }
-    } else if (path.starts_with("/dashboard-admin")) {
+    } else if (path.starts_with("/admin") || path.starts_with("/dashboard-admin")) {
+        if (guard_denied(logged_in)) return {};
         if (!logged_in) {
-            return redirect_to("/login?next=" + UrlEncodeValue(request.GetUrl()));
+            return redirect_to(login_redirect);
         }
         if (role != "admin") {
             return redirect_to(DashboardForRole(role));
         }
     } else if (path.starts_with("/dashboard-creator")) {
+        if (guard_denied(logged_in)) return {};
         if (!logged_in) {
-            return redirect_to("/login?next=" + UrlEncodeValue(request.GetUrl()));
+            return redirect_to(login_redirect);
         }
         if (role != "creator" && role != "admin") {
             return redirect_to(DashboardForRole(role));
         }
     } else if (path.starts_with("/dashboard")) {
+        if (guard_denied(logged_in)) return {};
         if (!logged_in) {
-            return redirect_to("/login?next=" + UrlEncodeValue(request.GetUrl()));
+            return redirect_to(login_redirect);
         }
     }
 
