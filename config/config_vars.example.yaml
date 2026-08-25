@@ -30,3 +30,8 @@ cors-allowed-origins:
 server-port: 8080
 worker-threads: 4
 log-level: error
+
+# Frontend dashboard (redirect setelah login, sesuai role)
+dashboard-url: 'http://localhost:3000/dashboard'
+dashboard-creator-url: 'http://localhost:3000/dashboard-creator'
+dashboard-admin-url: 'http://localhost:3000/dashboard-admin'

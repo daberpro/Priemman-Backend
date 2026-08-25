@@ -10,8 +10,7 @@
 
 #include <openssl/rand.h>
 #include <proto/auth.pb.h>
-#include <userver/formats/json/serialize.hpp>
-#include <userver/formats/json/value_builder.hpp>
+#include <src/handlers/api_errors.hpp>
 #include <userver/logging/log.hpp>
 #include <userver/server/http/http_status.hpp>
 
@@ -141,17 +140,15 @@ std::string SendOtpHandler::HandleRequestThrow(
     priemman::v1::SendOtpRequest request_body;
     if (!request_body.ParseFromString(request.RequestBody())) {
         http_response.SetStatus(userver::server::http::HttpStatus::kBadRequest);
-        userver::formats::json::ValueBuilder builder;
-        builder["error"] = "Invalid request body";
-        return userver::formats::json::ToString(builder.ExtractValue());
+        http_response.SetContentType(errors::kProtobufContentType);
+        return errors::BuildErrorResult("INVALID_REQUEST_BODY");
     }
 
     const std::string email = NormalizeEmail(request_body.email());
     if (email.empty()) {
         http_response.SetStatus(userver::server::http::HttpStatus::kBadRequest);
-        userver::formats::json::ValueBuilder builder;
-        builder["error"] = "Email is required";
-        return userver::formats::json::ToString(builder.ExtractValue());
+        http_response.SetContentType(errors::kProtobufContentType);
+        return errors::BuildErrorResult("EMAIL_REQUIRED");
     }
 
     const std::string otp_code = GenerateOtpCode();

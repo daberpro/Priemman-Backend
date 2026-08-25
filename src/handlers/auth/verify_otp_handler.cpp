@@ -7,8 +7,7 @@
 
 #include <proto/auth.pb.h>
 #include <string>
-#include <userver/formats/json/serialize.hpp>
-#include <userver/formats/json/value_builder.hpp>
+#include <src/handlers/api_errors.hpp>
 #include <userver/server/http/http_response.hpp>
 #include <userver/server/http/http_status.hpp>
 
@@ -41,12 +40,20 @@ std::string VerifyOtpHandler::HandleRequestThrow(
 ) const {
     auto& res = request.GetHttpResponse();
 
+    const auto error_response = [&res](
+        userver::server::http::HttpStatus status,
+        std::string_view code
+    ) {
+        res.SetStatus(status);
+        res.SetContentType(errors::kProtobufContentType);
+        return errors::BuildErrorResult(code);
+    };
+
     priemman::v1::VerifyOtpRequest req;
     if (!req.ParseFromString(request.RequestBody())) {
-        res.SetStatus(userver::server::http::HttpStatus::kBadRequest);
-        userver::formats::json::ValueBuilder err;
-        err["error"] = "invalid_request_body";
-        return userver::formats::json::ToString(err.ExtractValue());
+        return error_response(
+            userver::server::http::HttpStatus::kBadRequest,
+            "INVALID_REQUEST_BODY");
     }
 
     const std::string email = NormalizeEmail(req.email());
@@ -56,31 +63,27 @@ std::string VerifyOtpHandler::HandleRequestThrow(
     const database::OtpResult valid = _otp_repo.VerifyAndConsume(email, otp_hash, ip_address);
 
     switch (valid) {
-        case database::OtpResult::kInvalidCode:{
-            res.SetStatus(userver::server::http::HttpStatus::kUnauthorized);
-            userver::formats::json::ValueBuilder err;
-            err["error"] = "invalid_otp_code";
-            return userver::formats::json::ToString(err.ExtractValue());
+        case database::OtpResult::kInvalidCode: {
+            return error_response(
+                userver::server::http::HttpStatus::kUnauthorized,
+                "INVALID_OTP_CODE");
         }
-        case database::OtpResult::kNotFoundOrExpired:{
-            res.SetStatus(userver::server::http::HttpStatus::kUnauthorized);
-            userver::formats::json::ValueBuilder err;
-            err["error"] = "invalid_or_expired_otp";
-            return userver::formats::json::ToString(err.ExtractValue());
+        case database::OtpResult::kNotFoundOrExpired: {
+            return error_response(
+                userver::server::http::HttpStatus::kUnauthorized,
+                "INVALID_OR_EXPIRED_OTP");
         }
-        case database::OtpResult::kEmailSuspended:{
-            res.SetStatus(userver::server::http::HttpStatus::kUnauthorized);
-            userver::formats::json::ValueBuilder err;
-            err["error"] = "email_suspended";
-            return userver::formats::json::ToString(err.ExtractValue());
+        case database::OtpResult::kEmailSuspended: {
+            return error_response(
+                userver::server::http::HttpStatus::kUnauthorized,
+                "EMAIL_SUSPENDED");
         }
-        case database::OtpResult::kIpSuspended:{
-            res.SetStatus(userver::server::http::HttpStatus::kUnauthorized);
-            userver::formats::json::ValueBuilder err;
-            err["error"] = "ip_suspended";
-            return userver::formats::json::ToString(err.ExtractValue());
+        case database::OtpResult::kIpSuspended: {
+            return error_response(
+                userver::server::http::HttpStatus::kUnauthorized,
+                "IP_SUSPENDED");
         }
-        case database::OtpResult::kSuccess:{
+        case database::OtpResult::kSuccess: {
             break;
         }
     }

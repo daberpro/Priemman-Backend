@@ -543,7 +543,7 @@ def cloudinary_exists(public_id: str) -> bool | None:
 
 
 def upload_test_image(base_url: str, token: str):
-    """Upload test.png ke backend, return UploadMediaResponse."""
+    """Upload test.png ke backend, return item pertama UploadMediaBatchResponse."""
     if not os.path.exists(MEDIA_TEST_IMAGE):
         pytest.skip("test.png tidak ada di test_py/")
     with open(MEDIA_TEST_IMAGE, "rb") as f:
@@ -552,7 +552,9 @@ def upload_test_image(base_url: str, token: str):
     r = requests.post(f"{base_url}/v1/media/upload", files=files,
                       headers={"Authorization": f"Bearer {token}"})
     assert r.status_code == 200, f"upload gagal: {r.status_code} {r.text[:300]}"
-    return parse(media_pb2.UploadMediaResponse, r)
+    batch = parse(media_pb2.UploadMediaBatchResponse, r)
+    assert batch.items, "batch upload kosong"
+    return batch.items[0]
 
 
 class TestMedia:

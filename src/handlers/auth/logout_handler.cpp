@@ -1,8 +1,7 @@
 #include "logout_handler.hpp"
 
 #include <proto/auth.pb.h>
-#include <userver/formats/json/serialize.hpp>
-#include <userver/formats/json/value_builder.hpp>
+#include <src/handlers/api_errors.hpp>
 #include <userver/server/http/http_response.hpp>
 
 namespace priemman::auth {
@@ -26,9 +25,8 @@ std::string LogoutHandler::HandleRequestThrow(
     priemman::v1::LogoutRequest req;
     if (!req.ParseFromString(request.RequestBody())) {
         res.SetStatus(userver::server::http::HttpStatus::kBadRequest);
-        userver::formats::json::ValueBuilder err;
-        err["error"] = "invalid_request_body";
-        return userver::formats::json::ToString(err.ExtractValue());
+        res.SetContentType(errors::kProtobufContentType);
+        return errors::BuildErrorResult("INVALID_REQUEST_BODY");
     }
 
     const bool revoked = _sessions.Revoke(req.session_token());

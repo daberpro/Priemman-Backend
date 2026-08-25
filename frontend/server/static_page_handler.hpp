@@ -1,5 +1,7 @@
 #pragma once
 
+#include <string>
+
 #include <userver/components/fs_cache.hpp>
 #include <userver/server/handlers/http_handler_base.hpp>
 
@@ -21,6 +23,7 @@ public:
 
 private:
     const userver::fs::FsCacheClient* _fs;
+    std::string _favicon_data;
 };
 
 }  // namespace priemman::frontend
