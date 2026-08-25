@@ -14,6 +14,39 @@
 
 namespace priemman::handlers::media {
 
+namespace {
+
+constexpr std::size_t kMaxFileSize = 10 * 1024 * 1024; // 10MB per file
+constexpr std::size_t kMaxFiles = 10;                  // maksimal file per request
+
+// Optimasi delivery: sisipkan transformasi f_auto,q_auto supaya CDN
+// Cloudinary menyajikan AVIF (Chrome/Firefox) / WebP (browser lain)
+// sesuai kemampuan browser, dengan fallback ke format asli.
+// Aset asli tetap utuh; hanya URL delivery-nya yang berubah.
+// Contoh: .../image/upload/v123/x.png -> .../image/upload/f_auto,q_auto/v123/x.png
+std::string InsertDeliveryTransform(std::string media_url) {
+    constexpr std::string_view kUploadMarker = "/upload/";
+    const auto marker_pos = media_url.find(kUploadMarker);
+    if (media_url.find("res.cloudinary.com") != std::string::npos &&
+        marker_pos != std::string::npos) {
+        media_url.insert(marker_pos + kUploadMarker.size(), "f_auto,q_auto/");
+    }
+    return media_url;
+}
+
+priemman::v1::MediaType MediaTypeFromCloudinary(
+    const std::string& resource_type,
+    const std::string& content_type
+) {
+    if (resource_type == "image") return priemman::v1::MEDIA_TYPE_IMAGE;
+    if (resource_type == "video") return priemman::v1::MEDIA_TYPE_VIDEO;
+    if (content_type.find("image/") == 0) return priemman::v1::MEDIA_TYPE_IMAGE;
+    if (content_type.find("video/") == 0) return priemman::v1::MEDIA_TYPE_VIDEO;
+    return priemman::v1::MEDIA_TYPE_UNSPECIFIED;
+}
+
+} // namespace
+
 UploadMediaHandler::UploadMediaHandler(
     const userver::components::ComponentConfig& config,
     const userver::components::ComponentContext& context
@@ -54,151 +87,136 @@ std::string UploadMediaHandler::HandleRequestThrow(
                             "Expected 'multipart/form-data', got: " + content_type_header);
     }
 
-    // 3. Ambil file dari form data
+    // 3. Ambil semua file dari form data (field "file" boleh dikirim lebih dari satu)
     if (!request.HasFormDataArg("file")) {
         return return_error(userver::server::http::HttpStatus::kBadRequest,
                             "MISSING_FILE", "Missing 'file' in form data");
     }
 
-    const auto& file_arg = request.GetFormDataArg("file");
-    if (file_arg.value.empty()) {
+    const auto& files = request.GetFormDataArgVector("file");
+    if (files.size() > kMaxFiles) {
         return return_error(userver::server::http::HttpStatus::kBadRequest,
-                            "EMPTY_FILE", "Uploaded file is empty");
+                            "MAX_FILES_EXCEEDED",
+                            fmt::format("Too many files: {} (max: {})",
+                                        files.size(), kMaxFiles));
     }
 
-    // 4. Log info file
-    LOG_INFO() << "Uploading file: "
-               << file_arg.filename.value_or("unknown")
-               << " size: " << file_arg.value.size()
-               << " bytes"
-               << " content-type: " << file_arg.content_type.value_or("unknown");
-
-    // 5. Cek ukuran file (max 10MB)
-    const size_t MAX_FILE_SIZE = 10 * 1024 * 1024; // 10MB
-    if (file_arg.value.size() > MAX_FILE_SIZE) {
-        return return_error(userver::server::http::HttpStatus::kBadRequest,
-                            "FILE_TOO_LARGE",
-                            fmt::format("File too large: {} bytes (max: {} bytes)",
-                                       file_arg.value.size(), MAX_FILE_SIZE));
+    // 4. Validasi awal semua file sebelum upload
+    for (const auto& file_arg : files) {
+        const std::string filename = file_arg.filename.value_or("unknown");
+        if (file_arg.value.empty()) {
+            return return_error(userver::server::http::HttpStatus::kBadRequest,
+                                "EMPTY_FILE", "Uploaded file is empty: " + filename);
+        }
+        if (file_arg.value.size() > kMaxFileSize) {
+            return return_error(userver::server::http::HttpStatus::kBadRequest,
+                                "FILE_TOO_LARGE",
+                                fmt::format("File too large: {} ({} bytes, max: {} bytes)",
+                                            filename, file_arg.value.size(), kMaxFileSize));
+        }
     }
 
-    // 6. Siapkan parameter untuk Cloudinary
-    // PENTING: copy dari string_view dengan panjang yang benar.
-    // Jangan pakai .data() — string_view tidak null-terminated, konstruktor
-    // std::string(const char*) akan membaca lewat batas view dan menelan
-    // "\r\n\r\n" + bytes file, merusak Content-Type part multipart.
-    std::string content_type_str{file_arg.content_type.value_or("application/octet-stream")};
+    priemman::v1::UploadMediaBatchResponse batch_res;
 
-    // Tentukan resource_type dari content-type
-    std::string resource_type = "auto";
-    if (content_type_str.find("image/") == 0) {
-        resource_type = "image";
-    } else if (content_type_str.find("video/") == 0) {
-        resource_type = "video";
-    }
+    for (const auto& file_arg : files) {
+        const std::string filename = file_arg.filename.value_or("upload.bin");
 
-    std::map<std::string, std::string> additional_params = {
-        {"folder", "projects/" + *user_id},
-        {"unique_filename", "true"},
-    };
+        LOG_INFO() << "Uploading file: " << filename
+                   << " size: " << file_arg.value.size()
+                   << " bytes"
+                   << " content-type: " << file_arg.content_type.value_or("unknown");
 
-    // Catatan: parameter expires_at sengaja TIDAK dikirim — di akun paket
-    // Free tidak ikut dihitung dalam signature sehingga membuat upload 401,
-    // dan di explicit API diabaikan. Pembersihan orphan cukup lewat sweeper DB.
+        // PENTING: copy dari string_view dengan panjang yang benar.
+        // Jangan pakai .data() — string_view tidak null-terminated, konstruktor
+        // std::string(const char*) akan membaca lewat batas view dan menelan
+        // "\r\n\r\n" + bytes file, merusak Content-Type part multipart.
+        std::string content_type_str{file_arg.content_type.value_or("application/octet-stream")};
 
-    // 7. Upload ke Cloudinary
-    std::string response_body;
-    try {
-        LOG_INFO() << "Uploading to Cloudinary: folder=projects/" << *user_id
-                   << ", resource_type=" << resource_type;
+        // Tentukan resource_type dari content-type
+        std::string resource_type = "auto";
+        if (content_type_str.find("image/") == 0) {
+            resource_type = "image";
+        } else if (content_type_str.find("video/") == 0) {
+            resource_type = "video";
+        }
 
-        response_body = cloudinary_client_.UploadFile(
-            std::string(file_arg.value),
-            file_arg.filename.value_or("upload.bin"),
-            content_type_str,
-            additional_params,
-            resource_type
-        );
-    } catch (const std::exception& e) {
-        LOG_ERROR() << "Cloudinary upload failed: " << e.what();
-        return return_error(
-            userver::server::http::HttpStatus::kInternalServerError,
-            "CLOUDINARY_ERROR",
-            std::string("Upload failed: ") + e.what()
-        );
-    }
+        std::map<std::string, std::string> additional_params = {
+            {"folder", "projects/" + *user_id},
+            {"unique_filename", "true"},
+        };
 
-    // 8. Parse response JSON dari Cloudinary
-    auto json = userver::formats::json::FromString(response_body);
+        // Catatan: parameter expires_at sengaja TIDAK dikirim — di akun paket
+        // Free tidak ikut dihitung dalam signature sehingga membuat upload 401,
+        // dan di explicit API diabaikan. Pembersihan orphan cukup lewat sweeper DB.
 
-    LOG_INFO() << "Cloudinary upload success: public_id="
-               << json["public_id"].As<std::string>("");
-
-    // 9. Map ke protobuf UploadMediaResponse
-    priemman::v1::UploadMediaResponse proto_res;
-
-    // URL
-    std::string media_url = json["secure_url"].As<std::string>(json["url"].As<std::string>(""));
-
-    // Optimasi delivery: sisipkan transformasi f_auto,q_auto supaya CDN
-    // Cloudinary menyajikan AVIF (Chrome/Firefox) / WebP (browser lain)
-    // sesuai kemampuan browser, dengan fallback ke format asli.
-    // Aset asli tetap utuh; hanya URL delivery-nya yang berubah.
-    // Contoh: .../image/upload/v123/x.png -> .../image/upload/f_auto,q_auto/v123/x.png
-    constexpr std::string_view kUploadMarker = "/upload/";
-    const auto marker_pos = media_url.find(kUploadMarker);
-    if (media_url.find("res.cloudinary.com") != std::string::npos &&
-        marker_pos != std::string::npos) {
-        media_url.insert(marker_pos + kUploadMarker.size(), "f_auto,q_auto/");
-    }
-    proto_res.set_url(media_url);
-
-    // Public ID (wajib untuk operasi hapus nanti)
-    proto_res.set_public_id(json["public_id"].As<std::string>(""));
-
-    // Resource type dari Cloudinary response
-    const auto cloudinary_resource_type = json["resource_type"].As<std::string>("auto");
-    proto_res.set_resource_type(cloudinary_resource_type);
-
-    // 10. Catat aset sebagai orphan — kalau tidak pernah di-attach ke project,
-    // sweeper akan menghapusnya dari Cloudinary setelah TTL.
-    const std::string public_id = proto_res.public_id();
-    if (!public_id.empty()) {
+        // 5. Upload ke Cloudinary
+        std::string response_body;
         try {
-            _media.InsertOrphan(public_id, *user_id, cloudinary_resource_type);
+            LOG_INFO() << "Uploading to Cloudinary: folder=projects/" << *user_id
+                       << ", resource_type=" << resource_type
+                       << ", file=" << filename;
+
+            response_body = cloudinary_client_.UploadFile(
+                std::string(file_arg.value),
+                filename,
+                content_type_str,
+                additional_params,
+                resource_type
+            );
         } catch (const std::exception& e) {
-            // Aset sudah ada di Cloudinary tapi tidak tercatat; sweeper tidak
-            // akan mengenalinya, namun upload gagal di sisi client.
-            LOG_ERROR() << "Failed to track media upload " << public_id
-                        << ": " << e.what();
+            LOG_ERROR() << "Cloudinary upload failed: " << e.what();
             return return_error(
                 userver::server::http::HttpStatus::kInternalServerError,
-                "DB_ERROR", "Failed to record uploaded media"
+                "CLOUDINARY_ERROR",
+                std::string("Upload failed: ") + e.what()
             );
         }
-    }
 
-    // Tentukan MediaType
-    if (cloudinary_resource_type == "image") {
-        proto_res.set_type(priemman::v1::MEDIA_TYPE_IMAGE);
-    } else if (cloudinary_resource_type == "video") {
-        proto_res.set_type(priemman::v1::MEDIA_TYPE_VIDEO);
-    } else {
-        // Fallback ke content-type
-        if (content_type_str.find("image/") == 0) {
-            proto_res.set_type(priemman::v1::MEDIA_TYPE_IMAGE);
-        } else if (content_type_str.find("video/") == 0) {
-            proto_res.set_type(priemman::v1::MEDIA_TYPE_VIDEO);
-        } else {
-            proto_res.set_type(priemman::v1::MEDIA_TYPE_UNSPECIFIED);
+        // 6. Parse response JSON dari Cloudinary
+        auto json = userver::formats::json::FromString(response_body);
+
+        LOG_INFO() << "Cloudinary upload success: public_id="
+                   << json["public_id"].As<std::string>("");
+
+        // 7. Map ke protobuf UploadMediaResponse
+        auto* item = batch_res.add_items();
+
+        std::string media_url = json["secure_url"].As<std::string>(json["url"].As<std::string>(""));
+        item->set_url(InsertDeliveryTransform(std::move(media_url)));
+
+        // Public ID (wajib untuk operasi hapus nanti)
+        item->set_public_id(json["public_id"].As<std::string>(""));
+
+        // Resource type dari Cloudinary response
+        const auto cloudinary_resource_type = json["resource_type"].As<std::string>("auto");
+        item->set_resource_type(cloudinary_resource_type);
+
+        // 8. Catat aset sebagai orphan — kalau tidak pernah di-attach ke project,
+        // sweeper akan menghapusnya dari Cloudinary setelah TTL.
+        const std::string public_id = item->public_id();
+        if (!public_id.empty()) {
+            try {
+                _media.InsertOrphan(public_id, *user_id, cloudinary_resource_type);
+            } catch (const std::exception& e) {
+                // Aset sudah ada di Cloudinary tapi tidak tercatat; sweeper tidak
+                // akan mengenalinya, namun upload gagal di sisi client.
+                LOG_ERROR() << "Failed to track media upload " << public_id
+                            << ": " << e.what();
+                return return_error(
+                    userver::server::http::HttpStatus::kInternalServerError,
+                    "DB_ERROR", "Failed to record uploaded media"
+                );
+            }
         }
-    }
 
-    // Generate UUID untuk media id
-    proto_res.mutable_id()->set_value(userver::utils::generators::GenerateUuid());
+        item->set_type(MediaTypeFromCloudinary(cloudinary_resource_type, content_type_str));
+
+        // Generate UUID untuk media id
+        item->mutable_id()->set_value(userver::utils::generators::GenerateUuid());
+    }
 
     res.SetContentType("application/protobuf");
-    return proto_res.SerializeAsString();
+    return batch_res.SerializeAsString();
 }
 
 } // namespace priemman::handlers::media

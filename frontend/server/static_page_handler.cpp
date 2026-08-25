@@ -7,6 +7,8 @@
 
 #include <userver/components/component_config.hpp>
 #include <userver/components/component_context.hpp>
+#include <userver/fs/blocking/read.hpp>
+#include <userver/logging/log.hpp>
 #include <userver/server/http/http_method.hpp>
 #include <userver/server/http/http_response.hpp>
 #include <userver/server/http/http_status.hpp>
@@ -83,6 +85,12 @@ userver::fs::FileInfoWithDataConstPtr TryResolve(
     return fs.TryGetFile("/" + rel);
 }
 
+std::string DashboardForRole(const std::string& role) {
+    if (role == "admin") return "/dashboard-admin";
+    if (role == "creator") return "/dashboard-creator";
+    return "/dashboard";
+}
+
 }  // namespace
 
 StaticPageHandler::StaticPageHandler(
@@ -93,6 +101,15 @@ StaticPageHandler::StaticPageHandler(
       _fs(&context.FindComponent<userver::components::FsCache>(
                config["fs-cache-component"].As<std::string>())
                .GetClient()) {
+    const auto favicon_path =
+        config["favicon-path"].As<std::string>("../static/favicon.ico");
+    try {
+        _favicon_data = userver::fs::blocking::ReadFileContents(favicon_path);
+        LOG_INFO() << "favicon loaded from " << favicon_path;
+    } catch (const std::exception& ex) {
+        LOG_WARNING() << "favicon not loaded from " << favicon_path
+                      << ", falling back to dist file: " << ex.what();
+    }
 }
 
 userver::yaml_config::Schema StaticPageHandler::GetStaticConfigSchema() {
@@ -106,6 +123,15 @@ userver::yaml_config::Schema StaticPageHandler::GetStaticConfigSchema() {
             userver::yaml_config::impl::SchemaFromString(R"(
 type: string
 description: Name of the fs-cache component that serves the static files
+)")
+        )
+    );
+    schema.properties->emplace(
+        "favicon-path",
+        userver::yaml_config::SchemaPtr(
+            userver::yaml_config::impl::SchemaFromString(R"(
+type: string
+description: Path to the favicon.ico served at /favicon.ico, overrides the dist file
 )")
         )
     );
@@ -136,17 +162,41 @@ std::string StaticPageHandler::HandleRequestThrow(
         return {};
     };
 
+    if ((path == "/login" || path == "/sign-in") && logged_in) {
+        return redirect_to(DashboardForRole(role));
+    }
+
     if (path.starts_with("/admin")) {
         if (!logged_in) {
             return redirect_to("/login?next=" + UrlEncodeValue(request.GetUrl()));
         }
         if (role != "admin") {
-            return redirect_to("/");
+            return redirect_to(DashboardForRole(role));
+        }
+    } else if (path.starts_with("/dashboard-admin")) {
+        if (!logged_in) {
+            return redirect_to("/login?next=" + UrlEncodeValue(request.GetUrl()));
+        }
+        if (role != "admin") {
+            return redirect_to(DashboardForRole(role));
+        }
+    } else if (path.starts_with("/dashboard-creator")) {
+        if (!logged_in) {
+            return redirect_to("/login?next=" + UrlEncodeValue(request.GetUrl()));
+        }
+        if (role != "creator" && role != "admin") {
+            return redirect_to(DashboardForRole(role));
         }
     } else if (path.starts_with("/dashboard")) {
         if (!logged_in) {
             return redirect_to("/login?next=" + UrlEncodeValue(request.GetUrl()));
         }
+    }
+
+    if (path == "/favicon.ico" && !_favicon_data.empty()) {
+        response.SetContentType("image/x-icon");
+        response.SetHeader(std::string_view{"Cache-Control"}, "public, max-age=3600");
+        return _favicon_data;
     }
 
     userver::fs::FileInfoWithDataConstPtr file;

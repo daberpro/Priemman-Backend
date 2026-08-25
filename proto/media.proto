@@ -12,3 +12,7 @@ message UploadMediaResponse {
     string public_id = 5;          // Public ID dari Cloudinary (wajib untuk operasi hapus)
     string resource_type = 6;      // "image", "video", atau "raw" dari Cloudinary
 }
+
+message UploadMediaBatchResponse {
+    repeated UploadMediaResponse items = 1;  // Urutan sama dengan urutan file di request
+}

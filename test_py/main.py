@@ -428,23 +428,30 @@ def upload_media(token: str, file_path: str) -> media_pb2.UploadMediaResponse | 
     resp = http.post(UPLOAD_MEDIA_URL, files=files, headers=headers)
 
     if resp.status_code == 200 and is_proto(resp):
-        out = media_pb2.UploadMediaResponse()
-        out.ParseFromString(resp.content)
+        batch = media_pb2.UploadMediaBatchResponse()
+        batch.ParseFromString(resp.content)
+
+        if not batch.items:
+            show_error(resp)
+            return None
 
         # Enum MediaType didefinisikan di project.proto, jadi ada di project_pb2
-        media_type_name = {
-            project_pb2.MEDIA_TYPE_IMAGE: "IMAGE",
-            project_pb2.MEDIA_TYPE_VIDEO: "VIDEO",
-            project_pb2.MEDIA_TYPE_UNSPECIFIED: "UNSPECIFIED",
-        }.get(out.type, "UNKNOWN")
+        for idx, out in enumerate(batch.items, start=1):
+            media_type_name = {
+                project_pb2.MEDIA_TYPE_IMAGE: "IMAGE",
+                project_pb2.MEDIA_TYPE_VIDEO: "VIDEO",
+                project_pb2.MEDIA_TYPE_UNSPECIFIED: "UNSPECIFIED",
+            }.get(out.type, "UNKNOWN")
 
-        show(resp.status_code,
-             f"id            : {out.id.value}\n"
-             f"url           : {out.url}\n"
-             f"public_id     : {out.public_id}\n"
-             f"type          : {media_type_name}\n"
-             f"resource_type : {out.resource_type}")
-        return out
+            header = f"file {idx}/{len(batch.items)}" if len(batch.items) > 1 else None
+            show(resp.status_code,
+                 (f"[{header}]\n" if header else "") +
+                 f"id            : {out.id.value}\n"
+                 f"url           : {out.url}\n"
+                 f"public_id     : {out.public_id}\n"
+                 f"type          : {media_type_name}\n"
+                 f"resource_type : {out.resource_type}")
+        return batch.items[0]
 
     show_error(resp)
     return None

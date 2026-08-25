@@ -70,18 +70,25 @@ jobs:
             --parallel 2
 
       # === TAMBAHAN BARU ===
-      - name: Strip binary (reduce size)
+      - name: Strip binaries (reduce size)
         if: github.event_name == 'push'
         run: |
-          strip build-ci/server
-          ls -lh build-ci/server
+          strip build-ci/server build-ci/frontend_server
+          ls -lh build-ci/server build-ci/frontend_server
 
-      - name: Upload server binary as artifact
+      - name: Stage artifacts (flat layout)
+        if: github.event_name == 'push'
+        run: |
+          mkdir -p dist-bin dist-config
+          cp build-ci/server build-ci/frontend_server dist-bin/
+          cp config/static_config.yaml config/frontend_static_config.yaml config/db.sql dist-config/
+
+      - name: Upload server binaries as artifact
         if: github.event_name == 'push'
         uses: actions/upload-artifact@v4
         with:
           name: priemman-server-${{ github.ref_name }}-${{ github.sha }}
-          path: build-ci/server
+          path: dist-bin/
           retention-days: 30
           if-no-files-found: error
 
@@ -90,9 +97,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: priemman-config-${{ github.ref_name }}-${{ github.sha }}
-          path: |
-            config/static_config.yaml
-            config/db.sql
+          path: dist-config/
           retention-days: 30
           if-no-files-found: error
       # === END TAMBAHAN ===

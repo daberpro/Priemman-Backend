@@ -23,6 +23,7 @@
 #include <src/database/project_repository.hpp>
 #include <src/database/collection_repository.hpp>
 #include <src/database/media_repository.hpp>
+#include <src/handlers/api_errors.hpp>
 
 namespace priemman::handlers {
 
@@ -30,12 +31,7 @@ inline std::string ErrorResult(
     const std::string& code,
     const std::string& message
 ) {
-    priemman::v1::Result r;
-    r.set_is_error(true);
-    r.set_message(message);
-    r.mutable_error_detail()->set_code(code);
-    r.mutable_error_detail()->set_message(message);
-    return r.SerializeAsString();
+    return errors::BuildErrorResult(code, message);
 }
 
 class AuthenticatedHandlerBase : public userver::server::handlers::HttpHandlerBase {

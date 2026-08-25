@@ -5,6 +5,7 @@
 #include <cctype>
 #include <string>
 #include <ranges>
+#include <src/handlers/api_errors.hpp>
 #include <userver/formats/json.hpp>
 #include <userver/http/content_type.hpp>
 #include <userver/server/http/http_response.hpp>
@@ -44,6 +45,64 @@ std::string NormalizeEmail(std::string email) {
     return email;
 }
 
+std::string ErrorResult(userver::server::http::HttpResponse& res,
+                        userver::server::http::HttpStatus status,
+                        std::string_view code) {
+    res.SetStatus(status);
+    res.SetContentType(errors::kProtobufContentType);
+    return errors::BuildErrorResult(code);
+}
+
+}
+
+DashboardUrls DashboardUrls::FromConfig(const userver::components::ComponentConfig& config) {
+    return DashboardUrls{
+        config["dashboard-url"].As<std::string>("http://localhost:3000/dashboard"),
+        config["dashboard-creator-url"].As<std::string>("http://localhost:3000/dashboard-creator"),
+        config["dashboard-admin-url"].As<std::string>("http://localhost:3000/dashboard-admin"),
+    };
+}
+
+const std::string& DashboardUrls::ForRole(const std::string& role) const {
+    if (role == "admin") return admin;
+    if (role == "creator") return creator;
+    return user;
+}
+
+namespace {
+
+void AddDashboardUrlProperties(userver::yaml_config::Schema& schema) {
+    if (!schema.properties.has_value()) {
+        schema.properties.emplace();
+    }
+    static const std::pair<std::string_view, std::string_view> kProps[] = {
+        {"dashboard-url", "Dashboard URL for regular users after successful login"},
+        {"dashboard-creator-url", "Dashboard URL for creators after successful login"},
+        {"dashboard-admin-url", "Dashboard URL for admins after successful login"},
+    };
+    for (const auto& [name, description] : kProps) {
+        schema.properties->emplace(
+            std::string{name},
+            userver::yaml_config::SchemaPtr(
+                userver::yaml_config::impl::SchemaFromString(
+                    "type: string\ndescription: " + std::string{description} + "\n")
+            )
+        );
+    }
+}
+
+}  // namespace
+
+userver::yaml_config::Schema OAuthGoogleCallbackHandler::GetStaticConfigSchema() {
+    auto schema = userver::server::handlers::HttpHandlerBase::GetStaticConfigSchema();
+    AddDashboardUrlProperties(schema);
+    return schema;
+}
+
+userver::yaml_config::Schema OAuthGithubCallbackHandler::GetStaticConfigSchema() {
+    auto schema = userver::server::handlers::HttpHandlerBase::GetStaticConfigSchema();
+    AddDashboardUrlProperties(schema);
+    return schema;
 }
 
 // Google
@@ -55,22 +114,20 @@ OAuthGoogleCallbackHandler::OAuthGoogleCallbackHandler(
       _users(&_mysql_cluster),
       _sessions(&_mysql_cluster),
       _oauth_google_component(&context.FindComponent<daberdev::components::OAuthGoogleComponent>("daberdev-oauth-google-component")),
-      _redirect_url(config["redirect-url"].As<std::string>("http://localhost:3000/dashboard")) {}
+      _dashboards(DashboardUrls::FromConfig(config)) {}
 
 std::string OAuthGoogleCallbackHandler::HandleRequestThrow(
     const userver::server::http::HttpRequest& request,
     userver::server::request::RequestContext&) const {
 
     auto& res = request.GetHttpResponse();
-    res.SetContentType(userver::http::content_type::kApplicationJson);
 
     // 1. Validasi State dari Cookie (Bukan dari DB)
     const auto url_state = std::string{request.GetArg("state")};
     const std::string cookie_state = request.GetCookie("oauth_state");
 
     if (url_state.empty() || cookie_state.empty() || url_state != cookie_state) {
-        res.SetStatus(userver::server::http::HttpStatus::kBadRequest);
-        return R"({"error":"invalid_or_expired_state"})";
+        return ErrorResult(res, userver::server::http::HttpStatus::kBadRequest, "INVALID_OR_EXPIRED_STATE");
     }
 
     // 2. Ambil Data User
@@ -85,8 +142,7 @@ std::string OAuthGoogleCallbackHandler::HandleRequestThrow(
     oauth.email_verified = JsonBool(doc, "email_verified");
 
     if (oauth.provider_user_id.empty() || oauth.email.empty()) {
-        res.SetStatus(userver::server::http::HttpStatus::kUnauthorized);
-        return R"({"error":"oauth_profile_incomplete"})";
+        return ErrorResult(res, userver::server::http::HttpStatus::kUnauthorized, "OAUTH_PROFILE_INCOMPLETE");
     }
 
     // 3. Find / Create User
@@ -105,7 +161,7 @@ std::string OAuthGoogleCallbackHandler::HandleRequestThrow(
     res.SetCookie(clear_cookie);
 
     res.SetStatus(userver::server::http::HttpStatus::kFound);
-    res.SetHeader(std::string("Location"), _redirect_url);
+    res.SetHeader(std::string("Location"), _dashboards.ForRole(result.user.role));
 
     return "";
 }
@@ -119,21 +175,19 @@ OAuthGithubCallbackHandler::OAuthGithubCallbackHandler(
       _users(&_mysql_cluster),
       _sessions(&_mysql_cluster),
       _oauth_github_component(&context.FindComponent<daberdev::components::OAuthGithubComponent>("daberdev-oauth-github-component")),
-      _redirect_url(config["redirect-url"].As<std::string>("http://localhost:3000/dashboard")) {}
+      _dashboards(DashboardUrls::FromConfig(config)) {}
 
 std::string OAuthGithubCallbackHandler::HandleRequestThrow(
     const userver::server::http::HttpRequest& request,
     userver::server::request::RequestContext&) const {
 
     auto& res = request.GetHttpResponse();
-    res.SetContentType(userver::http::content_type::kApplicationJson);
 
     const auto url_state = std::string{request.GetArg("state")};
     const std::string cookie_state = request.GetCookie("oauth_state");
 
     if (url_state.empty() || cookie_state.empty() || url_state != cookie_state) {
-        res.SetStatus(userver::server::http::HttpStatus::kBadRequest);
-        return R"({"error":"invalid_or_expired_state"})";
+        return ErrorResult(res, userver::server::http::HttpStatus::kBadRequest, "INVALID_OR_EXPIRED_STATE");
     }
 
     const auto doc = userver::formats::json::FromString(_oauth_github_component->GetData(request));
@@ -156,8 +210,7 @@ std::string OAuthGithubCallbackHandler::HandleRequestThrow(
     oauth.avatar_url = JsonString(doc, "avatar_url");
 
     if (oauth.provider_user_id.empty() || oauth.email.empty()) {
-        res.SetStatus(userver::server::http::HttpStatus::kUnauthorized);
-        return R"({"error":"oauth_profile_incomplete"})";
+        return ErrorResult(res, userver::server::http::HttpStatus::kUnauthorized, "OAUTH_PROFILE_INCOMPLETE");
     }
 
     auto result = _users.FindOrCreateFromOAuth(oauth);
@@ -171,7 +224,7 @@ std::string OAuthGithubCallbackHandler::HandleRequestThrow(
     res.SetCookie(clear_cookie);
 
     res.SetStatus(userver::server::http::HttpStatus::kFound);
-    res.SetHeader(std::string("Location"), _redirect_url);
+    res.SetHeader(std::string("Location"), _dashboards.ForRole(result.user.role));
 
     return "";
 }
