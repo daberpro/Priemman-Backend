@@ -30,7 +30,7 @@ std::string LogoutHandler::HandleRequestThrow(
     }
 
     const bool revoked = _sessions.Revoke(req.session_token());
-    res.SetHeader(std::string("Set-Cookie"), "session=; Path=/; HttpOnly; SameSite=Lax; Max-Age=0");
+    res.SetHeader(std::string("Set-Cookie"), BuildSessionClearCookie());
 
     priemman::v1::LogoutResponse response;
     response.set_success(revoked);

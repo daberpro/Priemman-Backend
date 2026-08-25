@@ -14,4 +14,11 @@ inline std::string BuildSessionCookie(const std::string& token) {
            "; Max-Age=2592000";
 }
 
+// session_cookie.hpp
+inline std::string BuildSessionClearCookie() {
+    return "session=; Domain=priemman.my.id; Path=/; HttpOnly; "
+           "SameSite=Lax; Secure; Max-Age=0";
+}
+
+
 }  // namespace priemman::auth
