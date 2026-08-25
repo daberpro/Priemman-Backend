@@ -16,8 +16,8 @@ components_manager:
                     level#fallback: info
 
         cors-middleware:
-            allowed-origins: $cors-allowed-origins
-            allowed-origins#fallback:
+            allowed-origins:
+                - https://priemman.my.id
                 - http://localhost:3000
             allow-credentials: true
             allowed-headers:

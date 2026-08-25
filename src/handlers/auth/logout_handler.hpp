@@ -11,6 +11,7 @@
 #include <userver/storages/mysql/component.hpp>
 
 #include <src/database/session_repository.hpp>
+#include <src/handlers/auth/session_cookie.hpp>
 
 namespace priemman::auth {
 

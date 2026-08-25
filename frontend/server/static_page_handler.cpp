@@ -235,6 +235,10 @@ std::string StaticPageHandler::HandleRequestThrow(
         if (!logged_in) {
             return redirect_to(login_redirect);
         }
+        // FIX: creator/admin yang buka /dashboard dilempar ke dashboard miliknya
+        if (role == "creator" || role == "admin") {
+            return redirect_to(DashboardForRole(role));
+        }
     }
 
     if (path == "/favicon.ico" && !_favicon_data.empty()) {
