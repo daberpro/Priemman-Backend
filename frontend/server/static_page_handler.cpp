@@ -227,7 +227,7 @@ std::string StaticPageHandler::HandleRequestThrow(
         if (!logged_in) {
             return redirect_to(login_redirect);
         }
-        if (role != "creator" && role != "admin") {
+        if (role != "creator") {
             return redirect_to(DashboardForRole(role));
         }
     } else if (path.starts_with("/dashboard")) {
