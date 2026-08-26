@@ -1349,7 +1349,9 @@ class UpdateBasicInfoRequest final :
     kHeadlineFieldNumber = 3,
     kCompanyFieldNumber = 4,
     kWebsiteUrlFieldNumber = 6,
+    kAvatarUrlFieldNumber = 8,
     kLocationFieldNumber = 5,
+    kAboutMeFieldNumber = 7,
   };
   // string first_name = 1;
   void clear_first_name();
@@ -1421,6 +1423,20 @@ class UpdateBasicInfoRequest final :
   std::string* _internal_mutable_website_url();
   public:
 
+  // string avatar_url = 8;
+  void clear_avatar_url();
+  const std::string& avatar_url() const;
+  template <typename ArgT0 = const std::string&, typename... ArgT>
+  void set_avatar_url(ArgT0&& arg0, ArgT... args);
+  std::string* mutable_avatar_url();
+  PROTOBUF_NODISCARD std::string* release_avatar_url();
+  void set_allocated_avatar_url(std::string* avatar_url);
+  private:
+  const std::string& _internal_avatar_url() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_avatar_url(const std::string& value);
+  std::string* _internal_mutable_avatar_url();
+  public:
+
   // .priemman.v1.Location location = 5;
   bool has_location() const;
   private:
@@ -1439,6 +1455,24 @@ class UpdateBasicInfoRequest final :
       ::priemman::v1::Location* location);
   ::priemman::v1::Location* unsafe_arena_release_location();
 
+  // .priemman.v1.AboutMe about_me = 7;
+  bool has_about_me() const;
+  private:
+  bool _internal_has_about_me() const;
+  public:
+  void clear_about_me();
+  const ::priemman::v1::AboutMe& about_me() const;
+  PROTOBUF_NODISCARD ::priemman::v1::AboutMe* release_about_me();
+  ::priemman::v1::AboutMe* mutable_about_me();
+  void set_allocated_about_me(::priemman::v1::AboutMe* about_me);
+  private:
+  const ::priemman::v1::AboutMe& _internal_about_me() const;
+  ::priemman::v1::AboutMe* _internal_mutable_about_me();
+  public:
+  void unsafe_arena_set_allocated_about_me(
+      ::priemman::v1::AboutMe* about_me);
+  ::priemman::v1::AboutMe* unsafe_arena_release_about_me();
+
   // @@protoc_insertion_point(class_scope:priemman.v1.UpdateBasicInfoRequest)
  private:
   class _Internal;
@@ -1452,7 +1486,9 @@ class UpdateBasicInfoRequest final :
     ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr headline_;
     ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr company_;
     ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr website_url_;
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr avatar_url_;
     ::priemman::v1::Location* location_;
+    ::priemman::v1::AboutMe* about_me_;
     mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   };
   union { Impl_ _impl_; };
@@ -6202,6 +6238,146 @@ inline void UpdateBasicInfoRequest::set_allocated_website_url(std::string* websi
   }
 #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
   // @@protoc_insertion_point(field_set_allocated:priemman.v1.UpdateBasicInfoRequest.website_url)
+}
+
+// .priemman.v1.AboutMe about_me = 7;
+inline bool UpdateBasicInfoRequest::_internal_has_about_me() const {
+  return this != internal_default_instance() && _impl_.about_me_ != nullptr;
+}
+inline bool UpdateBasicInfoRequest::has_about_me() const {
+  return _internal_has_about_me();
+}
+inline void UpdateBasicInfoRequest::clear_about_me() {
+  if (GetArenaForAllocation() == nullptr && _impl_.about_me_ != nullptr) {
+    delete _impl_.about_me_;
+  }
+  _impl_.about_me_ = nullptr;
+}
+inline const ::priemman::v1::AboutMe& UpdateBasicInfoRequest::_internal_about_me() const {
+  const ::priemman::v1::AboutMe* p = _impl_.about_me_;
+  return p != nullptr ? *p : reinterpret_cast<const ::priemman::v1::AboutMe&>(
+      ::priemman::v1::_AboutMe_default_instance_);
+}
+inline const ::priemman::v1::AboutMe& UpdateBasicInfoRequest::about_me() const {
+  // @@protoc_insertion_point(field_get:priemman.v1.UpdateBasicInfoRequest.about_me)
+  return _internal_about_me();
+}
+inline void UpdateBasicInfoRequest::unsafe_arena_set_allocated_about_me(
+    ::priemman::v1::AboutMe* about_me) {
+  if (GetArenaForAllocation() == nullptr) {
+    delete reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(_impl_.about_me_);
+  }
+  _impl_.about_me_ = about_me;
+  if (about_me) {
+    
+  } else {
+    
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:priemman.v1.UpdateBasicInfoRequest.about_me)
+}
+inline ::priemman::v1::AboutMe* UpdateBasicInfoRequest::release_about_me() {
+  
+  ::priemman::v1::AboutMe* temp = _impl_.about_me_;
+  _impl_.about_me_ = nullptr;
+#ifdef PROTOBUF_FORCE_COPY_IN_RELEASE
+  auto* old =  reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(temp);
+  temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
+  if (GetArenaForAllocation() == nullptr) { delete old; }
+#else  // PROTOBUF_FORCE_COPY_IN_RELEASE
+  if (GetArenaForAllocation() != nullptr) {
+    temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
+  }
+#endif  // !PROTOBUF_FORCE_COPY_IN_RELEASE
+  return temp;
+}
+inline ::priemman::v1::AboutMe* UpdateBasicInfoRequest::unsafe_arena_release_about_me() {
+  // @@protoc_insertion_point(field_release:priemman.v1.UpdateBasicInfoRequest.about_me)
+  
+  ::priemman::v1::AboutMe* temp = _impl_.about_me_;
+  _impl_.about_me_ = nullptr;
+  return temp;
+}
+inline ::priemman::v1::AboutMe* UpdateBasicInfoRequest::_internal_mutable_about_me() {
+  
+  if (_impl_.about_me_ == nullptr) {
+    auto* p = CreateMaybeMessage<::priemman::v1::AboutMe>(GetArenaForAllocation());
+    _impl_.about_me_ = p;
+  }
+  return _impl_.about_me_;
+}
+inline ::priemman::v1::AboutMe* UpdateBasicInfoRequest::mutable_about_me() {
+  ::priemman::v1::AboutMe* _msg = _internal_mutable_about_me();
+  // @@protoc_insertion_point(field_mutable:priemman.v1.UpdateBasicInfoRequest.about_me)
+  return _msg;
+}
+inline void UpdateBasicInfoRequest::set_allocated_about_me(::priemman::v1::AboutMe* about_me) {
+  ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArenaForAllocation();
+  if (message_arena == nullptr) {
+    delete _impl_.about_me_;
+  }
+  if (about_me) {
+    ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena =
+        ::PROTOBUF_NAMESPACE_ID::Arena::InternalGetOwningArena(about_me);
+    if (message_arena != submessage_arena) {
+      about_me = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
+          message_arena, about_me, submessage_arena);
+    }
+    
+  } else {
+    
+  }
+  _impl_.about_me_ = about_me;
+  // @@protoc_insertion_point(field_set_allocated:priemman.v1.UpdateBasicInfoRequest.about_me)
+}
+
+// string avatar_url = 8;
+inline void UpdateBasicInfoRequest::clear_avatar_url() {
+  _impl_.avatar_url_.ClearToEmpty();
+}
+inline const std::string& UpdateBasicInfoRequest::avatar_url() const {
+  // @@protoc_insertion_point(field_get:priemman.v1.UpdateBasicInfoRequest.avatar_url)
+  return _internal_avatar_url();
+}
+template <typename ArgT0, typename... ArgT>
+inline PROTOBUF_ALWAYS_INLINE
+void UpdateBasicInfoRequest::set_avatar_url(ArgT0&& arg0, ArgT... args) {
+ 
+ _impl_.avatar_url_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
+  // @@protoc_insertion_point(field_set:priemman.v1.UpdateBasicInfoRequest.avatar_url)
+}
+inline std::string* UpdateBasicInfoRequest::mutable_avatar_url() {
+  std::string* _s = _internal_mutable_avatar_url();
+  // @@protoc_insertion_point(field_mutable:priemman.v1.UpdateBasicInfoRequest.avatar_url)
+  return _s;
+}
+inline const std::string& UpdateBasicInfoRequest::_internal_avatar_url() const {
+  return _impl_.avatar_url_.Get();
+}
+inline void UpdateBasicInfoRequest::_internal_set_avatar_url(const std::string& value) {
+  
+  _impl_.avatar_url_.Set(value, GetArenaForAllocation());
+}
+inline std::string* UpdateBasicInfoRequest::_internal_mutable_avatar_url() {
+  
+  return _impl_.avatar_url_.Mutable(GetArenaForAllocation());
+}
+inline std::string* UpdateBasicInfoRequest::release_avatar_url() {
+  // @@protoc_insertion_point(field_release:priemman.v1.UpdateBasicInfoRequest.avatar_url)
+  return _impl_.avatar_url_.Release();
+}
+inline void UpdateBasicInfoRequest::set_allocated_avatar_url(std::string* avatar_url) {
+  if (avatar_url != nullptr) {
+    
+  } else {
+    
+  }
+  _impl_.avatar_url_.SetAllocated(avatar_url, GetArenaForAllocation());
+#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (_impl_.avatar_url_.IsDefault()) {
+    _impl_.avatar_url_.Set("", GetArenaForAllocation());
+  }
+#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:priemman.v1.UpdateBasicInfoRequest.avatar_url)
 }
 
 // -------------------------------------------------------------------

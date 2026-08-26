@@ -60,6 +60,8 @@ std::string BasicInfoHandler::HandleRequestThrow(
         }
 
         database::BasicInfoPatch patch;
+        const auto& about_me = req.about_me();
+
         patch.first_name = req.first_name();
         patch.last_name = req.last_name();
         patch.headline = req.headline();
@@ -67,6 +69,11 @@ std::string BasicInfoHandler::HandleRequestThrow(
         patch.country = req.location().country();
         patch.city = req.location().city();
         patch.website_url = req.website_url();
+        patch.about_me = {
+          .title = about_me.title(),
+          .description =  about_me.description()
+        };
+        patch.avatar_url = req.avatar_url();
 
         _users.UpdateBasicInfo(*user_id, patch);
 

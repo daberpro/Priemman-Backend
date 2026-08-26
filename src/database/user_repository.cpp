@@ -140,11 +140,13 @@ void UserRepository::UpdateBasicInfo(
         userver::storages::mysql::Query{R"sql(
             UPDATE users
             SET first_name = ?, last_name = ?, headline = ?, company = ?,
-                city = ?, country = ?, website_url = ?
+                city = ?, country = ?, website_url = ?, about_title = ?, about_description = ?,
+                avatar_url = ?
             WHERE id = ?
         )sql"},
         patch.first_name, patch.last_name, patch.headline, patch.company,
         patch.city, patch.country, patch.website_url,
+        patch.about_me.title, patch.about_me.description, patch.avatar_url,
         user_id
     );
 }

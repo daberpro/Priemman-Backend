@@ -106,7 +106,9 @@ PROTOBUF_CONSTEXPR UpdateBasicInfoRequest::UpdateBasicInfoRequest(
   , /*decltype(_impl_.headline_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
   , /*decltype(_impl_.company_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
   , /*decltype(_impl_.website_url_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
+  , /*decltype(_impl_.avatar_url_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
   , /*decltype(_impl_.location_)*/nullptr
+  , /*decltype(_impl_.about_me_)*/nullptr
   , /*decltype(_impl_._cached_size_)*/{}} {}
 struct UpdateBasicInfoRequestDefaultTypeInternal {
   PROTOBUF_CONSTEXPR UpdateBasicInfoRequestDefaultTypeInternal()
@@ -413,6 +415,8 @@ const uint32_t TableStruct_user_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE(pro
   PROTOBUF_FIELD_OFFSET(::priemman::v1::UpdateBasicInfoRequest, _impl_.company_),
   PROTOBUF_FIELD_OFFSET(::priemman::v1::UpdateBasicInfoRequest, _impl_.location_),
   PROTOBUF_FIELD_OFFSET(::priemman::v1::UpdateBasicInfoRequest, _impl_.website_url_),
+  PROTOBUF_FIELD_OFFSET(::priemman::v1::UpdateBasicInfoRequest, _impl_.about_me_),
+  PROTOBUF_FIELD_OFFSET(::priemman::v1::UpdateBasicInfoRequest, _impl_.avatar_url_),
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::priemman::v1::UpsertWorkExperienceRequest, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -554,21 +558,21 @@ static const ::_pbi::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protode
   { 23, -1, -1, sizeof(::priemman::v1::AboutMe)},
   { 31, -1, -1, sizeof(::priemman::v1::User)},
   { 53, -1, -1, sizeof(::priemman::v1::UpdateBasicInfoRequest)},
-  { 65, -1, -1, sizeof(::priemman::v1::UpsertWorkExperienceRequest)},
-  { 72, -1, -1, sizeof(::priemman::v1::ListWorkExperienceResponse)},
-  { 79, -1, -1, sizeof(::priemman::v1::DeleteWorkExperienceRequest)},
-  { 86, -1, -1, sizeof(::priemman::v1::ListConnectedAccountsResponse)},
-  { 93, -1, -1, sizeof(::priemman::v1::DeleteConnectedAccountRequest)},
-  { 100, -1, -1, sizeof(::priemman::v1::UpgradeStatus)},
-  { 115, -1, -1, sizeof(::priemman::v1::CreateUpgradeRequestResponse)},
-  { 123, -1, -1, sizeof(::priemman::v1::AdminUserEntry)},
-  { 135, -1, -1, sizeof(::priemman::v1::AdminListUsersResponse)},
-  { 145, -1, -1, sizeof(::priemman::v1::UpgradeRequestEntry)},
-  { 160, -1, -1, sizeof(::priemman::v1::AdminListUpgradeRequestsResponse)},
-  { 167, -1, -1, sizeof(::priemman::v1::AdminReviewUpgradeRequest)},
-  { 176, -1, -1, sizeof(::priemman::v1::AdminReviewUpgradeResponse)},
-  { 184, -1, -1, sizeof(::priemman::v1::AdminConfirmPaymentRequest)},
-  { 191, -1, -1, sizeof(::priemman::v1::AdminConfirmPaymentResponse)},
+  { 67, -1, -1, sizeof(::priemman::v1::UpsertWorkExperienceRequest)},
+  { 74, -1, -1, sizeof(::priemman::v1::ListWorkExperienceResponse)},
+  { 81, -1, -1, sizeof(::priemman::v1::DeleteWorkExperienceRequest)},
+  { 88, -1, -1, sizeof(::priemman::v1::ListConnectedAccountsResponse)},
+  { 95, -1, -1, sizeof(::priemman::v1::DeleteConnectedAccountRequest)},
+  { 102, -1, -1, sizeof(::priemman::v1::UpgradeStatus)},
+  { 117, -1, -1, sizeof(::priemman::v1::CreateUpgradeRequestResponse)},
+  { 125, -1, -1, sizeof(::priemman::v1::AdminUserEntry)},
+  { 137, -1, -1, sizeof(::priemman::v1::AdminListUsersResponse)},
+  { 147, -1, -1, sizeof(::priemman::v1::UpgradeRequestEntry)},
+  { 162, -1, -1, sizeof(::priemman::v1::AdminListUpgradeRequestsResponse)},
+  { 169, -1, -1, sizeof(::priemman::v1::AdminReviewUpgradeRequest)},
+  { 178, -1, -1, sizeof(::priemman::v1::AdminReviewUpgradeResponse)},
+  { 186, -1, -1, sizeof(::priemman::v1::AdminConfirmPaymentRequest)},
+  { 193, -1, -1, sizeof(::priemman::v1::AdminConfirmPaymentResponse)},
 };
 
 static const ::_pb::Message* const file_default_instances[] = {
@@ -620,63 +624,65 @@ const char descriptor_table_protodef_user_2eproto[] PROTOBUF_SECTION_VARIABLE(pr
   "n.v1.AboutMe\022.\n\ncreated_at\030\016 \001(\0132\032.googl"
   "e.protobuf.Timestamp\022.\n\nupdated_at\030\017 \001(\013"
   "2\032.google.protobuf.Timestamp\022#\n\004role\030\020 \001"
-  "(\0162\025.priemman.v1.UserRole\"\240\001\n\026UpdateBasi"
+  "(\0162\025.priemman.v1.UserRole\"\334\001\n\026UpdateBasi"
   "cInfoRequest\022\022\n\nfirst_name\030\001 \001(\t\022\021\n\tlast"
   "_name\030\002 \001(\t\022\020\n\010headline\030\003 \001(\t\022\017\n\007company"
   "\030\004 \001(\t\022\'\n\010location\030\005 \001(\0132\025.priemman.v1.L"
-  "ocation\022\023\n\013website_url\030\006 \001(\t\"I\n\033UpsertWo"
-  "rkExperienceRequest\022*\n\005entry\030\001 \001(\0132\033.pri"
-  "emman.v1.WorkExperience\"J\n\032ListWorkExper"
-  "ienceResponse\022,\n\007entries\030\001 \003(\0132\033.priemma"
-  "n.v1.WorkExperience\"@\n\033DeleteWorkExperie"
-  "nceRequest\022!\n\002id\030\001 \001(\0132\025.priemman.v1.Obj"
-  "ectId\"P\n\035ListConnectedAccountsResponse\022/"
-  "\n\010accounts\030\001 \003(\0132\035.priemman.v1.Connected"
-  "Account\"Q\n\035DeleteConnectedAccountRequest"
-  "\0220\n\010platform\030\001 \001(\0162\036.priemman.v1.Connect"
-  "edPlatform\"\262\002\n\rUpgradeStatus\022\016\n\006status\030\001"
-  " \001(\t\022)\n\nrequest_id\030\002 \001(\0132\025.priemman.v1.O"
-  "bjectId\022\022\n\ninvoice_id\030\003 \001(\t\022\026\n\016invoice_a"
-  "mount\030\004 \001(\003\022\020\n\010currency\030\005 \001(\t\022\030\n\020rejecti"
-  "on_reason\030\006 \001(\t\0220\n\014requested_at\030\007 \001(\0132\032."
-  "google.protobuf.Timestamp\022/\n\013reviewed_at"
-  "\030\010 \001(\0132\032.google.protobuf.Timestamp\022+\n\007pa"
-  "id_at\030\t \001(\0132\032.google.protobuf.Timestamp\""
-  "[\n\034CreateUpgradeRequestResponse\022\017\n\007succe"
-  "ss\030\001 \001(\010\022*\n\006status\030\002 \001(\0132\032.priemman.v1.U"
-  "pgradeStatus\"\276\001\n\016AdminUserEntry\022!\n\002id\030\001 "
-  "\001(\0132\025.priemman.v1.ObjectId\022\r\n\005email\030\002 \001("
-  "\t\022\022\n\nfirst_name\030\003 \001(\t\022\021\n\tlast_name\030\004 \001(\t"
-  "\022#\n\004role\030\005 \001(\0162\025.priemman.v1.UserRole\022.\n"
-  "\ncreated_at\030\006 \001(\0132\032.google.protobuf.Time"
-  "stamp\"r\n\026AdminListUsersResponse\022*\n\005users"
-  "\030\001 \003(\0132\033.priemman.v1.AdminUserEntry\022\r\n\005t"
-  "otal\030\002 \001(\005\022\r\n\005limit\030\003 \001(\005\022\016\n\006offset\030\004 \001("
-  "\005\"\211\002\n\023UpgradeRequestEntry\022!\n\002id\030\001 \001(\0132\025."
-  "priemman.v1.ObjectId\022&\n\007user_id\030\002 \001(\0132\025."
-  "priemman.v1.ObjectId\022\r\n\005email\030\003 \001(\t\022\016\n\006s"
-  "tatus\030\004 \001(\t\022\022\n\ninvoice_id\030\005 \001(\t\022\026\n\016invoi"
-  "ce_amount\030\006 \001(\003\022\020\n\010currency\030\007 \001(\t\022\030\n\020rej"
-  "ection_reason\030\010 \001(\t\0220\n\014requested_at\030\t \001("
-  "\0132\032.google.protobuf.Timestamp\"V\n AdminLi"
-  "stUpgradeRequestsResponse\0222\n\010requests\030\001 "
-  "\003(\0132 .priemman.v1.UpgradeRequestEntry\"i\n"
-  "\031AdminReviewUpgradeRequest\022!\n\002id\030\001 \001(\0132\025"
-  ".priemman.v1.ObjectId\022\017\n\007approve\030\002 \001(\010\022\030"
-  "\n\020rejection_reason\030\003 \001(\t\"`\n\032AdminReviewU"
-  "pgradeResponse\022\017\n\007success\030\001 \001(\010\0221\n\007reque"
-  "st\030\002 \001(\0132 .priemman.v1.UpgradeRequestEnt"
-  "ry\"\?\n\032AdminConfirmPaymentRequest\022!\n\002id\030\001"
-  " \001(\0132\025.priemman.v1.ObjectId\"V\n\033AdminConf"
-  "irmPaymentResponse\022\017\n\007success\030\001 \001(\010\022&\n\007u"
-  "ser_id\030\002 \001(\0132\025.priemman.v1.ObjectId*\231\001\n\021"
-  "ConnectedPlatform\022\"\n\036CONNECTED_PLATFORM_"
-  "UNSPECIFIED\020\000\022 \n\034CONNECTED_PLATFORM_INST"
-  "AGRAM\020\001\022\037\n\033CONNECTED_PLATFORM_LINKEDIN\020\002"
-  "\022\035\n\031CONNECTED_PLATFORM_GITHUB\020\003*e\n\010UserR"
-  "ole\022\031\n\025USER_ROLE_UNSPECIFIED\020\000\022\022\n\016USER_R"
-  "OLE_USER\020\001\022\025\n\021USER_ROLE_CREATOR\020\002\022\023\n\017USE"
-  "R_ROLE_ADMIN\020\003b\006proto3"
+  "ocation\022\023\n\013website_url\030\006 \001(\t\022&\n\010about_me"
+  "\030\007 \001(\0132\024.priemman.v1.AboutMe\022\022\n\navatar_u"
+  "rl\030\010 \001(\t\"I\n\033UpsertWorkExperienceRequest\022"
+  "*\n\005entry\030\001 \001(\0132\033.priemman.v1.WorkExperie"
+  "nce\"J\n\032ListWorkExperienceResponse\022,\n\007ent"
+  "ries\030\001 \003(\0132\033.priemman.v1.WorkExperience\""
+  "@\n\033DeleteWorkExperienceRequest\022!\n\002id\030\001 \001"
+  "(\0132\025.priemman.v1.ObjectId\"P\n\035ListConnect"
+  "edAccountsResponse\022/\n\010accounts\030\001 \003(\0132\035.p"
+  "riemman.v1.ConnectedAccount\"Q\n\035DeleteCon"
+  "nectedAccountRequest\0220\n\010platform\030\001 \001(\0162\036"
+  ".priemman.v1.ConnectedPlatform\"\262\002\n\rUpgra"
+  "deStatus\022\016\n\006status\030\001 \001(\t\022)\n\nrequest_id\030\002"
+  " \001(\0132\025.priemman.v1.ObjectId\022\022\n\ninvoice_i"
+  "d\030\003 \001(\t\022\026\n\016invoice_amount\030\004 \001(\003\022\020\n\010curre"
+  "ncy\030\005 \001(\t\022\030\n\020rejection_reason\030\006 \001(\t\0220\n\014r"
+  "equested_at\030\007 \001(\0132\032.google.protobuf.Time"
+  "stamp\022/\n\013reviewed_at\030\010 \001(\0132\032.google.prot"
+  "obuf.Timestamp\022+\n\007paid_at\030\t \001(\0132\032.google"
+  ".protobuf.Timestamp\"[\n\034CreateUpgradeRequ"
+  "estResponse\022\017\n\007success\030\001 \001(\010\022*\n\006status\030\002"
+  " \001(\0132\032.priemman.v1.UpgradeStatus\"\276\001\n\016Adm"
+  "inUserEntry\022!\n\002id\030\001 \001(\0132\025.priemman.v1.Ob"
+  "jectId\022\r\n\005email\030\002 \001(\t\022\022\n\nfirst_name\030\003 \001("
+  "\t\022\021\n\tlast_name\030\004 \001(\t\022#\n\004role\030\005 \001(\0162\025.pri"
+  "emman.v1.UserRole\022.\n\ncreated_at\030\006 \001(\0132\032."
+  "google.protobuf.Timestamp\"r\n\026AdminListUs"
+  "ersResponse\022*\n\005users\030\001 \003(\0132\033.priemman.v1"
+  ".AdminUserEntry\022\r\n\005total\030\002 \001(\005\022\r\n\005limit\030"
+  "\003 \001(\005\022\016\n\006offset\030\004 \001(\005\"\211\002\n\023UpgradeRequest"
+  "Entry\022!\n\002id\030\001 \001(\0132\025.priemman.v1.ObjectId"
+  "\022&\n\007user_id\030\002 \001(\0132\025.priemman.v1.ObjectId"
+  "\022\r\n\005email\030\003 \001(\t\022\016\n\006status\030\004 \001(\t\022\022\n\ninvoi"
+  "ce_id\030\005 \001(\t\022\026\n\016invoice_amount\030\006 \001(\003\022\020\n\010c"
+  "urrency\030\007 \001(\t\022\030\n\020rejection_reason\030\010 \001(\t\022"
+  "0\n\014requested_at\030\t \001(\0132\032.google.protobuf."
+  "Timestamp\"V\n AdminListUpgradeRequestsRes"
+  "ponse\0222\n\010requests\030\001 \003(\0132 .priemman.v1.Up"
+  "gradeRequestEntry\"i\n\031AdminReviewUpgradeR"
+  "equest\022!\n\002id\030\001 \001(\0132\025.priemman.v1.ObjectI"
+  "d\022\017\n\007approve\030\002 \001(\010\022\030\n\020rejection_reason\030\003"
+  " \001(\t\"`\n\032AdminReviewUpgradeResponse\022\017\n\007su"
+  "ccess\030\001 \001(\010\0221\n\007request\030\002 \001(\0132 .priemman."
+  "v1.UpgradeRequestEntry\"\?\n\032AdminConfirmPa"
+  "ymentRequest\022!\n\002id\030\001 \001(\0132\025.priemman.v1.O"
+  "bjectId\"V\n\033AdminConfirmPaymentResponse\022\017"
+  "\n\007success\030\001 \001(\010\022&\n\007user_id\030\002 \001(\0132\025.priem"
+  "man.v1.ObjectId*\231\001\n\021ConnectedPlatform\022\"\n"
+  "\036CONNECTED_PLATFORM_UNSPECIFIED\020\000\022 \n\034CON"
+  "NECTED_PLATFORM_INSTAGRAM\020\001\022\037\n\033CONNECTED"
+  "_PLATFORM_LINKEDIN\020\002\022\035\n\031CONNECTED_PLATFO"
+  "RM_GITHUB\020\003*e\n\010UserRole\022\031\n\025USER_ROLE_UNS"
+  "PECIFIED\020\000\022\022\n\016USER_ROLE_USER\020\001\022\025\n\021USER_R"
+  "OLE_CREATOR\020\002\022\023\n\017USER_ROLE_ADMIN\020\003b\006prot"
+  "o3"
   ;
 static const ::_pbi::DescriptorTable* const descriptor_table_user_2eproto_deps[2] = {
   &::descriptor_table_common_2eproto,
@@ -684,7 +690,7 @@ static const ::_pbi::DescriptorTable* const descriptor_table_user_2eproto_deps[2
 };
 static ::_pbi::once_flag descriptor_table_user_2eproto_once;
 const ::_pbi::DescriptorTable descriptor_table_user_2eproto = {
-    false, false, 3262, descriptor_table_protodef_user_2eproto,
+    false, false, 3322, descriptor_table_protodef_user_2eproto,
     "user.proto",
     &descriptor_table_user_2eproto_once, descriptor_table_user_2eproto_deps, 2, 20,
     schemas, file_default_instances, TableStruct_user_2eproto::offsets,
@@ -2642,11 +2648,16 @@ void User::InternalSwap(User* other) {
 class UpdateBasicInfoRequest::_Internal {
  public:
   static const ::priemman::v1::Location& location(const UpdateBasicInfoRequest* msg);
+  static const ::priemman::v1::AboutMe& about_me(const UpdateBasicInfoRequest* msg);
 };
 
 const ::priemman::v1::Location&
 UpdateBasicInfoRequest::_Internal::location(const UpdateBasicInfoRequest* msg) {
   return *msg->_impl_.location_;
+}
+const ::priemman::v1::AboutMe&
+UpdateBasicInfoRequest::_Internal::about_me(const UpdateBasicInfoRequest* msg) {
+  return *msg->_impl_.about_me_;
 }
 void UpdateBasicInfoRequest::clear_location() {
   if (GetArenaForAllocation() == nullptr && _impl_.location_ != nullptr) {
@@ -2669,7 +2680,9 @@ UpdateBasicInfoRequest::UpdateBasicInfoRequest(const UpdateBasicInfoRequest& fro
     , decltype(_impl_.headline_){}
     , decltype(_impl_.company_){}
     , decltype(_impl_.website_url_){}
+    , decltype(_impl_.avatar_url_){}
     , decltype(_impl_.location_){nullptr}
+    , decltype(_impl_.about_me_){nullptr}
     , /*decltype(_impl_._cached_size_)*/{}};
 
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
@@ -2713,8 +2726,19 @@ UpdateBasicInfoRequest::UpdateBasicInfoRequest(const UpdateBasicInfoRequest& fro
     _this->_impl_.website_url_.Set(from._internal_website_url(), 
       _this->GetArenaForAllocation());
   }
+  _impl_.avatar_url_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+    _impl_.avatar_url_.Set("", GetArenaForAllocation());
+  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (!from._internal_avatar_url().empty()) {
+    _this->_impl_.avatar_url_.Set(from._internal_avatar_url(), 
+      _this->GetArenaForAllocation());
+  }
   if (from._internal_has_location()) {
     _this->_impl_.location_ = new ::priemman::v1::Location(*from._impl_.location_);
+  }
+  if (from._internal_has_about_me()) {
+    _this->_impl_.about_me_ = new ::priemman::v1::AboutMe(*from._impl_.about_me_);
   }
   // @@protoc_insertion_point(copy_constructor:priemman.v1.UpdateBasicInfoRequest)
 }
@@ -2729,7 +2753,9 @@ inline void UpdateBasicInfoRequest::SharedCtor(
     , decltype(_impl_.headline_){}
     , decltype(_impl_.company_){}
     , decltype(_impl_.website_url_){}
+    , decltype(_impl_.avatar_url_){}
     , decltype(_impl_.location_){nullptr}
+    , decltype(_impl_.about_me_){nullptr}
     , /*decltype(_impl_._cached_size_)*/{}
   };
   _impl_.first_name_.InitDefault();
@@ -2752,6 +2778,10 @@ inline void UpdateBasicInfoRequest::SharedCtor(
   #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
     _impl_.website_url_.Set("", GetArenaForAllocation());
   #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  _impl_.avatar_url_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+    _impl_.avatar_url_.Set("", GetArenaForAllocation());
+  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
 }
 
 UpdateBasicInfoRequest::~UpdateBasicInfoRequest() {
@@ -2770,7 +2800,9 @@ inline void UpdateBasicInfoRequest::SharedDtor() {
   _impl_.headline_.Destroy();
   _impl_.company_.Destroy();
   _impl_.website_url_.Destroy();
+  _impl_.avatar_url_.Destroy();
   if (this != internal_default_instance()) delete _impl_.location_;
+  if (this != internal_default_instance()) delete _impl_.about_me_;
 }
 
 void UpdateBasicInfoRequest::SetCachedSize(int size) const {
@@ -2788,10 +2820,15 @@ void UpdateBasicInfoRequest::Clear() {
   _impl_.headline_.ClearToEmpty();
   _impl_.company_.ClearToEmpty();
   _impl_.website_url_.ClearToEmpty();
+  _impl_.avatar_url_.ClearToEmpty();
   if (GetArenaForAllocation() == nullptr && _impl_.location_ != nullptr) {
     delete _impl_.location_;
   }
   _impl_.location_ = nullptr;
+  if (GetArenaForAllocation() == nullptr && _impl_.about_me_ != nullptr) {
+    delete _impl_.about_me_;
+  }
+  _impl_.about_me_ = nullptr;
   _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
@@ -2856,6 +2893,24 @@ const char* UpdateBasicInfoRequest::_InternalParse(const char* ptr, ::_pbi::Pars
           ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
           CHK_(ptr);
           CHK_(::_pbi::VerifyUTF8(str, "priemman.v1.UpdateBasicInfoRequest.website_url"));
+        } else
+          goto handle_unusual;
+        continue;
+      // .priemman.v1.AboutMe about_me = 7;
+      case 7:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 58)) {
+          ptr = ctx->ParseMessage(_internal_mutable_about_me(), ptr);
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      // string avatar_url = 8;
+      case 8:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 66)) {
+          auto str = _internal_mutable_avatar_url();
+          ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
+          CHK_(ptr);
+          CHK_(::_pbi::VerifyUTF8(str, "priemman.v1.UpdateBasicInfoRequest.avatar_url"));
         } else
           goto handle_unusual;
         continue;
@@ -2945,6 +3000,23 @@ uint8_t* UpdateBasicInfoRequest::_InternalSerialize(
         6, this->_internal_website_url(), target);
   }
 
+  // .priemman.v1.AboutMe about_me = 7;
+  if (this->_internal_has_about_me()) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+      InternalWriteMessage(7, _Internal::about_me(this),
+        _Internal::about_me(this).GetCachedSize(), target, stream);
+  }
+
+  // string avatar_url = 8;
+  if (!this->_internal_avatar_url().empty()) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+      this->_internal_avatar_url().data(), static_cast<int>(this->_internal_avatar_url().length()),
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+      "priemman.v1.UpdateBasicInfoRequest.avatar_url");
+    target = stream->WriteStringMaybeAliased(
+        8, this->_internal_avatar_url(), target);
+  }
+
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
     target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
         _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
@@ -2996,11 +3068,25 @@ size_t UpdateBasicInfoRequest::ByteSizeLong() const {
         this->_internal_website_url());
   }
 
+  // string avatar_url = 8;
+  if (!this->_internal_avatar_url().empty()) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+        this->_internal_avatar_url());
+  }
+
   // .priemman.v1.Location location = 5;
   if (this->_internal_has_location()) {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *_impl_.location_);
+  }
+
+  // .priemman.v1.AboutMe about_me = 7;
+  if (this->_internal_has_about_me()) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
+        *_impl_.about_me_);
   }
 
   return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
@@ -3036,9 +3122,16 @@ void UpdateBasicInfoRequest::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg,
   if (!from._internal_website_url().empty()) {
     _this->_internal_set_website_url(from._internal_website_url());
   }
+  if (!from._internal_avatar_url().empty()) {
+    _this->_internal_set_avatar_url(from._internal_avatar_url());
+  }
   if (from._internal_has_location()) {
     _this->_internal_mutable_location()->::priemman::v1::Location::MergeFrom(
         from._internal_location());
+  }
+  if (from._internal_has_about_me()) {
+    _this->_internal_mutable_about_me()->::priemman::v1::AboutMe::MergeFrom(
+        from._internal_about_me());
   }
   _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
 }
@@ -3079,7 +3172,16 @@ void UpdateBasicInfoRequest::InternalSwap(UpdateBasicInfoRequest* other) {
       &_impl_.website_url_, lhs_arena,
       &other->_impl_.website_url_, rhs_arena
   );
-  swap(_impl_.location_, other->_impl_.location_);
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
+      &_impl_.avatar_url_, lhs_arena,
+      &other->_impl_.avatar_url_, rhs_arena
+  );
+  ::PROTOBUF_NAMESPACE_ID::internal::memswap<
+      PROTOBUF_FIELD_OFFSET(UpdateBasicInfoRequest, _impl_.about_me_)
+      + sizeof(UpdateBasicInfoRequest::_impl_.about_me_)
+      - PROTOBUF_FIELD_OFFSET(UpdateBasicInfoRequest, _impl_.location_)>(
+          reinterpret_cast<char*>(&_impl_.location_),
+          reinterpret_cast<char*>(&other->_impl_.location_));
 }
 
 ::PROTOBUF_NAMESPACE_ID::Metadata UpdateBasicInfoRequest::GetMetadata() const {

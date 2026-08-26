@@ -67,6 +67,8 @@ message UpdateBasicInfoRequest {
   string company = 4;
   Location location = 5;
   string website_url = 6;
+  AboutMe about_me = 7;
+  string avatar_url = 8;
 }
 
 message UpsertWorkExperienceRequest {
