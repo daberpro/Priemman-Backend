@@ -6,6 +6,8 @@ sidebar_position: 7
 
 Source of truth skema request/response berada di direktori [`proto`](https://github.com/daberpro/Priemman-Backend/tree/main/proto) repository.
 
+Untuk nama message yang dipakai per endpoint, lihat [Peta request dan response protobuf](./protobuf-api-map).
+
 ## Content type
 
 | Endpoint | Request | Response |

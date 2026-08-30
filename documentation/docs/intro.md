@@ -5,7 +5,7 @@ slug: /
 
 # Priemman API
 
-Backend Priemman memakai C++23 dan userver. Sebagian besar endpoint memakai **Protocol Buffers** (`application/x-protobuf`); contoh payload di dokumen ini ditampilkan sebagai JSON agar mudah dibaca. Client harus melakukan serialisasi/deserialisasi memakai file `.proto` pada repository.
+Backend Priemman memakai C++23 dan userver. Sebagian besar endpoint memakai **Protocol Buffers** (`application/x-protobuf`); contoh payload di dokumen ini ditampilkan sebagai JSON agar mudah dibaca. Client harus melakukan serialisasi/deserialisasi memakai file `.proto` pada repository. Lihat [peta request dan response protobuf](./protobuf-api-map) sebelum mengintegrasikan endpoint.
 
 ## Base URL dan konvensi
 

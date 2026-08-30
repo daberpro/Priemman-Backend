@@ -2,6 +2,7 @@
 const sidebars = {
   apiSidebar: [
     'intro',
+    'protobuf-api-map',
     {
       type: 'category',
       label: 'Autentikasi',
