@@ -15,7 +15,7 @@ struct ProjectRow {
     std::string owner_id;
     std::string title;
     std::string slug;
-    std::string description;
+    std::string content;
     std::optional<std::string> cover_media_id;
     std::string visibility;   // 'PUBLIC' | 'UNLISTED' | 'DRAFT'
     std::string status;       // 'DRAFT' | 'PUBLISHED' | 'ARCHIVED'
@@ -78,6 +78,7 @@ public:
                                         const std::string& status_filter,
                                         std::int64_t limit, std::int64_t offset) const;
     std::vector<ProjectRow> ListPublic(std::int64_t limit, std::int64_t offset) const;
+
 
 private:
     std::shared_ptr<userver::storages::mysql::Cluster> _mysql_cluster{nullptr};

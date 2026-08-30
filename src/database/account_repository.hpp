@@ -40,6 +40,8 @@ public:
     std::vector<ConnectedAccountRow> ListConnectedAccounts(const std::string& user_id) const;
     bool DeleteConnectedAccount(const std::string& user_id, const std::string& platform) const;
 
+    bool UpsertConnectedAccount(const std::string& user_id, const ConnectedAccountRow& row) const;
+
 private:
     std::shared_ptr<userver::storages::mysql::Cluster> _mysql_cluster{nullptr};
 };

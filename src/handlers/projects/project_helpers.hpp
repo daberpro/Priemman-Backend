@@ -1,6 +1,7 @@
 #pragma once
 
 #include <cctype>
+#include <expected>
 #include <optional>
 #include <string>
 #include <unordered_set>
@@ -60,72 +61,51 @@ inline std::vector<database::ProjectCollaboratorRow> BuildCollabRows(
     return rows;
 }
 
-// Kumpulkan public_id unik dan tidak kosong dari media di input
-inline std::vector<std::string> CollectPublicIds(
-    const google::protobuf::RepeatedPtrField<priemman::v1::Media>& media
+// Validasi dilakukan sebelum ReplaceMedia/ReplaceCollaborators agar input
+// malformed tidak menghapus child records project yang sudah ada.
+inline std::expected<bool, std::string> ValidateProjectRelations(
+    const priemman::v1::ProjectInput& input
 ) {
-    std::unordered_set<std::string> seen;
-    std::vector<std::string> out;
-    for (const auto& m : media) {
-        if (!m.public_id().empty() && seen.insert(m.public_id()).second) {
-            out.push_back(m.public_id());
-        }
-    }
-    return out;
-}
+    std::unordered_set<std::string> media_ids;
+    std::unordered_set<std::string> collaborator_ids;
+    bool cover_found = input.cover_media_id().empty();
 
-// CREATE: media harus tercatat, milik user ini, dan masih orphan.
-// Return pesan error, kosong kalau valid.
-inline std::string ValidateMediaForCreate(
-    const database::MediaRepository& media_repo,
-    const std::vector<std::string>& public_ids,
-    const std::string& user_id
-) {
-    for (const auto& pid : public_ids) {
-        auto row = media_repo.FindByPublicId(pid);
-        if (!row.has_value() || row->user_id != user_id) {
-            return "Media '" + pid + "' is invalid or does not belong to you";
+    for (const auto& media : input.media()) {
+        if (media.public_id().empty() || media.url().empty()) {
+            return std::unexpected{"Every media item must have a URL and public ID"};
         }
-        if (row->status != "orphan") {
-            return "Media '" + pid + "' is already used by another project";
+        if (media.type() != priemman::v1::MEDIA_TYPE_IMAGE &&
+            media.type() != priemman::v1::MEDIA_TYPE_VIDEO) {
+            return std::unexpected{"Every media item must be an image or video"};
         }
-    }
-    return {};
-}
+        if (media.order() < 0) {
+            return std::unexpected{"Media order cannot be negative"};
+        }
 
-// UPDATE: sama seperti create, tetapi media in_use yang memang sudah
-// terpasang di project ini boleh dikirim ulang.
-inline std::string ValidateMediaForUpdate(
-    const database::MediaRepository& media_repo,
-    const database::ProjectRepository& projects,
-    const std::string& project_id,
-    const std::vector<std::string>& public_ids,
-    const std::string& user_id
-) {
-    for (const auto& pid : public_ids) {
-        auto row = media_repo.FindByPublicId(pid);
-        if (!row.has_value() || row->user_id != user_id) {
-            return "Media '" + pid + "' is invalid or does not belong to you";
+        const auto& media_id = media.id().value();
+        if (!media_id.empty()) {
+            if (!media_ids.insert(media_id).second) {
+                return std::unexpected{"Media IDs must be unique"};
+            }
+            if (media_id == input.cover_media_id()) cover_found = true;
         }
-        if (row->status == "orphan") continue;
-        if (row->status == "in_use" &&
-            projects.IsMediaReferenced(project_id, pid)) {
-            continue;
-        }
-        return "Media '" + pid + "' is already used by another project";
     }
-    return {};
-}
 
-// Flip orphan -> in_use untuk semua media yang baru disimpan.
-inline void AttachMedia(
-    const database::MediaRepository& media_repo,
-    const std::vector<std::string>& public_ids,
-    const std::string& user_id
-) {
-    for (const auto& pid : public_ids) {
-        media_repo.MarkInUse(pid, user_id);
+    if (!cover_found) {
+        return std::unexpected{"cover_media_id must reference media in this project"};
     }
+
+    for (const auto& collaborator : input.collaborators()) {
+        const auto& collaborator_id = collaborator.user_id().value();
+        if (collaborator_id.empty()) {
+            return std::unexpected{"Collaborator user ID is required"};
+        }
+        if (!collaborator_ids.insert(collaborator_id).second) {
+            return std::unexpected{"Collaborators must be unique"};
+        }
+    }
+
+    return true;
 }
 
 inline void SaveChildren(
@@ -133,10 +113,6 @@ inline void SaveChildren(
     const std::string& project_id,
     const priemman::v1::ProjectInput& input
 ) {
-    repo.ReplaceStrings(project_id, "tools",
-        {input.tools().begin(), input.tools().end()});
-    repo.ReplaceStrings(project_id, "disciplines",
-        {input.disciplines().begin(), input.disciplines().end()});
     repo.ReplaceStrings(project_id, "tags",
         {input.tags().begin(), input.tags().end()});
 
@@ -152,6 +128,11 @@ inline void SaveChildren(
     repo.SetCover(project_id, cover);
 
     repo.ReplaceCollaborators(project_id, BuildCollabRows(input.collaborators()));
+}
+
+inline bool isExceeding1MB(const std::string& content) {
+    const size_t max_size = 1024 * 1024; // 1 MB dalam satuan byte
+    return content.size() > max_size;
 }
 
 }  // namespace priemman::handlers::projects::helpers

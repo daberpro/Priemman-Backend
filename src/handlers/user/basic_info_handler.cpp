@@ -2,8 +2,8 @@
 
 #include <proto/user.pb.h>
 #include <userver/server/http/http_method.hpp>
-
 #include <src/handlers/user/proto_convert.hpp>
+#include <src/handlers/media/media_helper.hpp>
 
 namespace priemman::handlers::user {
 
@@ -59,6 +59,31 @@ std::string BasicInfoHandler::HandleRequestThrow(
             return ErrorResult("INVALID_BODY", "Invalid request body");
         }
 
+        const auto user = _users.FindById(*user_id);
+        if (!user.has_value()) {
+            res.SetStatus(HttpStatus::kNotFound);
+            return ErrorResult("NOT_FOUND", "User not found");
+        }
+
+        const bool replace_avatar = req.has_avatar_replace_media();
+        std::vector<std::string> avatar_public_ids;
+        if (replace_avatar) {
+            const auto& avatar = req.avatar_replace_media();
+            if (avatar.type() != priemman::v1::MEDIA_TYPE_IMAGE ||
+                avatar.public_id().empty() || avatar.url().empty()) {
+                res.SetStatus(HttpStatus::kBadRequest);
+                return ErrorResult("INVALID_MEDIA", "Avatar must be an uploaded image with URL and public ID");
+            }
+
+            avatar_public_ids.emplace_back(avatar.public_id());
+            if (const auto validation = media::ValidateMediaForCreate(
+                    _media, avatar_public_ids, *user_id);
+                !validation.has_value()) {
+                res.SetStatus(HttpStatus::kBadRequest);
+                return ErrorResult("INVALID_MEDIA", validation.error());
+            }
+        }
+
         database::BasicInfoPatch patch;
         const auto& about_me = req.about_me();
 
@@ -73,9 +98,14 @@ std::string BasicInfoHandler::HandleRequestThrow(
           .title = about_me.title(),
           .description =  about_me.description()
         };
-        patch.avatar_url = req.avatar_url();
+        patch.avatar_url = replace_avatar
+            ? req.avatar_replace_media().url()
+            : user->avatar_url;
 
         _users.UpdateBasicInfo(*user_id, patch);
+        if (replace_avatar) {
+            media::AttachMedia(_media, avatar_public_ids, *user_id);
+        }
 
         const auto body = BuildMe(nullptr, _users, _accounts, *user_id);
         return body;

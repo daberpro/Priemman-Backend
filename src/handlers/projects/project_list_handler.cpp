@@ -36,8 +36,6 @@ void FillProject(
 ) {
     *out = mapper::ToProto(
         row,
-        repo.ListStrings(row.id, "tools"),
-        repo.ListStrings(row.id, "disciplines"),
         repo.ListStrings(row.id, "tags"),
         repo.ListMedia(row.id),
         repo.ListCollaborators(row.id)

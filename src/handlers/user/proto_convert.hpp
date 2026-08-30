@@ -65,6 +65,15 @@ inline database::WorkExperienceRow ToRow(const priemman::v1::WorkExperience& w) 
     return r;
 }
 
+inline database::ConnectedAccountRow ToRow(const priemman::v1::UpsertConnectedAccountRequest& r) {
+    database::ConnectedAccountRow row;
+    row.platform = r.platform();
+    row.handle_or_url = r.handle_or_url();
+    row.verified = r.verified();
+    row.connected_at = TimestampToSql(r.connected_at());
+    return row;
+}
+
 inline priemman::v1::ConnectedAccount ToProto(const database::ConnectedAccountRow& r) {
     priemman::v1::ConnectedAccount c;
     if (r.platform == "INSTAGRAM") c.set_platform(priemman::v1::CONNECTED_PLATFORM_INSTAGRAM);

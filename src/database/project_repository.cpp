@@ -12,7 +12,7 @@ namespace {
 
 constexpr std::string_view kSelectProject = R"sql(
     SELECT
-        id, owner_id, title, slug, description, cover_media_id,
+        id, owner_id, title, slug, content, cover_media_id,
         visibility, status,
         CAST(views AS SIGNED), CAST(likes AS SIGNED), CAST(saves AS SIGNED),
         DATE_FORMAT(created_at,   '%Y-%m-%dT%H:%i:%sZ'),
@@ -66,15 +66,15 @@ std::string ProjectRepository::Create(const ProjectRow& row) const {
         userver::storages::mysql::Query{
             R"sql(
                 INSERT INTO projects (
-                    id, owner_id, title, slug, description, cover_media_id,
-                    visibility, status, published_at
+                    id, owner_id, title, slug, cover_media_id,
+                    visibility, content, status, published_at
                 )
                 VALUES (?, ?, ?, ?, ?, ?, ?, ?,
                         CASE WHEN ? = 'PUBLISHED' THEN NOW(6) ELSE NULL END)
             )sql"
         },
-        id, row.owner_id, row.title, row.slug, row.description,
-        row.cover_media_id, row.visibility, row.status, row.status
+        id, row.owner_id, row.title, row.slug,
+        row.cover_media_id, row.visibility, row.content, row.status, row.status
     );
     return id;
 }
@@ -85,16 +85,16 @@ bool ProjectRepository::Update(const ProjectRow& row) const {
         userver::storages::mysql::Query{
             R"sql(
                 UPDATE projects
-                SET title = ?, slug = ?, description = ?,
-                    visibility = ?, status = ?,
+                SET title = ?, slug = ?,
+                    visibility = ?, status = ?, content = ?,
                     published_at = CASE WHEN ? = 'PUBLISHED'
                         THEN COALESCE(published_at, NOW(6))
                         ELSE published_at END
                 WHERE id = ? AND owner_id = ?
             )sql"
         },
-        row.title, row.slug, row.description,
-        row.visibility, row.status, row.status,
+        row.title, row.slug,
+        row.visibility, row.status, row.content , row.status,
         row.id, row.owner_id
     ).AsExecutionResult();
     return result.rows_affected > 0;
@@ -225,7 +225,7 @@ std::vector<std::string> ProjectRepository::ListStrings(
             " WHERE project_id = ? ORDER BY sort_order ASC"
         },
         project_id
-    ).AsVector<std::string>(userver::storages::mysql::kFieldTag);  // <-- TAMBAHKAN INI
+    ).AsVector<std::string>(userver::storages::mysql::kFieldTag);
 }
 
 std::vector<ProjectMediaRow> ProjectRepository::ListMedia(
@@ -315,5 +315,6 @@ std::vector<ProjectRow> ProjectRepository::ListPublic(
         limit, offset
     ).AsVector<ProjectRow>();
 }
+
 
 }  // namespace priemman::database

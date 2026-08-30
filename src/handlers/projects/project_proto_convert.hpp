@@ -37,8 +37,6 @@ inline priemman::v1::ProjectStatus StringToStatus(const std::string& s) {
 
 inline priemman::v1::Project ToProto(
     const database::ProjectRow& row,
-    const std::vector<std::string>& tools,
-    const std::vector<std::string>& disciplines,
     const std::vector<std::string>& tags,
     const std::vector<database::ProjectMediaRow>& media,
     const std::vector<database::ProjectCollaboratorRow>& collabs
@@ -48,7 +46,6 @@ inline priemman::v1::Project ToProto(
     p.mutable_owner_id()->set_value(row.owner_id);
     p.set_title(row.title);
     p.set_slug(row.slug);
-    p.set_description(row.description);
     p.set_cover_media_id(row.cover_media_id.value_or(""));
     p.set_visibility(StringToVisibility(row.visibility));
     p.set_status(StringToStatus(row.status));
@@ -56,8 +53,6 @@ inline priemman::v1::Project ToProto(
     p.mutable_metrics()->set_likes(row.likes);
     p.mutable_metrics()->set_saves(row.saves);
 
-    for (const auto& t : tools) p.add_tools(t);
-    for (const auto& d : disciplines) p.add_disciplines(d);
     for (const auto& t : tags) p.add_tags(t);
 
     for (const auto& m : media) {

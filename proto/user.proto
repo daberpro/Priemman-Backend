@@ -1,6 +1,8 @@
 syntax = "proto3";
 package priemman.v1;
 import "common.proto";
+import "project.proto";
+import "media.proto";
 import "google/protobuf/timestamp.proto";
 
 enum ConnectedPlatform {
@@ -28,6 +30,13 @@ message WorkExperience {
 }
 
 message ConnectedAccount {
+  ConnectedPlatform platform = 1;
+  string handle_or_url = 2;
+  bool verified = 3;
+  google.protobuf.Timestamp connected_at = 4;
+}
+
+message UpsertConnectedAccountRequest {
   ConnectedPlatform platform = 1;
   string handle_or_url = 2;
   bool verified = 3;
@@ -68,7 +77,7 @@ message UpdateBasicInfoRequest {
   Location location = 5;
   string website_url = 6;
   AboutMe about_me = 7;
-  string avatar_url = 8;
+  Media avatar_replace_media = 8;
 }
 
 message UpsertWorkExperienceRequest {

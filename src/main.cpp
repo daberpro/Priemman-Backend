@@ -102,6 +102,7 @@ auto main(int argc, char* argv[]) -> int {
         .Append<priemman::ApiInfoHandler>("handler-api-info")
         .Append<priemman::PingHandler>("handler-ping");
 
+    
     std::println("=========================================");
     std::println(" Priemman Backend Server");
     std::println(" Starting on config: {}", argc > 2 ? argv[2] : "../config/config.yaml");

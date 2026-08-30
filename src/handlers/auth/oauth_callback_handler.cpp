@@ -40,7 +40,7 @@ bool JsonBool(const Value& doc, const char* key, bool default_value = false) {
 
 std::string NormalizeEmail(std::string email) {
     std::ranges::transform(email, email.begin(), [](unsigned char c) {
-        return static_cast<char>(std::toupper(c));
+        return static_cast<char>(std::tolower(c));
     });
     return email;
 }

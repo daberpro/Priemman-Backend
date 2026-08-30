@@ -45,6 +45,19 @@ std::string ConnectedAccountsHandler::HandleRequestThrow(
         return response.SerializeAsString();
     }
 
+
+    // ---------- UPSERT (connect) ----------
+    if (method == HttpMethod::kPost) {
+        priemman::v1::UpsertConnectedAccountRequest req;
+        if (!req.ParseFromString(request.RequestBody())) {
+            res.SetStatus(HttpStatus::kBadRequest);
+            return ErrorResult("INVALID_BODY", "Invalid request body");
+        }
+        const database::ConnectedAccountRow row = mapper::ToRow(req);
+        _accounts.UpsertConnectedAccount(*user_id, row);
+        return req.SerializeAsString();
+    }
+
     // ---------- DELETE (disconnect) ----------
     if (method == HttpMethod::kDelete) {
         priemman::v1::DeleteConnectedAccountRequest req;

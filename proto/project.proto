@@ -1,6 +1,7 @@
 syntax = "proto3";
 package priemman.v1;
 import "common.proto";
+import "media.proto";
 import "google/protobuf/timestamp.proto";
 
 enum ProjectVisibility {
@@ -15,20 +16,6 @@ enum ProjectStatus {
   PROJECT_STATUS_DRAFT = 1;
   PROJECT_STATUS_PUBLISHED = 2;
   PROJECT_STATUS_ARCHIVED = 3;
-}
-
-enum MediaType {
-  MEDIA_TYPE_UNSPECIFIED = 0;
-  MEDIA_TYPE_IMAGE = 1;
-  MEDIA_TYPE_VIDEO = 2;
-}
-
-message Media {
-  string url = 1;
-  MediaType type = 2;
-  int32 order = 3;
-  ObjectId id = 4;
-  string public_id = 5; // <-- tambahan
 }
 
 message Collaborator {
@@ -47,19 +34,17 @@ message Project {
   ObjectId owner_id = 2;
   string title = 3;
   string slug = 4;
-  string description = 5;
-  repeated string tools = 6;
-  repeated string disciplines = 7;
-  repeated string tags = 8;
-  string cover_media_id = 9;
-  repeated Media media = 10;
-  repeated Collaborator collaborators = 11;
-  ProjectVisibility visibility = 12;
-  ProjectStatus status = 13;
-  ProjectMetrics metrics = 14;
-  google.protobuf.Timestamp created_at = 15;
-  google.protobuf.Timestamp updated_at = 16;
-  google.protobuf.Timestamp published_at = 17;
+  string content = 5;
+  repeated string tags = 6;
+  string cover_media_id = 7;
+  repeated Media media = 8;
+  repeated Collaborator collaborators = 9;
+  ProjectVisibility visibility = 10;
+  ProjectStatus status = 11;
+  ProjectMetrics metrics = 12;
+  google.protobuf.Timestamp created_at = 13;
+  google.protobuf.Timestamp updated_at = 14;
+  google.protobuf.Timestamp published_at = 15;
 }
 
 enum CollectionVisibility {
@@ -96,15 +81,13 @@ message ListProjectsResponse {
 // ---- Input & Request/Response CRUD ----
 message ProjectInput {
     string title = 1;
-    string description = 2;
-    repeated string tools = 3;
-    repeated string disciplines = 4;
-    repeated string tags = 5;
-    repeated Media media = 6;
-    repeated Collaborator collaborators = 7;
-    ProjectVisibility visibility = 8;
-    ProjectStatus status = 9;       // set PUBLISHED untuk publish (published_at otomatis)
-    string cover_media_id = 10;     // kosong = media pertama
+    repeated string tags = 2;
+    repeated Media media = 3;
+    repeated Collaborator collaborators = 4;
+    ProjectVisibility visibility = 5;
+    ProjectStatus status = 6;       // set PUBLISHED untuk publish (published_at otomatis)
+    string cover_media_id = 7;     // kosong = media pertama
+    string content = 8;
 }
 message CreateProjectRequest  { ProjectInput input = 1; }
 message UpdateProjectRequest  { ObjectId id = 1; ProjectInput input = 2; }

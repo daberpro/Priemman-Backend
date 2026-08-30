@@ -114,4 +114,24 @@ bool AccountRepository::DeleteConnectedAccount(
     return result.rows_affected > 0;
 }
 
+bool AccountRepository::UpsertConnectedAccount(
+    const std::string& user_id,
+    const ConnectedAccountRow& row
+) const {
+    auto result = _mysql_cluster->Execute(
+        userver::storages::mysql::ClusterHostType::kPrimary,
+        userver::storages::mysql::Query{R"sql(
+            INSERT INTO connected_accounts (user_id, platform, handle_or_url, verified, connected_at)
+            VALUES (?, ?, ?, ?, ?)
+            ON DUPLICATE KEY UPDATE
+                handle_or_url = VALUES(handle_or_url),
+                verified = VALUES(verified),
+                connected_at = VALUES(connected_at)
+        )sql"},
+        user_id, row.platform, row.handle_or_url, row.verified, row.connected_at
+    ).AsExecutionResult();
+    return result.rows_affected > 0;
+}
+
+
 }  // namespace priemman::database

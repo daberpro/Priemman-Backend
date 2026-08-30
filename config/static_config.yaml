@@ -78,7 +78,9 @@ components_manager:
 # ============== Handlers ==============
         handler-static:  # Landing page statis di path /
             fs-cache-component: fs-cache-static
-            path: /
+            # Docusaurus menghasilkan HTML, CSS, dan JS di bawah /assets.
+            # Wildcard diperlukan agar aset tersebut ikut dilayani, bukan hanya /.
+            path: /*
             method: GET
             task_processor: main-task-processor
             directory-file: index.html
@@ -126,7 +128,7 @@ components_manager:
 
         handler-connected-accounts:
             path: /v1/users/me/connected-accounts
-            method: GET,DELETE,OPTIONS
+            method: GET,DELETE,OPTIONS,POST
             task_processor: main-task-processor
             # TIDAK ADA cloudinary config di sini
 
