@@ -1,12 +1,10 @@
 name: C++ Build
-
 on:
   push:
     branches:
       - main
       - master
       - develop
-
   pull_request:
     branches:
       - main
@@ -17,7 +15,6 @@ jobs:
   build:
     name: Build
     runs-on: ubuntu-24.04
-
     steps:
       - name: Checkout
         # Catatan: v4 adalah versi stabil terbaru. v6 belum ada dan akan menyebabkan error.
@@ -30,8 +27,6 @@ jobs:
             build-essential \
             gcc-14 \
             g++-14 \
-            cmake \
-            ninja-build \
             pkg-config \
             wget \
             protobuf-compiler \
@@ -60,13 +55,12 @@ jobs:
             https://github.com/userver-framework/userver/releases/download/v3.1/ubuntu24.04-libuserver-all-dev_3.1_amd64.deb
           sudo apt-get install -y ./userver.deb
 
-      - name: Configure
+      - name: Configure & Build
+        working-directory: .
         run: |
-          cmake \
-            -S . \
-            -B build-ci \
-            -G Ninja \
-            -DCMAKE_BUILD_TYPE=Release \
+          mkdir -p build-ci
+          cd build-ci
+          cmake .. -DCMAKE_BUILD_TYPE=Release \
             -DCMAKE_C_COMPILER=gcc-14 \
             -DCMAKE_CXX_COMPILER=g++-14
           cmake --build ./ -j4
