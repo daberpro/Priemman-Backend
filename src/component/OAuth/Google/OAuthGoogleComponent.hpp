@@ -37,14 +37,29 @@ namespace daberdev::components {
                 .timeout(std::chrono::milliseconds(5000))
                 .perform();
 
-            token->raise_for_status();
-            auto result = userver::formats::json::FromString(token->body());
+            // Parse body BEFORE raising, so we can log Google's actual error
+            userver::formats::json::Value result;
+            try {
+                result = userver::formats::json::FromString(token->body());
+            } catch (const std::exception&) {
+                token->raise_for_status(); // body wasn't JSON, fall back to generic error
+                throw;
+            }
 
             if (result.HasMember("error")) {
+                std::string error_code = result["error"].template As<std::string>();
                 std::string error_msg = result.HasMember("error_description")
                     ? result["error_description"].template As<std::string>()
-                    : result["error"].template As<std::string>();
-                throw std::runtime_error("Google OAuth Error: " + error_msg);
+                    : error_code;
+                LOG_ERROR() << "Google token exchange failed: status=" << token->status_code()
+                            << " error=" << error_code << " description=" << error_msg;
+                throw std::runtime_error("Google OAuth Error [" + error_code + "]: " + error_msg);
+            }
+
+            if (token->status_code() != 200) {
+                LOG_ERROR() << "Google token exchange unexpected status: " << token->status_code()
+                            << " body=" << token->body();
+                token->raise_for_status();
             }
 
             return result["access_token"].template As<std::string>();
