@@ -1,19 +1,23 @@
 name: C++ Build
+
 on:
   push:
     branches:
       - main
       - master
       - develop
+
   pull_request:
     branches:
       - main
       - master
       - develop
+
 jobs:
   build:
     name: Build
     runs-on: ubuntu-24.04
+
     steps:
       - name: Checkout
         uses: actions/checkout@v6
@@ -25,6 +29,8 @@ jobs:
             build-essential \
             gcc-14 \
             g++-14 \
+            cmake \
+            ninja-build \
             pkg-config \
             wget \
             protobuf-compiler \
@@ -32,13 +38,6 @@ jobs:
             mariadb-server \
             mariadb-client \
             libmariadb-dev
-
-      - name: Install CMake 4.4.0
-        run: |
-          wget -O cmake.sh https://github.com/Kitware/CMake/releases/download/v4.4.0/cmake-4.4.0-linux-x86_64.sh
-          sudo sh cmake.sh --skip-license --prefix=/usr/local
-          # pastikan /usr/local/bin didahulukan di PATH daripada cmake bawaan apt (kalau ada)
-          echo "/usr/local/bin" >> "$GITHUB_PATH"
 
       - name: Show toolchain
         run: |
@@ -54,15 +53,21 @@ jobs:
             https://github.com/userver-framework/userver/releases/download/v3.1/ubuntu24.04-libuserver-all-dev_3.1_amd64.deb
           sudo apt-get install -y ./userver.deb
 
-      - name: Configure & Build
-        working-directory: .
+      - name: Configure
         run: |
-          mkdir -p build-ci
-          cd build-ci
-          cmake .. -DCMAKE_BUILD_TYPE=Release \
+          cmake \
+            -S . \
+            -B build-ci \
+            -G Ninja \
+            -DCMAKE_BUILD_TYPE=Release \
             -DCMAKE_C_COMPILER=gcc-14 \
             -DCMAKE_CXX_COMPILER=g++-14
-          cmake --build ./
+
+      - name: Build
+        run: |
+          cmake \
+            --build build-ci \
+            --parallel 2
 
       - name: Strip binaries (reduce size)
         if: github.event_name == 'push'
