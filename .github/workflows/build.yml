@@ -1,5 +1,4 @@
-name: C++ Build & Deploy
-
+name: C++ Build
 on:
   push:
     branches:
