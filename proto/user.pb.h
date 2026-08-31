@@ -1554,7 +1554,11 @@ class UpdateBasicInfoRequest final :
     kAboutMeFieldNumber = 7,
     kAvatarReplaceMediaFieldNumber = 8,
   };
-  // string first_name = 1;
+  // optional string first_name = 1;
+  bool has_first_name() const;
+  private:
+  bool _internal_has_first_name() const;
+  public:
   void clear_first_name();
   const std::string& first_name() const;
   template <typename ArgT0 = const std::string&, typename... ArgT>
@@ -1568,7 +1572,11 @@ class UpdateBasicInfoRequest final :
   std::string* _internal_mutable_first_name();
   public:
 
-  // string last_name = 2;
+  // optional string last_name = 2;
+  bool has_last_name() const;
+  private:
+  bool _internal_has_last_name() const;
+  public:
   void clear_last_name();
   const std::string& last_name() const;
   template <typename ArgT0 = const std::string&, typename... ArgT>
@@ -1582,7 +1590,11 @@ class UpdateBasicInfoRequest final :
   std::string* _internal_mutable_last_name();
   public:
 
-  // string headline = 3;
+  // optional string headline = 3;
+  bool has_headline() const;
+  private:
+  bool _internal_has_headline() const;
+  public:
   void clear_headline();
   const std::string& headline() const;
   template <typename ArgT0 = const std::string&, typename... ArgT>
@@ -1596,7 +1608,11 @@ class UpdateBasicInfoRequest final :
   std::string* _internal_mutable_headline();
   public:
 
-  // string company = 4;
+  // optional string company = 4;
+  bool has_company() const;
+  private:
+  bool _internal_has_company() const;
+  public:
   void clear_company();
   const std::string& company() const;
   template <typename ArgT0 = const std::string&, typename... ArgT>
@@ -1610,7 +1626,11 @@ class UpdateBasicInfoRequest final :
   std::string* _internal_mutable_company();
   public:
 
-  // string website_url = 6;
+  // optional string website_url = 6;
+  bool has_website_url() const;
+  private:
+  bool _internal_has_website_url() const;
+  public:
   void clear_website_url();
   const std::string& website_url() const;
   template <typename ArgT0 = const std::string&, typename... ArgT>
@@ -1686,6 +1706,8 @@ class UpdateBasicInfoRequest final :
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   struct Impl_ {
+    ::PROTOBUF_NAMESPACE_ID::internal::HasBits<1> _has_bits_;
+    mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
     ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr first_name_;
     ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr last_name_;
     ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr headline_;
@@ -1694,7 +1716,6 @@ class UpdateBasicInfoRequest final :
     ::priemman::v1::Location* location_;
     ::priemman::v1::AboutMe* about_me_;
     ::priemman::v1::Media* avatar_replace_media_;
-    mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   };
   union { Impl_ _impl_; };
   friend struct ::TableStruct_user_2eproto;
@@ -6289,9 +6310,17 @@ inline void User::set_role(::priemman::v1::UserRole value) {
 
 // UpdateBasicInfoRequest
 
-// string first_name = 1;
+// optional string first_name = 1;
+inline bool UpdateBasicInfoRequest::_internal_has_first_name() const {
+  bool value = (_impl_._has_bits_[0] & 0x00000001u) != 0;
+  return value;
+}
+inline bool UpdateBasicInfoRequest::has_first_name() const {
+  return _internal_has_first_name();
+}
 inline void UpdateBasicInfoRequest::clear_first_name() {
   _impl_.first_name_.ClearToEmpty();
+  _impl_._has_bits_[0] &= ~0x00000001u;
 }
 inline const std::string& UpdateBasicInfoRequest::first_name() const {
   // @@protoc_insertion_point(field_get:priemman.v1.UpdateBasicInfoRequest.first_name)
@@ -6300,7 +6329,7 @@ inline const std::string& UpdateBasicInfoRequest::first_name() const {
 template <typename ArgT0, typename... ArgT>
 inline PROTOBUF_ALWAYS_INLINE
 void UpdateBasicInfoRequest::set_first_name(ArgT0&& arg0, ArgT... args) {
- 
+ _impl_._has_bits_[0] |= 0x00000001u;
  _impl_.first_name_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
   // @@protoc_insertion_point(field_set:priemman.v1.UpdateBasicInfoRequest.first_name)
 }
@@ -6313,22 +6342,32 @@ inline const std::string& UpdateBasicInfoRequest::_internal_first_name() const {
   return _impl_.first_name_.Get();
 }
 inline void UpdateBasicInfoRequest::_internal_set_first_name(const std::string& value) {
-  
+  _impl_._has_bits_[0] |= 0x00000001u;
   _impl_.first_name_.Set(value, GetArenaForAllocation());
 }
 inline std::string* UpdateBasicInfoRequest::_internal_mutable_first_name() {
-  
+  _impl_._has_bits_[0] |= 0x00000001u;
   return _impl_.first_name_.Mutable(GetArenaForAllocation());
 }
 inline std::string* UpdateBasicInfoRequest::release_first_name() {
   // @@protoc_insertion_point(field_release:priemman.v1.UpdateBasicInfoRequest.first_name)
-  return _impl_.first_name_.Release();
+  if (!_internal_has_first_name()) {
+    return nullptr;
+  }
+  _impl_._has_bits_[0] &= ~0x00000001u;
+  auto* p = _impl_.first_name_.Release();
+#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (_impl_.first_name_.IsDefault()) {
+    _impl_.first_name_.Set("", GetArenaForAllocation());
+  }
+#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  return p;
 }
 inline void UpdateBasicInfoRequest::set_allocated_first_name(std::string* first_name) {
   if (first_name != nullptr) {
-    
+    _impl_._has_bits_[0] |= 0x00000001u;
   } else {
-    
+    _impl_._has_bits_[0] &= ~0x00000001u;
   }
   _impl_.first_name_.SetAllocated(first_name, GetArenaForAllocation());
 #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
@@ -6339,9 +6378,17 @@ inline void UpdateBasicInfoRequest::set_allocated_first_name(std::string* first_
   // @@protoc_insertion_point(field_set_allocated:priemman.v1.UpdateBasicInfoRequest.first_name)
 }
 
-// string last_name = 2;
+// optional string last_name = 2;
+inline bool UpdateBasicInfoRequest::_internal_has_last_name() const {
+  bool value = (_impl_._has_bits_[0] & 0x00000002u) != 0;
+  return value;
+}
+inline bool UpdateBasicInfoRequest::has_last_name() const {
+  return _internal_has_last_name();
+}
 inline void UpdateBasicInfoRequest::clear_last_name() {
   _impl_.last_name_.ClearToEmpty();
+  _impl_._has_bits_[0] &= ~0x00000002u;
 }
 inline const std::string& UpdateBasicInfoRequest::last_name() const {
   // @@protoc_insertion_point(field_get:priemman.v1.UpdateBasicInfoRequest.last_name)
@@ -6350,7 +6397,7 @@ inline const std::string& UpdateBasicInfoRequest::last_name() const {
 template <typename ArgT0, typename... ArgT>
 inline PROTOBUF_ALWAYS_INLINE
 void UpdateBasicInfoRequest::set_last_name(ArgT0&& arg0, ArgT... args) {
- 
+ _impl_._has_bits_[0] |= 0x00000002u;
  _impl_.last_name_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
   // @@protoc_insertion_point(field_set:priemman.v1.UpdateBasicInfoRequest.last_name)
 }
@@ -6363,22 +6410,32 @@ inline const std::string& UpdateBasicInfoRequest::_internal_last_name() const {
   return _impl_.last_name_.Get();
 }
 inline void UpdateBasicInfoRequest::_internal_set_last_name(const std::string& value) {
-  
+  _impl_._has_bits_[0] |= 0x00000002u;
   _impl_.last_name_.Set(value, GetArenaForAllocation());
 }
 inline std::string* UpdateBasicInfoRequest::_internal_mutable_last_name() {
-  
+  _impl_._has_bits_[0] |= 0x00000002u;
   return _impl_.last_name_.Mutable(GetArenaForAllocation());
 }
 inline std::string* UpdateBasicInfoRequest::release_last_name() {
   // @@protoc_insertion_point(field_release:priemman.v1.UpdateBasicInfoRequest.last_name)
-  return _impl_.last_name_.Release();
+  if (!_internal_has_last_name()) {
+    return nullptr;
+  }
+  _impl_._has_bits_[0] &= ~0x00000002u;
+  auto* p = _impl_.last_name_.Release();
+#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (_impl_.last_name_.IsDefault()) {
+    _impl_.last_name_.Set("", GetArenaForAllocation());
+  }
+#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  return p;
 }
 inline void UpdateBasicInfoRequest::set_allocated_last_name(std::string* last_name) {
   if (last_name != nullptr) {
-    
+    _impl_._has_bits_[0] |= 0x00000002u;
   } else {
-    
+    _impl_._has_bits_[0] &= ~0x00000002u;
   }
   _impl_.last_name_.SetAllocated(last_name, GetArenaForAllocation());
 #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
@@ -6389,9 +6446,17 @@ inline void UpdateBasicInfoRequest::set_allocated_last_name(std::string* last_na
   // @@protoc_insertion_point(field_set_allocated:priemman.v1.UpdateBasicInfoRequest.last_name)
 }
 
-// string headline = 3;
+// optional string headline = 3;
+inline bool UpdateBasicInfoRequest::_internal_has_headline() const {
+  bool value = (_impl_._has_bits_[0] & 0x00000004u) != 0;
+  return value;
+}
+inline bool UpdateBasicInfoRequest::has_headline() const {
+  return _internal_has_headline();
+}
 inline void UpdateBasicInfoRequest::clear_headline() {
   _impl_.headline_.ClearToEmpty();
+  _impl_._has_bits_[0] &= ~0x00000004u;
 }
 inline const std::string& UpdateBasicInfoRequest::headline() const {
   // @@protoc_insertion_point(field_get:priemman.v1.UpdateBasicInfoRequest.headline)
@@ -6400,7 +6465,7 @@ inline const std::string& UpdateBasicInfoRequest::headline() const {
 template <typename ArgT0, typename... ArgT>
 inline PROTOBUF_ALWAYS_INLINE
 void UpdateBasicInfoRequest::set_headline(ArgT0&& arg0, ArgT... args) {
- 
+ _impl_._has_bits_[0] |= 0x00000004u;
  _impl_.headline_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
   // @@protoc_insertion_point(field_set:priemman.v1.UpdateBasicInfoRequest.headline)
 }
@@ -6413,22 +6478,32 @@ inline const std::string& UpdateBasicInfoRequest::_internal_headline() const {
   return _impl_.headline_.Get();
 }
 inline void UpdateBasicInfoRequest::_internal_set_headline(const std::string& value) {
-  
+  _impl_._has_bits_[0] |= 0x00000004u;
   _impl_.headline_.Set(value, GetArenaForAllocation());
 }
 inline std::string* UpdateBasicInfoRequest::_internal_mutable_headline() {
-  
+  _impl_._has_bits_[0] |= 0x00000004u;
   return _impl_.headline_.Mutable(GetArenaForAllocation());
 }
 inline std::string* UpdateBasicInfoRequest::release_headline() {
   // @@protoc_insertion_point(field_release:priemman.v1.UpdateBasicInfoRequest.headline)
-  return _impl_.headline_.Release();
+  if (!_internal_has_headline()) {
+    return nullptr;
+  }
+  _impl_._has_bits_[0] &= ~0x00000004u;
+  auto* p = _impl_.headline_.Release();
+#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (_impl_.headline_.IsDefault()) {
+    _impl_.headline_.Set("", GetArenaForAllocation());
+  }
+#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  return p;
 }
 inline void UpdateBasicInfoRequest::set_allocated_headline(std::string* headline) {
   if (headline != nullptr) {
-    
+    _impl_._has_bits_[0] |= 0x00000004u;
   } else {
-    
+    _impl_._has_bits_[0] &= ~0x00000004u;
   }
   _impl_.headline_.SetAllocated(headline, GetArenaForAllocation());
 #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
@@ -6439,9 +6514,17 @@ inline void UpdateBasicInfoRequest::set_allocated_headline(std::string* headline
   // @@protoc_insertion_point(field_set_allocated:priemman.v1.UpdateBasicInfoRequest.headline)
 }
 
-// string company = 4;
+// optional string company = 4;
+inline bool UpdateBasicInfoRequest::_internal_has_company() const {
+  bool value = (_impl_._has_bits_[0] & 0x00000008u) != 0;
+  return value;
+}
+inline bool UpdateBasicInfoRequest::has_company() const {
+  return _internal_has_company();
+}
 inline void UpdateBasicInfoRequest::clear_company() {
   _impl_.company_.ClearToEmpty();
+  _impl_._has_bits_[0] &= ~0x00000008u;
 }
 inline const std::string& UpdateBasicInfoRequest::company() const {
   // @@protoc_insertion_point(field_get:priemman.v1.UpdateBasicInfoRequest.company)
@@ -6450,7 +6533,7 @@ inline const std::string& UpdateBasicInfoRequest::company() const {
 template <typename ArgT0, typename... ArgT>
 inline PROTOBUF_ALWAYS_INLINE
 void UpdateBasicInfoRequest::set_company(ArgT0&& arg0, ArgT... args) {
- 
+ _impl_._has_bits_[0] |= 0x00000008u;
  _impl_.company_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
   // @@protoc_insertion_point(field_set:priemman.v1.UpdateBasicInfoRequest.company)
 }
@@ -6463,22 +6546,32 @@ inline const std::string& UpdateBasicInfoRequest::_internal_company() const {
   return _impl_.company_.Get();
 }
 inline void UpdateBasicInfoRequest::_internal_set_company(const std::string& value) {
-  
+  _impl_._has_bits_[0] |= 0x00000008u;
   _impl_.company_.Set(value, GetArenaForAllocation());
 }
 inline std::string* UpdateBasicInfoRequest::_internal_mutable_company() {
-  
+  _impl_._has_bits_[0] |= 0x00000008u;
   return _impl_.company_.Mutable(GetArenaForAllocation());
 }
 inline std::string* UpdateBasicInfoRequest::release_company() {
   // @@protoc_insertion_point(field_release:priemman.v1.UpdateBasicInfoRequest.company)
-  return _impl_.company_.Release();
+  if (!_internal_has_company()) {
+    return nullptr;
+  }
+  _impl_._has_bits_[0] &= ~0x00000008u;
+  auto* p = _impl_.company_.Release();
+#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (_impl_.company_.IsDefault()) {
+    _impl_.company_.Set("", GetArenaForAllocation());
+  }
+#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  return p;
 }
 inline void UpdateBasicInfoRequest::set_allocated_company(std::string* company) {
   if (company != nullptr) {
-    
+    _impl_._has_bits_[0] |= 0x00000008u;
   } else {
-    
+    _impl_._has_bits_[0] &= ~0x00000008u;
   }
   _impl_.company_.SetAllocated(company, GetArenaForAllocation());
 #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
@@ -6574,9 +6667,17 @@ inline void UpdateBasicInfoRequest::set_allocated_location(::priemman::v1::Locat
   // @@protoc_insertion_point(field_set_allocated:priemman.v1.UpdateBasicInfoRequest.location)
 }
 
-// string website_url = 6;
+// optional string website_url = 6;
+inline bool UpdateBasicInfoRequest::_internal_has_website_url() const {
+  bool value = (_impl_._has_bits_[0] & 0x00000010u) != 0;
+  return value;
+}
+inline bool UpdateBasicInfoRequest::has_website_url() const {
+  return _internal_has_website_url();
+}
 inline void UpdateBasicInfoRequest::clear_website_url() {
   _impl_.website_url_.ClearToEmpty();
+  _impl_._has_bits_[0] &= ~0x00000010u;
 }
 inline const std::string& UpdateBasicInfoRequest::website_url() const {
   // @@protoc_insertion_point(field_get:priemman.v1.UpdateBasicInfoRequest.website_url)
@@ -6585,7 +6686,7 @@ inline const std::string& UpdateBasicInfoRequest::website_url() const {
 template <typename ArgT0, typename... ArgT>
 inline PROTOBUF_ALWAYS_INLINE
 void UpdateBasicInfoRequest::set_website_url(ArgT0&& arg0, ArgT... args) {
- 
+ _impl_._has_bits_[0] |= 0x00000010u;
  _impl_.website_url_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
   // @@protoc_insertion_point(field_set:priemman.v1.UpdateBasicInfoRequest.website_url)
 }
@@ -6598,22 +6699,32 @@ inline const std::string& UpdateBasicInfoRequest::_internal_website_url() const 
   return _impl_.website_url_.Get();
 }
 inline void UpdateBasicInfoRequest::_internal_set_website_url(const std::string& value) {
-  
+  _impl_._has_bits_[0] |= 0x00000010u;
   _impl_.website_url_.Set(value, GetArenaForAllocation());
 }
 inline std::string* UpdateBasicInfoRequest::_internal_mutable_website_url() {
-  
+  _impl_._has_bits_[0] |= 0x00000010u;
   return _impl_.website_url_.Mutable(GetArenaForAllocation());
 }
 inline std::string* UpdateBasicInfoRequest::release_website_url() {
   // @@protoc_insertion_point(field_release:priemman.v1.UpdateBasicInfoRequest.website_url)
-  return _impl_.website_url_.Release();
+  if (!_internal_has_website_url()) {
+    return nullptr;
+  }
+  _impl_._has_bits_[0] &= ~0x00000010u;
+  auto* p = _impl_.website_url_.Release();
+#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (_impl_.website_url_.IsDefault()) {
+    _impl_.website_url_.Set("", GetArenaForAllocation());
+  }
+#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  return p;
 }
 inline void UpdateBasicInfoRequest::set_allocated_website_url(std::string* website_url) {
   if (website_url != nullptr) {
-    
+    _impl_._has_bits_[0] |= 0x00000010u;
   } else {
-    
+    _impl_._has_bits_[0] &= ~0x00000010u;
   }
   _impl_.website_url_.SetAllocated(website_url, GetArenaForAllocation());
 #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING

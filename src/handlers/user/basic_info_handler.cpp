@@ -11,6 +11,26 @@ namespace {
 
 using namespace userver::server::http;  // NOLINT
 
+database::BasicInfoPatch ExistingUserToPatch(
+    const database::User& user,
+    const std::optional<database::AboutInfo>& about
+) {
+    database::BasicInfoPatch patch;
+
+    patch.first_name = user.first_name;
+    patch.last_name = user.last_name;
+    patch.headline = user.headline;
+    patch.company = user.company;
+    patch.city = user.city;
+    patch.country = user.country;
+    patch.website_url = user.website_url;
+    patch.avatar_url = user.avatar_url;
+    if(about.has_value()){
+        patch.about_me = about.value();
+    }
+    return patch;
+}
+
 std::string BuildMe(
     const AuthenticatedHandlerBase* /*tag*/,
     const database::UserRepository& users,
@@ -84,20 +104,42 @@ std::string BasicInfoHandler::HandleRequestThrow(
             }
         }
 
-        database::BasicInfoPatch patch;
-        const auto& about_me = req.about_me();
+        auto about_info = _users.FindAbout(user->id.c_str());
+        auto patch = ExistingUserToPatch(*user, about_info);
 
-        patch.first_name = req.first_name();
-        patch.last_name = req.last_name();
-        patch.headline = req.headline();
-        patch.company = req.company();
-        patch.country = req.location().country();
-        patch.city = req.location().city();
-        patch.website_url = req.website_url();
-        patch.about_me = {
-          .title = about_me.title(),
-          .description =  about_me.description()
-        };
+        const auto& about_me = req.about_me();
+        if(req.has_first_name()){
+            patch.first_name = req.first_name();
+        }
+
+        if(req.has_last_name()){
+            patch.last_name = req.last_name();
+        }
+
+        if(req.has_headline()){
+            patch.headline = req.headline();
+        }
+
+        if(req.has_company()){
+            patch.company = req.company();
+        }
+
+        if(req.has_location()){
+            patch.country = req.location().country();
+            patch.city = req.location().city();
+        }
+
+        if(req.has_website_url()){
+            patch.website_url = req.website_url();
+        }
+
+        if(req.has_about_me()){
+            patch.about_me = {
+            .title = about_me.title(),
+            .description =  about_me.description()
+            };
+        }
+
         patch.avatar_url = replace_avatar
             ? req.avatar_replace_media().url()
             : user->avatar_url;

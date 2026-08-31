@@ -74,10 +74,10 @@ message UpdateBasicInfoRequest {
   optional string last_name = 2;
   optional string headline = 3;
   optional string company = 4;
-  optional Location location = 5;
+  Location location = 5;
   optional string website_url = 6;
-  optional AboutMe about_me = 7;
-  optional Media avatar_replace_media = 8;
+  AboutMe about_me = 7;
+  Media avatar_replace_media = 8;
 }
 
 message UpsertWorkExperienceRequest {
