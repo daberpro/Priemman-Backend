@@ -1,4 +1,5 @@
-name: C++ Build
+name: C++ Build & Deploy
+
 on:
   push:
     branches:
@@ -10,13 +11,15 @@ on:
       - main
       - master
       - develop
+
 jobs:
   build:
     name: Build
     runs-on: ubuntu-24.04
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        # Catatan: v4 adalah versi stabil terbaru. v6 belum ada dan akan menyebabkan error.
+        uses: actions/checkout@v4
 
       - name: Install build dependencies
         run: |
@@ -37,7 +40,6 @@ jobs:
         run: |
           wget -O cmake.sh https://github.com/Kitware/CMake/releases/download/v4.4.0/cmake-4.4.0-linux-x86_64.sh
           sudo sh cmake.sh --skip-license --prefix=/usr/local
-          # pastikan /usr/local/bin didahulukan di PATH daripada cmake bawaan apt (kalau ada)
           echo "/usr/local/bin" >> "$GITHUB_PATH"
 
       - name: Show toolchain
@@ -62,7 +64,7 @@ jobs:
           cmake .. -DCMAKE_BUILD_TYPE=Release \
             -DCMAKE_C_COMPILER=gcc-14 \
             -DCMAKE_CXX_COMPILER=g++-14
-          cmake --build ./
+          cmake --build ./ -j4
 
       - name: Strip binaries (reduce size)
         if: github.event_name == 'push'
@@ -84,3 +86,25 @@ jobs:
             templates/
           retention-days: 30
           if-no-files-found: error
+
+      # ==============================================================================
+      # BAGIAN DEPLOYMENT KE VPS
+      # ==============================================================================
+
+      - name: Execute deploy.sh on VPS
+        if: github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master')
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USERNAME }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          port: ${{ secrets.VPS_PORT }}
+          script: |
+            # Masuk ke direktori proyek di VPS
+            cd /home/daberdev
+            
+            # Pastikan script memiliki izin eksekusi
+            chmod +x ./deploy.sh
+            
+            # Jalankan script deployment
+            ./deploy.sh
