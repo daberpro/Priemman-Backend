@@ -8,6 +8,7 @@
 #include <src/handlers/api_errors.hpp>
 #include <userver/formats/json.hpp>
 #include <userver/http/content_type.hpp>
+#include <userver/logging/log.hpp>
 #include <userver/server/http/http_response.hpp>
 #include <userver/server/http/http_response_cookie.hpp>
 
