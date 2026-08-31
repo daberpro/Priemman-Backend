@@ -20,7 +20,8 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        # Catatan: v4 adalah versi stabil terbaru. v6 belum ada dan akan menyebabkan error.
+        uses: actions/checkout@v4
 
       - name: Install build dependencies
         run: |
@@ -38,6 +39,12 @@ jobs:
             mariadb-server \
             mariadb-client \
             libmariadb-dev
+
+      - name: Install CMake 4.4.0
+        run: |
+          wget -O cmake.sh https://github.com/Kitware/CMake/releases/download/v4.4.0/cmake-4.4.0-linux-x86_64.sh
+          sudo sh cmake.sh --skip-license --prefix=/usr/local
+          echo "/usr/local/bin" >> "$GITHUB_PATH"
 
       - name: Show toolchain
         run: |
@@ -62,12 +69,7 @@ jobs:
             -DCMAKE_BUILD_TYPE=Release \
             -DCMAKE_C_COMPILER=gcc-14 \
             -DCMAKE_CXX_COMPILER=g++-14
-
-      - name: Build
-        run: |
-          cmake \
-            --build build-ci \
-            --parallel 2
+          cmake --build ./ -j4
 
       - name: Strip binaries (reduce size)
         if: github.event_name == 'push'
@@ -89,3 +91,25 @@ jobs:
             templates/
           retention-days: 30
           if-no-files-found: error
+
+      # ==============================================================================
+      # BAGIAN DEPLOYMENT KE VPS
+      # ==============================================================================
+
+      - name: Execute deploy.sh on VPS
+        if: github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master')
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USERNAME }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          port: ${{ secrets.VPS_PORT }}
+          script: |
+            # Masuk ke direktori proyek di VPS
+            cd /home/daberdev
+            
+            # Pastikan script memiliki izin eksekusi
+            chmod +x ./deploy.sh
+            
+            # Jalankan script deployment
+            ./deploy.sh
