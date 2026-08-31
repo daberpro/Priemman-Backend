@@ -1,0 +1,17 @@
+:root {
+  --ifm-color-primary: #7c4dff;
+  --ifm-color-primary-dark: #6536e8;
+  --ifm-color-primary-darker: #5d2fdc;
+  --ifm-color-primary-light: #9467ff;
+  --ifm-code-font-size: 92%;
+}
+
+[data-theme='dark'] {
+  --ifm-color-primary: #a78bfa;
+  --ifm-background-color: #111111;
+  --ifm-background-surface-color: #1a1a1a;
+  --ifm-navbar-background-color: #111111;
+  --ifm-footer-background-color: #0a0a0a;
+}
+
+.markdown h1:first-child { margin-top: 0; }

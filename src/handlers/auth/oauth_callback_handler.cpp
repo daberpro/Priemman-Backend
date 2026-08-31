@@ -40,7 +40,7 @@ bool JsonBool(const Value& doc, const char* key, bool default_value = false) {
 
 std::string NormalizeEmail(std::string email) {
     std::ranges::transform(email, email.begin(), [](unsigned char c) {
-        return static_cast<char>(std::toupper(c));
+        return static_cast<char>(std::tolower(c));
     });
     return email;
 }
@@ -79,6 +79,7 @@ void AddDashboardUrlProperties(userver::yaml_config::Schema& schema) {
         {"dashboard-url", "Dashboard URL for regular users after successful login"},
         {"dashboard-creator-url", "Dashboard URL for creators after successful login"},
         {"dashboard-admin-url", "Dashboard URL for admins after successful login"},
+        {"domain","Domain utama atau base domain contoh priemman.my.id"}
     };
     for (const auto& [name, description] : kProps) {
         schema.properties->emplace(
@@ -110,6 +111,7 @@ OAuthGoogleCallbackHandler::OAuthGoogleCallbackHandler(
     const userver::components::ComponentConfig& config,
     const userver::components::ComponentContext& context)
     : userver::server::handlers::HttpHandlerBase(config, context),
+      _domain{config["domain"].As<std::string>()},
       _mysql_cluster(context.FindComponent<userver::storages::mysql::Component>("database").GetCluster()),
       _users(&_mysql_cluster),
       _sessions(&_mysql_cluster),
@@ -152,7 +154,7 @@ std::string OAuthGoogleCallbackHandler::HandleRequestThrow(
     auto session = _sessions.Create(result.user.id);
 
     // 5. Set Cookie & Redirect
-    res.SetHeader(std::string("Set-Cookie"), BuildSessionCookie(session.token));
+    res.SetHeader(std::string("Set-Cookie"), BuildSessionCookie(session.token, _domain));
 
     // Hapus cookie oauth_state karena sudah tidak dipakai
     userver::server::http::Cookie clear_cookie{"oauth_state", ""};
@@ -171,6 +173,7 @@ OAuthGithubCallbackHandler::OAuthGithubCallbackHandler(
     const userver::components::ComponentConfig& config,
     const userver::components::ComponentContext& context)
     : userver::server::handlers::HttpHandlerBase(config, context),
+      _domain{config["domain"].As<std::string>()},
       _mysql_cluster(context.FindComponent<userver::storages::mysql::Component>("database").GetCluster()),
       _users(&_mysql_cluster),
       _sessions(&_mysql_cluster),
@@ -216,7 +219,7 @@ std::string OAuthGithubCallbackHandler::HandleRequestThrow(
     auto result = _users.FindOrCreateFromOAuth(oauth);
     auto session = _sessions.Create(result.user.id);
 
-    res.SetHeader(std::string("Set-Cookie"), BuildSessionCookie(session.token));
+    res.SetHeader(std::string("Set-Cookie"), BuildSessionCookie(session.token, _domain));
 
     userver::server::http::Cookie clear_cookie{"oauth_state", ""};
     clear_cookie.SetMaxAge(std::chrono::seconds(0));

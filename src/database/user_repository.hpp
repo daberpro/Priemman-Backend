@@ -45,6 +45,11 @@ struct FindOrCreateResult {
     bool is_new_user;
 };
 
+struct AboutInfo {
+    std::string title;
+    std::string description;
+};
+
 struct BasicInfoPatch {
     std::string first_name;
     std::string last_name;
@@ -53,11 +58,8 @@ struct BasicInfoPatch {
     std::string city;
     std::string country;
     std::string website_url;
-};
-
-struct AboutInfo {
-    std::string title;
-    std::string description;
+    AboutInfo about_me;
+    std::string avatar_url;
 };
 
 

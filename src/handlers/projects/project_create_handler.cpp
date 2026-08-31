@@ -5,6 +5,8 @@
 
 #include <src/handlers/projects/project_helpers.hpp>
 #include <src/handlers/projects/project_proto_convert.hpp>
+#include <src/handlers/media/media_helper.hpp>
+#include <userver/server/http/http_status.hpp>
 
 namespace priemman::handlers::projects {
 
@@ -41,13 +43,37 @@ std::string ProjectCreateHandler::HandleRequestThrow(
         return ErrorResult("INVALID_TITLE", "Title is required");
     }
 
+    auto content = input.content();
+    if(content.empty()){
+        res.SetStatus(HttpStatus::kBadRequest);
+        return ErrorResult("INVALID_CONTENT", "Content is required");
+    }
+    else if(helpers::isExceeding1MB(content)){
+        res.SetStatus(HttpStatus::kPayloadTooLarge);
+        return ErrorResult("CONTENT_TOO_LARGE", "Content cannot be more than > 1mb");
+    }
+
+    if (const auto relations = helpers::ValidateProjectRelations(input);
+        !relations.has_value()) {
+        res.SetStatus(HttpStatus::kBadRequest);
+        return ErrorResult("INVALID_PROJECT_RELATIONS", relations.error());
+    }
+
+    for (const auto& collaborator : input.collaborators()) {
+        if (!_users.FindById(collaborator.user_id().value()).has_value()) {
+            res.SetStatus(HttpStatus::kBadRequest);
+            return ErrorResult("INVALID_COLLABORATOR", "Collaborator user was not found");
+        }
+    }
+
     // Validasi media Cloudinary: harus tercatat, milik sendiri, dan masih orphan.
     // Ditolak tegas sebelum project dibuat supaya tidak ada project setengah jadi.
-    const auto public_ids = helpers::CollectPublicIds(input.media());
-    if (const auto err = helpers::ValidateMediaForCreate(_media, public_ids, *user_id);
-        !err.empty()) {
+    std::vector<std::string> public_ids;
+    media::CollectPublicIds(input.media(), &public_ids);
+    if (const auto validation = media::ValidateMediaForCreate(_media, public_ids, *user_id);
+        !validation.has_value()) {
         res.SetStatus(HttpStatus::kBadRequest);
-        return ErrorResult("INVALID_MEDIA", err);
+        return ErrorResult("INVALID_MEDIA", validation.error());
     }
 
     // Slug unik per owner
@@ -61,21 +87,19 @@ std::string ProjectCreateHandler::HandleRequestThrow(
     row.owner_id = *user_id;
     row.title = input.title();
     row.slug = slug;
-    row.description = input.description();
     row.visibility = mapper::VisibilityToString(input.visibility());
     row.status = mapper::StatusToString(input.status());
+    row.content = content;
 
     const std::string id = _projects.Create(row);
     helpers::SaveChildren(_projects, id, input);
-    helpers::AttachMedia(_media, public_ids, *user_id);
+    media::AttachMedia(_media, public_ids, *user_id);
 
     auto created = _projects.FindById(id);
     priemman::v1::ProjectResponse response;
     if (created.has_value()) {
         *response.mutable_project() = mapper::ToProto(
             *created,
-            _projects.ListStrings(id, "tools"),
-            _projects.ListStrings(id, "disciplines"),
             _projects.ListStrings(id, "tags"),
             _projects.ListMedia(id),
             _projects.ListCollaborators(id)

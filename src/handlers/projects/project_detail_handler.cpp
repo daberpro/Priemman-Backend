@@ -5,6 +5,7 @@
 
 #include <src/handlers/projects/project_helpers.hpp>
 #include <src/handlers/projects/project_proto_convert.hpp>
+#include <src/handlers/media/media_helper.hpp>
 
 #include <unordered_set>
 
@@ -55,8 +56,6 @@ std::string ProjectDetailHandler::HandleRequestThrow(
         priemman::v1::ProjectResponse response;
         *response.mutable_project() = mapper::ToProto(
             *row,
-            _projects.ListStrings(id, "tools"),
-            _projects.ListStrings(id, "disciplines"),
             _projects.ListStrings(id, "tags"),
             _projects.ListMedia(id),
             _projects.ListCollaborators(id)
@@ -76,6 +75,10 @@ std::string ProjectDetailHandler::HandleRequestThrow(
             res.SetStatus(HttpStatus::kBadRequest);
             return ErrorResult("INVALID_BODY", "Invalid request body");
         }
+        if (!req.id().value().empty() && req.id().value() != id) {
+            res.SetStatus(HttpStatus::kBadRequest);
+            return ErrorResult("INVALID_ID", "Request project ID does not match the URL");
+        }
 
         const auto& input = req.input();
 
@@ -85,15 +88,40 @@ std::string ProjectDetailHandler::HandleRequestThrow(
             return ErrorResult("NOT_FOUND", "Project not found");
         }
 
+        if (input.title().empty()) {
+            res.SetStatus(HttpStatus::kBadRequest);
+            return ErrorResult("INVALID_TITLE", "Title is required");
+        }
+        if (input.content().empty()) {
+            res.SetStatus(HttpStatus::kBadRequest);
+            return ErrorResult("INVALID_CONTENT", "Content is required");
+        }
+        if (helpers::isExceeding1MB(input.content())) {
+            res.SetStatus(HttpStatus::kPayloadTooLarge);
+            return ErrorResult("CONTENT_TOO_LARGE", "Content cannot be more than 1 MB");
+        }
+        if (const auto relations = helpers::ValidateProjectRelations(input);
+            !relations.has_value()) {
+            res.SetStatus(HttpStatus::kBadRequest);
+            return ErrorResult("INVALID_PROJECT_RELATIONS", relations.error());
+        }
+
+        for (const auto& collaborator : input.collaborators()) {
+            if (!_users.FindById(collaborator.user_id().value()).has_value()) {
+                res.SetStatus(HttpStatus::kBadRequest);
+                return ErrorResult("INVALID_COLLABORATOR", "Collaborator user was not found");
+            }
+        }
+
         // Validasi media Cloudinary sebelum menyimpan apapun.
         // Media in_use yang memang sudah terpasang di project ini boleh
         // dikirim ulang; milik orang lain / tidak dikenal ditolak tegas.
-        const auto public_ids = helpers::CollectPublicIds(input.media());
-        if (const auto err = helpers::ValidateMediaForUpdate(
-                _media, _projects, id, public_ids, *user_id);
-            !err.empty()) {
+        std::vector<std::string> public_ids;
+        media::CollectPublicIds(input.media(), &public_ids);
+        if (const auto validation = media::ValidateMediaForUpdate(_media, public_ids, *user_id);
+            !validation.has_value()) {
             res.SetStatus(HttpStatus::kBadRequest);
-            return ErrorResult("INVALID_MEDIA", err);
+            return ErrorResult("INVALID_MEDIA", validation.error());
         }
 
         // Simpan media lama sebelum update
@@ -104,9 +132,9 @@ std::string ProjectDetailHandler::HandleRequestThrow(
         row.owner_id = *user_id;
         row.title = input.title();
         row.slug = existing->slug;
-        row.description = input.description();
         row.visibility = mapper::VisibilityToString(input.visibility());
         row.status = mapper::StatusToString(input.status());
+        row.content = input.content();
 
         if (!_projects.Update(row)) {
             res.SetStatus(HttpStatus::kNotFound);
@@ -114,7 +142,7 @@ std::string ProjectDetailHandler::HandleRequestThrow(
         }
 
         helpers::SaveChildren(_projects, id, input);
-        helpers::AttachMedia(_media, public_ids, *user_id);
+        media::AttachMedia(_media, public_ids, *user_id);
 
         // Ambil media baru dan kembalikan yang tidak terpakai ke orphan.
         // Penghapusan dari Cloudinary diserahkan ke sweeper (grace period).
@@ -139,8 +167,6 @@ std::string ProjectDetailHandler::HandleRequestThrow(
         if (updated.has_value()) {
             *response.mutable_project() = mapper::ToProto(
                 *updated,
-                _projects.ListStrings(id, "tools"),
-                _projects.ListStrings(id, "disciplines"),
                 _projects.ListStrings(id, "tags"),
                 _projects.ListMedia(id),
                 _projects.ListCollaborators(id)

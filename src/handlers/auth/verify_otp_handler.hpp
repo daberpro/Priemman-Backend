@@ -13,6 +13,8 @@
 #include <src/database/otp_repository.hpp>
 #include <src/database/session_repository.hpp>
 #include <src/database/user_repository.hpp>
+#include <userver/yaml_config/yaml_config.hpp>
+#include <userver/yaml_config/merge_schemas.hpp>
 
 namespace priemman::auth {
 
@@ -30,7 +32,10 @@ public:
         userver::server::request::RequestContext& context
     ) const override;
 
+    static userver::yaml_config::Schema GetStaticConfigSchema();
+
 private:
+    std::string _domain{""};
     std::shared_ptr<userver::storages::mysql::Cluster> _mysql_cluster;
     database::OtpRepository _otp_repo;
     database::UserRepository _users;

@@ -120,4 +120,24 @@ void MediaRepository::DeleteByPublicId(const std::string& public_id) const {
     );
 }
 
+bool MediaRepository::MakeOrphan(
+    const std::string& public_id, const std::string& user_id
+) const {
+    auto result = _mysql_cluster->Execute(
+        userver::storages::mysql::ClusterHostType::kPrimary,
+        userver::storages::mysql::Query{
+            R"sql(
+                UPDATE media_uploads mu
+                SET mu.status = 'orphan', mu.attached_at = NULL
+                WHERE mu.public_id = ?
+                AND mu.status = 'in_use'
+                AND mu.user_id = ?
+            )sql"
+        },
+        public_id,
+        user_id
+    ).AsExecutionResult();
+    return result.rows_affected > 0;
+}
+
 }  // namespace priemman::database

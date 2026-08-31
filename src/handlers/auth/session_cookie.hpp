@@ -1,23 +1,33 @@
 #pragma once
 
 #include <string>
+#include <format>
 
 namespace priemman::auth {
 
-inline std::string BuildSessionCookie(const std::string& token) {
-    return "session=" + token +
-           "; Domain=priemman.my.id"   // <- agar berlaku untuk *.priemman.my.id
-           "; Path=/"
-           "; HttpOnly"
-           "; SameSite=Lax"
-           "; Secure"                  // <- wajib karena HTTPS
-           "; Max-Age=2592000";
+inline std::string BuildSessionCookie(const std::string& token, const std::string& domain) {
+    return std::format(R"s(
+           session={}
+           ; Domain={}
+           ; Path=/
+           ; HttpOnly
+           ; SameSite=Lax
+           ; Secure
+           ; Max-Age=2592000
+    )s",token, domain);
 }
 
 // session_cookie.hpp
-inline std::string BuildSessionClearCookie() {
-    return "session=; Domain=priemman.my.id; Path=/; HttpOnly; "
-           "SameSite=Lax; Secure; Max-Age=0";
+inline std::string BuildSessionClearCookie(const std::string& domain) {
+    return std::format(R"s(
+        session=
+        ; Domain={}
+        ; Path=/
+        ; HttpOnly
+        ; SameSite=Lax
+        ; Secure
+        ; Max-Age=0
+    )s",domain);
 }
 
 

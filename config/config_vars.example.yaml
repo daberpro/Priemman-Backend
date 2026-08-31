@@ -1,10 +1,8 @@
-# Database
-db-host:
-db-port:
-db-user:
-db-password:
-db-name:
-db-pool-size: 15
+cloudinary-cloud-name:
+cloudinary-api-key:
+cloudinary-api-secret:
+
+base-domain: 'localhost'
 
 # SMTP
 smtp-host:
@@ -21,10 +19,6 @@ github-redirect-url:
 github-client-id:
 github-client-secret:
 
-# CORS - INI ARRAY, lebih baik di config_vars
-cors-allowed-origins:
-    - http://localhost:3000
-    - http://localhost:5173
 
 # Server
 server-port: 8080
@@ -35,3 +29,6 @@ log-level: error
 dashboard-url: 'http://localhost:3000/dashboard'
 dashboard-creator-url: 'http://localhost:3000/dashboard-creator'
 dashboard-admin-url: 'http://localhost:3000/dashboard-admin'
+
+# Frontend server
+favicon-path: '../static/favicon.ico'

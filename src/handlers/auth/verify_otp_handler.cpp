@@ -19,13 +19,38 @@ std::string NormalizeEmail(std::string email) {
                    [](unsigned char c) { return static_cast<char>(std::tolower(c)); });
     return email;
 }
+
+void AddProperties(userver::yaml_config::Schema& schema) {
+    if (!schema.properties.has_value()) {
+        schema.properties.emplace();
+    }
+    static const std::pair<std::string_view, std::string_view> kProps[] = {
+        {"domain","Domain utama atau base domain contoh priemman.my.id"}
+    };
+    for (const auto& [name, description] : kProps) {
+        schema.properties->emplace(
+            std::string{name},
+            userver::yaml_config::SchemaPtr(
+                userver::yaml_config::impl::SchemaFromString(
+                    "type: string\ndescription: " + std::string{description} + "\n")
+            )
+        );
+    }
+}
 }  // namespace
+
+userver::yaml_config::Schema VerifyOtpHandler::GetStaticConfigSchema() {
+    auto schema = userver::server::handlers::HttpHandlerBase::GetStaticConfigSchema();
+    AddProperties(schema);
+    return schema;
+}
 
 VerifyOtpHandler::VerifyOtpHandler(
     const userver::components::ComponentConfig& config,
     const userver::components::ComponentContext& context
 )
     : userver::server::handlers::HttpHandlerBase(config, context),
+      _domain{config["domain"].As<std::string>()},
       _mysql_cluster(
           context.FindComponent<userver::storages::mysql::Component>("database").GetCluster()
       ),
@@ -91,7 +116,7 @@ std::string VerifyOtpHandler::HandleRequestThrow(
     auto result = _users.FindOrCreateFromEmail(email);
     auto session = _sessions.Create(result.user.id);
 
-    res.SetHeader(std::string("Set-Cookie"), BuildSessionCookie(session.token));
+    res.SetHeader(std::string("Set-Cookie"), BuildSessionCookie(session.token, _domain));
 
     priemman::v1::VerifyOtpResponse response;
     response.set_session_token(session.token);

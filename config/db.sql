@@ -206,7 +206,7 @@ CREATE TABLE IF NOT EXISTS projects (
     owner_id CHAR(36) NOT NULL,
     title VARCHAR(255) NOT NULL DEFAULT '',
     slug VARCHAR(255) NOT NULL,
-    description TEXT NOT NULL,
+    content MEDIUMTEXT NOT NULL,
     cover_media_id CHAR(36) NULL,
     visibility ENUM('PUBLIC', 'UNLISTED', 'DRAFT') NOT NULL DEFAULT 'DRAFT',
     status ENUM('DRAFT', 'PUBLISHED', 'ARCHIVED') NOT NULL DEFAULT 'DRAFT',
@@ -227,32 +227,6 @@ CREATE TABLE IF NOT EXISTS projects (
     CONSTRAINT fk_projects_owner
         FOREIGN KEY (owner_id)
         REFERENCES users(id)
-        ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
-CREATE TABLE IF NOT EXISTS project_tools (
-    project_id CHAR(36) NOT NULL,
-    tool VARCHAR(255) NOT NULL,
-    sort_order INT UNSIGNED NOT NULL DEFAULT 0,
-
-    PRIMARY KEY (project_id, tool),
-
-    CONSTRAINT fk_project_tools_project
-        FOREIGN KEY (project_id)
-        REFERENCES projects(id)
-        ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
-CREATE TABLE IF NOT EXISTS project_disciplines (
-    project_id CHAR(36) NOT NULL,
-    discipline VARCHAR(255) NOT NULL,
-    sort_order INT UNSIGNED NOT NULL DEFAULT 0,
-
-    PRIMARY KEY (project_id, discipline),
-
-    CONSTRAINT fk_project_disciplines_project
-        FOREIGN KEY (project_id)
-        REFERENCES projects(id)
         ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 

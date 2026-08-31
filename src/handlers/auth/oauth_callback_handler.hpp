@@ -33,6 +33,7 @@ public:
     std::string HandleRequestThrow(const userver::server::http::HttpRequest& request, userver::server::request::RequestContext& context) const override;
     static userver::yaml_config::Schema GetStaticConfigSchema();
 private:
+    std::string _domain{"priemman.my.id"};
     std::shared_ptr<userver::storages::mysql::Cluster> _mysql_cluster{nullptr};
     database::UserRepository _users;
     database::SessionRepository _sessions;
@@ -47,6 +48,7 @@ public:
     std::string HandleRequestThrow(const userver::server::http::HttpRequest& request, userver::server::request::RequestContext& context) const override;
     static userver::yaml_config::Schema GetStaticConfigSchema();
 private:
+    std::string _domain{""};
     std::shared_ptr<userver::storages::mysql::Cluster> _mysql_cluster{nullptr};
     database::UserRepository _users;
     database::SessionRepository _sessions;

@@ -52,6 +52,9 @@ public:
     // lebih dari satu project).
     bool DetachIfUnreferenced(const std::string& public_id) const;
 
+    // Mengembalikan media ke orphan, (berarti media tidak dipakai)
+    bool MakeOrphan(const std::string& public_id, const std::string& user_id) const;
+
     // Ambil orphan yang sudah melewati TTL (untuk sweeper).
     std::vector<ExpiredOrphan> ListExpiredOrphans(std::int64_t ttl_seconds,
                                                   std::int64_t limit) const;

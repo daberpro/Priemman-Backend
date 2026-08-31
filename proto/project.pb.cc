@@ -22,23 +22,6 @@ namespace _pbi = _pb::internal;
 
 namespace priemman {
 namespace v1 {
-PROTOBUF_CONSTEXPR Media::Media(
-    ::_pbi::ConstantInitialized): _impl_{
-    /*decltype(_impl_.url_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
-  , /*decltype(_impl_.public_id_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
-  , /*decltype(_impl_.id_)*/nullptr
-  , /*decltype(_impl_.type_)*/0
-  , /*decltype(_impl_.order_)*/0
-  , /*decltype(_impl_._cached_size_)*/{}} {}
-struct MediaDefaultTypeInternal {
-  PROTOBUF_CONSTEXPR MediaDefaultTypeInternal()
-      : _instance(::_pbi::ConstantInitialized{}) {}
-  ~MediaDefaultTypeInternal() {}
-  union {
-    Media _instance;
-  };
-};
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 MediaDefaultTypeInternal _Media_default_instance_;
 PROTOBUF_CONSTEXPR Collaborator::Collaborator(
     ::_pbi::ConstantInitialized): _impl_{
     /*decltype(_impl_.role_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
@@ -70,14 +53,12 @@ struct ProjectMetricsDefaultTypeInternal {
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 ProjectMetricsDefaultTypeInternal _ProjectMetrics_default_instance_;
 PROTOBUF_CONSTEXPR Project::Project(
     ::_pbi::ConstantInitialized): _impl_{
-    /*decltype(_impl_.tools_)*/{}
-  , /*decltype(_impl_.disciplines_)*/{}
-  , /*decltype(_impl_.tags_)*/{}
+    /*decltype(_impl_.tags_)*/{}
   , /*decltype(_impl_.media_)*/{}
   , /*decltype(_impl_.collaborators_)*/{}
   , /*decltype(_impl_.title_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
   , /*decltype(_impl_.slug_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
-  , /*decltype(_impl_.description_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
+  , /*decltype(_impl_.content_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
   , /*decltype(_impl_.cover_media_id_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
   , /*decltype(_impl_.id_)*/nullptr
   , /*decltype(_impl_.owner_id_)*/nullptr
@@ -149,14 +130,12 @@ struct ListProjectsResponseDefaultTypeInternal {
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 ListProjectsResponseDefaultTypeInternal _ListProjectsResponse_default_instance_;
 PROTOBUF_CONSTEXPR ProjectInput::ProjectInput(
     ::_pbi::ConstantInitialized): _impl_{
-    /*decltype(_impl_.tools_)*/{}
-  , /*decltype(_impl_.disciplines_)*/{}
-  , /*decltype(_impl_.tags_)*/{}
+    /*decltype(_impl_.tags_)*/{}
   , /*decltype(_impl_.media_)*/{}
   , /*decltype(_impl_.collaborators_)*/{}
   , /*decltype(_impl_.title_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
-  , /*decltype(_impl_.description_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
   , /*decltype(_impl_.cover_media_id_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
+  , /*decltype(_impl_.content_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
   , /*decltype(_impl_.visibility_)*/0
   , /*decltype(_impl_.status_)*/0
   , /*decltype(_impl_._cached_size_)*/{}} {}
@@ -293,22 +272,11 @@ struct DeleteCollectionRequestDefaultTypeInternal {
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 DeleteCollectionRequestDefaultTypeInternal _DeleteCollectionRequest_default_instance_;
 }  // namespace v1
 }  // namespace priemman
-static ::_pb::Metadata file_level_metadata_project_2eproto[17];
-static const ::_pb::EnumDescriptor* file_level_enum_descriptors_project_2eproto[4];
+static ::_pb::Metadata file_level_metadata_project_2eproto[16];
+static const ::_pb::EnumDescriptor* file_level_enum_descriptors_project_2eproto[3];
 static constexpr ::_pb::ServiceDescriptor const** file_level_service_descriptors_project_2eproto = nullptr;
 
 const uint32_t TableStruct_project_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
-  ~0u,  // no _has_bits_
-  PROTOBUF_FIELD_OFFSET(::priemman::v1::Media, _internal_metadata_),
-  ~0u,  // no _extensions_
-  ~0u,  // no _oneof_case_
-  ~0u,  // no _weak_field_map_
-  ~0u,  // no _inlined_string_donated_
-  PROTOBUF_FIELD_OFFSET(::priemman::v1::Media, _impl_.url_),
-  PROTOBUF_FIELD_OFFSET(::priemman::v1::Media, _impl_.type_),
-  PROTOBUF_FIELD_OFFSET(::priemman::v1::Media, _impl_.order_),
-  PROTOBUF_FIELD_OFFSET(::priemman::v1::Media, _impl_.id_),
-  PROTOBUF_FIELD_OFFSET(::priemman::v1::Media, _impl_.public_id_),
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::priemman::v1::Collaborator, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -336,9 +304,7 @@ const uint32_t TableStruct_project_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE(
   PROTOBUF_FIELD_OFFSET(::priemman::v1::Project, _impl_.owner_id_),
   PROTOBUF_FIELD_OFFSET(::priemman::v1::Project, _impl_.title_),
   PROTOBUF_FIELD_OFFSET(::priemman::v1::Project, _impl_.slug_),
-  PROTOBUF_FIELD_OFFSET(::priemman::v1::Project, _impl_.description_),
-  PROTOBUF_FIELD_OFFSET(::priemman::v1::Project, _impl_.tools_),
-  PROTOBUF_FIELD_OFFSET(::priemman::v1::Project, _impl_.disciplines_),
+  PROTOBUF_FIELD_OFFSET(::priemman::v1::Project, _impl_.content_),
   PROTOBUF_FIELD_OFFSET(::priemman::v1::Project, _impl_.tags_),
   PROTOBUF_FIELD_OFFSET(::priemman::v1::Project, _impl_.cover_media_id_),
   PROTOBUF_FIELD_OFFSET(::priemman::v1::Project, _impl_.media_),
@@ -388,15 +354,13 @@ const uint32_t TableStruct_project_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE(
   ~0u,  // no _weak_field_map_
   ~0u,  // no _inlined_string_donated_
   PROTOBUF_FIELD_OFFSET(::priemman::v1::ProjectInput, _impl_.title_),
-  PROTOBUF_FIELD_OFFSET(::priemman::v1::ProjectInput, _impl_.description_),
-  PROTOBUF_FIELD_OFFSET(::priemman::v1::ProjectInput, _impl_.tools_),
-  PROTOBUF_FIELD_OFFSET(::priemman::v1::ProjectInput, _impl_.disciplines_),
   PROTOBUF_FIELD_OFFSET(::priemman::v1::ProjectInput, _impl_.tags_),
   PROTOBUF_FIELD_OFFSET(::priemman::v1::ProjectInput, _impl_.media_),
   PROTOBUF_FIELD_OFFSET(::priemman::v1::ProjectInput, _impl_.collaborators_),
   PROTOBUF_FIELD_OFFSET(::priemman::v1::ProjectInput, _impl_.visibility_),
   PROTOBUF_FIELD_OFFSET(::priemman::v1::ProjectInput, _impl_.status_),
   PROTOBUF_FIELD_OFFSET(::priemman::v1::ProjectInput, _impl_.cover_media_id_),
+  PROTOBUF_FIELD_OFFSET(::priemman::v1::ProjectInput, _impl_.content_),
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::priemman::v1::CreateProjectRequest, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -467,27 +431,25 @@ const uint32_t TableStruct_project_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE(
   PROTOBUF_FIELD_OFFSET(::priemman::v1::DeleteCollectionRequest, _impl_.id_),
 };
 static const ::_pbi::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
-  { 0, -1, -1, sizeof(::priemman::v1::Media)},
-  { 11, -1, -1, sizeof(::priemman::v1::Collaborator)},
-  { 19, -1, -1, sizeof(::priemman::v1::ProjectMetrics)},
-  { 28, -1, -1, sizeof(::priemman::v1::Project)},
-  { 51, -1, -1, sizeof(::priemman::v1::Collection)},
-  { 65, -1, -1, sizeof(::priemman::v1::ListProjectsRequest)},
-  { 75, -1, -1, sizeof(::priemman::v1::ListProjectsResponse)},
-  { 83, -1, -1, sizeof(::priemman::v1::ProjectInput)},
-  { 99, -1, -1, sizeof(::priemman::v1::CreateProjectRequest)},
-  { 106, -1, -1, sizeof(::priemman::v1::UpdateProjectRequest)},
-  { 114, -1, -1, sizeof(::priemman::v1::ProjectResponse)},
-  { 121, -1, -1, sizeof(::priemman::v1::CollectionInput)},
-  { 131, -1, -1, sizeof(::priemman::v1::CreateCollectionRequest)},
-  { 138, -1, -1, sizeof(::priemman::v1::UpdateCollectionRequest)},
-  { 146, -1, -1, sizeof(::priemman::v1::CollectionResponse)},
-  { 153, -1, -1, sizeof(::priemman::v1::ListCollectionsResponse)},
-  { 160, -1, -1, sizeof(::priemman::v1::DeleteCollectionRequest)},
+  { 0, -1, -1, sizeof(::priemman::v1::Collaborator)},
+  { 8, -1, -1, sizeof(::priemman::v1::ProjectMetrics)},
+  { 17, -1, -1, sizeof(::priemman::v1::Project)},
+  { 38, -1, -1, sizeof(::priemman::v1::Collection)},
+  { 52, -1, -1, sizeof(::priemman::v1::ListProjectsRequest)},
+  { 62, -1, -1, sizeof(::priemman::v1::ListProjectsResponse)},
+  { 70, -1, -1, sizeof(::priemman::v1::ProjectInput)},
+  { 84, -1, -1, sizeof(::priemman::v1::CreateProjectRequest)},
+  { 91, -1, -1, sizeof(::priemman::v1::UpdateProjectRequest)},
+  { 99, -1, -1, sizeof(::priemman::v1::ProjectResponse)},
+  { 106, -1, -1, sizeof(::priemman::v1::CollectionInput)},
+  { 116, -1, -1, sizeof(::priemman::v1::CreateCollectionRequest)},
+  { 123, -1, -1, sizeof(::priemman::v1::UpdateCollectionRequest)},
+  { 131, -1, -1, sizeof(::priemman::v1::CollectionResponse)},
+  { 138, -1, -1, sizeof(::priemman::v1::ListCollectionsResponse)},
+  { 145, -1, -1, sizeof(::priemman::v1::DeleteCollectionRequest)},
 };
 
 static const ::_pb::Message* const file_default_instances[] = {
-  &::priemman::v1::_Media_default_instance_._instance,
   &::priemman::v1::_Collaborator_default_instance_._instance,
   &::priemman::v1::_ProjectMetrics_default_instance_._instance,
   &::priemman::v1::_Project_default_instance_._instance,
@@ -508,92 +470,86 @@ static const ::_pb::Message* const file_default_instances[] = {
 
 const char descriptor_table_protodef_project_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) =
   "\n\rproject.proto\022\013priemman.v1\032\014common.pro"
-  "to\032\037google/protobuf/timestamp.proto\"\177\n\005M"
-  "edia\022\013\n\003url\030\001 \001(\t\022$\n\004type\030\002 \001(\0162\026.priemm"
-  "an.v1.MediaType\022\r\n\005order\030\003 \001(\005\022!\n\002id\030\004 \001"
-  "(\0132\025.priemman.v1.ObjectId\022\021\n\tpublic_id\030\005"
-  " \001(\t\"D\n\014Collaborator\022&\n\007user_id\030\001 \001(\0132\025."
-  "priemman.v1.ObjectId\022\014\n\004role\030\002 \001(\t\"=\n\016Pr"
-  "ojectMetrics\022\r\n\005views\030\001 \001(\003\022\r\n\005likes\030\002 \001"
-  "(\003\022\r\n\005saves\030\003 \001(\003\"\306\004\n\007Project\022!\n\002id\030\001 \001("
-  "\0132\025.priemman.v1.ObjectId\022\'\n\010owner_id\030\002 \001"
-  "(\0132\025.priemman.v1.ObjectId\022\r\n\005title\030\003 \001(\t"
-  "\022\014\n\004slug\030\004 \001(\t\022\023\n\013description\030\005 \001(\t\022\r\n\005t"
-  "ools\030\006 \003(\t\022\023\n\013disciplines\030\007 \003(\t\022\014\n\004tags\030"
-  "\010 \003(\t\022\026\n\016cover_media_id\030\t \001(\t\022!\n\005media\030\n"
-  " \003(\0132\022.priemman.v1.Media\0220\n\rcollaborator"
-  "s\030\013 \003(\0132\031.priemman.v1.Collaborator\0222\n\nvi"
-  "sibility\030\014 \001(\0162\036.priemman.v1.ProjectVisi"
-  "bility\022*\n\006status\030\r \001(\0162\032.priemman.v1.Pro"
-  "jectStatus\022,\n\007metrics\030\016 \001(\0132\033.priemman.v"
-  "1.ProjectMetrics\022.\n\ncreated_at\030\017 \001(\0132\032.g"
-  "oogle.protobuf.Timestamp\022.\n\nupdated_at\030\020"
-  " \001(\0132\032.google.protobuf.Timestamp\0220\n\014publ"
-  "ished_at\030\021 \001(\0132\032.google.protobuf.Timesta"
-  "mp\"\277\002\n\nCollection\022!\n\002id\030\001 \001(\0132\025.priemman"
-  ".v1.ObjectId\022\'\n\010owner_id\030\002 \001(\0132\025.priemma"
-  "n.v1.ObjectId\022\r\n\005title\030\003 \001(\t\022\023\n\013descript"
-  "ion\030\004 \001(\t\022*\n\013project_ids\030\005 \003(\0132\025.priemma"
-  "n.v1.ObjectId\0225\n\nvisibility\030\006 \001(\0162!.prie"
-  "mman.v1.CollectionVisibility\022.\n\ncreated_"
-  "at\030\007 \001(\0132\032.google.protobuf.Timestamp\022.\n\n"
-  "updated_at\030\010 \001(\0132\032.google.protobuf.Times"
-  "tamp\"\230\001\n\023ListProjectsRequest\022\'\n\010owner_id"
-  "\030\001 \001(\0132\025.priemman.v1.ObjectId\0221\n\rstatus_"
-  "filter\030\002 \001(\0162\032.priemman.v1.ProjectStatus"
-  "\022\021\n\tpage_size\030\003 \001(\005\022\022\n\npage_token\030\004 \001(\t\""
-  "W\n\024ListProjectsResponse\022&\n\010projects\030\001 \003("
-  "\0132\024.priemman.v1.Project\022\027\n\017next_page_tok"
-  "en\030\002 \001(\t\"\261\002\n\014ProjectInput\022\r\n\005title\030\001 \001(\t"
-  "\022\023\n\013description\030\002 \001(\t\022\r\n\005tools\030\003 \003(\t\022\023\n\013"
-  "disciplines\030\004 \003(\t\022\014\n\004tags\030\005 \003(\t\022!\n\005media"
-  "\030\006 \003(\0132\022.priemman.v1.Media\0220\n\rcollaborat"
-  "ors\030\007 \003(\0132\031.priemman.v1.Collaborator\0222\n\n"
-  "visibility\030\010 \001(\0162\036.priemman.v1.ProjectVi"
-  "sibility\022*\n\006status\030\t \001(\0162\032.priemman.v1.P"
-  "rojectStatus\022\026\n\016cover_media_id\030\n \001(\t\"@\n\024"
-  "CreateProjectRequest\022(\n\005input\030\001 \001(\0132\031.pr"
-  "iemman.v1.ProjectInput\"c\n\024UpdateProjectR"
+  "to\032\013media.proto\032\037google/protobuf/timesta"
+  "mp.proto\"D\n\014Collaborator\022&\n\007user_id\030\001 \001("
+  "\0132\025.priemman.v1.ObjectId\022\014\n\004role\030\002 \001(\t\"="
+  "\n\016ProjectMetrics\022\r\n\005views\030\001 \001(\003\022\r\n\005likes"
+  "\030\002 \001(\003\022\r\n\005saves\030\003 \001(\003\"\236\004\n\007Project\022!\n\002id\030"
+  "\001 \001(\0132\025.priemman.v1.ObjectId\022\'\n\010owner_id"
+  "\030\002 \001(\0132\025.priemman.v1.ObjectId\022\r\n\005title\030\003"
+  " \001(\t\022\014\n\004slug\030\004 \001(\t\022\017\n\007content\030\005 \001(\t\022\014\n\004t"
+  "ags\030\006 \003(\t\022\026\n\016cover_media_id\030\007 \001(\t\022!\n\005med"
+  "ia\030\010 \003(\0132\022.priemman.v1.Media\0220\n\rcollabor"
+  "ators\030\t \003(\0132\031.priemman.v1.Collaborator\0222"
+  "\n\nvisibility\030\n \001(\0162\036.priemman.v1.Project"
+  "Visibility\022*\n\006status\030\013 \001(\0162\032.priemman.v1"
+  ".ProjectStatus\022,\n\007metrics\030\014 \001(\0132\033.priemm"
+  "an.v1.ProjectMetrics\022.\n\ncreated_at\030\r \001(\013"
+  "2\032.google.protobuf.Timestamp\022.\n\nupdated_"
+  "at\030\016 \001(\0132\032.google.protobuf.Timestamp\0220\n\014"
+  "published_at\030\017 \001(\0132\032.google.protobuf.Tim"
+  "estamp\"\277\002\n\nCollection\022!\n\002id\030\001 \001(\0132\025.prie"
+  "mman.v1.ObjectId\022\'\n\010owner_id\030\002 \001(\0132\025.pri"
+  "emman.v1.ObjectId\022\r\n\005title\030\003 \001(\t\022\023\n\013desc"
+  "ription\030\004 \001(\t\022*\n\013project_ids\030\005 \003(\0132\025.pri"
+  "emman.v1.ObjectId\0225\n\nvisibility\030\006 \001(\0162!."
+  "priemman.v1.CollectionVisibility\022.\n\ncrea"
+  "ted_at\030\007 \001(\0132\032.google.protobuf.Timestamp"
+  "\022.\n\nupdated_at\030\010 \001(\0132\032.google.protobuf.T"
+  "imestamp\"\230\001\n\023ListProjectsRequest\022\'\n\010owne"
+  "r_id\030\001 \001(\0132\025.priemman.v1.ObjectId\0221\n\rsta"
+  "tus_filter\030\002 \001(\0162\032.priemman.v1.ProjectSt"
+  "atus\022\021\n\tpage_size\030\003 \001(\005\022\022\n\npage_token\030\004 "
+  "\001(\t\"W\n\024ListProjectsResponse\022&\n\010projects\030"
+  "\001 \003(\0132\024.priemman.v1.Project\022\027\n\017next_page"
+  "_token\030\002 \001(\t\"\211\002\n\014ProjectInput\022\r\n\005title\030\001"
+  " \001(\t\022\014\n\004tags\030\002 \003(\t\022!\n\005media\030\003 \003(\0132\022.prie"
+  "mman.v1.Media\0220\n\rcollaborators\030\004 \003(\0132\031.p"
+  "riemman.v1.Collaborator\0222\n\nvisibility\030\005 "
+  "\001(\0162\036.priemman.v1.ProjectVisibility\022*\n\006s"
+  "tatus\030\006 \001(\0162\032.priemman.v1.ProjectStatus\022"
+  "\026\n\016cover_media_id\030\007 \001(\t\022\017\n\007content\030\010 \001(\t"
+  "\"@\n\024CreateProjectRequest\022(\n\005input\030\001 \001(\0132"
+  "\031.priemman.v1.ProjectInput\"c\n\024UpdateProj"
+  "ectRequest\022!\n\002id\030\001 \001(\0132\025.priemman.v1.Obj"
+  "ectId\022(\n\005input\030\002 \001(\0132\031.priemman.v1.Proje"
+  "ctInput\"8\n\017ProjectResponse\022%\n\007project\030\001 "
+  "\001(\0132\024.priemman.v1.Project\"\230\001\n\017Collection"
+  "Input\022\r\n\005title\030\001 \001(\t\022\023\n\013description\030\002 \001("
+  "\t\0225\n\nvisibility\030\003 \001(\0162!.priemman.v1.Coll"
+  "ectionVisibility\022*\n\013project_ids\030\004 \003(\0132\025."
+  "priemman.v1.ObjectId\"F\n\027CreateCollection"
+  "Request\022+\n\005input\030\001 \001(\0132\034.priemman.v1.Col"
+  "lectionInput\"i\n\027UpdateCollectionRequest\022"
+  "!\n\002id\030\001 \001(\0132\025.priemman.v1.ObjectId\022+\n\005in"
+  "put\030\002 \001(\0132\034.priemman.v1.CollectionInput\""
+  "A\n\022CollectionResponse\022+\n\ncollection\030\001 \001("
+  "\0132\027.priemman.v1.Collection\"G\n\027ListCollec"
+  "tionsResponse\022,\n\013collections\030\001 \003(\0132\027.pri"
+  "emman.v1.Collection\"<\n\027DeleteCollectionR"
   "equest\022!\n\002id\030\001 \001(\0132\025.priemman.v1.ObjectI"
-  "d\022(\n\005input\030\002 \001(\0132\031.priemman.v1.ProjectIn"
-  "put\"8\n\017ProjectResponse\022%\n\007project\030\001 \001(\0132"
-  "\024.priemman.v1.Project\"\230\001\n\017CollectionInpu"
-  "t\022\r\n\005title\030\001 \001(\t\022\023\n\013description\030\002 \001(\t\0225\n"
-  "\nvisibility\030\003 \001(\0162!.priemman.v1.Collecti"
-  "onVisibility\022*\n\013project_ids\030\004 \003(\0132\025.prie"
-  "mman.v1.ObjectId\"F\n\027CreateCollectionRequ"
-  "est\022+\n\005input\030\001 \001(\0132\034.priemman.v1.Collect"
-  "ionInput\"i\n\027UpdateCollectionRequest\022!\n\002i"
-  "d\030\001 \001(\0132\025.priemman.v1.ObjectId\022+\n\005input\030"
-  "\002 \001(\0132\034.priemman.v1.CollectionInput\"A\n\022C"
-  "ollectionResponse\022+\n\ncollection\030\001 \001(\0132\027."
-  "priemman.v1.Collection\"G\n\027ListCollection"
-  "sResponse\022,\n\013collections\030\001 \003(\0132\027.priemma"
-  "n.v1.Collection\"<\n\027DeleteCollectionReque"
-  "st\022!\n\002id\030\001 \001(\0132\025.priemman.v1.ObjectId*\225\001"
-  "\n\021ProjectVisibility\022\"\n\036PROJECT_VISIBILIT"
-  "Y_UNSPECIFIED\020\000\022\035\n\031PROJECT_VISIBILITY_PU"
-  "BLIC\020\001\022\037\n\033PROJECT_VISIBILITY_UNLISTED\020\002\022"
-  "\034\n\030PROJECT_VISIBILITY_DRAFT\020\003*\204\001\n\rProjec"
-  "tStatus\022\036\n\032PROJECT_STATUS_UNSPECIFIED\020\000\022"
-  "\030\n\024PROJECT_STATUS_DRAFT\020\001\022\034\n\030PROJECT_STA"
-  "TUS_PUBLISHED\020\002\022\033\n\027PROJECT_STATUS_ARCHIV"
-  "ED\020\003*S\n\tMediaType\022\032\n\026MEDIA_TYPE_UNSPECIF"
-  "IED\020\000\022\024\n\020MEDIA_TYPE_IMAGE\020\001\022\024\n\020MEDIA_TYP"
-  "E_VIDEO\020\002*\202\001\n\024CollectionVisibility\022%\n!CO"
-  "LLECTION_VISIBILITY_UNSPECIFIED\020\000\022 \n\034COL"
-  "LECTION_VISIBILITY_PUBLIC\020\001\022!\n\035COLLECTIO"
-  "N_VISIBILITY_PRIVATE\020\002b\006proto3"
+  "d*\225\001\n\021ProjectVisibility\022\"\n\036PROJECT_VISIB"
+  "ILITY_UNSPECIFIED\020\000\022\035\n\031PROJECT_VISIBILIT"
+  "Y_PUBLIC\020\001\022\037\n\033PROJECT_VISIBILITY_UNLISTE"
+  "D\020\002\022\034\n\030PROJECT_VISIBILITY_DRAFT\020\003*\204\001\n\rPr"
+  "ojectStatus\022\036\n\032PROJECT_STATUS_UNSPECIFIE"
+  "D\020\000\022\030\n\024PROJECT_STATUS_DRAFT\020\001\022\034\n\030PROJECT"
+  "_STATUS_PUBLISHED\020\002\022\033\n\027PROJECT_STATUS_AR"
+  "CHIVED\020\003*\202\001\n\024CollectionVisibility\022%\n!COL"
+  "LECTION_VISIBILITY_UNSPECIFIED\020\000\022 \n\034COLL"
+  "ECTION_VISIBILITY_PUBLIC\020\001\022!\n\035COLLECTION"
+  "_VISIBILITY_PRIVATE\020\002b\006proto3"
   ;
-static const ::_pbi::DescriptorTable* const descriptor_table_project_2eproto_deps[2] = {
+static const ::_pbi::DescriptorTable* const descriptor_table_project_2eproto_deps[3] = {
   &::descriptor_table_common_2eproto,
   &::descriptor_table_google_2fprotobuf_2ftimestamp_2eproto,
+  &::descriptor_table_media_2eproto,
 };
 static ::_pbi::once_flag descriptor_table_project_2eproto_once;
 const ::_pbi::DescriptorTable descriptor_table_project_2eproto = {
-    false, false, 3070, descriptor_table_protodef_project_2eproto,
+    false, false, 2789, descriptor_table_protodef_project_2eproto,
     "project.proto",
-    &descriptor_table_project_2eproto_once, descriptor_table_project_2eproto_deps, 2, 17,
+    &descriptor_table_project_2eproto_once, descriptor_table_project_2eproto_deps, 3, 16,
     schemas, file_default_instances, TableStruct_project_2eproto::offsets,
     file_level_metadata_project_2eproto, file_level_enum_descriptors_project_2eproto,
     file_level_service_descriptors_project_2eproto,
@@ -638,24 +594,9 @@ bool ProjectStatus_IsValid(int value) {
   }
 }
 
-const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* MediaType_descriptor() {
-  ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&descriptor_table_project_2eproto);
-  return file_level_enum_descriptors_project_2eproto[2];
-}
-bool MediaType_IsValid(int value) {
-  switch (value) {
-    case 0:
-    case 1:
-    case 2:
-      return true;
-    default:
-      return false;
-  }
-}
-
 const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* CollectionVisibility_descriptor() {
   ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&descriptor_table_project_2eproto);
-  return file_level_enum_descriptors_project_2eproto[3];
+  return file_level_enum_descriptors_project_2eproto[2];
 }
 bool CollectionVisibility_IsValid(int value) {
   switch (value) {
@@ -668,369 +609,6 @@ bool CollectionVisibility_IsValid(int value) {
   }
 }
 
-
-// ===================================================================
-
-class Media::_Internal {
- public:
-  static const ::priemman::v1::ObjectId& id(const Media* msg);
-};
-
-const ::priemman::v1::ObjectId&
-Media::_Internal::id(const Media* msg) {
-  return *msg->_impl_.id_;
-}
-void Media::clear_id() {
-  if (GetArenaForAllocation() == nullptr && _impl_.id_ != nullptr) {
-    delete _impl_.id_;
-  }
-  _impl_.id_ = nullptr;
-}
-Media::Media(::PROTOBUF_NAMESPACE_ID::Arena* arena,
-                         bool is_message_owned)
-  : ::PROTOBUF_NAMESPACE_ID::Message(arena, is_message_owned) {
-  SharedCtor(arena, is_message_owned);
-  // @@protoc_insertion_point(arena_constructor:priemman.v1.Media)
-}
-Media::Media(const Media& from)
-  : ::PROTOBUF_NAMESPACE_ID::Message() {
-  Media* const _this = this; (void)_this;
-  new (&_impl_) Impl_{
-      decltype(_impl_.url_){}
-    , decltype(_impl_.public_id_){}
-    , decltype(_impl_.id_){nullptr}
-    , decltype(_impl_.type_){}
-    , decltype(_impl_.order_){}
-    , /*decltype(_impl_._cached_size_)*/{}};
-
-  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
-  _impl_.url_.InitDefault();
-  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-    _impl_.url_.Set("", GetArenaForAllocation());
-  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  if (!from._internal_url().empty()) {
-    _this->_impl_.url_.Set(from._internal_url(), 
-      _this->GetArenaForAllocation());
-  }
-  _impl_.public_id_.InitDefault();
-  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-    _impl_.public_id_.Set("", GetArenaForAllocation());
-  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  if (!from._internal_public_id().empty()) {
-    _this->_impl_.public_id_.Set(from._internal_public_id(), 
-      _this->GetArenaForAllocation());
-  }
-  if (from._internal_has_id()) {
-    _this->_impl_.id_ = new ::priemman::v1::ObjectId(*from._impl_.id_);
-  }
-  ::memcpy(&_impl_.type_, &from._impl_.type_,
-    static_cast<size_t>(reinterpret_cast<char*>(&_impl_.order_) -
-    reinterpret_cast<char*>(&_impl_.type_)) + sizeof(_impl_.order_));
-  // @@protoc_insertion_point(copy_constructor:priemman.v1.Media)
-}
-
-inline void Media::SharedCtor(
-    ::_pb::Arena* arena, bool is_message_owned) {
-  (void)arena;
-  (void)is_message_owned;
-  new (&_impl_) Impl_{
-      decltype(_impl_.url_){}
-    , decltype(_impl_.public_id_){}
-    , decltype(_impl_.id_){nullptr}
-    , decltype(_impl_.type_){0}
-    , decltype(_impl_.order_){0}
-    , /*decltype(_impl_._cached_size_)*/{}
-  };
-  _impl_.url_.InitDefault();
-  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-    _impl_.url_.Set("", GetArenaForAllocation());
-  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  _impl_.public_id_.InitDefault();
-  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-    _impl_.public_id_.Set("", GetArenaForAllocation());
-  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-}
-
-Media::~Media() {
-  // @@protoc_insertion_point(destructor:priemman.v1.Media)
-  if (auto *arena = _internal_metadata_.DeleteReturnArena<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>()) {
-  (void)arena;
-    return;
-  }
-  SharedDtor();
-}
-
-inline void Media::SharedDtor() {
-  GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
-  _impl_.url_.Destroy();
-  _impl_.public_id_.Destroy();
-  if (this != internal_default_instance()) delete _impl_.id_;
-}
-
-void Media::SetCachedSize(int size) const {
-  _impl_._cached_size_.Set(size);
-}
-
-void Media::Clear() {
-// @@protoc_insertion_point(message_clear_start:priemman.v1.Media)
-  uint32_t cached_has_bits = 0;
-  // Prevent compiler warnings about cached_has_bits being unused
-  (void) cached_has_bits;
-
-  _impl_.url_.ClearToEmpty();
-  _impl_.public_id_.ClearToEmpty();
-  if (GetArenaForAllocation() == nullptr && _impl_.id_ != nullptr) {
-    delete _impl_.id_;
-  }
-  _impl_.id_ = nullptr;
-  ::memset(&_impl_.type_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&_impl_.order_) -
-      reinterpret_cast<char*>(&_impl_.type_)) + sizeof(_impl_.order_));
-  _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
-}
-
-const char* Media::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
-#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
-  while (!ctx->Done(&ptr)) {
-    uint32_t tag;
-    ptr = ::_pbi::ReadTag(ptr, &tag);
-    switch (tag >> 3) {
-      // string url = 1;
-      case 1:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 10)) {
-          auto str = _internal_mutable_url();
-          ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
-          CHK_(ptr);
-          CHK_(::_pbi::VerifyUTF8(str, "priemman.v1.Media.url"));
-        } else
-          goto handle_unusual;
-        continue;
-      // .priemman.v1.MediaType type = 2;
-      case 2:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 16)) {
-          uint64_t val = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
-          CHK_(ptr);
-          _internal_set_type(static_cast<::priemman::v1::MediaType>(val));
-        } else
-          goto handle_unusual;
-        continue;
-      // int32 order = 3;
-      case 3:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 24)) {
-          _impl_.order_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
-          CHK_(ptr);
-        } else
-          goto handle_unusual;
-        continue;
-      // .priemman.v1.ObjectId id = 4;
-      case 4:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 34)) {
-          ptr = ctx->ParseMessage(_internal_mutable_id(), ptr);
-          CHK_(ptr);
-        } else
-          goto handle_unusual;
-        continue;
-      // string public_id = 5;
-      case 5:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 42)) {
-          auto str = _internal_mutable_public_id();
-          ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
-          CHK_(ptr);
-          CHK_(::_pbi::VerifyUTF8(str, "priemman.v1.Media.public_id"));
-        } else
-          goto handle_unusual;
-        continue;
-      default:
-        goto handle_unusual;
-    }  // switch
-  handle_unusual:
-    if ((tag == 0) || ((tag & 7) == 4)) {
-      CHK_(ptr);
-      ctx->SetLastTag(tag);
-      goto message_done;
-    }
-    ptr = UnknownFieldParse(
-        tag,
-        _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
-        ptr, ctx);
-    CHK_(ptr != nullptr);
-  }  // while
-message_done:
-  return ptr;
-failure:
-  ptr = nullptr;
-  goto message_done;
-#undef CHK_
-}
-
-uint8_t* Media::_InternalSerialize(
-    uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
-  // @@protoc_insertion_point(serialize_to_array_start:priemman.v1.Media)
-  uint32_t cached_has_bits = 0;
-  (void) cached_has_bits;
-
-  // string url = 1;
-  if (!this->_internal_url().empty()) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
-      this->_internal_url().data(), static_cast<int>(this->_internal_url().length()),
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
-      "priemman.v1.Media.url");
-    target = stream->WriteStringMaybeAliased(
-        1, this->_internal_url(), target);
-  }
-
-  // .priemman.v1.MediaType type = 2;
-  if (this->_internal_type() != 0) {
-    target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteEnumToArray(
-      2, this->_internal_type(), target);
-  }
-
-  // int32 order = 3;
-  if (this->_internal_order() != 0) {
-    target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteInt32ToArray(3, this->_internal_order(), target);
-  }
-
-  // .priemman.v1.ObjectId id = 4;
-  if (this->_internal_has_id()) {
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      InternalWriteMessage(4, _Internal::id(this),
-        _Internal::id(this).GetCachedSize(), target, stream);
-  }
-
-  // string public_id = 5;
-  if (!this->_internal_public_id().empty()) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
-      this->_internal_public_id().data(), static_cast<int>(this->_internal_public_id().length()),
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
-      "priemman.v1.Media.public_id");
-    target = stream->WriteStringMaybeAliased(
-        5, this->_internal_public_id(), target);
-  }
-
-  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
-    target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
-        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
-  }
-  // @@protoc_insertion_point(serialize_to_array_end:priemman.v1.Media)
-  return target;
-}
-
-size_t Media::ByteSizeLong() const {
-// @@protoc_insertion_point(message_byte_size_start:priemman.v1.Media)
-  size_t total_size = 0;
-
-  uint32_t cached_has_bits = 0;
-  // Prevent compiler warnings about cached_has_bits being unused
-  (void) cached_has_bits;
-
-  // string url = 1;
-  if (!this->_internal_url().empty()) {
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
-        this->_internal_url());
-  }
-
-  // string public_id = 5;
-  if (!this->_internal_public_id().empty()) {
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
-        this->_internal_public_id());
-  }
-
-  // .priemman.v1.ObjectId id = 4;
-  if (this->_internal_has_id()) {
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
-        *_impl_.id_);
-  }
-
-  // .priemman.v1.MediaType type = 2;
-  if (this->_internal_type() != 0) {
-    total_size += 1 +
-      ::_pbi::WireFormatLite::EnumSize(this->_internal_type());
-  }
-
-  // int32 order = 3;
-  if (this->_internal_order() != 0) {
-    total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(this->_internal_order());
-  }
-
-  return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
-}
-
-const ::PROTOBUF_NAMESPACE_ID::Message::ClassData Media::_class_data_ = {
-    ::PROTOBUF_NAMESPACE_ID::Message::CopyWithSourceCheck,
-    Media::MergeImpl
-};
-const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*Media::GetClassData() const { return &_class_data_; }
-
-
-void Media::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg) {
-  auto* const _this = static_cast<Media*>(&to_msg);
-  auto& from = static_cast<const Media&>(from_msg);
-  // @@protoc_insertion_point(class_specific_merge_from_start:priemman.v1.Media)
-  GOOGLE_DCHECK_NE(&from, _this);
-  uint32_t cached_has_bits = 0;
-  (void) cached_has_bits;
-
-  if (!from._internal_url().empty()) {
-    _this->_internal_set_url(from._internal_url());
-  }
-  if (!from._internal_public_id().empty()) {
-    _this->_internal_set_public_id(from._internal_public_id());
-  }
-  if (from._internal_has_id()) {
-    _this->_internal_mutable_id()->::priemman::v1::ObjectId::MergeFrom(
-        from._internal_id());
-  }
-  if (from._internal_type() != 0) {
-    _this->_internal_set_type(from._internal_type());
-  }
-  if (from._internal_order() != 0) {
-    _this->_internal_set_order(from._internal_order());
-  }
-  _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
-}
-
-void Media::CopyFrom(const Media& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:priemman.v1.Media)
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-bool Media::IsInitialized() const {
-  return true;
-}
-
-void Media::InternalSwap(Media* other) {
-  using std::swap;
-  auto* lhs_arena = GetArenaForAllocation();
-  auto* rhs_arena = other->GetArenaForAllocation();
-  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
-  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
-      &_impl_.url_, lhs_arena,
-      &other->_impl_.url_, rhs_arena
-  );
-  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
-      &_impl_.public_id_, lhs_arena,
-      &other->_impl_.public_id_, rhs_arena
-  );
-  ::PROTOBUF_NAMESPACE_ID::internal::memswap<
-      PROTOBUF_FIELD_OFFSET(Media, _impl_.order_)
-      + sizeof(Media::_impl_.order_)
-      - PROTOBUF_FIELD_OFFSET(Media, _impl_.id_)>(
-          reinterpret_cast<char*>(&_impl_.id_),
-          reinterpret_cast<char*>(&other->_impl_.id_));
-}
-
-::PROTOBUF_NAMESPACE_ID::Metadata Media::GetMetadata() const {
-  return ::_pbi::AssignDescriptors(
-      &descriptor_table_project_2eproto_getter, &descriptor_table_project_2eproto_once,
-      file_level_metadata_project_2eproto[0]);
-}
 
 // ===================================================================
 
@@ -1280,7 +858,7 @@ void Collaborator::InternalSwap(Collaborator* other) {
 ::PROTOBUF_NAMESPACE_ID::Metadata Collaborator::GetMetadata() const {
   return ::_pbi::AssignDescriptors(
       &descriptor_table_project_2eproto_getter, &descriptor_table_project_2eproto_once,
-      file_level_metadata_project_2eproto[1]);
+      file_level_metadata_project_2eproto[0]);
 }
 
 // ===================================================================
@@ -1515,7 +1093,7 @@ void ProjectMetrics::InternalSwap(ProjectMetrics* other) {
 ::PROTOBUF_NAMESPACE_ID::Metadata ProjectMetrics::GetMetadata() const {
   return ::_pbi::AssignDescriptors(
       &descriptor_table_project_2eproto_getter, &descriptor_table_project_2eproto_once,
-      file_level_metadata_project_2eproto[2]);
+      file_level_metadata_project_2eproto[1]);
 }
 
 // ===================================================================
@@ -1566,6 +1144,9 @@ void Project::clear_owner_id() {
   }
   _impl_.owner_id_ = nullptr;
 }
+void Project::clear_media() {
+  _impl_.media_.Clear();
+}
 void Project::clear_created_at() {
   if (GetArenaForAllocation() == nullptr && _impl_.created_at_ != nullptr) {
     delete _impl_.created_at_;
@@ -1594,14 +1175,12 @@ Project::Project(const Project& from)
   : ::PROTOBUF_NAMESPACE_ID::Message() {
   Project* const _this = this; (void)_this;
   new (&_impl_) Impl_{
-      decltype(_impl_.tools_){from._impl_.tools_}
-    , decltype(_impl_.disciplines_){from._impl_.disciplines_}
-    , decltype(_impl_.tags_){from._impl_.tags_}
+      decltype(_impl_.tags_){from._impl_.tags_}
     , decltype(_impl_.media_){from._impl_.media_}
     , decltype(_impl_.collaborators_){from._impl_.collaborators_}
     , decltype(_impl_.title_){}
     , decltype(_impl_.slug_){}
-    , decltype(_impl_.description_){}
+    , decltype(_impl_.content_){}
     , decltype(_impl_.cover_media_id_){}
     , decltype(_impl_.id_){nullptr}
     , decltype(_impl_.owner_id_){nullptr}
@@ -1630,12 +1209,12 @@ Project::Project(const Project& from)
     _this->_impl_.slug_.Set(from._internal_slug(), 
       _this->GetArenaForAllocation());
   }
-  _impl_.description_.InitDefault();
+  _impl_.content_.InitDefault();
   #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-    _impl_.description_.Set("", GetArenaForAllocation());
+    _impl_.content_.Set("", GetArenaForAllocation());
   #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  if (!from._internal_description().empty()) {
-    _this->_impl_.description_.Set(from._internal_description(), 
+  if (!from._internal_content().empty()) {
+    _this->_impl_.content_.Set(from._internal_content(), 
       _this->GetArenaForAllocation());
   }
   _impl_.cover_media_id_.InitDefault();
@@ -1675,14 +1254,12 @@ inline void Project::SharedCtor(
   (void)arena;
   (void)is_message_owned;
   new (&_impl_) Impl_{
-      decltype(_impl_.tools_){arena}
-    , decltype(_impl_.disciplines_){arena}
-    , decltype(_impl_.tags_){arena}
+      decltype(_impl_.tags_){arena}
     , decltype(_impl_.media_){arena}
     , decltype(_impl_.collaborators_){arena}
     , decltype(_impl_.title_){}
     , decltype(_impl_.slug_){}
-    , decltype(_impl_.description_){}
+    , decltype(_impl_.content_){}
     , decltype(_impl_.cover_media_id_){}
     , decltype(_impl_.id_){nullptr}
     , decltype(_impl_.owner_id_){nullptr}
@@ -1702,9 +1279,9 @@ inline void Project::SharedCtor(
   #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
     _impl_.slug_.Set("", GetArenaForAllocation());
   #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  _impl_.description_.InitDefault();
+  _impl_.content_.InitDefault();
   #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-    _impl_.description_.Set("", GetArenaForAllocation());
+    _impl_.content_.Set("", GetArenaForAllocation());
   #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
   _impl_.cover_media_id_.InitDefault();
   #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
@@ -1723,14 +1300,12 @@ Project::~Project() {
 
 inline void Project::SharedDtor() {
   GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
-  _impl_.tools_.~RepeatedPtrField();
-  _impl_.disciplines_.~RepeatedPtrField();
   _impl_.tags_.~RepeatedPtrField();
   _impl_.media_.~RepeatedPtrField();
   _impl_.collaborators_.~RepeatedPtrField();
   _impl_.title_.Destroy();
   _impl_.slug_.Destroy();
-  _impl_.description_.Destroy();
+  _impl_.content_.Destroy();
   _impl_.cover_media_id_.Destroy();
   if (this != internal_default_instance()) delete _impl_.id_;
   if (this != internal_default_instance()) delete _impl_.owner_id_;
@@ -1750,14 +1325,12 @@ void Project::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  _impl_.tools_.Clear();
-  _impl_.disciplines_.Clear();
   _impl_.tags_.Clear();
   _impl_.media_.Clear();
   _impl_.collaborators_.Clear();
   _impl_.title_.ClearToEmpty();
   _impl_.slug_.ClearToEmpty();
-  _impl_.description_.ClearToEmpty();
+  _impl_.content_.ClearToEmpty();
   _impl_.cover_media_id_.ClearToEmpty();
   if (GetArenaForAllocation() == nullptr && _impl_.id_ != nullptr) {
     delete _impl_.id_;
@@ -1831,49 +1404,19 @@ const char* Project::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) 
         } else
           goto handle_unusual;
         continue;
-      // string description = 5;
+      // string content = 5;
       case 5:
         if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 42)) {
-          auto str = _internal_mutable_description();
+          auto str = _internal_mutable_content();
           ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
           CHK_(ptr);
-          CHK_(::_pbi::VerifyUTF8(str, "priemman.v1.Project.description"));
+          CHK_(::_pbi::VerifyUTF8(str, "priemman.v1.Project.content"));
         } else
           goto handle_unusual;
         continue;
-      // repeated string tools = 6;
+      // repeated string tags = 6;
       case 6:
         if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 50)) {
-          ptr -= 1;
-          do {
-            ptr += 1;
-            auto str = _internal_add_tools();
-            ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
-            CHK_(ptr);
-            CHK_(::_pbi::VerifyUTF8(str, "priemman.v1.Project.tools"));
-            if (!ctx->DataAvailable(ptr)) break;
-          } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<50>(ptr));
-        } else
-          goto handle_unusual;
-        continue;
-      // repeated string disciplines = 7;
-      case 7:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 58)) {
-          ptr -= 1;
-          do {
-            ptr += 1;
-            auto str = _internal_add_disciplines();
-            ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
-            CHK_(ptr);
-            CHK_(::_pbi::VerifyUTF8(str, "priemman.v1.Project.disciplines"));
-            if (!ctx->DataAvailable(ptr)) break;
-          } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<58>(ptr));
-        } else
-          goto handle_unusual;
-        continue;
-      // repeated string tags = 8;
-      case 8:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 66)) {
           ptr -= 1;
           do {
             ptr += 1;
@@ -1882,13 +1425,13 @@ const char* Project::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) 
             CHK_(ptr);
             CHK_(::_pbi::VerifyUTF8(str, "priemman.v1.Project.tags"));
             if (!ctx->DataAvailable(ptr)) break;
-          } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<66>(ptr));
+          } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<50>(ptr));
         } else
           goto handle_unusual;
         continue;
-      // string cover_media_id = 9;
-      case 9:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 74)) {
+      // string cover_media_id = 7;
+      case 7:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 58)) {
           auto str = _internal_mutable_cover_media_id();
           ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
           CHK_(ptr);
@@ -1896,77 +1439,77 @@ const char* Project::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) 
         } else
           goto handle_unusual;
         continue;
-      // repeated .priemman.v1.Media media = 10;
-      case 10:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 82)) {
+      // repeated .priemman.v1.Media media = 8;
+      case 8:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 66)) {
           ptr -= 1;
           do {
             ptr += 1;
             ptr = ctx->ParseMessage(_internal_add_media(), ptr);
             CHK_(ptr);
             if (!ctx->DataAvailable(ptr)) break;
-          } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<82>(ptr));
+          } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<66>(ptr));
         } else
           goto handle_unusual;
         continue;
-      // repeated .priemman.v1.Collaborator collaborators = 11;
-      case 11:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 90)) {
+      // repeated .priemman.v1.Collaborator collaborators = 9;
+      case 9:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 74)) {
           ptr -= 1;
           do {
             ptr += 1;
             ptr = ctx->ParseMessage(_internal_add_collaborators(), ptr);
             CHK_(ptr);
             if (!ctx->DataAvailable(ptr)) break;
-          } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<90>(ptr));
+          } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<74>(ptr));
         } else
           goto handle_unusual;
         continue;
-      // .priemman.v1.ProjectVisibility visibility = 12;
-      case 12:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 96)) {
+      // .priemman.v1.ProjectVisibility visibility = 10;
+      case 10:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 80)) {
           uint64_t val = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
           CHK_(ptr);
           _internal_set_visibility(static_cast<::priemman::v1::ProjectVisibility>(val));
         } else
           goto handle_unusual;
         continue;
-      // .priemman.v1.ProjectStatus status = 13;
-      case 13:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 104)) {
+      // .priemman.v1.ProjectStatus status = 11;
+      case 11:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 88)) {
           uint64_t val = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
           CHK_(ptr);
           _internal_set_status(static_cast<::priemman::v1::ProjectStatus>(val));
         } else
           goto handle_unusual;
         continue;
-      // .priemman.v1.ProjectMetrics metrics = 14;
-      case 14:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 114)) {
+      // .priemman.v1.ProjectMetrics metrics = 12;
+      case 12:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 98)) {
           ptr = ctx->ParseMessage(_internal_mutable_metrics(), ptr);
           CHK_(ptr);
         } else
           goto handle_unusual;
         continue;
-      // .google.protobuf.Timestamp created_at = 15;
-      case 15:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 122)) {
+      // .google.protobuf.Timestamp created_at = 13;
+      case 13:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 106)) {
           ptr = ctx->ParseMessage(_internal_mutable_created_at(), ptr);
           CHK_(ptr);
         } else
           goto handle_unusual;
         continue;
-      // .google.protobuf.Timestamp updated_at = 16;
-      case 16:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 130)) {
+      // .google.protobuf.Timestamp updated_at = 14;
+      case 14:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 114)) {
           ptr = ctx->ParseMessage(_internal_mutable_updated_at(), ptr);
           CHK_(ptr);
         } else
           goto handle_unusual;
         continue;
-      // .google.protobuf.Timestamp published_at = 17;
-      case 17:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 138)) {
+      // .google.protobuf.Timestamp published_at = 15;
+      case 15:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 122)) {
           ptr = ctx->ParseMessage(_internal_mutable_published_at(), ptr);
           CHK_(ptr);
         } else
@@ -2035,111 +1578,91 @@ uint8_t* Project::_InternalSerialize(
         4, this->_internal_slug(), target);
   }
 
-  // string description = 5;
-  if (!this->_internal_description().empty()) {
+  // string content = 5;
+  if (!this->_internal_content().empty()) {
     ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
-      this->_internal_description().data(), static_cast<int>(this->_internal_description().length()),
+      this->_internal_content().data(), static_cast<int>(this->_internal_content().length()),
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
-      "priemman.v1.Project.description");
+      "priemman.v1.Project.content");
     target = stream->WriteStringMaybeAliased(
-        5, this->_internal_description(), target);
+        5, this->_internal_content(), target);
   }
 
-  // repeated string tools = 6;
-  for (int i = 0, n = this->_internal_tools_size(); i < n; i++) {
-    const auto& s = this->_internal_tools(i);
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
-      s.data(), static_cast<int>(s.length()),
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
-      "priemman.v1.Project.tools");
-    target = stream->WriteString(6, s, target);
-  }
-
-  // repeated string disciplines = 7;
-  for (int i = 0, n = this->_internal_disciplines_size(); i < n; i++) {
-    const auto& s = this->_internal_disciplines(i);
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
-      s.data(), static_cast<int>(s.length()),
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
-      "priemman.v1.Project.disciplines");
-    target = stream->WriteString(7, s, target);
-  }
-
-  // repeated string tags = 8;
+  // repeated string tags = 6;
   for (int i = 0, n = this->_internal_tags_size(); i < n; i++) {
     const auto& s = this->_internal_tags(i);
     ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
       s.data(), static_cast<int>(s.length()),
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
       "priemman.v1.Project.tags");
-    target = stream->WriteString(8, s, target);
+    target = stream->WriteString(6, s, target);
   }
 
-  // string cover_media_id = 9;
+  // string cover_media_id = 7;
   if (!this->_internal_cover_media_id().empty()) {
     ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
       this->_internal_cover_media_id().data(), static_cast<int>(this->_internal_cover_media_id().length()),
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
       "priemman.v1.Project.cover_media_id");
     target = stream->WriteStringMaybeAliased(
-        9, this->_internal_cover_media_id(), target);
+        7, this->_internal_cover_media_id(), target);
   }
 
-  // repeated .priemman.v1.Media media = 10;
+  // repeated .priemman.v1.Media media = 8;
   for (unsigned i = 0,
       n = static_cast<unsigned>(this->_internal_media_size()); i < n; i++) {
     const auto& repfield = this->_internal_media(i);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-        InternalWriteMessage(10, repfield, repfield.GetCachedSize(), target, stream);
+        InternalWriteMessage(8, repfield, repfield.GetCachedSize(), target, stream);
   }
 
-  // repeated .priemman.v1.Collaborator collaborators = 11;
+  // repeated .priemman.v1.Collaborator collaborators = 9;
   for (unsigned i = 0,
       n = static_cast<unsigned>(this->_internal_collaborators_size()); i < n; i++) {
     const auto& repfield = this->_internal_collaborators(i);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-        InternalWriteMessage(11, repfield, repfield.GetCachedSize(), target, stream);
+        InternalWriteMessage(9, repfield, repfield.GetCachedSize(), target, stream);
   }
 
-  // .priemman.v1.ProjectVisibility visibility = 12;
+  // .priemman.v1.ProjectVisibility visibility = 10;
   if (this->_internal_visibility() != 0) {
     target = stream->EnsureSpace(target);
     target = ::_pbi::WireFormatLite::WriteEnumToArray(
-      12, this->_internal_visibility(), target);
+      10, this->_internal_visibility(), target);
   }
 
-  // .priemman.v1.ProjectStatus status = 13;
+  // .priemman.v1.ProjectStatus status = 11;
   if (this->_internal_status() != 0) {
     target = stream->EnsureSpace(target);
     target = ::_pbi::WireFormatLite::WriteEnumToArray(
-      13, this->_internal_status(), target);
+      11, this->_internal_status(), target);
   }
 
-  // .priemman.v1.ProjectMetrics metrics = 14;
+  // .priemman.v1.ProjectMetrics metrics = 12;
   if (this->_internal_has_metrics()) {
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      InternalWriteMessage(14, _Internal::metrics(this),
+      InternalWriteMessage(12, _Internal::metrics(this),
         _Internal::metrics(this).GetCachedSize(), target, stream);
   }
 
-  // .google.protobuf.Timestamp created_at = 15;
+  // .google.protobuf.Timestamp created_at = 13;
   if (this->_internal_has_created_at()) {
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      InternalWriteMessage(15, _Internal::created_at(this),
+      InternalWriteMessage(13, _Internal::created_at(this),
         _Internal::created_at(this).GetCachedSize(), target, stream);
   }
 
-  // .google.protobuf.Timestamp updated_at = 16;
+  // .google.protobuf.Timestamp updated_at = 14;
   if (this->_internal_has_updated_at()) {
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      InternalWriteMessage(16, _Internal::updated_at(this),
+      InternalWriteMessage(14, _Internal::updated_at(this),
         _Internal::updated_at(this).GetCachedSize(), target, stream);
   }
 
-  // .google.protobuf.Timestamp published_at = 17;
+  // .google.protobuf.Timestamp published_at = 15;
   if (this->_internal_has_published_at()) {
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      InternalWriteMessage(17, _Internal::published_at(this),
+      InternalWriteMessage(15, _Internal::published_at(this),
         _Internal::published_at(this).GetCachedSize(), target, stream);
   }
 
@@ -2159,23 +1682,7 @@ size_t Project::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // repeated string tools = 6;
-  total_size += 1 *
-      ::PROTOBUF_NAMESPACE_ID::internal::FromIntSize(_impl_.tools_.size());
-  for (int i = 0, n = _impl_.tools_.size(); i < n; i++) {
-    total_size += ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
-      _impl_.tools_.Get(i));
-  }
-
-  // repeated string disciplines = 7;
-  total_size += 1 *
-      ::PROTOBUF_NAMESPACE_ID::internal::FromIntSize(_impl_.disciplines_.size());
-  for (int i = 0, n = _impl_.disciplines_.size(); i < n; i++) {
-    total_size += ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
-      _impl_.disciplines_.Get(i));
-  }
-
-  // repeated string tags = 8;
+  // repeated string tags = 6;
   total_size += 1 *
       ::PROTOBUF_NAMESPACE_ID::internal::FromIntSize(_impl_.tags_.size());
   for (int i = 0, n = _impl_.tags_.size(); i < n; i++) {
@@ -2183,14 +1690,14 @@ size_t Project::ByteSizeLong() const {
       _impl_.tags_.Get(i));
   }
 
-  // repeated .priemman.v1.Media media = 10;
+  // repeated .priemman.v1.Media media = 8;
   total_size += 1UL * this->_internal_media_size();
   for (const auto& msg : this->_impl_.media_) {
     total_size +=
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(msg);
   }
 
-  // repeated .priemman.v1.Collaborator collaborators = 11;
+  // repeated .priemman.v1.Collaborator collaborators = 9;
   total_size += 1UL * this->_internal_collaborators_size();
   for (const auto& msg : this->_impl_.collaborators_) {
     total_size +=
@@ -2211,14 +1718,14 @@ size_t Project::ByteSizeLong() const {
         this->_internal_slug());
   }
 
-  // string description = 5;
-  if (!this->_internal_description().empty()) {
+  // string content = 5;
+  if (!this->_internal_content().empty()) {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
-        this->_internal_description());
+        this->_internal_content());
   }
 
-  // string cover_media_id = 9;
+  // string cover_media_id = 7;
   if (!this->_internal_cover_media_id().empty()) {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
@@ -2239,41 +1746,41 @@ size_t Project::ByteSizeLong() const {
         *_impl_.owner_id_);
   }
 
-  // .priemman.v1.ProjectMetrics metrics = 14;
+  // .priemman.v1.ProjectMetrics metrics = 12;
   if (this->_internal_has_metrics()) {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *_impl_.metrics_);
   }
 
-  // .google.protobuf.Timestamp created_at = 15;
+  // .google.protobuf.Timestamp created_at = 13;
   if (this->_internal_has_created_at()) {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *_impl_.created_at_);
   }
 
-  // .google.protobuf.Timestamp updated_at = 16;
+  // .google.protobuf.Timestamp updated_at = 14;
   if (this->_internal_has_updated_at()) {
-    total_size += 2 +
+    total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *_impl_.updated_at_);
   }
 
-  // .google.protobuf.Timestamp published_at = 17;
+  // .google.protobuf.Timestamp published_at = 15;
   if (this->_internal_has_published_at()) {
-    total_size += 2 +
+    total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *_impl_.published_at_);
   }
 
-  // .priemman.v1.ProjectVisibility visibility = 12;
+  // .priemman.v1.ProjectVisibility visibility = 10;
   if (this->_internal_visibility() != 0) {
     total_size += 1 +
       ::_pbi::WireFormatLite::EnumSize(this->_internal_visibility());
   }
 
-  // .priemman.v1.ProjectStatus status = 13;
+  // .priemman.v1.ProjectStatus status = 11;
   if (this->_internal_status() != 0) {
     total_size += 1 +
       ::_pbi::WireFormatLite::EnumSize(this->_internal_status());
@@ -2297,8 +1804,6 @@ void Project::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOB
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  _this->_impl_.tools_.MergeFrom(from._impl_.tools_);
-  _this->_impl_.disciplines_.MergeFrom(from._impl_.disciplines_);
   _this->_impl_.tags_.MergeFrom(from._impl_.tags_);
   _this->_impl_.media_.MergeFrom(from._impl_.media_);
   _this->_impl_.collaborators_.MergeFrom(from._impl_.collaborators_);
@@ -2308,8 +1813,8 @@ void Project::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOB
   if (!from._internal_slug().empty()) {
     _this->_internal_set_slug(from._internal_slug());
   }
-  if (!from._internal_description().empty()) {
-    _this->_internal_set_description(from._internal_description());
+  if (!from._internal_content().empty()) {
+    _this->_internal_set_content(from._internal_content());
   }
   if (!from._internal_cover_media_id().empty()) {
     _this->_internal_set_cover_media_id(from._internal_cover_media_id());
@@ -2363,8 +1868,6 @@ void Project::InternalSwap(Project* other) {
   auto* lhs_arena = GetArenaForAllocation();
   auto* rhs_arena = other->GetArenaForAllocation();
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
-  _impl_.tools_.InternalSwap(&other->_impl_.tools_);
-  _impl_.disciplines_.InternalSwap(&other->_impl_.disciplines_);
   _impl_.tags_.InternalSwap(&other->_impl_.tags_);
   _impl_.media_.InternalSwap(&other->_impl_.media_);
   _impl_.collaborators_.InternalSwap(&other->_impl_.collaborators_);
@@ -2377,8 +1880,8 @@ void Project::InternalSwap(Project* other) {
       &other->_impl_.slug_, rhs_arena
   );
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
-      &_impl_.description_, lhs_arena,
-      &other->_impl_.description_, rhs_arena
+      &_impl_.content_, lhs_arena,
+      &other->_impl_.content_, rhs_arena
   );
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
       &_impl_.cover_media_id_, lhs_arena,
@@ -2395,7 +1898,7 @@ void Project::InternalSwap(Project* other) {
 ::PROTOBUF_NAMESPACE_ID::Metadata Project::GetMetadata() const {
   return ::_pbi::AssignDescriptors(
       &descriptor_table_project_2eproto_getter, &descriptor_table_project_2eproto_once,
-      file_level_metadata_project_2eproto[3]);
+      file_level_metadata_project_2eproto[2]);
 }
 
 // ===================================================================
@@ -2908,7 +2411,7 @@ void Collection::InternalSwap(Collection* other) {
 ::PROTOBUF_NAMESPACE_ID::Metadata Collection::GetMetadata() const {
   return ::_pbi::AssignDescriptors(
       &descriptor_table_project_2eproto_getter, &descriptor_table_project_2eproto_once,
-      file_level_metadata_project_2eproto[4]);
+      file_level_metadata_project_2eproto[3]);
 }
 
 // ===================================================================
@@ -3221,7 +2724,7 @@ void ListProjectsRequest::InternalSwap(ListProjectsRequest* other) {
 ::PROTOBUF_NAMESPACE_ID::Metadata ListProjectsRequest::GetMetadata() const {
   return ::_pbi::AssignDescriptors(
       &descriptor_table_project_2eproto_getter, &descriptor_table_project_2eproto_once,
-      file_level_metadata_project_2eproto[5]);
+      file_level_metadata_project_2eproto[4]);
 }
 
 // ===================================================================
@@ -3458,7 +2961,7 @@ void ListProjectsResponse::InternalSwap(ListProjectsResponse* other) {
 ::PROTOBUF_NAMESPACE_ID::Metadata ListProjectsResponse::GetMetadata() const {
   return ::_pbi::AssignDescriptors(
       &descriptor_table_project_2eproto_getter, &descriptor_table_project_2eproto_once,
-      file_level_metadata_project_2eproto[6]);
+      file_level_metadata_project_2eproto[5]);
 }
 
 // ===================================================================
@@ -3467,6 +2970,9 @@ class ProjectInput::_Internal {
  public:
 };
 
+void ProjectInput::clear_media() {
+  _impl_.media_.Clear();
+}
 ProjectInput::ProjectInput(::PROTOBUF_NAMESPACE_ID::Arena* arena,
                          bool is_message_owned)
   : ::PROTOBUF_NAMESPACE_ID::Message(arena, is_message_owned) {
@@ -3477,14 +2983,12 @@ ProjectInput::ProjectInput(const ProjectInput& from)
   : ::PROTOBUF_NAMESPACE_ID::Message() {
   ProjectInput* const _this = this; (void)_this;
   new (&_impl_) Impl_{
-      decltype(_impl_.tools_){from._impl_.tools_}
-    , decltype(_impl_.disciplines_){from._impl_.disciplines_}
-    , decltype(_impl_.tags_){from._impl_.tags_}
+      decltype(_impl_.tags_){from._impl_.tags_}
     , decltype(_impl_.media_){from._impl_.media_}
     , decltype(_impl_.collaborators_){from._impl_.collaborators_}
     , decltype(_impl_.title_){}
-    , decltype(_impl_.description_){}
     , decltype(_impl_.cover_media_id_){}
+    , decltype(_impl_.content_){}
     , decltype(_impl_.visibility_){}
     , decltype(_impl_.status_){}
     , /*decltype(_impl_._cached_size_)*/{}};
@@ -3498,20 +3002,20 @@ ProjectInput::ProjectInput(const ProjectInput& from)
     _this->_impl_.title_.Set(from._internal_title(), 
       _this->GetArenaForAllocation());
   }
-  _impl_.description_.InitDefault();
-  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-    _impl_.description_.Set("", GetArenaForAllocation());
-  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  if (!from._internal_description().empty()) {
-    _this->_impl_.description_.Set(from._internal_description(), 
-      _this->GetArenaForAllocation());
-  }
   _impl_.cover_media_id_.InitDefault();
   #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
     _impl_.cover_media_id_.Set("", GetArenaForAllocation());
   #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
   if (!from._internal_cover_media_id().empty()) {
     _this->_impl_.cover_media_id_.Set(from._internal_cover_media_id(), 
+      _this->GetArenaForAllocation());
+  }
+  _impl_.content_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+    _impl_.content_.Set("", GetArenaForAllocation());
+  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (!from._internal_content().empty()) {
+    _this->_impl_.content_.Set(from._internal_content(), 
       _this->GetArenaForAllocation());
   }
   ::memcpy(&_impl_.visibility_, &from._impl_.visibility_,
@@ -3525,14 +3029,12 @@ inline void ProjectInput::SharedCtor(
   (void)arena;
   (void)is_message_owned;
   new (&_impl_) Impl_{
-      decltype(_impl_.tools_){arena}
-    , decltype(_impl_.disciplines_){arena}
-    , decltype(_impl_.tags_){arena}
+      decltype(_impl_.tags_){arena}
     , decltype(_impl_.media_){arena}
     , decltype(_impl_.collaborators_){arena}
     , decltype(_impl_.title_){}
-    , decltype(_impl_.description_){}
     , decltype(_impl_.cover_media_id_){}
+    , decltype(_impl_.content_){}
     , decltype(_impl_.visibility_){0}
     , decltype(_impl_.status_){0}
     , /*decltype(_impl_._cached_size_)*/{}
@@ -3541,13 +3043,13 @@ inline void ProjectInput::SharedCtor(
   #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
     _impl_.title_.Set("", GetArenaForAllocation());
   #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  _impl_.description_.InitDefault();
-  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-    _impl_.description_.Set("", GetArenaForAllocation());
-  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
   _impl_.cover_media_id_.InitDefault();
   #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
     _impl_.cover_media_id_.Set("", GetArenaForAllocation());
+  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  _impl_.content_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+    _impl_.content_.Set("", GetArenaForAllocation());
   #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
 }
 
@@ -3562,14 +3064,12 @@ ProjectInput::~ProjectInput() {
 
 inline void ProjectInput::SharedDtor() {
   GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
-  _impl_.tools_.~RepeatedPtrField();
-  _impl_.disciplines_.~RepeatedPtrField();
   _impl_.tags_.~RepeatedPtrField();
   _impl_.media_.~RepeatedPtrField();
   _impl_.collaborators_.~RepeatedPtrField();
   _impl_.title_.Destroy();
-  _impl_.description_.Destroy();
   _impl_.cover_media_id_.Destroy();
+  _impl_.content_.Destroy();
 }
 
 void ProjectInput::SetCachedSize(int size) const {
@@ -3582,14 +3082,12 @@ void ProjectInput::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  _impl_.tools_.Clear();
-  _impl_.disciplines_.Clear();
   _impl_.tags_.Clear();
   _impl_.media_.Clear();
   _impl_.collaborators_.Clear();
   _impl_.title_.ClearToEmpty();
-  _impl_.description_.ClearToEmpty();
   _impl_.cover_media_id_.ClearToEmpty();
+  _impl_.content_.ClearToEmpty();
   ::memset(&_impl_.visibility_, 0, static_cast<size_t>(
       reinterpret_cast<char*>(&_impl_.status_) -
       reinterpret_cast<char*>(&_impl_.visibility_)) + sizeof(_impl_.status_));
@@ -3612,49 +3110,9 @@ const char* ProjectInput::_InternalParse(const char* ptr, ::_pbi::ParseContext* 
         } else
           goto handle_unusual;
         continue;
-      // string description = 2;
+      // repeated string tags = 2;
       case 2:
         if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 18)) {
-          auto str = _internal_mutable_description();
-          ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
-          CHK_(ptr);
-          CHK_(::_pbi::VerifyUTF8(str, "priemman.v1.ProjectInput.description"));
-        } else
-          goto handle_unusual;
-        continue;
-      // repeated string tools = 3;
-      case 3:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 26)) {
-          ptr -= 1;
-          do {
-            ptr += 1;
-            auto str = _internal_add_tools();
-            ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
-            CHK_(ptr);
-            CHK_(::_pbi::VerifyUTF8(str, "priemman.v1.ProjectInput.tools"));
-            if (!ctx->DataAvailable(ptr)) break;
-          } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<26>(ptr));
-        } else
-          goto handle_unusual;
-        continue;
-      // repeated string disciplines = 4;
-      case 4:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 34)) {
-          ptr -= 1;
-          do {
-            ptr += 1;
-            auto str = _internal_add_disciplines();
-            ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
-            CHK_(ptr);
-            CHK_(::_pbi::VerifyUTF8(str, "priemman.v1.ProjectInput.disciplines"));
-            if (!ctx->DataAvailable(ptr)) break;
-          } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<34>(ptr));
-        } else
-          goto handle_unusual;
-        continue;
-      // repeated string tags = 5;
-      case 5:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 42)) {
           ptr -= 1;
           do {
             ptr += 1;
@@ -3663,61 +3121,71 @@ const char* ProjectInput::_InternalParse(const char* ptr, ::_pbi::ParseContext* 
             CHK_(ptr);
             CHK_(::_pbi::VerifyUTF8(str, "priemman.v1.ProjectInput.tags"));
             if (!ctx->DataAvailable(ptr)) break;
-          } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<42>(ptr));
+          } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<18>(ptr));
         } else
           goto handle_unusual;
         continue;
-      // repeated .priemman.v1.Media media = 6;
-      case 6:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 50)) {
+      // repeated .priemman.v1.Media media = 3;
+      case 3:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 26)) {
           ptr -= 1;
           do {
             ptr += 1;
             ptr = ctx->ParseMessage(_internal_add_media(), ptr);
             CHK_(ptr);
             if (!ctx->DataAvailable(ptr)) break;
-          } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<50>(ptr));
+          } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<26>(ptr));
         } else
           goto handle_unusual;
         continue;
-      // repeated .priemman.v1.Collaborator collaborators = 7;
-      case 7:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 58)) {
+      // repeated .priemman.v1.Collaborator collaborators = 4;
+      case 4:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 34)) {
           ptr -= 1;
           do {
             ptr += 1;
             ptr = ctx->ParseMessage(_internal_add_collaborators(), ptr);
             CHK_(ptr);
             if (!ctx->DataAvailable(ptr)) break;
-          } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<58>(ptr));
+          } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<34>(ptr));
         } else
           goto handle_unusual;
         continue;
-      // .priemman.v1.ProjectVisibility visibility = 8;
-      case 8:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 64)) {
+      // .priemman.v1.ProjectVisibility visibility = 5;
+      case 5:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 40)) {
           uint64_t val = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
           CHK_(ptr);
           _internal_set_visibility(static_cast<::priemman::v1::ProjectVisibility>(val));
         } else
           goto handle_unusual;
         continue;
-      // .priemman.v1.ProjectStatus status = 9;
-      case 9:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 72)) {
+      // .priemman.v1.ProjectStatus status = 6;
+      case 6:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 48)) {
           uint64_t val = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
           CHK_(ptr);
           _internal_set_status(static_cast<::priemman::v1::ProjectStatus>(val));
         } else
           goto handle_unusual;
         continue;
-      // string cover_media_id = 10;
-      case 10:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 82)) {
+      // string cover_media_id = 7;
+      case 7:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 58)) {
           auto str = _internal_mutable_cover_media_id();
           ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
           CHK_(ptr);
           CHK_(::_pbi::VerifyUTF8(str, "priemman.v1.ProjectInput.cover_media_id"));
+        } else
+          goto handle_unusual;
+        continue;
+      // string content = 8;
+      case 8:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 66)) {
+          auto str = _internal_mutable_content();
+          ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
+          CHK_(ptr);
+          CHK_(::_pbi::VerifyUTF8(str, "priemman.v1.ProjectInput.content"));
         } else
           goto handle_unusual;
         continue;
@@ -3760,84 +3228,64 @@ uint8_t* ProjectInput::_InternalSerialize(
         1, this->_internal_title(), target);
   }
 
-  // string description = 2;
-  if (!this->_internal_description().empty()) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
-      this->_internal_description().data(), static_cast<int>(this->_internal_description().length()),
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
-      "priemman.v1.ProjectInput.description");
-    target = stream->WriteStringMaybeAliased(
-        2, this->_internal_description(), target);
-  }
-
-  // repeated string tools = 3;
-  for (int i = 0, n = this->_internal_tools_size(); i < n; i++) {
-    const auto& s = this->_internal_tools(i);
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
-      s.data(), static_cast<int>(s.length()),
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
-      "priemman.v1.ProjectInput.tools");
-    target = stream->WriteString(3, s, target);
-  }
-
-  // repeated string disciplines = 4;
-  for (int i = 0, n = this->_internal_disciplines_size(); i < n; i++) {
-    const auto& s = this->_internal_disciplines(i);
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
-      s.data(), static_cast<int>(s.length()),
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
-      "priemman.v1.ProjectInput.disciplines");
-    target = stream->WriteString(4, s, target);
-  }
-
-  // repeated string tags = 5;
+  // repeated string tags = 2;
   for (int i = 0, n = this->_internal_tags_size(); i < n; i++) {
     const auto& s = this->_internal_tags(i);
     ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
       s.data(), static_cast<int>(s.length()),
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
       "priemman.v1.ProjectInput.tags");
-    target = stream->WriteString(5, s, target);
+    target = stream->WriteString(2, s, target);
   }
 
-  // repeated .priemman.v1.Media media = 6;
+  // repeated .priemman.v1.Media media = 3;
   for (unsigned i = 0,
       n = static_cast<unsigned>(this->_internal_media_size()); i < n; i++) {
     const auto& repfield = this->_internal_media(i);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-        InternalWriteMessage(6, repfield, repfield.GetCachedSize(), target, stream);
+        InternalWriteMessage(3, repfield, repfield.GetCachedSize(), target, stream);
   }
 
-  // repeated .priemman.v1.Collaborator collaborators = 7;
+  // repeated .priemman.v1.Collaborator collaborators = 4;
   for (unsigned i = 0,
       n = static_cast<unsigned>(this->_internal_collaborators_size()); i < n; i++) {
     const auto& repfield = this->_internal_collaborators(i);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-        InternalWriteMessage(7, repfield, repfield.GetCachedSize(), target, stream);
+        InternalWriteMessage(4, repfield, repfield.GetCachedSize(), target, stream);
   }
 
-  // .priemman.v1.ProjectVisibility visibility = 8;
+  // .priemman.v1.ProjectVisibility visibility = 5;
   if (this->_internal_visibility() != 0) {
     target = stream->EnsureSpace(target);
     target = ::_pbi::WireFormatLite::WriteEnumToArray(
-      8, this->_internal_visibility(), target);
+      5, this->_internal_visibility(), target);
   }
 
-  // .priemman.v1.ProjectStatus status = 9;
+  // .priemman.v1.ProjectStatus status = 6;
   if (this->_internal_status() != 0) {
     target = stream->EnsureSpace(target);
     target = ::_pbi::WireFormatLite::WriteEnumToArray(
-      9, this->_internal_status(), target);
+      6, this->_internal_status(), target);
   }
 
-  // string cover_media_id = 10;
+  // string cover_media_id = 7;
   if (!this->_internal_cover_media_id().empty()) {
     ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
       this->_internal_cover_media_id().data(), static_cast<int>(this->_internal_cover_media_id().length()),
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
       "priemman.v1.ProjectInput.cover_media_id");
     target = stream->WriteStringMaybeAliased(
-        10, this->_internal_cover_media_id(), target);
+        7, this->_internal_cover_media_id(), target);
+  }
+
+  // string content = 8;
+  if (!this->_internal_content().empty()) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+      this->_internal_content().data(), static_cast<int>(this->_internal_content().length()),
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+      "priemman.v1.ProjectInput.content");
+    target = stream->WriteStringMaybeAliased(
+        8, this->_internal_content(), target);
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
@@ -3856,23 +3304,7 @@ size_t ProjectInput::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // repeated string tools = 3;
-  total_size += 1 *
-      ::PROTOBUF_NAMESPACE_ID::internal::FromIntSize(_impl_.tools_.size());
-  for (int i = 0, n = _impl_.tools_.size(); i < n; i++) {
-    total_size += ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
-      _impl_.tools_.Get(i));
-  }
-
-  // repeated string disciplines = 4;
-  total_size += 1 *
-      ::PROTOBUF_NAMESPACE_ID::internal::FromIntSize(_impl_.disciplines_.size());
-  for (int i = 0, n = _impl_.disciplines_.size(); i < n; i++) {
-    total_size += ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
-      _impl_.disciplines_.Get(i));
-  }
-
-  // repeated string tags = 5;
+  // repeated string tags = 2;
   total_size += 1 *
       ::PROTOBUF_NAMESPACE_ID::internal::FromIntSize(_impl_.tags_.size());
   for (int i = 0, n = _impl_.tags_.size(); i < n; i++) {
@@ -3880,14 +3312,14 @@ size_t ProjectInput::ByteSizeLong() const {
       _impl_.tags_.Get(i));
   }
 
-  // repeated .priemman.v1.Media media = 6;
+  // repeated .priemman.v1.Media media = 3;
   total_size += 1UL * this->_internal_media_size();
   for (const auto& msg : this->_impl_.media_) {
     total_size +=
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(msg);
   }
 
-  // repeated .priemman.v1.Collaborator collaborators = 7;
+  // repeated .priemman.v1.Collaborator collaborators = 4;
   total_size += 1UL * this->_internal_collaborators_size();
   for (const auto& msg : this->_impl_.collaborators_) {
     total_size +=
@@ -3901,27 +3333,27 @@ size_t ProjectInput::ByteSizeLong() const {
         this->_internal_title());
   }
 
-  // string description = 2;
-  if (!this->_internal_description().empty()) {
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
-        this->_internal_description());
-  }
-
-  // string cover_media_id = 10;
+  // string cover_media_id = 7;
   if (!this->_internal_cover_media_id().empty()) {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
         this->_internal_cover_media_id());
   }
 
-  // .priemman.v1.ProjectVisibility visibility = 8;
+  // string content = 8;
+  if (!this->_internal_content().empty()) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+        this->_internal_content());
+  }
+
+  // .priemman.v1.ProjectVisibility visibility = 5;
   if (this->_internal_visibility() != 0) {
     total_size += 1 +
       ::_pbi::WireFormatLite::EnumSize(this->_internal_visibility());
   }
 
-  // .priemman.v1.ProjectStatus status = 9;
+  // .priemman.v1.ProjectStatus status = 6;
   if (this->_internal_status() != 0) {
     total_size += 1 +
       ::_pbi::WireFormatLite::EnumSize(this->_internal_status());
@@ -3945,19 +3377,17 @@ void ProjectInput::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::P
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  _this->_impl_.tools_.MergeFrom(from._impl_.tools_);
-  _this->_impl_.disciplines_.MergeFrom(from._impl_.disciplines_);
   _this->_impl_.tags_.MergeFrom(from._impl_.tags_);
   _this->_impl_.media_.MergeFrom(from._impl_.media_);
   _this->_impl_.collaborators_.MergeFrom(from._impl_.collaborators_);
   if (!from._internal_title().empty()) {
     _this->_internal_set_title(from._internal_title());
   }
-  if (!from._internal_description().empty()) {
-    _this->_internal_set_description(from._internal_description());
-  }
   if (!from._internal_cover_media_id().empty()) {
     _this->_internal_set_cover_media_id(from._internal_cover_media_id());
+  }
+  if (!from._internal_content().empty()) {
+    _this->_internal_set_content(from._internal_content());
   }
   if (from._internal_visibility() != 0) {
     _this->_internal_set_visibility(from._internal_visibility());
@@ -3984,8 +3414,6 @@ void ProjectInput::InternalSwap(ProjectInput* other) {
   auto* lhs_arena = GetArenaForAllocation();
   auto* rhs_arena = other->GetArenaForAllocation();
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
-  _impl_.tools_.InternalSwap(&other->_impl_.tools_);
-  _impl_.disciplines_.InternalSwap(&other->_impl_.disciplines_);
   _impl_.tags_.InternalSwap(&other->_impl_.tags_);
   _impl_.media_.InternalSwap(&other->_impl_.media_);
   _impl_.collaborators_.InternalSwap(&other->_impl_.collaborators_);
@@ -3994,12 +3422,12 @@ void ProjectInput::InternalSwap(ProjectInput* other) {
       &other->_impl_.title_, rhs_arena
   );
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
-      &_impl_.description_, lhs_arena,
-      &other->_impl_.description_, rhs_arena
-  );
-  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
       &_impl_.cover_media_id_, lhs_arena,
       &other->_impl_.cover_media_id_, rhs_arena
+  );
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
+      &_impl_.content_, lhs_arena,
+      &other->_impl_.content_, rhs_arena
   );
   ::PROTOBUF_NAMESPACE_ID::internal::memswap<
       PROTOBUF_FIELD_OFFSET(ProjectInput, _impl_.status_)
@@ -4012,7 +3440,7 @@ void ProjectInput::InternalSwap(ProjectInput* other) {
 ::PROTOBUF_NAMESPACE_ID::Metadata ProjectInput::GetMetadata() const {
   return ::_pbi::AssignDescriptors(
       &descriptor_table_project_2eproto_getter, &descriptor_table_project_2eproto_once,
-      file_level_metadata_project_2eproto[7]);
+      file_level_metadata_project_2eproto[6]);
 }
 
 // ===================================================================
@@ -4205,7 +3633,7 @@ void CreateProjectRequest::InternalSwap(CreateProjectRequest* other) {
 ::PROTOBUF_NAMESPACE_ID::Metadata CreateProjectRequest::GetMetadata() const {
   return ::_pbi::AssignDescriptors(
       &descriptor_table_project_2eproto_getter, &descriptor_table_project_2eproto_once,
-      file_level_metadata_project_2eproto[8]);
+      file_level_metadata_project_2eproto[7]);
 }
 
 // ===================================================================
@@ -4450,7 +3878,7 @@ void UpdateProjectRequest::InternalSwap(UpdateProjectRequest* other) {
 ::PROTOBUF_NAMESPACE_ID::Metadata UpdateProjectRequest::GetMetadata() const {
   return ::_pbi::AssignDescriptors(
       &descriptor_table_project_2eproto_getter, &descriptor_table_project_2eproto_once,
-      file_level_metadata_project_2eproto[9]);
+      file_level_metadata_project_2eproto[8]);
 }
 
 // ===================================================================
@@ -4643,7 +4071,7 @@ void ProjectResponse::InternalSwap(ProjectResponse* other) {
 ::PROTOBUF_NAMESPACE_ID::Metadata ProjectResponse::GetMetadata() const {
   return ::_pbi::AssignDescriptors(
       &descriptor_table_project_2eproto_getter, &descriptor_table_project_2eproto_once,
-      file_level_metadata_project_2eproto[10]);
+      file_level_metadata_project_2eproto[9]);
 }
 
 // ===================================================================
@@ -4963,7 +4391,7 @@ void CollectionInput::InternalSwap(CollectionInput* other) {
 ::PROTOBUF_NAMESPACE_ID::Metadata CollectionInput::GetMetadata() const {
   return ::_pbi::AssignDescriptors(
       &descriptor_table_project_2eproto_getter, &descriptor_table_project_2eproto_once,
-      file_level_metadata_project_2eproto[11]);
+      file_level_metadata_project_2eproto[10]);
 }
 
 // ===================================================================
@@ -5156,7 +4584,7 @@ void CreateCollectionRequest::InternalSwap(CreateCollectionRequest* other) {
 ::PROTOBUF_NAMESPACE_ID::Metadata CreateCollectionRequest::GetMetadata() const {
   return ::_pbi::AssignDescriptors(
       &descriptor_table_project_2eproto_getter, &descriptor_table_project_2eproto_once,
-      file_level_metadata_project_2eproto[12]);
+      file_level_metadata_project_2eproto[11]);
 }
 
 // ===================================================================
@@ -5401,7 +4829,7 @@ void UpdateCollectionRequest::InternalSwap(UpdateCollectionRequest* other) {
 ::PROTOBUF_NAMESPACE_ID::Metadata UpdateCollectionRequest::GetMetadata() const {
   return ::_pbi::AssignDescriptors(
       &descriptor_table_project_2eproto_getter, &descriptor_table_project_2eproto_once,
-      file_level_metadata_project_2eproto[13]);
+      file_level_metadata_project_2eproto[12]);
 }
 
 // ===================================================================
@@ -5594,7 +5022,7 @@ void CollectionResponse::InternalSwap(CollectionResponse* other) {
 ::PROTOBUF_NAMESPACE_ID::Metadata CollectionResponse::GetMetadata() const {
   return ::_pbi::AssignDescriptors(
       &descriptor_table_project_2eproto_getter, &descriptor_table_project_2eproto_once,
-      file_level_metadata_project_2eproto[14]);
+      file_level_metadata_project_2eproto[13]);
 }
 
 // ===================================================================
@@ -5779,7 +5207,7 @@ void ListCollectionsResponse::InternalSwap(ListCollectionsResponse* other) {
 ::PROTOBUF_NAMESPACE_ID::Metadata ListCollectionsResponse::GetMetadata() const {
   return ::_pbi::AssignDescriptors(
       &descriptor_table_project_2eproto_getter, &descriptor_table_project_2eproto_once,
-      file_level_metadata_project_2eproto[15]);
+      file_level_metadata_project_2eproto[14]);
 }
 
 // ===================================================================
@@ -5978,17 +5406,13 @@ void DeleteCollectionRequest::InternalSwap(DeleteCollectionRequest* other) {
 ::PROTOBUF_NAMESPACE_ID::Metadata DeleteCollectionRequest::GetMetadata() const {
   return ::_pbi::AssignDescriptors(
       &descriptor_table_project_2eproto_getter, &descriptor_table_project_2eproto_once,
-      file_level_metadata_project_2eproto[16]);
+      file_level_metadata_project_2eproto[15]);
 }
 
 // @@protoc_insertion_point(namespace_scope)
 }  // namespace v1
 }  // namespace priemman
 PROTOBUF_NAMESPACE_OPEN
-template<> PROTOBUF_NOINLINE ::priemman::v1::Media*
-Arena::CreateMaybeMessage< ::priemman::v1::Media >(Arena* arena) {
-  return Arena::CreateMessageInternal< ::priemman::v1::Media >(arena);
-}
 template<> PROTOBUF_NOINLINE ::priemman::v1::Collaborator*
 Arena::CreateMaybeMessage< ::priemman::v1::Collaborator >(Arena* arena) {
   return Arena::CreateMessageInternal< ::priemman::v1::Collaborator >(arena);
