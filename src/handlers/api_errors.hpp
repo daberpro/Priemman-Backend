@@ -37,7 +37,7 @@ inline const ErrorMessages& Messages() {
         {"ALREADY_CREATOR", "You are already a creator"},
         {"UPGRADE_ALREADY_REQUESTED", "Upgrade request already submitted"},
         {"REVIEW_FAILED", "Review action failed"},
-        {"CONFIRM_FAILED", "Confirm action failed"},
+        {"CONFIRM_FAILED", "Confirm action failed"}
     };
     return kMessages;
 }

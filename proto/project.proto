@@ -79,6 +79,7 @@ message ListProjectsResponse {
 }
 
 // ---- Input & Request/Response CRUD ----
+
 message ProjectInput {
     string title = 1;
     repeated string tags = 2;

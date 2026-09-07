@@ -19,6 +19,22 @@ enum UserRole {
   USER_ROLE_ADMIN = 3;
 }
 
+message ActionInput {
+    string project_id = 1;
+}
+
+message ProjectSummaryRow {
+    string project_id = 1;
+    string title = 2;
+    optional string thumbnail = 3;
+    string first_name = 4;
+    string last_name = 5;
+}
+
+message ListProjectSummaryRow {
+    repeated ProjectSummaryRow projects = 1;
+}
+
 message WorkExperience {
   ObjectId id = 1;
   string title = 2;

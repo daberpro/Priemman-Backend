@@ -147,4 +147,38 @@ inline void FillUpgradeRequestEntry(
     SqlToTimestamp(r.requested_at, out->mutable_requested_at());
 }
 
+inline priemman::v1::ActionInput ToProto(const database::ActionInput& r){
+    priemman::v1::ActionInput action;
+    action.set_project_id(r.project_id);
+    return action;
+}
+
+inline database::ActionInput ToRow(const priemman::v1::ActionInput& r){
+    return {
+        .project_id = r.project_id()
+    };
+}
+
+inline priemman::v1::ProjectSummaryRow ToProto(const database::ProjectSummaryRow& r){
+    priemman::v1::ProjectSummaryRow l;
+    l.set_project_id(r.project_id);
+    l.set_title(r.title);
+    if(r.thumbnail.has_value()){
+        l.set_thumbnail(r.thumbnail.value());
+    }
+    l.set_first_name(r.first_name);
+    l.set_last_name(r.last_name);
+    return l;
+}
+
+inline database::ProjectSummaryRow ToRow(const priemman::v1::ProjectSummaryRow& r){
+    return {
+        .project_id = r.project_id(),
+        .title = r.title(),
+        .thumbnail = r.has_thumbnail() ? std::make_optional<std::string>(r.thumbnail()) : std::nullopt,
+        .first_name = r.first_name(),
+        .last_name = r.last_name()
+    };
+}
+
 }  // namespace priemman::handlers::mapper

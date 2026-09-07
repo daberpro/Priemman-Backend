@@ -4,6 +4,7 @@
 #include <string>
 #include <vector>
 #include <userver/storages/mysql/cluster.hpp>
+#include <src/database/project_repository.hpp>
 
 namespace priemman::database {
 
@@ -62,6 +63,17 @@ struct BasicInfoPatch {
     std::string avatar_url;
 };
 
+struct ActionInput {
+    std::string project_id;
+};
+
+struct ProjectSummaryRow {
+    std::string project_id;
+    std::string title;
+    std::optional<std::string> thumbnail; // std::optional karena di tabel dideklarasikan NULL
+    std::string first_name;
+    std::string last_name;
+};
 
 class UserRepository {
 public:
@@ -80,6 +92,28 @@ public:
     ) const;
     std::int64_t CountUsers(const std::string& role_filter) const;
     bool SetRole(const std::string& user_id, const std::string& role) const;
+
+
+    bool ActionLike(const std::string& user_id,const std::string& project_id) const;
+    bool ActionUnLike(const std::string& user_id,const std::string& project_id) const;
+
+    bool ActionView(const std::string& user_id, const std::string& project_id) const;
+
+    bool ActionSave(const std::string& user_id, const std::string& project_id) const;
+    bool ActionUnSave(const std::string& user_id,const std::string& project_id) const;
+
+    std::vector<ProjectSummaryRow> ListLikedProjects(
+        const std::string& user_id,
+        std::int64_t limit,
+        std::int64_t offset
+    ) const;
+
+    std::vector<ProjectSummaryRow> ListSavedProjects(
+        const std::string& user_id,
+        std::int64_t limit,
+        std::int64_t offset
+    ) const;
+
 private:
     std::shared_ptr<userver::storages::mysql::Cluster> _mysql_cluster{nullptr};
 };
