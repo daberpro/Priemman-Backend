@@ -24,6 +24,7 @@
 #include <src/database/collection_repository.hpp>
 #include <src/database/media_repository.hpp>
 #include <src/handlers/api_errors.hpp>
+#include <src/handlers/utils.hpp>
 
 namespace priemman::handlers {
 

@@ -36,22 +36,23 @@ inline priemman::v1::ProjectStatus StringToStatus(const std::string& s) {
 }
 
 inline priemman::v1::Project ToProto(
-    const database::ProjectRow& row,
+    const database::ProjectRowPopulated& row,
     const std::vector<std::string>& tags,
     const std::vector<database::ProjectMediaRow>& media,
     const std::vector<database::ProjectCollaboratorRow>& collabs
 ) {
     priemman::v1::Project p;
-    p.mutable_id()->set_value(row.id);
-    p.mutable_owner_id()->set_value(row.owner_id);
-    p.set_title(row.title);
-    p.set_slug(row.slug);
-    p.set_cover_media_id(row.cover_media_id.value_or(""));
-    p.set_visibility(StringToVisibility(row.visibility));
-    p.set_status(StringToStatus(row.status));
-    p.mutable_metrics()->set_views(row.views);
-    p.mutable_metrics()->set_likes(row.likes);
-    p.mutable_metrics()->set_saves(row.saves);
+    p.mutable_id()->set_value(row.project.id);
+    p.mutable_owner_id()->set_value(row.project.owner_id);
+    p.set_title(row.project.title);
+    p.set_slug(row.project.slug);
+    p.set_content(row.project.content);
+    p.set_cover_media_id(row.project.cover_media_id.value_or(""));
+    p.set_visibility(StringToVisibility(row.project.visibility));
+    p.set_status(StringToStatus(row.project.status));
+    p.mutable_metrics()->set_views(row.project.views);
+    p.mutable_metrics()->set_likes(row.project.likes);
+    p.mutable_metrics()->set_saves(row.project.saves);
 
     for (const auto& t : tags) p.add_tags(t);
 
@@ -63,7 +64,7 @@ inline priemman::v1::Project ToProto(
             ? priemman::v1::MEDIA_TYPE_VIDEO
             : priemman::v1::MEDIA_TYPE_IMAGE);
         pm->set_order(static_cast<std::int32_t>(m.sort_order));
-        pm->set_public_id(m.cloudinary_public_id);   // tambahkan setelah set_order
+        pm->set_public_id(m.cloudinary_public_id);
     }
 
     for (const auto& c : collabs) {
@@ -72,9 +73,14 @@ inline priemman::v1::Project ToProto(
         pc->set_role(c.role);
     }
 
-    SqlToTimestamp(row.created_at, p.mutable_created_at());
-    SqlToTimestamp(row.updated_at, p.mutable_updated_at());
-    SqlToTimestamp(row.published_at, p.mutable_published_at());
+    SqlToTimestamp(row.project.created_at, p.mutable_created_at());
+    SqlToTimestamp(row.project.updated_at, p.mutable_updated_at());
+    SqlToTimestamp(row.project.published_at, p.mutable_published_at());
+    p.mutable_author()->mutable_id()->set_value(row.author.id);
+    p.mutable_author()->set_first_name(row.author.first_name);
+    p.mutable_author()->set_first_name(row.author.last_name);
+    p.mutable_author()->set_avatar_url(row.author.avatar_url);
+
     return p;
 }
 

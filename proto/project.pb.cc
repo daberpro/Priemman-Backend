@@ -66,6 +66,7 @@ PROTOBUF_CONSTEXPR Project::Project(
   , /*decltype(_impl_.created_at_)*/nullptr
   , /*decltype(_impl_.updated_at_)*/nullptr
   , /*decltype(_impl_.published_at_)*/nullptr
+  , /*decltype(_impl_.author_)*/nullptr
   , /*decltype(_impl_.visibility_)*/0
   , /*decltype(_impl_.status_)*/0
   , /*decltype(_impl_._cached_size_)*/{}} {}
@@ -315,6 +316,7 @@ const uint32_t TableStruct_project_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE(
   PROTOBUF_FIELD_OFFSET(::priemman::v1::Project, _impl_.created_at_),
   PROTOBUF_FIELD_OFFSET(::priemman::v1::Project, _impl_.updated_at_),
   PROTOBUF_FIELD_OFFSET(::priemman::v1::Project, _impl_.published_at_),
+  PROTOBUF_FIELD_OFFSET(::priemman::v1::Project, _impl_.author_),
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::priemman::v1::Collection, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -434,19 +436,19 @@ static const ::_pbi::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protode
   { 0, -1, -1, sizeof(::priemman::v1::Collaborator)},
   { 8, -1, -1, sizeof(::priemman::v1::ProjectMetrics)},
   { 17, -1, -1, sizeof(::priemman::v1::Project)},
-  { 38, -1, -1, sizeof(::priemman::v1::Collection)},
-  { 52, -1, -1, sizeof(::priemman::v1::ListProjectsRequest)},
-  { 62, -1, -1, sizeof(::priemman::v1::ListProjectsResponse)},
-  { 70, -1, -1, sizeof(::priemman::v1::ProjectInput)},
-  { 84, -1, -1, sizeof(::priemman::v1::CreateProjectRequest)},
-  { 91, -1, -1, sizeof(::priemman::v1::UpdateProjectRequest)},
-  { 99, -1, -1, sizeof(::priemman::v1::ProjectResponse)},
-  { 106, -1, -1, sizeof(::priemman::v1::CollectionInput)},
-  { 116, -1, -1, sizeof(::priemman::v1::CreateCollectionRequest)},
-  { 123, -1, -1, sizeof(::priemman::v1::UpdateCollectionRequest)},
-  { 131, -1, -1, sizeof(::priemman::v1::CollectionResponse)},
-  { 138, -1, -1, sizeof(::priemman::v1::ListCollectionsResponse)},
-  { 145, -1, -1, sizeof(::priemman::v1::DeleteCollectionRequest)},
+  { 39, -1, -1, sizeof(::priemman::v1::Collection)},
+  { 53, -1, -1, sizeof(::priemman::v1::ListProjectsRequest)},
+  { 63, -1, -1, sizeof(::priemman::v1::ListProjectsResponse)},
+  { 71, -1, -1, sizeof(::priemman::v1::ProjectInput)},
+  { 85, -1, -1, sizeof(::priemman::v1::CreateProjectRequest)},
+  { 92, -1, -1, sizeof(::priemman::v1::UpdateProjectRequest)},
+  { 100, -1, -1, sizeof(::priemman::v1::ProjectResponse)},
+  { 107, -1, -1, sizeof(::priemman::v1::CollectionInput)},
+  { 117, -1, -1, sizeof(::priemman::v1::CreateCollectionRequest)},
+  { 124, -1, -1, sizeof(::priemman::v1::UpdateCollectionRequest)},
+  { 132, -1, -1, sizeof(::priemman::v1::CollectionResponse)},
+  { 139, -1, -1, sizeof(::priemman::v1::ListCollectionsResponse)},
+  { 146, -1, -1, sizeof(::priemman::v1::DeleteCollectionRequest)},
 };
 
 static const ::_pb::Message* const file_default_instances[] = {
@@ -474,7 +476,7 @@ const char descriptor_table_protodef_project_2eproto[] PROTOBUF_SECTION_VARIABLE
   "mp.proto\"D\n\014Collaborator\022&\n\007user_id\030\001 \001("
   "\0132\025.priemman.v1.ObjectId\022\014\n\004role\030\002 \001(\t\"="
   "\n\016ProjectMetrics\022\r\n\005views\030\001 \001(\003\022\r\n\005likes"
-  "\030\002 \001(\003\022\r\n\005saves\030\003 \001(\003\"\236\004\n\007Project\022!\n\002id\030"
+  "\030\002 \001(\003\022\r\n\005saves\030\003 \001(\003\"\307\004\n\007Project\022!\n\002id\030"
   "\001 \001(\0132\025.priemman.v1.ObjectId\022\'\n\010owner_id"
   "\030\002 \001(\0132\025.priemman.v1.ObjectId\022\r\n\005title\030\003"
   " \001(\t\022\014\n\004slug\030\004 \001(\t\022\017\n\007content\030\005 \001(\t\022\014\n\004t"
@@ -488,57 +490,58 @@ const char descriptor_table_protodef_project_2eproto[] PROTOBUF_SECTION_VARIABLE
   "2\032.google.protobuf.Timestamp\022.\n\nupdated_"
   "at\030\016 \001(\0132\032.google.protobuf.Timestamp\0220\n\014"
   "published_at\030\017 \001(\0132\032.google.protobuf.Tim"
-  "estamp\"\277\002\n\nCollection\022!\n\002id\030\001 \001(\0132\025.prie"
-  "mman.v1.ObjectId\022\'\n\010owner_id\030\002 \001(\0132\025.pri"
-  "emman.v1.ObjectId\022\r\n\005title\030\003 \001(\t\022\023\n\013desc"
-  "ription\030\004 \001(\t\022*\n\013project_ids\030\005 \003(\0132\025.pri"
-  "emman.v1.ObjectId\0225\n\nvisibility\030\006 \001(\0162!."
-  "priemman.v1.CollectionVisibility\022.\n\ncrea"
-  "ted_at\030\007 \001(\0132\032.google.protobuf.Timestamp"
-  "\022.\n\nupdated_at\030\010 \001(\0132\032.google.protobuf.T"
-  "imestamp\"\230\001\n\023ListProjectsRequest\022\'\n\010owne"
-  "r_id\030\001 \001(\0132\025.priemman.v1.ObjectId\0221\n\rsta"
-  "tus_filter\030\002 \001(\0162\032.priemman.v1.ProjectSt"
-  "atus\022\021\n\tpage_size\030\003 \001(\005\022\022\n\npage_token\030\004 "
-  "\001(\t\"W\n\024ListProjectsResponse\022&\n\010projects\030"
-  "\001 \003(\0132\024.priemman.v1.Project\022\027\n\017next_page"
-  "_token\030\002 \001(\t\"\211\002\n\014ProjectInput\022\r\n\005title\030\001"
-  " \001(\t\022\014\n\004tags\030\002 \003(\t\022!\n\005media\030\003 \003(\0132\022.prie"
-  "mman.v1.Media\0220\n\rcollaborators\030\004 \003(\0132\031.p"
-  "riemman.v1.Collaborator\0222\n\nvisibility\030\005 "
-  "\001(\0162\036.priemman.v1.ProjectVisibility\022*\n\006s"
-  "tatus\030\006 \001(\0162\032.priemman.v1.ProjectStatus\022"
-  "\026\n\016cover_media_id\030\007 \001(\t\022\017\n\007content\030\010 \001(\t"
-  "\"@\n\024CreateProjectRequest\022(\n\005input\030\001 \001(\0132"
-  "\031.priemman.v1.ProjectInput\"c\n\024UpdateProj"
-  "ectRequest\022!\n\002id\030\001 \001(\0132\025.priemman.v1.Obj"
-  "ectId\022(\n\005input\030\002 \001(\0132\031.priemman.v1.Proje"
-  "ctInput\"8\n\017ProjectResponse\022%\n\007project\030\001 "
-  "\001(\0132\024.priemman.v1.Project\"\230\001\n\017Collection"
-  "Input\022\r\n\005title\030\001 \001(\t\022\023\n\013description\030\002 \001("
-  "\t\0225\n\nvisibility\030\003 \001(\0162!.priemman.v1.Coll"
-  "ectionVisibility\022*\n\013project_ids\030\004 \003(\0132\025."
-  "priemman.v1.ObjectId\"F\n\027CreateCollection"
-  "Request\022+\n\005input\030\001 \001(\0132\034.priemman.v1.Col"
-  "lectionInput\"i\n\027UpdateCollectionRequest\022"
-  "!\n\002id\030\001 \001(\0132\025.priemman.v1.ObjectId\022+\n\005in"
-  "put\030\002 \001(\0132\034.priemman.v1.CollectionInput\""
-  "A\n\022CollectionResponse\022+\n\ncollection\030\001 \001("
-  "\0132\027.priemman.v1.Collection\"G\n\027ListCollec"
-  "tionsResponse\022,\n\013collections\030\001 \003(\0132\027.pri"
-  "emman.v1.Collection\"<\n\027DeleteCollectionR"
-  "equest\022!\n\002id\030\001 \001(\0132\025.priemman.v1.ObjectI"
-  "d*\225\001\n\021ProjectVisibility\022\"\n\036PROJECT_VISIB"
-  "ILITY_UNSPECIFIED\020\000\022\035\n\031PROJECT_VISIBILIT"
-  "Y_PUBLIC\020\001\022\037\n\033PROJECT_VISIBILITY_UNLISTE"
-  "D\020\002\022\034\n\030PROJECT_VISIBILITY_DRAFT\020\003*\204\001\n\rPr"
-  "ojectStatus\022\036\n\032PROJECT_STATUS_UNSPECIFIE"
-  "D\020\000\022\030\n\024PROJECT_STATUS_DRAFT\020\001\022\034\n\030PROJECT"
-  "_STATUS_PUBLISHED\020\002\022\033\n\027PROJECT_STATUS_AR"
-  "CHIVED\020\003*\202\001\n\024CollectionVisibility\022%\n!COL"
-  "LECTION_VISIBILITY_UNSPECIFIED\020\000\022 \n\034COLL"
-  "ECTION_VISIBILITY_PUBLIC\020\001\022!\n\035COLLECTION"
-  "_VISIBILITY_PRIVATE\020\002b\006proto3"
+  "estamp\022\'\n\006author\030\020 \001(\0132\027.priemman.v1.Pub"
+  "licInfo\"\277\002\n\nCollection\022!\n\002id\030\001 \001(\0132\025.pri"
+  "emman.v1.ObjectId\022\'\n\010owner_id\030\002 \001(\0132\025.pr"
+  "iemman.v1.ObjectId\022\r\n\005title\030\003 \001(\t\022\023\n\013des"
+  "cription\030\004 \001(\t\022*\n\013project_ids\030\005 \003(\0132\025.pr"
+  "iemman.v1.ObjectId\0225\n\nvisibility\030\006 \001(\0162!"
+  ".priemman.v1.CollectionVisibility\022.\n\ncre"
+  "ated_at\030\007 \001(\0132\032.google.protobuf.Timestam"
+  "p\022.\n\nupdated_at\030\010 \001(\0132\032.google.protobuf."
+  "Timestamp\"\230\001\n\023ListProjectsRequest\022\'\n\010own"
+  "er_id\030\001 \001(\0132\025.priemman.v1.ObjectId\0221\n\rst"
+  "atus_filter\030\002 \001(\0162\032.priemman.v1.ProjectS"
+  "tatus\022\021\n\tpage_size\030\003 \001(\005\022\022\n\npage_token\030\004"
+  " \001(\t\"W\n\024ListProjectsResponse\022&\n\010projects"
+  "\030\001 \003(\0132\024.priemman.v1.Project\022\027\n\017next_pag"
+  "e_token\030\002 \001(\t\"\211\002\n\014ProjectInput\022\r\n\005title\030"
+  "\001 \001(\t\022\014\n\004tags\030\002 \003(\t\022!\n\005media\030\003 \003(\0132\022.pri"
+  "emman.v1.Media\0220\n\rcollaborators\030\004 \003(\0132\031."
+  "priemman.v1.Collaborator\0222\n\nvisibility\030\005"
+  " \001(\0162\036.priemman.v1.ProjectVisibility\022*\n\006"
+  "status\030\006 \001(\0162\032.priemman.v1.ProjectStatus"
+  "\022\026\n\016cover_media_id\030\007 \001(\t\022\017\n\007content\030\010 \001("
+  "\t\"@\n\024CreateProjectRequest\022(\n\005input\030\001 \001(\013"
+  "2\031.priemman.v1.ProjectInput\"c\n\024UpdatePro"
+  "jectRequest\022!\n\002id\030\001 \001(\0132\025.priemman.v1.Ob"
+  "jectId\022(\n\005input\030\002 \001(\0132\031.priemman.v1.Proj"
+  "ectInput\"8\n\017ProjectResponse\022%\n\007project\030\001"
+  " \001(\0132\024.priemman.v1.Project\"\230\001\n\017Collectio"
+  "nInput\022\r\n\005title\030\001 \001(\t\022\023\n\013description\030\002 \001"
+  "(\t\0225\n\nvisibility\030\003 \001(\0162!.priemman.v1.Col"
+  "lectionVisibility\022*\n\013project_ids\030\004 \003(\0132\025"
+  ".priemman.v1.ObjectId\"F\n\027CreateCollectio"
+  "nRequest\022+\n\005input\030\001 \001(\0132\034.priemman.v1.Co"
+  "llectionInput\"i\n\027UpdateCollectionRequest"
+  "\022!\n\002id\030\001 \001(\0132\025.priemman.v1.ObjectId\022+\n\005i"
+  "nput\030\002 \001(\0132\034.priemman.v1.CollectionInput"
+  "\"A\n\022CollectionResponse\022+\n\ncollection\030\001 \001"
+  "(\0132\027.priemman.v1.Collection\"G\n\027ListColle"
+  "ctionsResponse\022,\n\013collections\030\001 \003(\0132\027.pr"
+  "iemman.v1.Collection\"<\n\027DeleteCollection"
+  "Request\022!\n\002id\030\001 \001(\0132\025.priemman.v1.Object"
+  "Id*\225\001\n\021ProjectVisibility\022\"\n\036PROJECT_VISI"
+  "BILITY_UNSPECIFIED\020\000\022\035\n\031PROJECT_VISIBILI"
+  "TY_PUBLIC\020\001\022\037\n\033PROJECT_VISIBILITY_UNLIST"
+  "ED\020\002\022\034\n\030PROJECT_VISIBILITY_DRAFT\020\003*\204\001\n\rP"
+  "rojectStatus\022\036\n\032PROJECT_STATUS_UNSPECIFI"
+  "ED\020\000\022\030\n\024PROJECT_STATUS_DRAFT\020\001\022\034\n\030PROJEC"
+  "T_STATUS_PUBLISHED\020\002\022\033\n\027PROJECT_STATUS_A"
+  "RCHIVED\020\003*\202\001\n\024CollectionVisibility\022%\n!CO"
+  "LLECTION_VISIBILITY_UNSPECIFIED\020\000\022 \n\034COL"
+  "LECTION_VISIBILITY_PUBLIC\020\001\022!\n\035COLLECTIO"
+  "N_VISIBILITY_PRIVATE\020\002b\006proto3"
   ;
 static const ::_pbi::DescriptorTable* const descriptor_table_project_2eproto_deps[3] = {
   &::descriptor_table_common_2eproto,
@@ -547,7 +550,7 @@ static const ::_pbi::DescriptorTable* const descriptor_table_project_2eproto_dep
 };
 static ::_pbi::once_flag descriptor_table_project_2eproto_once;
 const ::_pbi::DescriptorTable descriptor_table_project_2eproto = {
-    false, false, 2789, descriptor_table_protodef_project_2eproto,
+    false, false, 2830, descriptor_table_protodef_project_2eproto,
     "project.proto",
     &descriptor_table_project_2eproto_once, descriptor_table_project_2eproto_deps, 3, 16,
     schemas, file_default_instances, TableStruct_project_2eproto::offsets,
@@ -1106,6 +1109,7 @@ class Project::_Internal {
   static const ::PROTOBUF_NAMESPACE_ID::Timestamp& created_at(const Project* msg);
   static const ::PROTOBUF_NAMESPACE_ID::Timestamp& updated_at(const Project* msg);
   static const ::PROTOBUF_NAMESPACE_ID::Timestamp& published_at(const Project* msg);
+  static const ::priemman::v1::PublicInfo& author(const Project* msg);
 };
 
 const ::priemman::v1::ObjectId&
@@ -1131,6 +1135,10 @@ Project::_Internal::updated_at(const Project* msg) {
 const ::PROTOBUF_NAMESPACE_ID::Timestamp&
 Project::_Internal::published_at(const Project* msg) {
   return *msg->_impl_.published_at_;
+}
+const ::priemman::v1::PublicInfo&
+Project::_Internal::author(const Project* msg) {
+  return *msg->_impl_.author_;
 }
 void Project::clear_id() {
   if (GetArenaForAllocation() == nullptr && _impl_.id_ != nullptr) {
@@ -1165,6 +1173,12 @@ void Project::clear_published_at() {
   }
   _impl_.published_at_ = nullptr;
 }
+void Project::clear_author() {
+  if (GetArenaForAllocation() == nullptr && _impl_.author_ != nullptr) {
+    delete _impl_.author_;
+  }
+  _impl_.author_ = nullptr;
+}
 Project::Project(::PROTOBUF_NAMESPACE_ID::Arena* arena,
                          bool is_message_owned)
   : ::PROTOBUF_NAMESPACE_ID::Message(arena, is_message_owned) {
@@ -1188,6 +1202,7 @@ Project::Project(const Project& from)
     , decltype(_impl_.created_at_){nullptr}
     , decltype(_impl_.updated_at_){nullptr}
     , decltype(_impl_.published_at_){nullptr}
+    , decltype(_impl_.author_){nullptr}
     , decltype(_impl_.visibility_){}
     , decltype(_impl_.status_){}
     , /*decltype(_impl_._cached_size_)*/{}};
@@ -1243,6 +1258,9 @@ Project::Project(const Project& from)
   if (from._internal_has_published_at()) {
     _this->_impl_.published_at_ = new ::PROTOBUF_NAMESPACE_ID::Timestamp(*from._impl_.published_at_);
   }
+  if (from._internal_has_author()) {
+    _this->_impl_.author_ = new ::priemman::v1::PublicInfo(*from._impl_.author_);
+  }
   ::memcpy(&_impl_.visibility_, &from._impl_.visibility_,
     static_cast<size_t>(reinterpret_cast<char*>(&_impl_.status_) -
     reinterpret_cast<char*>(&_impl_.visibility_)) + sizeof(_impl_.status_));
@@ -1267,6 +1285,7 @@ inline void Project::SharedCtor(
     , decltype(_impl_.created_at_){nullptr}
     , decltype(_impl_.updated_at_){nullptr}
     , decltype(_impl_.published_at_){nullptr}
+    , decltype(_impl_.author_){nullptr}
     , decltype(_impl_.visibility_){0}
     , decltype(_impl_.status_){0}
     , /*decltype(_impl_._cached_size_)*/{}
@@ -1313,6 +1332,7 @@ inline void Project::SharedDtor() {
   if (this != internal_default_instance()) delete _impl_.created_at_;
   if (this != internal_default_instance()) delete _impl_.updated_at_;
   if (this != internal_default_instance()) delete _impl_.published_at_;
+  if (this != internal_default_instance()) delete _impl_.author_;
 }
 
 void Project::SetCachedSize(int size) const {
@@ -1356,6 +1376,10 @@ void Project::Clear() {
     delete _impl_.published_at_;
   }
   _impl_.published_at_ = nullptr;
+  if (GetArenaForAllocation() == nullptr && _impl_.author_ != nullptr) {
+    delete _impl_.author_;
+  }
+  _impl_.author_ = nullptr;
   ::memset(&_impl_.visibility_, 0, static_cast<size_t>(
       reinterpret_cast<char*>(&_impl_.status_) -
       reinterpret_cast<char*>(&_impl_.visibility_)) + sizeof(_impl_.status_));
@@ -1515,6 +1539,14 @@ const char* Project::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) 
         } else
           goto handle_unusual;
         continue;
+      // .priemman.v1.PublicInfo author = 16;
+      case 16:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 130)) {
+          ptr = ctx->ParseMessage(_internal_mutable_author(), ptr);
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
       default:
         goto handle_unusual;
     }  // switch
@@ -1666,6 +1698,13 @@ uint8_t* Project::_InternalSerialize(
         _Internal::published_at(this).GetCachedSize(), target, stream);
   }
 
+  // .priemman.v1.PublicInfo author = 16;
+  if (this->_internal_has_author()) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+      InternalWriteMessage(16, _Internal::author(this),
+        _Internal::author(this).GetCachedSize(), target, stream);
+  }
+
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
     target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
         _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
@@ -1774,6 +1813,13 @@ size_t Project::ByteSizeLong() const {
         *_impl_.published_at_);
   }
 
+  // .priemman.v1.PublicInfo author = 16;
+  if (this->_internal_has_author()) {
+    total_size += 2 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
+        *_impl_.author_);
+  }
+
   // .priemman.v1.ProjectVisibility visibility = 10;
   if (this->_internal_visibility() != 0) {
     total_size += 1 +
@@ -1842,6 +1888,10 @@ void Project::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOB
   if (from._internal_has_published_at()) {
     _this->_internal_mutable_published_at()->::PROTOBUF_NAMESPACE_ID::Timestamp::MergeFrom(
         from._internal_published_at());
+  }
+  if (from._internal_has_author()) {
+    _this->_internal_mutable_author()->::priemman::v1::PublicInfo::MergeFrom(
+        from._internal_author());
   }
   if (from._internal_visibility() != 0) {
     _this->_internal_set_visibility(from._internal_visibility());

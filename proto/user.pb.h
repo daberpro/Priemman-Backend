@@ -54,6 +54,9 @@ namespace v1 {
 class AboutMe;
 struct AboutMeDefaultTypeInternal;
 extern AboutMeDefaultTypeInternal _AboutMe_default_instance_;
+class ActionInput;
+struct ActionInputDefaultTypeInternal;
+extern ActionInputDefaultTypeInternal _ActionInput_default_instance_;
 class AdminConfirmPaymentRequest;
 struct AdminConfirmPaymentRequestDefaultTypeInternal;
 extern AdminConfirmPaymentRequestDefaultTypeInternal _AdminConfirmPaymentRequest_default_instance_;
@@ -90,9 +93,15 @@ extern DeleteWorkExperienceRequestDefaultTypeInternal _DeleteWorkExperienceReque
 class ListConnectedAccountsResponse;
 struct ListConnectedAccountsResponseDefaultTypeInternal;
 extern ListConnectedAccountsResponseDefaultTypeInternal _ListConnectedAccountsResponse_default_instance_;
+class ListProjectSummaryRow;
+struct ListProjectSummaryRowDefaultTypeInternal;
+extern ListProjectSummaryRowDefaultTypeInternal _ListProjectSummaryRow_default_instance_;
 class ListWorkExperienceResponse;
 struct ListWorkExperienceResponseDefaultTypeInternal;
 extern ListWorkExperienceResponseDefaultTypeInternal _ListWorkExperienceResponse_default_instance_;
+class ProjectSummaryRow;
+struct ProjectSummaryRowDefaultTypeInternal;
+extern ProjectSummaryRowDefaultTypeInternal _ProjectSummaryRow_default_instance_;
 class UpdateBasicInfoRequest;
 struct UpdateBasicInfoRequestDefaultTypeInternal;
 extern UpdateBasicInfoRequestDefaultTypeInternal _UpdateBasicInfoRequest_default_instance_;
@@ -118,6 +127,7 @@ extern WorkExperienceDefaultTypeInternal _WorkExperience_default_instance_;
 }  // namespace priemman
 PROTOBUF_NAMESPACE_OPEN
 template<> ::priemman::v1::AboutMe* Arena::CreateMaybeMessage<::priemman::v1::AboutMe>(Arena*);
+template<> ::priemman::v1::ActionInput* Arena::CreateMaybeMessage<::priemman::v1::ActionInput>(Arena*);
 template<> ::priemman::v1::AdminConfirmPaymentRequest* Arena::CreateMaybeMessage<::priemman::v1::AdminConfirmPaymentRequest>(Arena*);
 template<> ::priemman::v1::AdminConfirmPaymentResponse* Arena::CreateMaybeMessage<::priemman::v1::AdminConfirmPaymentResponse>(Arena*);
 template<> ::priemman::v1::AdminListUpgradeRequestsResponse* Arena::CreateMaybeMessage<::priemman::v1::AdminListUpgradeRequestsResponse>(Arena*);
@@ -130,7 +140,9 @@ template<> ::priemman::v1::CreateUpgradeRequestResponse* Arena::CreateMaybeMessa
 template<> ::priemman::v1::DeleteConnectedAccountRequest* Arena::CreateMaybeMessage<::priemman::v1::DeleteConnectedAccountRequest>(Arena*);
 template<> ::priemman::v1::DeleteWorkExperienceRequest* Arena::CreateMaybeMessage<::priemman::v1::DeleteWorkExperienceRequest>(Arena*);
 template<> ::priemman::v1::ListConnectedAccountsResponse* Arena::CreateMaybeMessage<::priemman::v1::ListConnectedAccountsResponse>(Arena*);
+template<> ::priemman::v1::ListProjectSummaryRow* Arena::CreateMaybeMessage<::priemman::v1::ListProjectSummaryRow>(Arena*);
 template<> ::priemman::v1::ListWorkExperienceResponse* Arena::CreateMaybeMessage<::priemman::v1::ListWorkExperienceResponse>(Arena*);
+template<> ::priemman::v1::ProjectSummaryRow* Arena::CreateMaybeMessage<::priemman::v1::ProjectSummaryRow>(Arena*);
 template<> ::priemman::v1::UpdateBasicInfoRequest* Arena::CreateMaybeMessage<::priemman::v1::UpdateBasicInfoRequest>(Arena*);
 template<> ::priemman::v1::UpgradeRequestEntry* Arena::CreateMaybeMessage<::priemman::v1::UpgradeRequestEntry>(Arena*);
 template<> ::priemman::v1::UpgradeStatus* Arena::CreateMaybeMessage<::priemman::v1::UpgradeStatus>(Arena*);
@@ -198,6 +210,538 @@ inline bool UserRole_Parse(
 }
 // ===================================================================
 
+class ActionInput final :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:priemman.v1.ActionInput) */ {
+ public:
+  inline ActionInput() : ActionInput(nullptr) {}
+  ~ActionInput() override;
+  explicit PROTOBUF_CONSTEXPR ActionInput(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+
+  ActionInput(const ActionInput& from);
+  ActionInput(ActionInput&& from) noexcept
+    : ActionInput() {
+    *this = ::std::move(from);
+  }
+
+  inline ActionInput& operator=(const ActionInput& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline ActionInput& operator=(ActionInput&& from) noexcept {
+    if (this == &from) return *this;
+    if (GetOwningArena() == from.GetOwningArena()
+  #ifdef PROTOBUF_FORCE_COPY_IN_MOVE
+        && GetOwningArena() != nullptr
+  #endif  // !PROTOBUF_FORCE_COPY_IN_MOVE
+    ) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const ActionInput& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const ActionInput* internal_default_instance() {
+    return reinterpret_cast<const ActionInput*>(
+               &_ActionInput_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    0;
+
+  friend void swap(ActionInput& a, ActionInput& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(ActionInput* other) {
+    if (other == this) return;
+  #ifdef PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() != nullptr &&
+        GetOwningArena() == other->GetOwningArena()) {
+   #else  // PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() == other->GetOwningArena()) {
+  #endif  // !PROTOBUF_FORCE_COPY_IN_SWAP
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(ActionInput* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetOwningArena() == other->GetOwningArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  ActionInput* New(::PROTOBUF_NAMESPACE_ID::Arena* arena = nullptr) const final {
+    return CreateMaybeMessage<ActionInput>(arena);
+  }
+  using ::PROTOBUF_NAMESPACE_ID::Message::CopyFrom;
+  void CopyFrom(const ActionInput& from);
+  using ::PROTOBUF_NAMESPACE_ID::Message::MergeFrom;
+  void MergeFrom( const ActionInput& from) {
+    ActionInput::MergeImpl(*this, from);
+  }
+  private:
+  static void MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg);
+  public:
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  uint8_t* _InternalSerialize(
+      uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _impl_._cached_size_.Get(); }
+
+  private:
+  void SharedCtor(::PROTOBUF_NAMESPACE_ID::Arena* arena, bool is_message_owned);
+  void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(ActionInput* other);
+
+  private:
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "priemman.v1.ActionInput";
+  }
+  protected:
+  explicit ActionInput(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                       bool is_message_owned = false);
+  public:
+
+  static const ClassData _class_data_;
+  const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kProjectIdFieldNumber = 1,
+  };
+  // string project_id = 1;
+  void clear_project_id();
+  const std::string& project_id() const;
+  template <typename ArgT0 = const std::string&, typename... ArgT>
+  void set_project_id(ArgT0&& arg0, ArgT... args);
+  std::string* mutable_project_id();
+  PROTOBUF_NODISCARD std::string* release_project_id();
+  void set_allocated_project_id(std::string* project_id);
+  private:
+  const std::string& _internal_project_id() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_project_id(const std::string& value);
+  std::string* _internal_mutable_project_id();
+  public:
+
+  // @@protoc_insertion_point(class_scope:priemman.v1.ActionInput)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  struct Impl_ {
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr project_id_;
+    mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  };
+  union { Impl_ _impl_; };
+  friend struct ::TableStruct_user_2eproto;
+};
+// -------------------------------------------------------------------
+
+class ProjectSummaryRow final :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:priemman.v1.ProjectSummaryRow) */ {
+ public:
+  inline ProjectSummaryRow() : ProjectSummaryRow(nullptr) {}
+  ~ProjectSummaryRow() override;
+  explicit PROTOBUF_CONSTEXPR ProjectSummaryRow(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+
+  ProjectSummaryRow(const ProjectSummaryRow& from);
+  ProjectSummaryRow(ProjectSummaryRow&& from) noexcept
+    : ProjectSummaryRow() {
+    *this = ::std::move(from);
+  }
+
+  inline ProjectSummaryRow& operator=(const ProjectSummaryRow& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline ProjectSummaryRow& operator=(ProjectSummaryRow&& from) noexcept {
+    if (this == &from) return *this;
+    if (GetOwningArena() == from.GetOwningArena()
+  #ifdef PROTOBUF_FORCE_COPY_IN_MOVE
+        && GetOwningArena() != nullptr
+  #endif  // !PROTOBUF_FORCE_COPY_IN_MOVE
+    ) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const ProjectSummaryRow& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const ProjectSummaryRow* internal_default_instance() {
+    return reinterpret_cast<const ProjectSummaryRow*>(
+               &_ProjectSummaryRow_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    1;
+
+  friend void swap(ProjectSummaryRow& a, ProjectSummaryRow& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(ProjectSummaryRow* other) {
+    if (other == this) return;
+  #ifdef PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() != nullptr &&
+        GetOwningArena() == other->GetOwningArena()) {
+   #else  // PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() == other->GetOwningArena()) {
+  #endif  // !PROTOBUF_FORCE_COPY_IN_SWAP
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(ProjectSummaryRow* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetOwningArena() == other->GetOwningArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  ProjectSummaryRow* New(::PROTOBUF_NAMESPACE_ID::Arena* arena = nullptr) const final {
+    return CreateMaybeMessage<ProjectSummaryRow>(arena);
+  }
+  using ::PROTOBUF_NAMESPACE_ID::Message::CopyFrom;
+  void CopyFrom(const ProjectSummaryRow& from);
+  using ::PROTOBUF_NAMESPACE_ID::Message::MergeFrom;
+  void MergeFrom( const ProjectSummaryRow& from) {
+    ProjectSummaryRow::MergeImpl(*this, from);
+  }
+  private:
+  static void MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg);
+  public:
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  uint8_t* _InternalSerialize(
+      uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _impl_._cached_size_.Get(); }
+
+  private:
+  void SharedCtor(::PROTOBUF_NAMESPACE_ID::Arena* arena, bool is_message_owned);
+  void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(ProjectSummaryRow* other);
+
+  private:
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "priemman.v1.ProjectSummaryRow";
+  }
+  protected:
+  explicit ProjectSummaryRow(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                       bool is_message_owned = false);
+  public:
+
+  static const ClassData _class_data_;
+  const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kProjectIdFieldNumber = 1,
+    kTitleFieldNumber = 2,
+    kThumbnailFieldNumber = 3,
+    kFirstNameFieldNumber = 4,
+    kLastNameFieldNumber = 5,
+  };
+  // string project_id = 1;
+  void clear_project_id();
+  const std::string& project_id() const;
+  template <typename ArgT0 = const std::string&, typename... ArgT>
+  void set_project_id(ArgT0&& arg0, ArgT... args);
+  std::string* mutable_project_id();
+  PROTOBUF_NODISCARD std::string* release_project_id();
+  void set_allocated_project_id(std::string* project_id);
+  private:
+  const std::string& _internal_project_id() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_project_id(const std::string& value);
+  std::string* _internal_mutable_project_id();
+  public:
+
+  // string title = 2;
+  void clear_title();
+  const std::string& title() const;
+  template <typename ArgT0 = const std::string&, typename... ArgT>
+  void set_title(ArgT0&& arg0, ArgT... args);
+  std::string* mutable_title();
+  PROTOBUF_NODISCARD std::string* release_title();
+  void set_allocated_title(std::string* title);
+  private:
+  const std::string& _internal_title() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_title(const std::string& value);
+  std::string* _internal_mutable_title();
+  public:
+
+  // optional string thumbnail = 3;
+  bool has_thumbnail() const;
+  private:
+  bool _internal_has_thumbnail() const;
+  public:
+  void clear_thumbnail();
+  const std::string& thumbnail() const;
+  template <typename ArgT0 = const std::string&, typename... ArgT>
+  void set_thumbnail(ArgT0&& arg0, ArgT... args);
+  std::string* mutable_thumbnail();
+  PROTOBUF_NODISCARD std::string* release_thumbnail();
+  void set_allocated_thumbnail(std::string* thumbnail);
+  private:
+  const std::string& _internal_thumbnail() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_thumbnail(const std::string& value);
+  std::string* _internal_mutable_thumbnail();
+  public:
+
+  // string first_name = 4;
+  void clear_first_name();
+  const std::string& first_name() const;
+  template <typename ArgT0 = const std::string&, typename... ArgT>
+  void set_first_name(ArgT0&& arg0, ArgT... args);
+  std::string* mutable_first_name();
+  PROTOBUF_NODISCARD std::string* release_first_name();
+  void set_allocated_first_name(std::string* first_name);
+  private:
+  const std::string& _internal_first_name() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_first_name(const std::string& value);
+  std::string* _internal_mutable_first_name();
+  public:
+
+  // string last_name = 5;
+  void clear_last_name();
+  const std::string& last_name() const;
+  template <typename ArgT0 = const std::string&, typename... ArgT>
+  void set_last_name(ArgT0&& arg0, ArgT... args);
+  std::string* mutable_last_name();
+  PROTOBUF_NODISCARD std::string* release_last_name();
+  void set_allocated_last_name(std::string* last_name);
+  private:
+  const std::string& _internal_last_name() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_last_name(const std::string& value);
+  std::string* _internal_mutable_last_name();
+  public:
+
+  // @@protoc_insertion_point(class_scope:priemman.v1.ProjectSummaryRow)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  struct Impl_ {
+    ::PROTOBUF_NAMESPACE_ID::internal::HasBits<1> _has_bits_;
+    mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr project_id_;
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr title_;
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr thumbnail_;
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr first_name_;
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr last_name_;
+  };
+  union { Impl_ _impl_; };
+  friend struct ::TableStruct_user_2eproto;
+};
+// -------------------------------------------------------------------
+
+class ListProjectSummaryRow final :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:priemman.v1.ListProjectSummaryRow) */ {
+ public:
+  inline ListProjectSummaryRow() : ListProjectSummaryRow(nullptr) {}
+  ~ListProjectSummaryRow() override;
+  explicit PROTOBUF_CONSTEXPR ListProjectSummaryRow(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+
+  ListProjectSummaryRow(const ListProjectSummaryRow& from);
+  ListProjectSummaryRow(ListProjectSummaryRow&& from) noexcept
+    : ListProjectSummaryRow() {
+    *this = ::std::move(from);
+  }
+
+  inline ListProjectSummaryRow& operator=(const ListProjectSummaryRow& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline ListProjectSummaryRow& operator=(ListProjectSummaryRow&& from) noexcept {
+    if (this == &from) return *this;
+    if (GetOwningArena() == from.GetOwningArena()
+  #ifdef PROTOBUF_FORCE_COPY_IN_MOVE
+        && GetOwningArena() != nullptr
+  #endif  // !PROTOBUF_FORCE_COPY_IN_MOVE
+    ) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const ListProjectSummaryRow& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const ListProjectSummaryRow* internal_default_instance() {
+    return reinterpret_cast<const ListProjectSummaryRow*>(
+               &_ListProjectSummaryRow_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    2;
+
+  friend void swap(ListProjectSummaryRow& a, ListProjectSummaryRow& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(ListProjectSummaryRow* other) {
+    if (other == this) return;
+  #ifdef PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() != nullptr &&
+        GetOwningArena() == other->GetOwningArena()) {
+   #else  // PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() == other->GetOwningArena()) {
+  #endif  // !PROTOBUF_FORCE_COPY_IN_SWAP
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(ListProjectSummaryRow* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetOwningArena() == other->GetOwningArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  ListProjectSummaryRow* New(::PROTOBUF_NAMESPACE_ID::Arena* arena = nullptr) const final {
+    return CreateMaybeMessage<ListProjectSummaryRow>(arena);
+  }
+  using ::PROTOBUF_NAMESPACE_ID::Message::CopyFrom;
+  void CopyFrom(const ListProjectSummaryRow& from);
+  using ::PROTOBUF_NAMESPACE_ID::Message::MergeFrom;
+  void MergeFrom( const ListProjectSummaryRow& from) {
+    ListProjectSummaryRow::MergeImpl(*this, from);
+  }
+  private:
+  static void MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg);
+  public:
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  uint8_t* _InternalSerialize(
+      uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _impl_._cached_size_.Get(); }
+
+  private:
+  void SharedCtor(::PROTOBUF_NAMESPACE_ID::Arena* arena, bool is_message_owned);
+  void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(ListProjectSummaryRow* other);
+
+  private:
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "priemman.v1.ListProjectSummaryRow";
+  }
+  protected:
+  explicit ListProjectSummaryRow(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                       bool is_message_owned = false);
+  public:
+
+  static const ClassData _class_data_;
+  const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kProjectsFieldNumber = 1,
+  };
+  // repeated .priemman.v1.ProjectSummaryRow projects = 1;
+  int projects_size() const;
+  private:
+  int _internal_projects_size() const;
+  public:
+  void clear_projects();
+  ::priemman::v1::ProjectSummaryRow* mutable_projects(int index);
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::priemman::v1::ProjectSummaryRow >*
+      mutable_projects();
+  private:
+  const ::priemman::v1::ProjectSummaryRow& _internal_projects(int index) const;
+  ::priemman::v1::ProjectSummaryRow* _internal_add_projects();
+  public:
+  const ::priemman::v1::ProjectSummaryRow& projects(int index) const;
+  ::priemman::v1::ProjectSummaryRow* add_projects();
+  const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::priemman::v1::ProjectSummaryRow >&
+      projects() const;
+
+  // @@protoc_insertion_point(class_scope:priemman.v1.ListProjectSummaryRow)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  struct Impl_ {
+    ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::priemman::v1::ProjectSummaryRow > projects_;
+    mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  };
+  union { Impl_ _impl_; };
+  friend struct ::TableStruct_user_2eproto;
+};
+// -------------------------------------------------------------------
+
 class WorkExperience final :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:priemman.v1.WorkExperience) */ {
  public:
@@ -246,7 +790,7 @@ class WorkExperience final :
                &_WorkExperience_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    0;
+    3;
 
   friend void swap(WorkExperience& a, WorkExperience& b) {
     a.Swap(&b);
@@ -502,7 +1046,7 @@ class ConnectedAccount final :
                &_ConnectedAccount_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    1;
+    4;
 
   friend void swap(ConnectedAccount& a, ConnectedAccount& b) {
     a.Swap(&b);
@@ -697,7 +1241,7 @@ class UpsertConnectedAccountRequest final :
                &_UpsertConnectedAccountRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    2;
+    5;
 
   friend void swap(UpsertConnectedAccountRequest& a, UpsertConnectedAccountRequest& b) {
     a.Swap(&b);
@@ -892,7 +1436,7 @@ class AboutMe final :
                &_AboutMe_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    3;
+    6;
 
   friend void swap(AboutMe& a, AboutMe& b) {
     a.Swap(&b);
@@ -1061,7 +1605,7 @@ class User final :
                &_User_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    4;
+    7;
 
   friend void swap(User& a, User& b) {
     a.Swap(&b);
@@ -1472,7 +2016,7 @@ class UpdateBasicInfoRequest final :
                &_UpdateBasicInfoRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    5;
+    8;
 
   friend void swap(UpdateBasicInfoRequest& a, UpdateBasicInfoRequest& b) {
     a.Swap(&b);
@@ -1770,7 +2314,7 @@ class UpsertWorkExperienceRequest final :
                &_UpsertWorkExperienceRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    6;
+    9;
 
   friend void swap(UpsertWorkExperienceRequest& a, UpsertWorkExperienceRequest& b) {
     a.Swap(&b);
@@ -1927,7 +2471,7 @@ class ListWorkExperienceResponse final :
                &_ListWorkExperienceResponse_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    7;
+    10;
 
   friend void swap(ListWorkExperienceResponse& a, ListWorkExperienceResponse& b) {
     a.Swap(&b);
@@ -2084,7 +2628,7 @@ class DeleteWorkExperienceRequest final :
                &_DeleteWorkExperienceRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    8;
+    11;
 
   friend void swap(DeleteWorkExperienceRequest& a, DeleteWorkExperienceRequest& b) {
     a.Swap(&b);
@@ -2241,7 +2785,7 @@ class ListConnectedAccountsResponse final :
                &_ListConnectedAccountsResponse_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    9;
+    12;
 
   friend void swap(ListConnectedAccountsResponse& a, ListConnectedAccountsResponse& b) {
     a.Swap(&b);
@@ -2398,7 +2942,7 @@ class DeleteConnectedAccountRequest final :
                &_DeleteConnectedAccountRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    10;
+    13;
 
   friend void swap(DeleteConnectedAccountRequest& a, DeleteConnectedAccountRequest& b) {
     a.Swap(&b);
@@ -2546,7 +3090,7 @@ class UpgradeStatus final :
                &_UpgradeStatus_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    11;
+    14;
 
   friend void swap(UpgradeStatus& a, UpgradeStatus& b) {
     a.Swap(&b);
@@ -2838,7 +3382,7 @@ class CreateUpgradeRequestResponse final :
                &_CreateUpgradeRequestResponse_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    12;
+    15;
 
   friend void swap(CreateUpgradeRequestResponse& a, CreateUpgradeRequestResponse& b) {
     a.Swap(&b);
@@ -3006,7 +3550,7 @@ class AdminUserEntry final :
                &_AdminUserEntry_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    13;
+    16;
 
   friend void swap(AdminUserEntry& a, AdminUserEntry& b) {
     a.Swap(&b);
@@ -3242,7 +3786,7 @@ class AdminListUsersResponse final :
                &_AdminListUsersResponse_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    14;
+    17;
 
   friend void swap(AdminListUsersResponse& a, AdminListUsersResponse& b) {
     a.Swap(&b);
@@ -3432,7 +3976,7 @@ class UpgradeRequestEntry final :
                &_UpgradeRequestEntry_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    15;
+    18;
 
   friend void swap(UpgradeRequestEntry& a, UpgradeRequestEntry& b) {
     a.Swap(&b);
@@ -3720,7 +4264,7 @@ class AdminListUpgradeRequestsResponse final :
                &_AdminListUpgradeRequestsResponse_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    16;
+    19;
 
   friend void swap(AdminListUpgradeRequestsResponse& a, AdminListUpgradeRequestsResponse& b) {
     a.Swap(&b);
@@ -3877,7 +4421,7 @@ class AdminReviewUpgradeRequest final :
                &_AdminReviewUpgradeRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    17;
+    20;
 
   friend void swap(AdminReviewUpgradeRequest& a, AdminReviewUpgradeRequest& b) {
     a.Swap(&b);
@@ -4061,7 +4605,7 @@ class AdminReviewUpgradeResponse final :
                &_AdminReviewUpgradeResponse_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    18;
+    21;
 
   friend void swap(AdminReviewUpgradeResponse& a, AdminReviewUpgradeResponse& b) {
     a.Swap(&b);
@@ -4229,7 +4773,7 @@ class AdminConfirmPaymentRequest final :
                &_AdminConfirmPaymentRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    19;
+    22;
 
   friend void swap(AdminConfirmPaymentRequest& a, AdminConfirmPaymentRequest& b) {
     a.Swap(&b);
@@ -4386,7 +4930,7 @@ class AdminConfirmPaymentResponse final :
                &_AdminConfirmPaymentResponse_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    20;
+    23;
 
   friend void swap(AdminConfirmPaymentResponse& a, AdminConfirmPaymentResponse& b) {
     a.Swap(&b);
@@ -4513,6 +5057,376 @@ class AdminConfirmPaymentResponse final :
   #pragma GCC diagnostic push
   #pragma GCC diagnostic ignored "-Wstrict-aliasing"
 #endif  // __GNUC__
+// ActionInput
+
+// string project_id = 1;
+inline void ActionInput::clear_project_id() {
+  _impl_.project_id_.ClearToEmpty();
+}
+inline const std::string& ActionInput::project_id() const {
+  // @@protoc_insertion_point(field_get:priemman.v1.ActionInput.project_id)
+  return _internal_project_id();
+}
+template <typename ArgT0, typename... ArgT>
+inline PROTOBUF_ALWAYS_INLINE
+void ActionInput::set_project_id(ArgT0&& arg0, ArgT... args) {
+ 
+ _impl_.project_id_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
+  // @@protoc_insertion_point(field_set:priemman.v1.ActionInput.project_id)
+}
+inline std::string* ActionInput::mutable_project_id() {
+  std::string* _s = _internal_mutable_project_id();
+  // @@protoc_insertion_point(field_mutable:priemman.v1.ActionInput.project_id)
+  return _s;
+}
+inline const std::string& ActionInput::_internal_project_id() const {
+  return _impl_.project_id_.Get();
+}
+inline void ActionInput::_internal_set_project_id(const std::string& value) {
+  
+  _impl_.project_id_.Set(value, GetArenaForAllocation());
+}
+inline std::string* ActionInput::_internal_mutable_project_id() {
+  
+  return _impl_.project_id_.Mutable(GetArenaForAllocation());
+}
+inline std::string* ActionInput::release_project_id() {
+  // @@protoc_insertion_point(field_release:priemman.v1.ActionInput.project_id)
+  return _impl_.project_id_.Release();
+}
+inline void ActionInput::set_allocated_project_id(std::string* project_id) {
+  if (project_id != nullptr) {
+    
+  } else {
+    
+  }
+  _impl_.project_id_.SetAllocated(project_id, GetArenaForAllocation());
+#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (_impl_.project_id_.IsDefault()) {
+    _impl_.project_id_.Set("", GetArenaForAllocation());
+  }
+#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:priemman.v1.ActionInput.project_id)
+}
+
+// -------------------------------------------------------------------
+
+// ProjectSummaryRow
+
+// string project_id = 1;
+inline void ProjectSummaryRow::clear_project_id() {
+  _impl_.project_id_.ClearToEmpty();
+}
+inline const std::string& ProjectSummaryRow::project_id() const {
+  // @@protoc_insertion_point(field_get:priemman.v1.ProjectSummaryRow.project_id)
+  return _internal_project_id();
+}
+template <typename ArgT0, typename... ArgT>
+inline PROTOBUF_ALWAYS_INLINE
+void ProjectSummaryRow::set_project_id(ArgT0&& arg0, ArgT... args) {
+ 
+ _impl_.project_id_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
+  // @@protoc_insertion_point(field_set:priemman.v1.ProjectSummaryRow.project_id)
+}
+inline std::string* ProjectSummaryRow::mutable_project_id() {
+  std::string* _s = _internal_mutable_project_id();
+  // @@protoc_insertion_point(field_mutable:priemman.v1.ProjectSummaryRow.project_id)
+  return _s;
+}
+inline const std::string& ProjectSummaryRow::_internal_project_id() const {
+  return _impl_.project_id_.Get();
+}
+inline void ProjectSummaryRow::_internal_set_project_id(const std::string& value) {
+  
+  _impl_.project_id_.Set(value, GetArenaForAllocation());
+}
+inline std::string* ProjectSummaryRow::_internal_mutable_project_id() {
+  
+  return _impl_.project_id_.Mutable(GetArenaForAllocation());
+}
+inline std::string* ProjectSummaryRow::release_project_id() {
+  // @@protoc_insertion_point(field_release:priemman.v1.ProjectSummaryRow.project_id)
+  return _impl_.project_id_.Release();
+}
+inline void ProjectSummaryRow::set_allocated_project_id(std::string* project_id) {
+  if (project_id != nullptr) {
+    
+  } else {
+    
+  }
+  _impl_.project_id_.SetAllocated(project_id, GetArenaForAllocation());
+#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (_impl_.project_id_.IsDefault()) {
+    _impl_.project_id_.Set("", GetArenaForAllocation());
+  }
+#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:priemman.v1.ProjectSummaryRow.project_id)
+}
+
+// string title = 2;
+inline void ProjectSummaryRow::clear_title() {
+  _impl_.title_.ClearToEmpty();
+}
+inline const std::string& ProjectSummaryRow::title() const {
+  // @@protoc_insertion_point(field_get:priemman.v1.ProjectSummaryRow.title)
+  return _internal_title();
+}
+template <typename ArgT0, typename... ArgT>
+inline PROTOBUF_ALWAYS_INLINE
+void ProjectSummaryRow::set_title(ArgT0&& arg0, ArgT... args) {
+ 
+ _impl_.title_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
+  // @@protoc_insertion_point(field_set:priemman.v1.ProjectSummaryRow.title)
+}
+inline std::string* ProjectSummaryRow::mutable_title() {
+  std::string* _s = _internal_mutable_title();
+  // @@protoc_insertion_point(field_mutable:priemman.v1.ProjectSummaryRow.title)
+  return _s;
+}
+inline const std::string& ProjectSummaryRow::_internal_title() const {
+  return _impl_.title_.Get();
+}
+inline void ProjectSummaryRow::_internal_set_title(const std::string& value) {
+  
+  _impl_.title_.Set(value, GetArenaForAllocation());
+}
+inline std::string* ProjectSummaryRow::_internal_mutable_title() {
+  
+  return _impl_.title_.Mutable(GetArenaForAllocation());
+}
+inline std::string* ProjectSummaryRow::release_title() {
+  // @@protoc_insertion_point(field_release:priemman.v1.ProjectSummaryRow.title)
+  return _impl_.title_.Release();
+}
+inline void ProjectSummaryRow::set_allocated_title(std::string* title) {
+  if (title != nullptr) {
+    
+  } else {
+    
+  }
+  _impl_.title_.SetAllocated(title, GetArenaForAllocation());
+#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (_impl_.title_.IsDefault()) {
+    _impl_.title_.Set("", GetArenaForAllocation());
+  }
+#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:priemman.v1.ProjectSummaryRow.title)
+}
+
+// optional string thumbnail = 3;
+inline bool ProjectSummaryRow::_internal_has_thumbnail() const {
+  bool value = (_impl_._has_bits_[0] & 0x00000001u) != 0;
+  return value;
+}
+inline bool ProjectSummaryRow::has_thumbnail() const {
+  return _internal_has_thumbnail();
+}
+inline void ProjectSummaryRow::clear_thumbnail() {
+  _impl_.thumbnail_.ClearToEmpty();
+  _impl_._has_bits_[0] &= ~0x00000001u;
+}
+inline const std::string& ProjectSummaryRow::thumbnail() const {
+  // @@protoc_insertion_point(field_get:priemman.v1.ProjectSummaryRow.thumbnail)
+  return _internal_thumbnail();
+}
+template <typename ArgT0, typename... ArgT>
+inline PROTOBUF_ALWAYS_INLINE
+void ProjectSummaryRow::set_thumbnail(ArgT0&& arg0, ArgT... args) {
+ _impl_._has_bits_[0] |= 0x00000001u;
+ _impl_.thumbnail_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
+  // @@protoc_insertion_point(field_set:priemman.v1.ProjectSummaryRow.thumbnail)
+}
+inline std::string* ProjectSummaryRow::mutable_thumbnail() {
+  std::string* _s = _internal_mutable_thumbnail();
+  // @@protoc_insertion_point(field_mutable:priemman.v1.ProjectSummaryRow.thumbnail)
+  return _s;
+}
+inline const std::string& ProjectSummaryRow::_internal_thumbnail() const {
+  return _impl_.thumbnail_.Get();
+}
+inline void ProjectSummaryRow::_internal_set_thumbnail(const std::string& value) {
+  _impl_._has_bits_[0] |= 0x00000001u;
+  _impl_.thumbnail_.Set(value, GetArenaForAllocation());
+}
+inline std::string* ProjectSummaryRow::_internal_mutable_thumbnail() {
+  _impl_._has_bits_[0] |= 0x00000001u;
+  return _impl_.thumbnail_.Mutable(GetArenaForAllocation());
+}
+inline std::string* ProjectSummaryRow::release_thumbnail() {
+  // @@protoc_insertion_point(field_release:priemman.v1.ProjectSummaryRow.thumbnail)
+  if (!_internal_has_thumbnail()) {
+    return nullptr;
+  }
+  _impl_._has_bits_[0] &= ~0x00000001u;
+  auto* p = _impl_.thumbnail_.Release();
+#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (_impl_.thumbnail_.IsDefault()) {
+    _impl_.thumbnail_.Set("", GetArenaForAllocation());
+  }
+#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  return p;
+}
+inline void ProjectSummaryRow::set_allocated_thumbnail(std::string* thumbnail) {
+  if (thumbnail != nullptr) {
+    _impl_._has_bits_[0] |= 0x00000001u;
+  } else {
+    _impl_._has_bits_[0] &= ~0x00000001u;
+  }
+  _impl_.thumbnail_.SetAllocated(thumbnail, GetArenaForAllocation());
+#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (_impl_.thumbnail_.IsDefault()) {
+    _impl_.thumbnail_.Set("", GetArenaForAllocation());
+  }
+#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:priemman.v1.ProjectSummaryRow.thumbnail)
+}
+
+// string first_name = 4;
+inline void ProjectSummaryRow::clear_first_name() {
+  _impl_.first_name_.ClearToEmpty();
+}
+inline const std::string& ProjectSummaryRow::first_name() const {
+  // @@protoc_insertion_point(field_get:priemman.v1.ProjectSummaryRow.first_name)
+  return _internal_first_name();
+}
+template <typename ArgT0, typename... ArgT>
+inline PROTOBUF_ALWAYS_INLINE
+void ProjectSummaryRow::set_first_name(ArgT0&& arg0, ArgT... args) {
+ 
+ _impl_.first_name_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
+  // @@protoc_insertion_point(field_set:priemman.v1.ProjectSummaryRow.first_name)
+}
+inline std::string* ProjectSummaryRow::mutable_first_name() {
+  std::string* _s = _internal_mutable_first_name();
+  // @@protoc_insertion_point(field_mutable:priemman.v1.ProjectSummaryRow.first_name)
+  return _s;
+}
+inline const std::string& ProjectSummaryRow::_internal_first_name() const {
+  return _impl_.first_name_.Get();
+}
+inline void ProjectSummaryRow::_internal_set_first_name(const std::string& value) {
+  
+  _impl_.first_name_.Set(value, GetArenaForAllocation());
+}
+inline std::string* ProjectSummaryRow::_internal_mutable_first_name() {
+  
+  return _impl_.first_name_.Mutable(GetArenaForAllocation());
+}
+inline std::string* ProjectSummaryRow::release_first_name() {
+  // @@protoc_insertion_point(field_release:priemman.v1.ProjectSummaryRow.first_name)
+  return _impl_.first_name_.Release();
+}
+inline void ProjectSummaryRow::set_allocated_first_name(std::string* first_name) {
+  if (first_name != nullptr) {
+    
+  } else {
+    
+  }
+  _impl_.first_name_.SetAllocated(first_name, GetArenaForAllocation());
+#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (_impl_.first_name_.IsDefault()) {
+    _impl_.first_name_.Set("", GetArenaForAllocation());
+  }
+#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:priemman.v1.ProjectSummaryRow.first_name)
+}
+
+// string last_name = 5;
+inline void ProjectSummaryRow::clear_last_name() {
+  _impl_.last_name_.ClearToEmpty();
+}
+inline const std::string& ProjectSummaryRow::last_name() const {
+  // @@protoc_insertion_point(field_get:priemman.v1.ProjectSummaryRow.last_name)
+  return _internal_last_name();
+}
+template <typename ArgT0, typename... ArgT>
+inline PROTOBUF_ALWAYS_INLINE
+void ProjectSummaryRow::set_last_name(ArgT0&& arg0, ArgT... args) {
+ 
+ _impl_.last_name_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
+  // @@protoc_insertion_point(field_set:priemman.v1.ProjectSummaryRow.last_name)
+}
+inline std::string* ProjectSummaryRow::mutable_last_name() {
+  std::string* _s = _internal_mutable_last_name();
+  // @@protoc_insertion_point(field_mutable:priemman.v1.ProjectSummaryRow.last_name)
+  return _s;
+}
+inline const std::string& ProjectSummaryRow::_internal_last_name() const {
+  return _impl_.last_name_.Get();
+}
+inline void ProjectSummaryRow::_internal_set_last_name(const std::string& value) {
+  
+  _impl_.last_name_.Set(value, GetArenaForAllocation());
+}
+inline std::string* ProjectSummaryRow::_internal_mutable_last_name() {
+  
+  return _impl_.last_name_.Mutable(GetArenaForAllocation());
+}
+inline std::string* ProjectSummaryRow::release_last_name() {
+  // @@protoc_insertion_point(field_release:priemman.v1.ProjectSummaryRow.last_name)
+  return _impl_.last_name_.Release();
+}
+inline void ProjectSummaryRow::set_allocated_last_name(std::string* last_name) {
+  if (last_name != nullptr) {
+    
+  } else {
+    
+  }
+  _impl_.last_name_.SetAllocated(last_name, GetArenaForAllocation());
+#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (_impl_.last_name_.IsDefault()) {
+    _impl_.last_name_.Set("", GetArenaForAllocation());
+  }
+#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:priemman.v1.ProjectSummaryRow.last_name)
+}
+
+// -------------------------------------------------------------------
+
+// ListProjectSummaryRow
+
+// repeated .priemman.v1.ProjectSummaryRow projects = 1;
+inline int ListProjectSummaryRow::_internal_projects_size() const {
+  return _impl_.projects_.size();
+}
+inline int ListProjectSummaryRow::projects_size() const {
+  return _internal_projects_size();
+}
+inline void ListProjectSummaryRow::clear_projects() {
+  _impl_.projects_.Clear();
+}
+inline ::priemman::v1::ProjectSummaryRow* ListProjectSummaryRow::mutable_projects(int index) {
+  // @@protoc_insertion_point(field_mutable:priemman.v1.ListProjectSummaryRow.projects)
+  return _impl_.projects_.Mutable(index);
+}
+inline ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::priemman::v1::ProjectSummaryRow >*
+ListProjectSummaryRow::mutable_projects() {
+  // @@protoc_insertion_point(field_mutable_list:priemman.v1.ListProjectSummaryRow.projects)
+  return &_impl_.projects_;
+}
+inline const ::priemman::v1::ProjectSummaryRow& ListProjectSummaryRow::_internal_projects(int index) const {
+  return _impl_.projects_.Get(index);
+}
+inline const ::priemman::v1::ProjectSummaryRow& ListProjectSummaryRow::projects(int index) const {
+  // @@protoc_insertion_point(field_get:priemman.v1.ListProjectSummaryRow.projects)
+  return _internal_projects(index);
+}
+inline ::priemman::v1::ProjectSummaryRow* ListProjectSummaryRow::_internal_add_projects() {
+  return _impl_.projects_.Add();
+}
+inline ::priemman::v1::ProjectSummaryRow* ListProjectSummaryRow::add_projects() {
+  ::priemman::v1::ProjectSummaryRow* _add = _internal_add_projects();
+  // @@protoc_insertion_point(field_add:priemman.v1.ListProjectSummaryRow.projects)
+  return _add;
+}
+inline const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::priemman::v1::ProjectSummaryRow >&
+ListProjectSummaryRow::projects() const {
+  // @@protoc_insertion_point(field_list:priemman.v1.ListProjectSummaryRow.projects)
+  return _impl_.projects_;
+}
+
+// -------------------------------------------------------------------
+
 // WorkExperience
 
 // .priemman.v1.ObjectId id = 1;
@@ -9378,6 +10292,12 @@ inline void AdminConfirmPaymentResponse::set_allocated_user_id(::priemman::v1::O
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------

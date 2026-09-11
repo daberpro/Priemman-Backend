@@ -1,8 +1,12 @@
 #include "user_repository.hpp"
+#include "project_repository.hpp"
 #include <stdexcept>
+#include <userver/storages/mysql/cluster.hpp>
 #include <userver/storages/mysql/cluster_host_type.hpp>
 #include <userver/storages/mysql/query.hpp>
 #include <userver/utils/uuid4.hpp>
+#include <userver/utils/uuid7.hpp>
+#include <vector>
 
 namespace priemman::database {
 
@@ -255,6 +259,199 @@ bool UserRepository::SetRole(const std::string& user_id, const std::string& role
     ).AsExecutionResult();
 
     return result.rows_affected > 0;
+}
+
+bool UserRepository::ActionLike(const std::string& user_id, const std::string& project_id) const {
+    auto trx = _mysql_cluster->Begin(userver::storages::mysql::ClusterHostType::kPrimary);
+    const auto id = userver::utils::generators::GenerateUuid();
+    const auto result = trx.Execute(
+      userver::storages::mysql::Query{
+          R"sql(
+            INSERT IGNORE INTO project_likes (id,user_id,project_id)
+            VALUES (?,?,?)
+          )sql"
+      },
+      id,
+      user_id,
+      project_id
+    ).AsExecutionResult();
+
+    if(result.rows_affected > 0){
+        trx.Execute(
+            userver::storages::mysql::Query{
+                R"sql(
+                    UPDATE projects
+                    SET likes = likes + 1
+                    WHERE id = ?
+                )sql"
+            },
+            project_id
+        );
+        trx.Commit();
+        return true;
+    }
+    return false;
+}
+
+bool UserRepository::ActionUnLike(const std::string& user_id, const std::string& project_id) const {
+    const auto result = _mysql_cluster->Execute(
+        userver::storages::mysql::ClusterHostType::kPrimary,
+        userver::storages::mysql::Query{
+          R"sql(
+            DELETE FROM project_likes
+            WHERE user_id = ? AND project_id = ?
+          )sql"
+      },
+      user_id,
+      project_id
+    ).AsExecutionResult();
+
+    return result.rows_affected > 0;
+}
+
+bool UserRepository::ActionView(const std::string& user_id, const std::string& project_id) const {
+    auto trx = _mysql_cluster->Begin(userver::storages::mysql::ClusterHostType::kPrimary);
+    const auto id = userver::utils::generators::GenerateUuid();
+    const auto result = trx.Execute(
+      userver::storages::mysql::Query{
+          R"sql(
+            INSERT IGNORE INTO project_views (id,user_id,project_id)
+            VALUES (?,?,?)
+          )sql"
+      },
+      id,
+      user_id,
+      project_id
+    ).AsExecutionResult();
+
+    if(result.rows_affected > 0){
+        trx.Execute(
+            userver::storages::mysql::Query{
+                R"sql(
+                    UPDATE projects
+                    SET views = views + 1
+                    WHERE id = ?
+                )sql"
+            },
+            project_id
+        );
+        trx.Commit();
+        return true;
+    }
+    return false;
+}
+
+bool UserRepository::ActionSave(const std::string& user_id, const std::string& project_id) const {
+    auto trx = _mysql_cluster->Begin(userver::storages::mysql::ClusterHostType::kPrimary);
+    const auto id = userver::utils::generators::GenerateUuid();
+    const auto result = trx.Execute(
+      userver::storages::mysql::Query{
+          R"sql(
+            INSERT IGNORE INTO project_saved (id,user_id,project_id)
+            VALUES (?,?,?)
+          )sql"
+      },
+      id,
+      user_id,
+      project_id
+    ).AsExecutionResult();
+
+    if(result.rows_affected > 0){
+        trx.Execute(
+            userver::storages::mysql::Query{
+                R"sql(
+                    UPDATE projects
+                    SET saves = saves + 1
+                    WHERE id = ?
+                )sql"
+            },
+            project_id
+        );
+        trx.Commit();
+        return true;
+    }
+    return false;
+}
+
+bool UserRepository::ActionUnSave(const std::string& user_id, const std::string& project_id) const {
+    const auto result = _mysql_cluster->Execute(
+        userver::storages::mysql::ClusterHostType::kPrimary,
+        userver::storages::mysql::Query{
+          R"sql(
+            DELETE FROM project_saved
+            WHERE user_id = ? AND project_id = ?
+          )sql"
+      },
+      user_id,
+      project_id
+    ).AsExecutionResult();
+    return result.rows_affected > 0;
+}
+
+std::vector<ProjectSummaryRow> UserRepository::ListLikedProjects(
+    const std::string& user_id,
+    std::int64_t limit,
+    std::int64_t offset
+) const {
+    return _mysql_cluster->Execute(
+        userver::storages::mysql::ClusterHostType::kPrimary,
+        userver::storages::mysql::Query{
+            R"sql(
+                SELECT
+                    p.id AS project_id,
+                    p.title AS title,
+                    p.cover_media_id AS thumbnail,
+                    u.first_name AS first_name,
+                    u.last_name AS last_name,
+                FROM project_likes pl
+                INNER JOIN projects p
+                    ON pl.project_id = p.id
+                INNER JOIN users u
+                    ON p.owner_id = u.id
+                WHERE pl.user_id = ?
+                    AND p.status = 'PUBLISHED'
+                    AND p.visibility = 'PUBLIC'
+                ORDER BY pl.created_at DESC
+                LIMIT ? OFFSET ?;
+            )sql"
+        },
+        user_id,
+        limit,
+        offset
+    ).AsVector<ProjectSummaryRow>();
+}
+
+std::vector<ProjectSummaryRow> UserRepository::ListSavedProjects(
+    const std::string& user_id,
+    std::int64_t limit,
+    std::int64_t offset
+) const {
+    return _mysql_cluster->Execute(
+        userver::storages::mysql::ClusterHostType::kPrimary,
+        userver::storages::mysql::Query{
+            R"sql(
+                SELECT
+                    p.id AS project_id,
+                    p.title,
+                    p.cover_media_id AS thumbnail,
+                    u.first_name,
+                    u.last_name
+                FROM project_saved ps
+                INNER JOIN projects p
+                    ON ps.project_id = p.id
+                INNER JOIN users u
+                    ON p.owner_id = u.id
+                WHERE ps.user_id = ?
+                    AND p.status = 'PUBLISHED'
+                    AND p.visibility = 'PUBLIC'
+                ORDER BY ps.created_at DESC
+                LIMIT ? OFFSET ?;
+            )sql"
+        },
+        user_id,
+        limit,
+        offset
+    ).AsVector<ProjectSummaryRow>();
 }
 
 }

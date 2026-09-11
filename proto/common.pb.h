@@ -65,6 +65,9 @@ extern LocationDefaultTypeInternal _Location_default_instance_;
 class ObjectId;
 struct ObjectIdDefaultTypeInternal;
 extern ObjectIdDefaultTypeInternal _ObjectId_default_instance_;
+class PublicInfo;
+struct PublicInfoDefaultTypeInternal;
+extern PublicInfoDefaultTypeInternal _PublicInfo_default_instance_;
 class Result;
 struct ResultDefaultTypeInternal;
 extern ResultDefaultTypeInternal _Result_default_instance_;
@@ -76,6 +79,7 @@ template<> ::priemman::v1::ErrorDetail* Arena::CreateMaybeMessage<::priemman::v1
 template<> ::priemman::v1::ErrorDetail_MetaEntry_DoNotUse* Arena::CreateMaybeMessage<::priemman::v1::ErrorDetail_MetaEntry_DoNotUse>(Arena*);
 template<> ::priemman::v1::Location* Arena::CreateMaybeMessage<::priemman::v1::Location>(Arena*);
 template<> ::priemman::v1::ObjectId* Arena::CreateMaybeMessage<::priemman::v1::ObjectId>(Arena*);
+template<> ::priemman::v1::PublicInfo* Arena::CreateMaybeMessage<::priemman::v1::PublicInfo>(Arena*);
 template<> ::priemman::v1::Result* Arena::CreateMaybeMessage<::priemman::v1::Result>(Arena*);
 PROTOBUF_NAMESPACE_CLOSE
 namespace priemman {
@@ -405,6 +409,211 @@ class Location final :
 };
 // -------------------------------------------------------------------
 
+class PublicInfo final :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:priemman.v1.PublicInfo) */ {
+ public:
+  inline PublicInfo() : PublicInfo(nullptr) {}
+  ~PublicInfo() override;
+  explicit PROTOBUF_CONSTEXPR PublicInfo(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+
+  PublicInfo(const PublicInfo& from);
+  PublicInfo(PublicInfo&& from) noexcept
+    : PublicInfo() {
+    *this = ::std::move(from);
+  }
+
+  inline PublicInfo& operator=(const PublicInfo& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline PublicInfo& operator=(PublicInfo&& from) noexcept {
+    if (this == &from) return *this;
+    if (GetOwningArena() == from.GetOwningArena()
+  #ifdef PROTOBUF_FORCE_COPY_IN_MOVE
+        && GetOwningArena() != nullptr
+  #endif  // !PROTOBUF_FORCE_COPY_IN_MOVE
+    ) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const PublicInfo& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const PublicInfo* internal_default_instance() {
+    return reinterpret_cast<const PublicInfo*>(
+               &_PublicInfo_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    2;
+
+  friend void swap(PublicInfo& a, PublicInfo& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(PublicInfo* other) {
+    if (other == this) return;
+  #ifdef PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() != nullptr &&
+        GetOwningArena() == other->GetOwningArena()) {
+   #else  // PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() == other->GetOwningArena()) {
+  #endif  // !PROTOBUF_FORCE_COPY_IN_SWAP
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(PublicInfo* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetOwningArena() == other->GetOwningArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  PublicInfo* New(::PROTOBUF_NAMESPACE_ID::Arena* arena = nullptr) const final {
+    return CreateMaybeMessage<PublicInfo>(arena);
+  }
+  using ::PROTOBUF_NAMESPACE_ID::Message::CopyFrom;
+  void CopyFrom(const PublicInfo& from);
+  using ::PROTOBUF_NAMESPACE_ID::Message::MergeFrom;
+  void MergeFrom( const PublicInfo& from) {
+    PublicInfo::MergeImpl(*this, from);
+  }
+  private:
+  static void MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg);
+  public:
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  uint8_t* _InternalSerialize(
+      uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _impl_._cached_size_.Get(); }
+
+  private:
+  void SharedCtor(::PROTOBUF_NAMESPACE_ID::Arena* arena, bool is_message_owned);
+  void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(PublicInfo* other);
+
+  private:
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "priemman.v1.PublicInfo";
+  }
+  protected:
+  explicit PublicInfo(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                       bool is_message_owned = false);
+  public:
+
+  static const ClassData _class_data_;
+  const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kFirstNameFieldNumber = 2,
+    kLastNameFieldNumber = 3,
+    kAvatarUrlFieldNumber = 4,
+    kIdFieldNumber = 1,
+  };
+  // string first_name = 2;
+  void clear_first_name();
+  const std::string& first_name() const;
+  template <typename ArgT0 = const std::string&, typename... ArgT>
+  void set_first_name(ArgT0&& arg0, ArgT... args);
+  std::string* mutable_first_name();
+  PROTOBUF_NODISCARD std::string* release_first_name();
+  void set_allocated_first_name(std::string* first_name);
+  private:
+  const std::string& _internal_first_name() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_first_name(const std::string& value);
+  std::string* _internal_mutable_first_name();
+  public:
+
+  // string last_name = 3;
+  void clear_last_name();
+  const std::string& last_name() const;
+  template <typename ArgT0 = const std::string&, typename... ArgT>
+  void set_last_name(ArgT0&& arg0, ArgT... args);
+  std::string* mutable_last_name();
+  PROTOBUF_NODISCARD std::string* release_last_name();
+  void set_allocated_last_name(std::string* last_name);
+  private:
+  const std::string& _internal_last_name() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_last_name(const std::string& value);
+  std::string* _internal_mutable_last_name();
+  public:
+
+  // string avatar_url = 4;
+  void clear_avatar_url();
+  const std::string& avatar_url() const;
+  template <typename ArgT0 = const std::string&, typename... ArgT>
+  void set_avatar_url(ArgT0&& arg0, ArgT... args);
+  std::string* mutable_avatar_url();
+  PROTOBUF_NODISCARD std::string* release_avatar_url();
+  void set_allocated_avatar_url(std::string* avatar_url);
+  private:
+  const std::string& _internal_avatar_url() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_avatar_url(const std::string& value);
+  std::string* _internal_mutable_avatar_url();
+  public:
+
+  // .priemman.v1.ObjectId id = 1;
+  bool has_id() const;
+  private:
+  bool _internal_has_id() const;
+  public:
+  void clear_id();
+  const ::priemman::v1::ObjectId& id() const;
+  PROTOBUF_NODISCARD ::priemman::v1::ObjectId* release_id();
+  ::priemman::v1::ObjectId* mutable_id();
+  void set_allocated_id(::priemman::v1::ObjectId* id);
+  private:
+  const ::priemman::v1::ObjectId& _internal_id() const;
+  ::priemman::v1::ObjectId* _internal_mutable_id();
+  public:
+  void unsafe_arena_set_allocated_id(
+      ::priemman::v1::ObjectId* id);
+  ::priemman::v1::ObjectId* unsafe_arena_release_id();
+
+  // @@protoc_insertion_point(class_scope:priemman.v1.PublicInfo)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  struct Impl_ {
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr first_name_;
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr last_name_;
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr avatar_url_;
+    ::priemman::v1::ObjectId* id_;
+    mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  };
+  union { Impl_ _impl_; };
+  friend struct ::TableStruct_common_2eproto;
+};
+// -------------------------------------------------------------------
+
 class ErrorDetail_MetaEntry_DoNotUse : public ::PROTOBUF_NAMESPACE_ID::internal::MapEntry<ErrorDetail_MetaEntry_DoNotUse, 
     std::string, std::string,
     ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_STRING,
@@ -481,7 +690,7 @@ class ErrorDetail final :
                &_ErrorDetail_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    3;
+    4;
 
   friend void swap(ErrorDetail& a, ErrorDetail& b) {
     a.Swap(&b);
@@ -676,7 +885,7 @@ class Result final :
                &_Result_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    4;
+    5;
 
   friend void swap(Result& a, Result& b) {
     a.Swap(&b);
@@ -887,7 +1096,7 @@ class DeleteResponse final :
                &_DeleteResponse_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    5;
+    6;
 
   friend void swap(DeleteResponse& a, DeleteResponse& b) {
     a.Swap(&b);
@@ -1148,6 +1357,250 @@ inline void Location::set_allocated_city(std::string* city) {
   }
 #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
   // @@protoc_insertion_point(field_set_allocated:priemman.v1.Location.city)
+}
+
+// -------------------------------------------------------------------
+
+// PublicInfo
+
+// .priemman.v1.ObjectId id = 1;
+inline bool PublicInfo::_internal_has_id() const {
+  return this != internal_default_instance() && _impl_.id_ != nullptr;
+}
+inline bool PublicInfo::has_id() const {
+  return _internal_has_id();
+}
+inline void PublicInfo::clear_id() {
+  if (GetArenaForAllocation() == nullptr && _impl_.id_ != nullptr) {
+    delete _impl_.id_;
+  }
+  _impl_.id_ = nullptr;
+}
+inline const ::priemman::v1::ObjectId& PublicInfo::_internal_id() const {
+  const ::priemman::v1::ObjectId* p = _impl_.id_;
+  return p != nullptr ? *p : reinterpret_cast<const ::priemman::v1::ObjectId&>(
+      ::priemman::v1::_ObjectId_default_instance_);
+}
+inline const ::priemman::v1::ObjectId& PublicInfo::id() const {
+  // @@protoc_insertion_point(field_get:priemman.v1.PublicInfo.id)
+  return _internal_id();
+}
+inline void PublicInfo::unsafe_arena_set_allocated_id(
+    ::priemman::v1::ObjectId* id) {
+  if (GetArenaForAllocation() == nullptr) {
+    delete reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(_impl_.id_);
+  }
+  _impl_.id_ = id;
+  if (id) {
+    
+  } else {
+    
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:priemman.v1.PublicInfo.id)
+}
+inline ::priemman::v1::ObjectId* PublicInfo::release_id() {
+  
+  ::priemman::v1::ObjectId* temp = _impl_.id_;
+  _impl_.id_ = nullptr;
+#ifdef PROTOBUF_FORCE_COPY_IN_RELEASE
+  auto* old =  reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(temp);
+  temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
+  if (GetArenaForAllocation() == nullptr) { delete old; }
+#else  // PROTOBUF_FORCE_COPY_IN_RELEASE
+  if (GetArenaForAllocation() != nullptr) {
+    temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
+  }
+#endif  // !PROTOBUF_FORCE_COPY_IN_RELEASE
+  return temp;
+}
+inline ::priemman::v1::ObjectId* PublicInfo::unsafe_arena_release_id() {
+  // @@protoc_insertion_point(field_release:priemman.v1.PublicInfo.id)
+  
+  ::priemman::v1::ObjectId* temp = _impl_.id_;
+  _impl_.id_ = nullptr;
+  return temp;
+}
+inline ::priemman::v1::ObjectId* PublicInfo::_internal_mutable_id() {
+  
+  if (_impl_.id_ == nullptr) {
+    auto* p = CreateMaybeMessage<::priemman::v1::ObjectId>(GetArenaForAllocation());
+    _impl_.id_ = p;
+  }
+  return _impl_.id_;
+}
+inline ::priemman::v1::ObjectId* PublicInfo::mutable_id() {
+  ::priemman::v1::ObjectId* _msg = _internal_mutable_id();
+  // @@protoc_insertion_point(field_mutable:priemman.v1.PublicInfo.id)
+  return _msg;
+}
+inline void PublicInfo::set_allocated_id(::priemman::v1::ObjectId* id) {
+  ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArenaForAllocation();
+  if (message_arena == nullptr) {
+    delete _impl_.id_;
+  }
+  if (id) {
+    ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena =
+        ::PROTOBUF_NAMESPACE_ID::Arena::InternalGetOwningArena(id);
+    if (message_arena != submessage_arena) {
+      id = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
+          message_arena, id, submessage_arena);
+    }
+    
+  } else {
+    
+  }
+  _impl_.id_ = id;
+  // @@protoc_insertion_point(field_set_allocated:priemman.v1.PublicInfo.id)
+}
+
+// string first_name = 2;
+inline void PublicInfo::clear_first_name() {
+  _impl_.first_name_.ClearToEmpty();
+}
+inline const std::string& PublicInfo::first_name() const {
+  // @@protoc_insertion_point(field_get:priemman.v1.PublicInfo.first_name)
+  return _internal_first_name();
+}
+template <typename ArgT0, typename... ArgT>
+inline PROTOBUF_ALWAYS_INLINE
+void PublicInfo::set_first_name(ArgT0&& arg0, ArgT... args) {
+ 
+ _impl_.first_name_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
+  // @@protoc_insertion_point(field_set:priemman.v1.PublicInfo.first_name)
+}
+inline std::string* PublicInfo::mutable_first_name() {
+  std::string* _s = _internal_mutable_first_name();
+  // @@protoc_insertion_point(field_mutable:priemman.v1.PublicInfo.first_name)
+  return _s;
+}
+inline const std::string& PublicInfo::_internal_first_name() const {
+  return _impl_.first_name_.Get();
+}
+inline void PublicInfo::_internal_set_first_name(const std::string& value) {
+  
+  _impl_.first_name_.Set(value, GetArenaForAllocation());
+}
+inline std::string* PublicInfo::_internal_mutable_first_name() {
+  
+  return _impl_.first_name_.Mutable(GetArenaForAllocation());
+}
+inline std::string* PublicInfo::release_first_name() {
+  // @@protoc_insertion_point(field_release:priemman.v1.PublicInfo.first_name)
+  return _impl_.first_name_.Release();
+}
+inline void PublicInfo::set_allocated_first_name(std::string* first_name) {
+  if (first_name != nullptr) {
+    
+  } else {
+    
+  }
+  _impl_.first_name_.SetAllocated(first_name, GetArenaForAllocation());
+#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (_impl_.first_name_.IsDefault()) {
+    _impl_.first_name_.Set("", GetArenaForAllocation());
+  }
+#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:priemman.v1.PublicInfo.first_name)
+}
+
+// string last_name = 3;
+inline void PublicInfo::clear_last_name() {
+  _impl_.last_name_.ClearToEmpty();
+}
+inline const std::string& PublicInfo::last_name() const {
+  // @@protoc_insertion_point(field_get:priemman.v1.PublicInfo.last_name)
+  return _internal_last_name();
+}
+template <typename ArgT0, typename... ArgT>
+inline PROTOBUF_ALWAYS_INLINE
+void PublicInfo::set_last_name(ArgT0&& arg0, ArgT... args) {
+ 
+ _impl_.last_name_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
+  // @@protoc_insertion_point(field_set:priemman.v1.PublicInfo.last_name)
+}
+inline std::string* PublicInfo::mutable_last_name() {
+  std::string* _s = _internal_mutable_last_name();
+  // @@protoc_insertion_point(field_mutable:priemman.v1.PublicInfo.last_name)
+  return _s;
+}
+inline const std::string& PublicInfo::_internal_last_name() const {
+  return _impl_.last_name_.Get();
+}
+inline void PublicInfo::_internal_set_last_name(const std::string& value) {
+  
+  _impl_.last_name_.Set(value, GetArenaForAllocation());
+}
+inline std::string* PublicInfo::_internal_mutable_last_name() {
+  
+  return _impl_.last_name_.Mutable(GetArenaForAllocation());
+}
+inline std::string* PublicInfo::release_last_name() {
+  // @@protoc_insertion_point(field_release:priemman.v1.PublicInfo.last_name)
+  return _impl_.last_name_.Release();
+}
+inline void PublicInfo::set_allocated_last_name(std::string* last_name) {
+  if (last_name != nullptr) {
+    
+  } else {
+    
+  }
+  _impl_.last_name_.SetAllocated(last_name, GetArenaForAllocation());
+#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (_impl_.last_name_.IsDefault()) {
+    _impl_.last_name_.Set("", GetArenaForAllocation());
+  }
+#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:priemman.v1.PublicInfo.last_name)
+}
+
+// string avatar_url = 4;
+inline void PublicInfo::clear_avatar_url() {
+  _impl_.avatar_url_.ClearToEmpty();
+}
+inline const std::string& PublicInfo::avatar_url() const {
+  // @@protoc_insertion_point(field_get:priemman.v1.PublicInfo.avatar_url)
+  return _internal_avatar_url();
+}
+template <typename ArgT0, typename... ArgT>
+inline PROTOBUF_ALWAYS_INLINE
+void PublicInfo::set_avatar_url(ArgT0&& arg0, ArgT... args) {
+ 
+ _impl_.avatar_url_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
+  // @@protoc_insertion_point(field_set:priemman.v1.PublicInfo.avatar_url)
+}
+inline std::string* PublicInfo::mutable_avatar_url() {
+  std::string* _s = _internal_mutable_avatar_url();
+  // @@protoc_insertion_point(field_mutable:priemman.v1.PublicInfo.avatar_url)
+  return _s;
+}
+inline const std::string& PublicInfo::_internal_avatar_url() const {
+  return _impl_.avatar_url_.Get();
+}
+inline void PublicInfo::_internal_set_avatar_url(const std::string& value) {
+  
+  _impl_.avatar_url_.Set(value, GetArenaForAllocation());
+}
+inline std::string* PublicInfo::_internal_mutable_avatar_url() {
+  
+  return _impl_.avatar_url_.Mutable(GetArenaForAllocation());
+}
+inline std::string* PublicInfo::release_avatar_url() {
+  // @@protoc_insertion_point(field_release:priemman.v1.PublicInfo.avatar_url)
+  return _impl_.avatar_url_.Release();
+}
+inline void PublicInfo::set_allocated_avatar_url(std::string* avatar_url) {
+  if (avatar_url != nullptr) {
+    
+  } else {
+    
+  }
+  _impl_.avatar_url_.SetAllocated(avatar_url, GetArenaForAllocation());
+#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (_impl_.avatar_url_.IsDefault()) {
+    _impl_.avatar_url_.Set("", GetArenaForAllocation());
+  }
+#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:priemman.v1.PublicInfo.avatar_url)
 }
 
 // -------------------------------------------------------------------
@@ -1546,6 +1999,8 @@ inline void DeleteResponse::set_success(bool value) {
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------

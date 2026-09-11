@@ -1,4 +1,5 @@
 #include "project_list_handler.hpp"
+#include "src/database/project_repository.hpp"
 
 #include <cstdlib>
 #include <string>
@@ -31,14 +32,14 @@ std::int64_t ParseOffset(const userver::server::http::HttpRequest& request) {
 
 void FillProject(
     const database::ProjectRepository& repo,
-    const database::ProjectRow& row,
+    const database::ProjectRowPopulated& row,
     priemman::v1::Project* out
 ) {
     *out = mapper::ToProto(
         row,
-        repo.ListStrings(row.id, "tags"),
-        repo.ListMedia(row.id),
-        repo.ListCollaborators(row.id)
+        repo.ListStrings(row.project.id, "tags"),
+        repo.ListMedia(row.project.id),
+        repo.ListCollaborators(row.project.id)
     );
 }
 
@@ -63,7 +64,7 @@ std::string ProjectListHandler::HandleRequestThrow(
     // Tanpa token   -> feed publik untuk halaman utama (PUBLISHED + PUBLIC)
     const auto viewer = TryAuth(request);
 
-    std::vector<database::ProjectRow> rows;
+    std::vector<database::ProjectRowPopulated> rows;
     if (viewer.has_value()) {
         rows = _projects.ListByOwner(
             *viewer,

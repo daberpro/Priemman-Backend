@@ -52,6 +52,7 @@ components_manager:
                     .txt: "text/plain; charset=utf-8"
                     .woff: "font/woff"
                     .woff2: "font/woff2"
+                    .xml: "application/xml; charset=utf-8"
 
 # ============== Cloudinary Component ==============
         cloudinary-client-component:
@@ -76,10 +77,8 @@ components_manager:
             fs-task-processor: fs-task-processor
 
 # ============== Handlers ==============
-        handler-static:  # Landing page statis di path /
+        handler-static:
             fs-cache-component: fs-cache-static
-            # Docusaurus menghasilkan HTML, CSS, dan JS di bawah /assets.
-            # Wildcard diperlukan agar aset tersebut ikut dilayani, bukan hanya /.
             path: /*
             method: GET
             task_processor: main-task-processor
@@ -94,43 +93,52 @@ components_manager:
             path: /v1/projects
             method: POST,OPTIONS
             task_processor: main-task-processor
-            # TIDAK ADA cloudinary config di sini
+
 
         handler-project-list:
             path: /v1/projects/list
             method: GET,OPTIONS
             task_processor: main-task-processor
-            # TIDAK ADA cloudinary config di sini
+
 
         handler-project-detail:
             path: /v1/projects/{id}
             method: GET,PUT,DELETE,OPTIONS
             task_processor: main-task-processor
-            # TIDAK ADA cloudinary config di sini
+
 
         handler-collection:
             path: /v1/collections
             method: GET,POST,PUT,DELETE,OPTIONS
             task_processor: main-task-processor
-            # TIDAK ADA cloudinary config di sini
+
 
         handler-basic-info:
             path: /v1/users/me
             method: GET,PUT,PATCH,OPTIONS
             task_processor: main-task-processor
-            # TIDAK ADA cloudinary config di sini
+
+        handler-like-action:
+            path: /v1/users/me/liked
+            method: GET,POST,DELETE
+            task_processor: main-task-processor
+
+        handler-save-action:
+            path: /v1/users/me/saved
+            method: GET,POST,DELETE
+            task_processor: main-task-processor
 
         handler-work-experience:
             path: /v1/users/me/work-experiences
             method: GET,POST,DELETE,OPTIONS
             task_processor: main-task-processor
-            # TIDAK ADA cloudinary config di sini
+
 
         handler-connected-accounts:
             path: /v1/users/me/connected-accounts
             method: GET,DELETE,OPTIONS,POST
             task_processor: main-task-processor
-            # TIDAK ADA cloudinary config di sini
+
 
         handler-send-otp:
             path: /v1/auth/send-otp
@@ -188,7 +196,9 @@ components_manager:
             path: /v1/media/upload
             method: POST,OPTIONS
             task_processor: main-task-processor
-            # TIDAK ADA cloudinary config di sini
+            # 20 mb max upload
+            max_request_size: $max-req-size-file-upload
+
 
         handler-upgrade:
             path: /v1/users/me/upgrade

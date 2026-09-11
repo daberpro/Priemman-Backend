@@ -41,6 +41,8 @@
 #include <src/handlers/projects/project_detail_handler.hpp>
 #include <src/handlers/projects/project_list_handler.hpp>
 #include <src/handlers/media/upload_media_handler.hpp>
+#include <src/handlers/user/action_like_handler.hpp>
+#include <src/handlers/user/action_save_handler.hpp>
 #include <src/middleware/rate_limiter.hpp>
 #include <src/component/Cloudinary/CloudinaryClientComponent.hpp>
 #include <src/component/Cloudinary/MediaSweeperComponent.hpp>
@@ -92,6 +94,8 @@ auto main(int argc, char* argv[]) -> int {
         .Append<priemman::handlers::user::WorkExperienceHandler>()
         .Append<priemman::handlers::user::ConnectedAccountsHandler>()
         .Append<priemman::handlers::user::UpgradeHandler>()
+        .Append<priemman::handlers::user::ActionLikeHandler>()
+        .Append<priemman::handlers::user::ActionSaveHandler>()
 
         // Admin Handlers
         .Append<priemman::handlers::admin::AdminUsersHandler>()
@@ -102,8 +106,8 @@ auto main(int argc, char* argv[]) -> int {
         .Append<priemman::ApiInfoHandler>("handler-api-info")
         .Append<priemman::PingHandler>("handler-ping");
 
-    
-    std::println("=========================================");
+
+    std::println("\n=========================================");
     std::println(" Priemman Backend Server");
     std::println(" Starting on config: {}", argc > 2 ? argv[2] : "../config/config.yaml");
     std::println("=========================================");
