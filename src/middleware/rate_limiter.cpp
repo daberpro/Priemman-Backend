@@ -46,7 +46,11 @@ RateLimiterMiddleware::RateLimiterMiddleware(
       _state(std::move(state)) {
 }
 
-bool RateLimiterMiddleware::IsExempt(const std::string& path) const {
+    // Root is the documentation landing page; exact match prevents broad bypass.
+    if (path == "/") {
+        return true;
+    }
+
     return std::ranges::any_of(
         _exempt_prefixes,
         [&path](const std::string& prefix) {
