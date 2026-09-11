@@ -7,6 +7,7 @@ cmake-build-*/
 out/
 bin/
 obj/
+node_modules/
 
 # ==============================
 # CMake
