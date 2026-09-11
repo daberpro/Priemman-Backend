@@ -11,6 +11,13 @@ message Location {
   string city = 2;
 }
 
+message PublicInfo {
+  ObjectId id = 1;
+  string first_name = 2;
+  string last_name = 3;
+  string avatar_url = 4;
+}
+
 message ErrorDetail {
   string code = 1;      // mis. "RATE_LIMITED", "INVALID_OTP"
   string message = 2;

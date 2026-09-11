@@ -120,12 +120,12 @@ components_manager:
 
         handler-like-action:
             path: /v1/users/me/liked
-            method: GET,PUT,DELETE
+            method: GET,POST,DELETE
             task_processor: main-task-processor
 
         handler-save-action:
             path: /v1/users/me/saved
-            method: GET,PUT,DELETE
+            method: GET,POST,DELETE
             task_processor: main-task-processor
 
         handler-work-experience:

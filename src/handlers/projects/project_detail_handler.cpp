@@ -1,4 +1,5 @@
 #include "project_detail_handler.hpp"
+#include "src/database/project_repository.hpp"
 
 #include <proto/project.pb.h>
 #include <userver/server/http/http_method.hpp>
@@ -14,8 +15,8 @@ namespace priemman::handlers::projects {
 namespace {
 using namespace userver::server::http;  // NOLINT
 
-bool IsPubliclyVisible(const database::ProjectRow& row) {
-    return row.status == "PUBLISHED" && row.visibility == "PUBLIC";
+bool IsPubliclyVisible(const database::ProjectRowPopulated& row) {
+    return row.project.status == "PUBLISHED" && row.project.visibility == "PUBLIC";
 }
 }  // namespace
 
@@ -43,7 +44,7 @@ std::string ProjectDetailHandler::HandleRequestThrow(
             return ErrorResult("NOT_FOUND", "Project not found");
         }
 
-        const bool is_owner = viewer.has_value() && *viewer == row->owner_id;
+        const bool is_owner = viewer.has_value() && *viewer == row->project.owner_id;
         if (!IsPubliclyVisible(*row) && !is_owner) {
             res.SetStatus(HttpStatus::kNotFound);
             return ErrorResult("NOT_FOUND", "Project not found");
@@ -83,7 +84,7 @@ std::string ProjectDetailHandler::HandleRequestThrow(
         const auto& input = req.input();
 
         auto existing = _projects.FindById(id);
-        if (!existing.has_value() || existing->owner_id != *user_id) {
+        if (!existing.has_value() || existing->project.owner_id != *user_id) {
             res.SetStatus(HttpStatus::kNotFound);
             return ErrorResult("NOT_FOUND", "Project not found");
         }
@@ -131,7 +132,7 @@ std::string ProjectDetailHandler::HandleRequestThrow(
         row.id = id;
         row.owner_id = *user_id;
         row.title = input.title();
-        row.slug = existing->slug;
+        row.slug = existing->project.slug;
         row.visibility = mapper::VisibilityToString(input.visibility());
         row.status = mapper::StatusToString(input.status());
         row.content = input.content();

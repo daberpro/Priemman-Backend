@@ -680,6 +680,7 @@ class Project final :
     kCreatedAtFieldNumber = 13,
     kUpdatedAtFieldNumber = 14,
     kPublishedAtFieldNumber = 15,
+    kAuthorFieldNumber = 16,
     kVisibilityFieldNumber = 10,
     kStatusFieldNumber = 11,
   };
@@ -907,6 +908,24 @@ class Project final :
       ::PROTOBUF_NAMESPACE_ID::Timestamp* published_at);
   ::PROTOBUF_NAMESPACE_ID::Timestamp* unsafe_arena_release_published_at();
 
+  // .priemman.v1.PublicInfo author = 16;
+  bool has_author() const;
+  private:
+  bool _internal_has_author() const;
+  public:
+  void clear_author();
+  const ::priemman::v1::PublicInfo& author() const;
+  PROTOBUF_NODISCARD ::priemman::v1::PublicInfo* release_author();
+  ::priemman::v1::PublicInfo* mutable_author();
+  void set_allocated_author(::priemman::v1::PublicInfo* author);
+  private:
+  const ::priemman::v1::PublicInfo& _internal_author() const;
+  ::priemman::v1::PublicInfo* _internal_mutable_author();
+  public:
+  void unsafe_arena_set_allocated_author(
+      ::priemman::v1::PublicInfo* author);
+  ::priemman::v1::PublicInfo* unsafe_arena_release_author();
+
   // .priemman.v1.ProjectVisibility visibility = 10;
   void clear_visibility();
   ::priemman::v1::ProjectVisibility visibility() const;
@@ -946,6 +965,7 @@ class Project final :
     ::PROTOBUF_NAMESPACE_ID::Timestamp* created_at_;
     ::PROTOBUF_NAMESPACE_ID::Timestamp* updated_at_;
     ::PROTOBUF_NAMESPACE_ID::Timestamp* published_at_;
+    ::priemman::v1::PublicInfo* author_;
     int visibility_;
     int status_;
     mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
@@ -4489,6 +4509,91 @@ inline void Project::set_allocated_published_at(::PROTOBUF_NAMESPACE_ID::Timesta
   }
   _impl_.published_at_ = published_at;
   // @@protoc_insertion_point(field_set_allocated:priemman.v1.Project.published_at)
+}
+
+// .priemman.v1.PublicInfo author = 16;
+inline bool Project::_internal_has_author() const {
+  return this != internal_default_instance() && _impl_.author_ != nullptr;
+}
+inline bool Project::has_author() const {
+  return _internal_has_author();
+}
+inline const ::priemman::v1::PublicInfo& Project::_internal_author() const {
+  const ::priemman::v1::PublicInfo* p = _impl_.author_;
+  return p != nullptr ? *p : reinterpret_cast<const ::priemman::v1::PublicInfo&>(
+      ::priemman::v1::_PublicInfo_default_instance_);
+}
+inline const ::priemman::v1::PublicInfo& Project::author() const {
+  // @@protoc_insertion_point(field_get:priemman.v1.Project.author)
+  return _internal_author();
+}
+inline void Project::unsafe_arena_set_allocated_author(
+    ::priemman::v1::PublicInfo* author) {
+  if (GetArenaForAllocation() == nullptr) {
+    delete reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(_impl_.author_);
+  }
+  _impl_.author_ = author;
+  if (author) {
+    
+  } else {
+    
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:priemman.v1.Project.author)
+}
+inline ::priemman::v1::PublicInfo* Project::release_author() {
+  
+  ::priemman::v1::PublicInfo* temp = _impl_.author_;
+  _impl_.author_ = nullptr;
+#ifdef PROTOBUF_FORCE_COPY_IN_RELEASE
+  auto* old =  reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(temp);
+  temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
+  if (GetArenaForAllocation() == nullptr) { delete old; }
+#else  // PROTOBUF_FORCE_COPY_IN_RELEASE
+  if (GetArenaForAllocation() != nullptr) {
+    temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
+  }
+#endif  // !PROTOBUF_FORCE_COPY_IN_RELEASE
+  return temp;
+}
+inline ::priemman::v1::PublicInfo* Project::unsafe_arena_release_author() {
+  // @@protoc_insertion_point(field_release:priemman.v1.Project.author)
+  
+  ::priemman::v1::PublicInfo* temp = _impl_.author_;
+  _impl_.author_ = nullptr;
+  return temp;
+}
+inline ::priemman::v1::PublicInfo* Project::_internal_mutable_author() {
+  
+  if (_impl_.author_ == nullptr) {
+    auto* p = CreateMaybeMessage<::priemman::v1::PublicInfo>(GetArenaForAllocation());
+    _impl_.author_ = p;
+  }
+  return _impl_.author_;
+}
+inline ::priemman::v1::PublicInfo* Project::mutable_author() {
+  ::priemman::v1::PublicInfo* _msg = _internal_mutable_author();
+  // @@protoc_insertion_point(field_mutable:priemman.v1.Project.author)
+  return _msg;
+}
+inline void Project::set_allocated_author(::priemman::v1::PublicInfo* author) {
+  ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArenaForAllocation();
+  if (message_arena == nullptr) {
+    delete reinterpret_cast< ::PROTOBUF_NAMESPACE_ID::MessageLite*>(_impl_.author_);
+  }
+  if (author) {
+    ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena =
+        ::PROTOBUF_NAMESPACE_ID::Arena::InternalGetOwningArena(
+                reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(author));
+    if (message_arena != submessage_arena) {
+      author = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
+          message_arena, author, submessage_arena);
+    }
+    
+  } else {
+    
+  }
+  _impl_.author_ = author;
+  // @@protoc_insertion_point(field_set_allocated:priemman.v1.Project.author)
 }
 
 // -------------------------------------------------------------------

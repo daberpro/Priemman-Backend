@@ -45,6 +45,7 @@ message Project {
   google.protobuf.Timestamp created_at = 13;
   google.protobuf.Timestamp updated_at = 14;
   google.protobuf.Timestamp published_at = 15;
+  PublicInfo author = 16;
 }
 
 enum CollectionVisibility {

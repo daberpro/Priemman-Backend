@@ -1,9 +1,14 @@
 #include "project_repository.hpp"
+#include "src/database/common_definition.hpp"
 
+#include <memory>
+#include <optional>
 #include <stdexcept>
+#include <unordered_map>
 
 #include <userver/storages/mysql/cluster_host_type.hpp>
 #include <userver/storages/mysql/query.hpp>
+#include <userver/storages/mysql/transaction.hpp>
 #include <userver/utils/uuid4.hpp>
 
 namespace priemman::database {
@@ -21,12 +26,54 @@ constexpr std::string_view kSelectProject = R"sql(
     FROM projects
 )sql";
 
-// kind -> (table, column); whitelist biar aman dari injeksi.
 std::pair<std::string, std::string> KindToTable(const std::string& kind) {
     if (kind == "tools") return {"project_tools", "tool"};
     if (kind == "disciplines") return {"project_disciplines", "discipline"};
     if (kind == "tags") return {"project_tags", "tag"};
     throw std::invalid_argument("Unknown project list kind: " + kind);
+}
+
+std::optional<priemman::common::PublicInfo> GetAuthor(
+    userver::storages::mysql::Transaction* const trx, const std::string& user_id
+) {
+    return trx->Execute(
+        userver::storages::mysql::Query{
+            R"sql(
+                SELECT id, first_name, last_name, avatar_url
+                FROM users
+                WHERE id = ?
+            )sql"
+        },
+        user_id
+    ).AsOptionalSingleRow<priemman::common::PublicInfo>();
+}
+
+// Gabungkan sekumpulan ProjectRow dengan author-nya masing-masing, dalam transaction
+// yang sama dengan query project-nya. Di-cache per owner_id supaya owner yang sama
+// tidak di-query berkali-kali dalam satu list.
+std::vector<ProjectRowPopulated> PopulateAll(
+    userver::storages::mysql::Transaction& trx, std::vector<ProjectRow>&& projects
+) {
+    std::vector<ProjectRowPopulated> result;
+    result.reserve(projects.size());
+
+    std::unordered_map<std::string, priemman::common::PublicInfo> author_cache;
+    for (auto& project : projects) {
+        auto cached = author_cache.find(project.owner_id);
+        if (cached == author_cache.end()) {
+            auto author = GetAuthor(&trx, project.owner_id);
+            cached = author_cache.emplace(
+                project.owner_id, author.value_or(priemman::common::PublicInfo{})
+            ).first;
+        }
+
+        ProjectRowPopulated populated;
+        populated.project = std::move(project);
+        populated.author = cached->second;
+        result.push_back(std::move(populated));
+    }
+
+    return result;
 }
 
 }  // namespace
@@ -37,14 +84,30 @@ ProjectRepository::ProjectRepository(
     : _mysql_cluster(*mysql_cluster) {
 }
 
-std::optional<ProjectRow> ProjectRepository::FindById(const std::string& id) const {
-    return _mysql_cluster->Execute(
-        userver::storages::mysql::ClusterHostType::kSecondary,
+std::optional<ProjectRowPopulated> ProjectRepository::FindById(const std::string& id) const {
+    auto trx = _mysql_cluster->Begin(userver::storages::mysql::ClusterHostType::kSecondary);
+
+    auto project = trx.Execute(
         userver::storages::mysql::Query{
             std::string{kSelectProject} + " WHERE id = ? LIMIT 1"
         },
         id
     ).AsOptionalSingleRow<ProjectRow>();
+
+    if (!project.has_value()) {
+        trx.Rollback();
+        return std::nullopt;
+    }
+
+    auto author = GetAuthor(&trx, project->owner_id);
+    trx.Commit();
+
+    ProjectRowPopulated result;
+    result.project = std::move(*project);
+    if (author.has_value()) {
+        result.author = std::move(*author);
+    }
+    return result;
 }
 
 bool ProjectRepository::ExistsByOwnerSlug(
@@ -59,10 +122,12 @@ bool ProjectRepository::ExistsByOwnerSlug(
     ).AsOptionalSingleField<std::int64_t>().value_or(0) > 0;
 }
 
-std::string ProjectRepository::Create(const ProjectRow& row) const {
+ProjectRowPopulated ProjectRepository::Create(const ProjectRow& row) const {
     const std::string id = userver::utils::generators::GenerateUuid();
-    _mysql_cluster->Execute(
-        userver::storages::mysql::ClusterHostType::kPrimary,
+
+    auto trx = _mysql_cluster->Begin(userver::storages::mysql::ClusterHostType::kPrimary);
+
+    trx.Execute(
         userver::storages::mysql::Query{
             R"sql(
                 INSERT INTO projects (
@@ -76,12 +141,31 @@ std::string ProjectRepository::Create(const ProjectRow& row) const {
         id, row.owner_id, row.title, row.slug,
         row.cover_media_id, row.visibility, row.content, row.status, row.status
     );
-    return id;
+
+    // Baca ulang row yang baru saja di-insert, masih dalam transaction yang sama,
+    // supaya created_at/updated_at/published_at ikut sesuai nilai default dari MariaDB.
+    auto project = trx.Execute(
+        userver::storages::mysql::Query{
+            std::string{kSelectProject} + " WHERE id = ? LIMIT 1"
+        },
+        id
+    ).AsSingleRow<ProjectRow>();
+
+    auto author = GetAuthor(&trx, project.owner_id);
+    trx.Commit();
+
+    ProjectRowPopulated result;
+    result.project = std::move(project);
+    if (author.has_value()) {
+        result.author = std::move(*author);
+    }
+    return result;
 }
 
-bool ProjectRepository::Update(const ProjectRow& row) const {
-    auto result = _mysql_cluster->Execute(
-        userver::storages::mysql::ClusterHostType::kPrimary,
+std::optional<ProjectRowPopulated> ProjectRepository::Update(const ProjectRow& row) const {
+    auto trx = _mysql_cluster->Begin(userver::storages::mysql::ClusterHostType::kPrimary);
+
+    auto exec_result = trx.Execute(
         userver::storages::mysql::Query{
             R"sql(
                 UPDATE projects
@@ -94,10 +178,37 @@ bool ProjectRepository::Update(const ProjectRow& row) const {
             )sql"
         },
         row.title, row.slug,
-        row.visibility, row.status, row.content , row.status,
+        row.visibility, row.status, row.content, row.status,
         row.id, row.owner_id
     ).AsExecutionResult();
-    return result.rows_affected > 0;
+
+    if (exec_result.rows_affected == 0) {
+        trx.Rollback();
+        return std::nullopt;
+    }
+
+    auto project = trx.Execute(
+        userver::storages::mysql::Query{
+            std::string{kSelectProject} + " WHERE id = ? LIMIT 1"
+        },
+        row.id
+    ).AsOptionalSingleRow<ProjectRow>();
+
+    if (!project.has_value()) {
+        // Praktis tidak akan terjadi (baru saja ter-update), tapi tetap dijaga.
+        trx.Rollback();
+        return std::nullopt;
+    }
+
+    auto author = GetAuthor(&trx, project->owner_id);
+    trx.Commit();
+
+    ProjectRowPopulated result;
+    result.project = std::move(*project);
+    if (author.has_value()) {
+        result.author = std::move(*author);
+    }
+    return result;
 }
 
 bool ProjectRepository::Delete(
@@ -165,7 +276,6 @@ void ProjectRepository::ReplaceStrings(
 void ProjectRepository::ReplaceMedia(
     const std::string& project_id, const std::vector<ProjectMediaRow>& media
 ) const {
-    // Hapus semua media lama
     _mysql_cluster->Execute(
         userver::storages::mysql::ClusterHostType::kPrimary,
         userver::storages::mysql::Query{
@@ -174,7 +284,6 @@ void ProjectRepository::ReplaceMedia(
         project_id
     );
 
-    // Insert media baru
     for (const auto& m : media) {
         _mysql_cluster->Execute(
             userver::storages::mysql::ClusterHostType::kPrimary,
@@ -277,36 +386,40 @@ std::vector<ProjectCollaboratorRow> ProjectRepository::ListCollaborators(
     ).AsVector<ProjectCollaboratorRow>();
 }
 
-std::vector<ProjectRow> ProjectRepository::ListByOwner(
+std::vector<ProjectRowPopulated> ProjectRepository::ListByOwner(
     const std::string& owner_id, const std::string& status_filter,
     std::int64_t limit, std::int64_t offset
 ) const {
-    if (status_filter.empty()) {
-        return _mysql_cluster->Execute(
-            userver::storages::mysql::ClusterHostType::kSecondary,
-            userver::storages::mysql::Query{
-                std::string{kSelectProject} +
-                " WHERE owner_id = ? ORDER BY created_at DESC LIMIT ? OFFSET ?"
-            },
-            owner_id, limit, offset
-        ).AsVector<ProjectRow>();
-    }
-    return _mysql_cluster->Execute(
-        userver::storages::mysql::ClusterHostType::kSecondary,
-        userver::storages::mysql::Query{
-            std::string{kSelectProject} +
-            " WHERE owner_id = ? AND status = ?"
-            " ORDER BY created_at DESC LIMIT ? OFFSET ?"
-        },
-        owner_id, status_filter, limit, offset
-    ).AsVector<ProjectRow>();
+    auto trx = _mysql_cluster->Begin(userver::storages::mysql::ClusterHostType::kSecondary);
+
+    std::vector<ProjectRow> projects = status_filter.empty()
+        ? trx.Execute(
+              userver::storages::mysql::Query{
+                  std::string{kSelectProject} +
+                  " WHERE owner_id = ? ORDER BY created_at DESC LIMIT ? OFFSET ?"
+              },
+              owner_id, limit, offset
+          ).AsVector<ProjectRow>()
+        : trx.Execute(
+              userver::storages::mysql::Query{
+                  std::string{kSelectProject} +
+                  " WHERE owner_id = ? AND status = ?"
+                  " ORDER BY created_at DESC LIMIT ? OFFSET ?"
+              },
+              owner_id, status_filter, limit, offset
+          ).AsVector<ProjectRow>();
+
+    auto result = PopulateAll(trx, std::move(projects));
+    trx.Commit();
+    return result;
 }
 
-std::vector<ProjectRow> ProjectRepository::ListPublic(
+std::vector<ProjectRowPopulated> ProjectRepository::ListPublic(
     std::int64_t limit, std::int64_t offset
 ) const {
-    return _mysql_cluster->Execute(
-        userver::storages::mysql::ClusterHostType::kSecondary,
+    auto trx = _mysql_cluster->Begin(userver::storages::mysql::ClusterHostType::kSecondary);
+
+    auto projects = trx.Execute(
         userver::storages::mysql::Query{
             std::string{kSelectProject} +
             " WHERE status = 'PUBLISHED' AND visibility = 'PUBLIC'"
@@ -314,6 +427,10 @@ std::vector<ProjectRow> ProjectRepository::ListPublic(
         },
         limit, offset
     ).AsVector<ProjectRow>();
+
+    auto result = PopulateAll(trx, std::move(projects));
+    trx.Commit();
+    return result;
 }
 
 

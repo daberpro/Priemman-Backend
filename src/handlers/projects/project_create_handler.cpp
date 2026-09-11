@@ -91,20 +91,17 @@ std::string ProjectCreateHandler::HandleRequestThrow(
     row.status = mapper::StatusToString(input.status());
     row.content = content;
 
-    const std::string id = _projects.Create(row);
-    helpers::SaveChildren(_projects, id, input);
+    const auto& created = _projects.Create(row);
+    helpers::SaveChildren(_projects, created.project.id, input);
     media::AttachMedia(_media, public_ids, *user_id);
 
-    auto created = _projects.FindById(id);
     priemman::v1::ProjectResponse response;
-    if (created.has_value()) {
-        *response.mutable_project() = mapper::ToProto(
-            *created,
-            _projects.ListStrings(id, "tags"),
-            _projects.ListMedia(id),
-            _projects.ListCollaborators(id)
-        );
-    }
+    *response.mutable_project() = mapper::ToProto(
+        created,
+        _projects.ListStrings(created.project.id, "tags"),
+        _projects.ListMedia(created.project.id),
+        _projects.ListCollaborators(created.project.id)
+    );
     return response.SerializeAsString();
 }
 

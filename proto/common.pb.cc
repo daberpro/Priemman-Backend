@@ -49,6 +49,22 @@ struct LocationDefaultTypeInternal {
   };
 };
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 LocationDefaultTypeInternal _Location_default_instance_;
+PROTOBUF_CONSTEXPR PublicInfo::PublicInfo(
+    ::_pbi::ConstantInitialized): _impl_{
+    /*decltype(_impl_.first_name_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
+  , /*decltype(_impl_.last_name_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
+  , /*decltype(_impl_.avatar_url_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
+  , /*decltype(_impl_.id_)*/nullptr
+  , /*decltype(_impl_._cached_size_)*/{}} {}
+struct PublicInfoDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR PublicInfoDefaultTypeInternal()
+      : _instance(::_pbi::ConstantInitialized{}) {}
+  ~PublicInfoDefaultTypeInternal() {}
+  union {
+    PublicInfo _instance;
+  };
+};
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 PublicInfoDefaultTypeInternal _PublicInfo_default_instance_;
 PROTOBUF_CONSTEXPR ErrorDetail_MetaEntry_DoNotUse::ErrorDetail_MetaEntry_DoNotUse(
     ::_pbi::ConstantInitialized) {}
 struct ErrorDetail_MetaEntry_DoNotUseDefaultTypeInternal {
@@ -107,7 +123,7 @@ struct DeleteResponseDefaultTypeInternal {
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 DeleteResponseDefaultTypeInternal _DeleteResponse_default_instance_;
 }  // namespace v1
 }  // namespace priemman
-static ::_pb::Metadata file_level_metadata_common_2eproto[6];
+static ::_pb::Metadata file_level_metadata_common_2eproto[7];
 static constexpr ::_pb::EnumDescriptor const** file_level_enum_descriptors_common_2eproto = nullptr;
 static constexpr ::_pb::ServiceDescriptor const** file_level_service_descriptors_common_2eproto = nullptr;
 
@@ -127,6 +143,16 @@ const uint32_t TableStruct_common_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE(p
   ~0u,  // no _inlined_string_donated_
   PROTOBUF_FIELD_OFFSET(::priemman::v1::Location, _impl_.country_),
   PROTOBUF_FIELD_OFFSET(::priemman::v1::Location, _impl_.city_),
+  ~0u,  // no _has_bits_
+  PROTOBUF_FIELD_OFFSET(::priemman::v1::PublicInfo, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  ~0u,  // no _inlined_string_donated_
+  PROTOBUF_FIELD_OFFSET(::priemman::v1::PublicInfo, _impl_.id_),
+  PROTOBUF_FIELD_OFFSET(::priemman::v1::PublicInfo, _impl_.first_name_),
+  PROTOBUF_FIELD_OFFSET(::priemman::v1::PublicInfo, _impl_.last_name_),
+  PROTOBUF_FIELD_OFFSET(::priemman::v1::PublicInfo, _impl_.avatar_url_),
   PROTOBUF_FIELD_OFFSET(::priemman::v1::ErrorDetail_MetaEntry_DoNotUse, _has_bits_),
   PROTOBUF_FIELD_OFFSET(::priemman::v1::ErrorDetail_MetaEntry_DoNotUse, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -168,15 +194,17 @@ const uint32_t TableStruct_common_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE(p
 static const ::_pbi::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
   { 0, -1, -1, sizeof(::priemman::v1::ObjectId)},
   { 7, -1, -1, sizeof(::priemman::v1::Location)},
-  { 15, 23, -1, sizeof(::priemman::v1::ErrorDetail_MetaEntry_DoNotUse)},
-  { 25, -1, -1, sizeof(::priemman::v1::ErrorDetail)},
-  { 34, -1, -1, sizeof(::priemman::v1::Result)},
-  { 45, -1, -1, sizeof(::priemman::v1::DeleteResponse)},
+  { 15, -1, -1, sizeof(::priemman::v1::PublicInfo)},
+  { 25, 33, -1, sizeof(::priemman::v1::ErrorDetail_MetaEntry_DoNotUse)},
+  { 35, -1, -1, sizeof(::priemman::v1::ErrorDetail)},
+  { 44, -1, -1, sizeof(::priemman::v1::Result)},
+  { 55, -1, -1, sizeof(::priemman::v1::DeleteResponse)},
 };
 
 static const ::_pb::Message* const file_default_instances[] = {
   &::priemman::v1::_ObjectId_default_instance_._instance,
   &::priemman::v1::_Location_default_instance_._instance,
+  &::priemman::v1::_PublicInfo_default_instance_._instance,
   &::priemman::v1::_ErrorDetail_MetaEntry_DoNotUse_default_instance_._instance,
   &::priemman::v1::_ErrorDetail_default_instance_._instance,
   &::priemman::v1::_Result_default_instance_._instance,
@@ -187,24 +215,26 @@ const char descriptor_table_protodef_common_2eproto[] PROTOBUF_SECTION_VARIABLE(
   "\n\014common.proto\022\013priemman.v1\032\037google/prot"
   "obuf/timestamp.proto\"\031\n\010ObjectId\022\r\n\005valu"
   "e\030\001 \001(\t\")\n\010Location\022\017\n\007country\030\001 \001(\t\022\014\n\004"
-  "city\030\002 \001(\t\"\213\001\n\013ErrorDetail\022\014\n\004code\030\001 \001(\t"
-  "\022\017\n\007message\030\002 \001(\t\0220\n\004meta\030\003 \003(\0132\".priemm"
-  "an.v1.ErrorDetail.MetaEntry\032+\n\tMetaEntry"
-  "\022\013\n\003key\030\001 \001(\t\022\r\n\005value\030\002 \001(\t:\0028\001\"}\n\006Resu"
-  "lt\022\020\n\010is_error\030\001 \001(\010\022\021\n\thas_value\030\002 \001(\010\022"
-  "\017\n\007message\030\003 \001(\t\022\r\n\005value\030\004 \001(\t\022.\n\014error"
-  "_detail\030\005 \001(\0132\030.priemman.v1.ErrorDetail\""
-  "!\n\016DeleteResponse\022\017\n\007success\030\001 \001(\010b\006prot"
-  "o3"
+  "city\030\002 \001(\t\"j\n\nPublicInfo\022!\n\002id\030\001 \001(\0132\025.p"
+  "riemman.v1.ObjectId\022\022\n\nfirst_name\030\002 \001(\t\022"
+  "\021\n\tlast_name\030\003 \001(\t\022\022\n\navatar_url\030\004 \001(\t\"\213"
+  "\001\n\013ErrorDetail\022\014\n\004code\030\001 \001(\t\022\017\n\007message\030"
+  "\002 \001(\t\0220\n\004meta\030\003 \003(\0132\".priemman.v1.ErrorD"
+  "etail.MetaEntry\032+\n\tMetaEntry\022\013\n\003key\030\001 \001("
+  "\t\022\r\n\005value\030\002 \001(\t:\0028\001\"}\n\006Result\022\020\n\010is_err"
+  "or\030\001 \001(\010\022\021\n\thas_value\030\002 \001(\010\022\017\n\007message\030\003"
+  " \001(\t\022\r\n\005value\030\004 \001(\t\022.\n\014error_detail\030\005 \001("
+  "\0132\030.priemman.v1.ErrorDetail\"!\n\016DeleteRes"
+  "ponse\022\017\n\007success\030\001 \001(\010b\006proto3"
   ;
 static const ::_pbi::DescriptorTable* const descriptor_table_common_2eproto_deps[1] = {
   &::descriptor_table_google_2fprotobuf_2ftimestamp_2eproto,
 };
 static ::_pbi::once_flag descriptor_table_common_2eproto_once;
 const ::_pbi::DescriptorTable descriptor_table_common_2eproto = {
-    false, false, 442, descriptor_table_protodef_common_2eproto,
+    false, false, 550, descriptor_table_protodef_common_2eproto,
     "common.proto",
-    &descriptor_table_common_2eproto_once, descriptor_table_common_2eproto_deps, 1, 6,
+    &descriptor_table_common_2eproto_once, descriptor_table_common_2eproto_deps, 1, 7,
     schemas, file_default_instances, TableStruct_common_2eproto::offsets,
     file_level_metadata_common_2eproto, file_level_enum_descriptors_common_2eproto,
     file_level_service_descriptors_common_2eproto,
@@ -676,6 +706,351 @@ void Location::InternalSwap(Location* other) {
 
 // ===================================================================
 
+class PublicInfo::_Internal {
+ public:
+  static const ::priemman::v1::ObjectId& id(const PublicInfo* msg);
+};
+
+const ::priemman::v1::ObjectId&
+PublicInfo::_Internal::id(const PublicInfo* msg) {
+  return *msg->_impl_.id_;
+}
+PublicInfo::PublicInfo(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                         bool is_message_owned)
+  : ::PROTOBUF_NAMESPACE_ID::Message(arena, is_message_owned) {
+  SharedCtor(arena, is_message_owned);
+  // @@protoc_insertion_point(arena_constructor:priemman.v1.PublicInfo)
+}
+PublicInfo::PublicInfo(const PublicInfo& from)
+  : ::PROTOBUF_NAMESPACE_ID::Message() {
+  PublicInfo* const _this = this; (void)_this;
+  new (&_impl_) Impl_{
+      decltype(_impl_.first_name_){}
+    , decltype(_impl_.last_name_){}
+    , decltype(_impl_.avatar_url_){}
+    , decltype(_impl_.id_){nullptr}
+    , /*decltype(_impl_._cached_size_)*/{}};
+
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  _impl_.first_name_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+    _impl_.first_name_.Set("", GetArenaForAllocation());
+  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (!from._internal_first_name().empty()) {
+    _this->_impl_.first_name_.Set(from._internal_first_name(), 
+      _this->GetArenaForAllocation());
+  }
+  _impl_.last_name_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+    _impl_.last_name_.Set("", GetArenaForAllocation());
+  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (!from._internal_last_name().empty()) {
+    _this->_impl_.last_name_.Set(from._internal_last_name(), 
+      _this->GetArenaForAllocation());
+  }
+  _impl_.avatar_url_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+    _impl_.avatar_url_.Set("", GetArenaForAllocation());
+  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (!from._internal_avatar_url().empty()) {
+    _this->_impl_.avatar_url_.Set(from._internal_avatar_url(), 
+      _this->GetArenaForAllocation());
+  }
+  if (from._internal_has_id()) {
+    _this->_impl_.id_ = new ::priemman::v1::ObjectId(*from._impl_.id_);
+  }
+  // @@protoc_insertion_point(copy_constructor:priemman.v1.PublicInfo)
+}
+
+inline void PublicInfo::SharedCtor(
+    ::_pb::Arena* arena, bool is_message_owned) {
+  (void)arena;
+  (void)is_message_owned;
+  new (&_impl_) Impl_{
+      decltype(_impl_.first_name_){}
+    , decltype(_impl_.last_name_){}
+    , decltype(_impl_.avatar_url_){}
+    , decltype(_impl_.id_){nullptr}
+    , /*decltype(_impl_._cached_size_)*/{}
+  };
+  _impl_.first_name_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+    _impl_.first_name_.Set("", GetArenaForAllocation());
+  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  _impl_.last_name_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+    _impl_.last_name_.Set("", GetArenaForAllocation());
+  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  _impl_.avatar_url_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+    _impl_.avatar_url_.Set("", GetArenaForAllocation());
+  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+}
+
+PublicInfo::~PublicInfo() {
+  // @@protoc_insertion_point(destructor:priemman.v1.PublicInfo)
+  if (auto *arena = _internal_metadata_.DeleteReturnArena<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>()) {
+  (void)arena;
+    return;
+  }
+  SharedDtor();
+}
+
+inline void PublicInfo::SharedDtor() {
+  GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
+  _impl_.first_name_.Destroy();
+  _impl_.last_name_.Destroy();
+  _impl_.avatar_url_.Destroy();
+  if (this != internal_default_instance()) delete _impl_.id_;
+}
+
+void PublicInfo::SetCachedSize(int size) const {
+  _impl_._cached_size_.Set(size);
+}
+
+void PublicInfo::Clear() {
+// @@protoc_insertion_point(message_clear_start:priemman.v1.PublicInfo)
+  uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  _impl_.first_name_.ClearToEmpty();
+  _impl_.last_name_.ClearToEmpty();
+  _impl_.avatar_url_.ClearToEmpty();
+  if (GetArenaForAllocation() == nullptr && _impl_.id_ != nullptr) {
+    delete _impl_.id_;
+  }
+  _impl_.id_ = nullptr;
+  _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+}
+
+const char* PublicInfo::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  while (!ctx->Done(&ptr)) {
+    uint32_t tag;
+    ptr = ::_pbi::ReadTag(ptr, &tag);
+    switch (tag >> 3) {
+      // .priemman.v1.ObjectId id = 1;
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 10)) {
+          ptr = ctx->ParseMessage(_internal_mutable_id(), ptr);
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      // string first_name = 2;
+      case 2:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 18)) {
+          auto str = _internal_mutable_first_name();
+          ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
+          CHK_(ptr);
+          CHK_(::_pbi::VerifyUTF8(str, "priemman.v1.PublicInfo.first_name"));
+        } else
+          goto handle_unusual;
+        continue;
+      // string last_name = 3;
+      case 3:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 26)) {
+          auto str = _internal_mutable_last_name();
+          ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
+          CHK_(ptr);
+          CHK_(::_pbi::VerifyUTF8(str, "priemman.v1.PublicInfo.last_name"));
+        } else
+          goto handle_unusual;
+        continue;
+      // string avatar_url = 4;
+      case 4:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 34)) {
+          auto str = _internal_mutable_avatar_url();
+          ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
+          CHK_(ptr);
+          CHK_(::_pbi::VerifyUTF8(str, "priemman.v1.PublicInfo.avatar_url"));
+        } else
+          goto handle_unusual;
+        continue;
+      default:
+        goto handle_unusual;
+    }  // switch
+  handle_unusual:
+    if ((tag == 0) || ((tag & 7) == 4)) {
+      CHK_(ptr);
+      ctx->SetLastTag(tag);
+      goto message_done;
+    }
+    ptr = UnknownFieldParse(
+        tag,
+        _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
+        ptr, ctx);
+    CHK_(ptr != nullptr);
+  }  // while
+message_done:
+  return ptr;
+failure:
+  ptr = nullptr;
+  goto message_done;
+#undef CHK_
+}
+
+uint8_t* PublicInfo::_InternalSerialize(
+    uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
+  // @@protoc_insertion_point(serialize_to_array_start:priemman.v1.PublicInfo)
+  uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // .priemman.v1.ObjectId id = 1;
+  if (this->_internal_has_id()) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+      InternalWriteMessage(1, _Internal::id(this),
+        _Internal::id(this).GetCachedSize(), target, stream);
+  }
+
+  // string first_name = 2;
+  if (!this->_internal_first_name().empty()) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+      this->_internal_first_name().data(), static_cast<int>(this->_internal_first_name().length()),
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+      "priemman.v1.PublicInfo.first_name");
+    target = stream->WriteStringMaybeAliased(
+        2, this->_internal_first_name(), target);
+  }
+
+  // string last_name = 3;
+  if (!this->_internal_last_name().empty()) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+      this->_internal_last_name().data(), static_cast<int>(this->_internal_last_name().length()),
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+      "priemman.v1.PublicInfo.last_name");
+    target = stream->WriteStringMaybeAliased(
+        3, this->_internal_last_name(), target);
+  }
+
+  // string avatar_url = 4;
+  if (!this->_internal_avatar_url().empty()) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+      this->_internal_avatar_url().data(), static_cast<int>(this->_internal_avatar_url().length()),
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+      "priemman.v1.PublicInfo.avatar_url");
+    target = stream->WriteStringMaybeAliased(
+        4, this->_internal_avatar_url(), target);
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:priemman.v1.PublicInfo)
+  return target;
+}
+
+size_t PublicInfo::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:priemman.v1.PublicInfo)
+  size_t total_size = 0;
+
+  uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  // string first_name = 2;
+  if (!this->_internal_first_name().empty()) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+        this->_internal_first_name());
+  }
+
+  // string last_name = 3;
+  if (!this->_internal_last_name().empty()) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+        this->_internal_last_name());
+  }
+
+  // string avatar_url = 4;
+  if (!this->_internal_avatar_url().empty()) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+        this->_internal_avatar_url());
+  }
+
+  // .priemman.v1.ObjectId id = 1;
+  if (this->_internal_has_id()) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
+        *_impl_.id_);
+  }
+
+  return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
+}
+
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData PublicInfo::_class_data_ = {
+    ::PROTOBUF_NAMESPACE_ID::Message::CopyWithSourceCheck,
+    PublicInfo::MergeImpl
+};
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*PublicInfo::GetClassData() const { return &_class_data_; }
+
+
+void PublicInfo::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg) {
+  auto* const _this = static_cast<PublicInfo*>(&to_msg);
+  auto& from = static_cast<const PublicInfo&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:priemman.v1.PublicInfo)
+  GOOGLE_DCHECK_NE(&from, _this);
+  uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (!from._internal_first_name().empty()) {
+    _this->_internal_set_first_name(from._internal_first_name());
+  }
+  if (!from._internal_last_name().empty()) {
+    _this->_internal_set_last_name(from._internal_last_name());
+  }
+  if (!from._internal_avatar_url().empty()) {
+    _this->_internal_set_avatar_url(from._internal_avatar_url());
+  }
+  if (from._internal_has_id()) {
+    _this->_internal_mutable_id()->::priemman::v1::ObjectId::MergeFrom(
+        from._internal_id());
+  }
+  _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+}
+
+void PublicInfo::CopyFrom(const PublicInfo& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:priemman.v1.PublicInfo)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool PublicInfo::IsInitialized() const {
+  return true;
+}
+
+void PublicInfo::InternalSwap(PublicInfo* other) {
+  using std::swap;
+  auto* lhs_arena = GetArenaForAllocation();
+  auto* rhs_arena = other->GetArenaForAllocation();
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
+      &_impl_.first_name_, lhs_arena,
+      &other->_impl_.first_name_, rhs_arena
+  );
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
+      &_impl_.last_name_, lhs_arena,
+      &other->_impl_.last_name_, rhs_arena
+  );
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
+      &_impl_.avatar_url_, lhs_arena,
+      &other->_impl_.avatar_url_, rhs_arena
+  );
+  swap(_impl_.id_, other->_impl_.id_);
+}
+
+::PROTOBUF_NAMESPACE_ID::Metadata PublicInfo::GetMetadata() const {
+  return ::_pbi::AssignDescriptors(
+      &descriptor_table_common_2eproto_getter, &descriptor_table_common_2eproto_once,
+      file_level_metadata_common_2eproto[2]);
+}
+
+// ===================================================================
+
 ErrorDetail_MetaEntry_DoNotUse::ErrorDetail_MetaEntry_DoNotUse() {}
 ErrorDetail_MetaEntry_DoNotUse::ErrorDetail_MetaEntry_DoNotUse(::PROTOBUF_NAMESPACE_ID::Arena* arena)
     : SuperType(arena) {}
@@ -685,7 +1060,7 @@ void ErrorDetail_MetaEntry_DoNotUse::MergeFrom(const ErrorDetail_MetaEntry_DoNot
 ::PROTOBUF_NAMESPACE_ID::Metadata ErrorDetail_MetaEntry_DoNotUse::GetMetadata() const {
   return ::_pbi::AssignDescriptors(
       &descriptor_table_common_2eproto_getter, &descriptor_table_common_2eproto_once,
-      file_level_metadata_common_2eproto[2]);
+      file_level_metadata_common_2eproto[3]);
 }
 
 // ===================================================================
@@ -1006,7 +1381,7 @@ void ErrorDetail::InternalSwap(ErrorDetail* other) {
 ::PROTOBUF_NAMESPACE_ID::Metadata ErrorDetail::GetMetadata() const {
   return ::_pbi::AssignDescriptors(
       &descriptor_table_common_2eproto_getter, &descriptor_table_common_2eproto_once,
-      file_level_metadata_common_2eproto[3]);
+      file_level_metadata_common_2eproto[4]);
 }
 
 // ===================================================================
@@ -1360,7 +1735,7 @@ void Result::InternalSwap(Result* other) {
 ::PROTOBUF_NAMESPACE_ID::Metadata Result::GetMetadata() const {
   return ::_pbi::AssignDescriptors(
       &descriptor_table_common_2eproto_getter, &descriptor_table_common_2eproto_once,
-      file_level_metadata_common_2eproto[4]);
+      file_level_metadata_common_2eproto[5]);
 }
 
 // ===================================================================
@@ -1538,7 +1913,7 @@ void DeleteResponse::InternalSwap(DeleteResponse* other) {
 ::PROTOBUF_NAMESPACE_ID::Metadata DeleteResponse::GetMetadata() const {
   return ::_pbi::AssignDescriptors(
       &descriptor_table_common_2eproto_getter, &descriptor_table_common_2eproto_once,
-      file_level_metadata_common_2eproto[5]);
+      file_level_metadata_common_2eproto[6]);
 }
 
 // @@protoc_insertion_point(namespace_scope)
@@ -1552,6 +1927,10 @@ Arena::CreateMaybeMessage< ::priemman::v1::ObjectId >(Arena* arena) {
 template<> PROTOBUF_NOINLINE ::priemman::v1::Location*
 Arena::CreateMaybeMessage< ::priemman::v1::Location >(Arena* arena) {
   return Arena::CreateMessageInternal< ::priemman::v1::Location >(arena);
+}
+template<> PROTOBUF_NOINLINE ::priemman::v1::PublicInfo*
+Arena::CreateMaybeMessage< ::priemman::v1::PublicInfo >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::priemman::v1::PublicInfo >(arena);
 }
 template<> PROTOBUF_NOINLINE ::priemman::v1::ErrorDetail_MetaEntry_DoNotUse*
 Arena::CreateMaybeMessage< ::priemman::v1::ErrorDetail_MetaEntry_DoNotUse >(Arena* arena) {
