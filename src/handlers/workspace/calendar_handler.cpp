@@ -4,8 +4,10 @@
 #include <format>
 #include <string>
 #include <string_view>
+#include <userver/http/url.hpp>
 #include <utility>
 #include <vector>
+#include <chrono>
 
 #include <libical/ical.h>
 
@@ -242,6 +244,7 @@ std::string CalendarHandler::HandleRequestThrow(
         ->CreateRequest()
         .headers(headers)
         .get(user_search_url)
+        .timeout(std::chrono::seconds{10})
         .perform();
 
     if (user_result->IsError()) {
@@ -283,10 +286,11 @@ std::string CalendarHandler::HandleRequestThrow(
 
     builder["username_nextcloud"] = username;
 
+    const auto encoded_username = userver::http::UrlEncode(username);
     const std::string calendar_url = std::format(
         "{}/remote.php/dav/calendars/{}/personal/?export",
         _workspace_host,
-        username
+        encoded_username
     );
 
     userver::clients::http::Headers calendar_headers;
@@ -303,6 +307,7 @@ std::string CalendarHandler::HandleRequestThrow(
         ->CreateRequest()
         .headers(calendar_headers)
         .get(calendar_url)
+        .timeout(std::chrono::seconds{10})
         .perform();
 
     if (calendar_result->IsError()) {
