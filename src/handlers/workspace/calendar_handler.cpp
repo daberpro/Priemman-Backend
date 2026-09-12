@@ -1,13 +1,12 @@
 #include "calendar_handler.hpp"
 
+#include <chrono>
 #include <cstdio>
 #include <format>
 #include <string>
 #include <string_view>
-#include <userver/http/url.hpp>
 #include <utility>
 #include <vector>
-#include <chrono>
 
 #include <libical/ical.h>
 
@@ -17,12 +16,13 @@
 #include <userver/formats/json/value.hpp>
 #include <userver/formats/json/value_builder.hpp>
 #include <userver/http/common_headers.hpp>
+#include <userver/http/url.hpp>
 #include <userver/logging/log.hpp>
 #include <userver/server/http/http_request.hpp>
 #include <userver/server/http/http_status.hpp>
 #include <userver/server/request/request_context.hpp>
-#include <userver/yaml_config/yaml_config.hpp>
 #include <userver/yaml_config/merge_schemas.hpp>
+#include <userver/yaml_config/yaml_config.hpp>
 
 namespace {
 
@@ -38,6 +38,7 @@ std::string FormatIcalTime(const icaltimetype& time) {
             time.month,
             time.day
         );
+
         return buffer;
     }
 
@@ -97,24 +98,32 @@ std::string GetPropertyString(
 namespace priemman::handlers::workspace {
 
 userver::yaml_config::Schema CalendarHandler::GetStaticConfigSchema() {
-    auto schema = userver::server::handlers::HttpHandlerBase::GetStaticConfigSchema();
+    auto schema =
+        userver::server::handlers::HttpHandlerBase::GetStaticConfigSchema();
+
     if (!schema.properties.has_value()) {
         schema.properties.emplace();
     }
+
     static const std::pair<std::string_view, std::string_view> kProps[] = {
-        {"workspace_host", "Workspace host url"},
-        {"username", "Workspace username"},
-        {"password", "Workspace password"},
+        {"workspace_host", "Priemman Platform host URL"},
+        {"username", "Priemman Platform username"},
+        {"password", "Priemman Platform password"},
     };
+
     for (const auto& [name, description] : kProps) {
         schema.properties->emplace(
             std::string{name},
             userver::yaml_config::SchemaPtr(
                 userver::yaml_config::impl::SchemaFromString(
-                    "type: string\ndescription: " + std::string{description} + "\n")
+                    "type: string\ndescription: " +
+                    std::string{description} +
+                    "\n"
+                )
             )
         );
     }
+
     return schema;
 }
 
@@ -159,7 +168,8 @@ std::vector<CalendarEvent> CalendarHandler::ParseIcsEvents(
             ICAL_LOCATION_PROPERTY
         );
 
-        if (auto* property = icalcomponent_get_first_property(
+        if (
+            auto* property = icalcomponent_get_first_property(
                 component,
                 ICAL_DTSTART_PROPERTY
             );
@@ -170,7 +180,8 @@ std::vector<CalendarEvent> CalendarHandler::ParseIcsEvents(
             );
         }
 
-        if (auto* property = icalcomponent_get_first_property(
+        if (
+            auto* property = icalcomponent_get_first_property(
                 component,
                 ICAL_DTEND_PROPERTY
             );
@@ -185,6 +196,7 @@ std::vector<CalendarEvent> CalendarHandler::ParseIcsEvents(
     }
 
     icalcomponent_free(calendar);
+
     return events;
 }
 
@@ -193,9 +205,10 @@ std::string CalendarHandler::HandleRequestThrow(
     userver::server::request::RequestContext&
 ) const {
     userver::formats::json::ValueBuilder builder;
+
     builder["status"] = "error";
     builder["message"] = "";
-    builder["username_nextcloud"] = "";
+    builder["username"] = "";
     builder["events"] = userver::formats::json::ValueBuilder(
         userver::formats::common::Type::kArray
     ).ExtractValue();
@@ -206,6 +219,7 @@ std::string CalendarHandler::HandleRequestThrow(
         request.SetResponseStatus(
             userver::server::http::HttpStatus::kUnauthorized
         );
+
         builder["message"] = "Unauthorized";
 
         return userver::formats::json::ToString(
@@ -214,24 +228,47 @@ std::string CalendarHandler::HandleRequestThrow(
     }
 
     auto user = _users.FindById(user_id.value());
+
     if (!user.has_value()) {
         request.SetResponseStatus(
             userver::server::http::HttpStatus::kNotFound
         );
-        return ErrorResult("NOT_FOUND", "User not found");
+
+        return ErrorResult(
+            "NOT_FOUND",
+            "User not found"
+        );
     }
+
     const auto& target_user = user.value().email;
 
-    const std::string auth_base = userver::crypto::base64::Base64Encode(
-            std::format("{}:{}", _username, _password)
-    );
+    const std::string auth_base =
+        userver::crypto::base64::Base64Encode(
+            std::format(
+                "{}:{}",
+                _username,
+                _password
+            )
+        );
 
     userver::clients::http::Headers headers;
-    headers.InsertOrAppend("OCS-APIRequest", "true");
-    headers.InsertOrAppend("Accept", "application/json");
+
+    headers.InsertOrAppend(
+        "OCS-APIRequest",
+        "true"
+    );
+
+    headers.InsertOrAppend(
+        "Accept",
+        "application/json"
+    );
+
     headers.InsertOrAppend(
         "Authorization",
-        std::format("Basic {}", auth_base)
+        std::format(
+            "Basic {}",
+            auth_base
+        )
     );
 
     const std::string user_search_url = std::format(
@@ -248,13 +285,15 @@ std::string CalendarHandler::HandleRequestThrow(
         .perform();
 
     if (user_result->IsError()) {
-        LOG_ERROR() << "Cannot access Nextcloud user API";
+        LOG_ERROR()
+            << "Cannot access Priemman Platform user API";
 
         request.SetResponseStatus(
             userver::server::http::HttpStatus::kBadGateway
         );
+
         builder["message"] =
-            "Gagal menghubungi server Nextcloud";
+            "Failed to contact Priemman Platform";
 
         return userver::formats::json::ToString(
             builder.ExtractValue()
@@ -273,8 +312,9 @@ std::string CalendarHandler::HandleRequestThrow(
         request.SetResponseStatus(
             userver::server::http::HttpStatus::kNotFound
         );
+
         builder["message"] =
-            "User tidak terdaftar di Nextcloud";
+            "User is not registered on Priemman Platform";
 
         return userver::formats::json::ToString(
             builder.ExtractValue()
@@ -284,9 +324,11 @@ std::string CalendarHandler::HandleRequestThrow(
     const std::string username =
         users[0].As<std::string>();
 
-    builder["username_nextcloud"] = username;
+    builder["username"] = username;
 
-    const auto encoded_username = userver::http::UrlEncode(username);
+    const auto encoded_username =
+        userver::http::UrlEncode(username);
+
     const std::string calendar_url = std::format(
         "{}/remote.php/dav/calendars/{}/personal/?export",
         _workspace_host,
@@ -294,13 +336,18 @@ std::string CalendarHandler::HandleRequestThrow(
     );
 
     userver::clients::http::Headers calendar_headers;
+
     calendar_headers.InsertOrAppend(
         "Accept",
         "text/calendar"
     );
+
     calendar_headers.InsertOrAppend(
         "Authorization",
-        std::format("Basic {}", auth_base)
+        std::format(
+            "Basic {}",
+            auth_base
+        )
     );
 
     auto calendar_result = _client
@@ -311,13 +358,15 @@ std::string CalendarHandler::HandleRequestThrow(
         .perform();
 
     if (calendar_result->IsError()) {
-        LOG_ERROR() << "Cannot access Nextcloud calendar API";
+        LOG_ERROR()
+            << "Cannot access Priemman Platform calendar API";
 
         request.SetResponseStatus(
             userver::server::http::HttpStatus::kBadGateway
         );
+
         builder["message"] =
-            "Gagal mengambil kalender Nextcloud";
+            "Failed to retrieve calendar from Priemman Platform";
 
         return userver::formats::json::ToString(
             builder.ExtractValue()
@@ -349,7 +398,7 @@ std::string CalendarHandler::HandleRequestThrow(
     }
 
     builder["status"] = "success";
-    builder["username_nextcloud"] = username;
+    builder["username"] = username;
     builder["events"] = events_builder.ExtractValue();
 
     return userver::formats::json::ToString(
