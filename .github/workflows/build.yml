@@ -1,5 +1,4 @@
 name: C++ Build
-
 on:
   push:
     branches:
@@ -16,9 +15,9 @@ jobs:
   build:
     name: Build
     runs-on: ubuntu-24.04
-
     steps:
       - name: Checkout
+        # Catatan: v4 adalah versi stabil terbaru. v6 belum ada dan akan menyebabkan error.
         uses: actions/checkout@v4
 
       - name: Install build dependencies
@@ -50,7 +49,6 @@ jobs:
           cmake --version
           protoc --version
           mariadb --version
-          pkg-config --modversion libical
 
       - name: Install userver
         run: |
@@ -89,6 +87,10 @@ jobs:
           retention-days: 30
           if-no-files-found: error
 
+      # ==============================================================================
+      # BAGIAN DEPLOYMENT KE VPS
+      # ==============================================================================
+
       - name: Execute deploy.sh on VPS
         if: github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master')
         uses: appleboy/ssh-action@v1.0.3
@@ -98,6 +100,11 @@ jobs:
           key: ${{ secrets.VPS_SSH_KEY }}
           port: ${{ secrets.VPS_PORT }}
           script: |
+            # Masuk ke direktori proyek di VPS
             cd /home/daberdev
+
+            # Pastikan script memiliki izin eksekusi
             chmod +x ./deploy.sh
+
+            # Jalankan script deployment
             ./deploy.sh
