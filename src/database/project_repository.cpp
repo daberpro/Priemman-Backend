@@ -39,7 +39,7 @@ std::optional<priemman::common::PublicInfo> GetAuthor(
     return trx->Execute(
         userver::storages::mysql::Query{
             R"sql(
-                SELECT id, first_name, last_name, avatar_url
+                SELECT id, first_name, last_name, avatar_url, headline
                 FROM users
                 WHERE id = ?
             )sql"

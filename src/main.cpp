@@ -43,6 +43,8 @@
 #include <src/handlers/media/upload_media_handler.hpp>
 #include <src/handlers/user/action_like_handler.hpp>
 #include <src/handlers/user/action_save_handler.hpp>
+#include <src/handlers/workspace/calendar_handler.hpp>
+
 #include <src/middleware/rate_limiter.hpp>
 #include <src/component/Cloudinary/CloudinaryClientComponent.hpp>
 #include <src/component/Cloudinary/MediaSweeperComponent.hpp>
@@ -70,6 +72,9 @@ auto main(int argc, char* argv[]) -> int {
         .Append<daberdev::components::OAuthGithubComponent>("daberdev-oauth-github-component")
         .Append<priemman::cloudinary::CloudinaryComponent>("cloudinary-client-component")
         .Append<priemman::cloudinary::MediaSweeperComponent>("media-sweeper")
+
+        // Workspace handlers
+        .Append<priemman::handlers::workspace::CalendarHandler>()
 
         // Auth Handlers
         .Append<priemman::auth::SendOtpHandler>("handler-send-otp")

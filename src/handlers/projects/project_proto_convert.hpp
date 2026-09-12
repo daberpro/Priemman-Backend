@@ -78,8 +78,9 @@ inline priemman::v1::Project ToProto(
     SqlToTimestamp(row.project.published_at, p.mutable_published_at());
     p.mutable_author()->mutable_id()->set_value(row.author.id);
     p.mutable_author()->set_first_name(row.author.first_name);
-    p.mutable_author()->set_first_name(row.author.last_name);
+    p.mutable_author()->set_last_name(row.author.last_name);
     p.mutable_author()->set_avatar_url(row.author.avatar_url);
+    p.mutable_author()->set_headline(row.author.headline);
 
     return p;
 }

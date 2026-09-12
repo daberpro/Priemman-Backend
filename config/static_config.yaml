@@ -27,21 +27,6 @@ components_manager:
 
         rate-limiter-middleware:
             requests-per-minute: 60
-            # Static Docusaurus documentation does not consume API quota.
-            # No /v1/ endpoint is included here.
-            exempt-path-prefixes:
-                - /assets/
-                - /img/
-                - /favicon
-                - /api-reference
-                - /protobuf-schemas
-                - /protobuf-api-map
-                - /auth
-                - /users-media
-                - /projects
-                - /collections
-                - /upgrades-admin
-                - /reference
 
         default-server-middleware-pipeline-builder:
             append:
@@ -214,6 +199,13 @@ components_manager:
             # 20 mb max upload
             max_request_size: $max-req-size-file-upload
 
+        handler-calendar-workspace:
+            path: /v1/workspace/calendar
+            method: GET
+            task_processor: main-task-processor
+            workspace_host: $workspace-host
+            username: $workspace-username
+            password: $workspace-password
 
         handler-upgrade:
             path: /v1/users/me/upgrade

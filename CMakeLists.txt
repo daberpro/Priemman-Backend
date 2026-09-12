@@ -9,6 +9,9 @@ file(GLOB PROTO_FILES "proto/*.proto")
 
 find_package(Protobuf REQUIRED)
 find_package(userver COMPONENTS core mysql REQUIRED)
+find_package(PkgConfig REQUIRED)
+
+pkg_check_modules(ICAL REQUIRED IMPORTED_TARGET libical)
 
 add_library(server_proto_objects OBJECT)
 protobuf_generate(
@@ -20,8 +23,14 @@ protobuf_generate(
     PROTOC_OUT_DIR
         ${CMAKE_CURRENT_SOURCE_DIR}/proto
 )
-target_link_libraries(server_proto_objects PUBLIC protobuf::libprotobuf)
-target_include_directories(server_proto_objects PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/proto)
+target_link_libraries(
+  server_proto_objects PUBLIC
+  protobuf::libprotobuf
+)
+target_include_directories(
+  server_proto_objects PUBLIC
+  ${CMAKE_CURRENT_SOURCE_DIR}/proto
+)
 
 add_executable(${PROJECT_NAME} ${SOURCES})
 
@@ -38,6 +47,7 @@ target_link_libraries(
     userver::mysql
     ssl
     crypto
+    PkgConfig::ICAL
 )
 
 add_subdirectory(frontend)

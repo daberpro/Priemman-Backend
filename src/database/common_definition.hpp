@@ -8,6 +8,7 @@ namespace priemman::common {
         std::string first_name;
         std::string last_name;
         std::string avatar_url;
+        std::string headline;
     };
 
 }
