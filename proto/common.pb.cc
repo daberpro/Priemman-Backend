@@ -54,6 +54,7 @@ PROTOBUF_CONSTEXPR PublicInfo::PublicInfo(
     /*decltype(_impl_.first_name_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
   , /*decltype(_impl_.last_name_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
   , /*decltype(_impl_.avatar_url_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
+  , /*decltype(_impl_.headline_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
   , /*decltype(_impl_.id_)*/nullptr
   , /*decltype(_impl_._cached_size_)*/{}} {}
 struct PublicInfoDefaultTypeInternal {
@@ -153,6 +154,7 @@ const uint32_t TableStruct_common_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE(p
   PROTOBUF_FIELD_OFFSET(::priemman::v1::PublicInfo, _impl_.first_name_),
   PROTOBUF_FIELD_OFFSET(::priemman::v1::PublicInfo, _impl_.last_name_),
   PROTOBUF_FIELD_OFFSET(::priemman::v1::PublicInfo, _impl_.avatar_url_),
+  PROTOBUF_FIELD_OFFSET(::priemman::v1::PublicInfo, _impl_.headline_),
   PROTOBUF_FIELD_OFFSET(::priemman::v1::ErrorDetail_MetaEntry_DoNotUse, _has_bits_),
   PROTOBUF_FIELD_OFFSET(::priemman::v1::ErrorDetail_MetaEntry_DoNotUse, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -195,10 +197,10 @@ static const ::_pbi::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protode
   { 0, -1, -1, sizeof(::priemman::v1::ObjectId)},
   { 7, -1, -1, sizeof(::priemman::v1::Location)},
   { 15, -1, -1, sizeof(::priemman::v1::PublicInfo)},
-  { 25, 33, -1, sizeof(::priemman::v1::ErrorDetail_MetaEntry_DoNotUse)},
-  { 35, -1, -1, sizeof(::priemman::v1::ErrorDetail)},
-  { 44, -1, -1, sizeof(::priemman::v1::Result)},
-  { 55, -1, -1, sizeof(::priemman::v1::DeleteResponse)},
+  { 26, 34, -1, sizeof(::priemman::v1::ErrorDetail_MetaEntry_DoNotUse)},
+  { 36, -1, -1, sizeof(::priemman::v1::ErrorDetail)},
+  { 45, -1, -1, sizeof(::priemman::v1::Result)},
+  { 56, -1, -1, sizeof(::priemman::v1::DeleteResponse)},
 };
 
 static const ::_pb::Message* const file_default_instances[] = {
@@ -215,24 +217,25 @@ const char descriptor_table_protodef_common_2eproto[] PROTOBUF_SECTION_VARIABLE(
   "\n\014common.proto\022\013priemman.v1\032\037google/prot"
   "obuf/timestamp.proto\"\031\n\010ObjectId\022\r\n\005valu"
   "e\030\001 \001(\t\")\n\010Location\022\017\n\007country\030\001 \001(\t\022\014\n\004"
-  "city\030\002 \001(\t\"j\n\nPublicInfo\022!\n\002id\030\001 \001(\0132\025.p"
+  "city\030\002 \001(\t\"|\n\nPublicInfo\022!\n\002id\030\001 \001(\0132\025.p"
   "riemman.v1.ObjectId\022\022\n\nfirst_name\030\002 \001(\t\022"
-  "\021\n\tlast_name\030\003 \001(\t\022\022\n\navatar_url\030\004 \001(\t\"\213"
-  "\001\n\013ErrorDetail\022\014\n\004code\030\001 \001(\t\022\017\n\007message\030"
-  "\002 \001(\t\0220\n\004meta\030\003 \003(\0132\".priemman.v1.ErrorD"
-  "etail.MetaEntry\032+\n\tMetaEntry\022\013\n\003key\030\001 \001("
-  "\t\022\r\n\005value\030\002 \001(\t:\0028\001\"}\n\006Result\022\020\n\010is_err"
-  "or\030\001 \001(\010\022\021\n\thas_value\030\002 \001(\010\022\017\n\007message\030\003"
-  " \001(\t\022\r\n\005value\030\004 \001(\t\022.\n\014error_detail\030\005 \001("
-  "\0132\030.priemman.v1.ErrorDetail\"!\n\016DeleteRes"
-  "ponse\022\017\n\007success\030\001 \001(\010b\006proto3"
+  "\021\n\tlast_name\030\003 \001(\t\022\022\n\navatar_url\030\004 \001(\t\022\020"
+  "\n\010headline\030\005 \001(\t\"\213\001\n\013ErrorDetail\022\014\n\004code"
+  "\030\001 \001(\t\022\017\n\007message\030\002 \001(\t\0220\n\004meta\030\003 \003(\0132\"."
+  "priemman.v1.ErrorDetail.MetaEntry\032+\n\tMet"
+  "aEntry\022\013\n\003key\030\001 \001(\t\022\r\n\005value\030\002 \001(\t:\0028\001\"}"
+  "\n\006Result\022\020\n\010is_error\030\001 \001(\010\022\021\n\thas_value\030"
+  "\002 \001(\010\022\017\n\007message\030\003 \001(\t\022\r\n\005value\030\004 \001(\t\022.\n"
+  "\014error_detail\030\005 \001(\0132\030.priemman.v1.ErrorD"
+  "etail\"!\n\016DeleteResponse\022\017\n\007success\030\001 \001(\010"
+  "b\006proto3"
   ;
 static const ::_pbi::DescriptorTable* const descriptor_table_common_2eproto_deps[1] = {
   &::descriptor_table_google_2fprotobuf_2ftimestamp_2eproto,
 };
 static ::_pbi::once_flag descriptor_table_common_2eproto_once;
 const ::_pbi::DescriptorTable descriptor_table_common_2eproto = {
-    false, false, 550, descriptor_table_protodef_common_2eproto,
+    false, false, 568, descriptor_table_protodef_common_2eproto,
     "common.proto",
     &descriptor_table_common_2eproto_once, descriptor_table_common_2eproto_deps, 1, 7,
     schemas, file_default_instances, TableStruct_common_2eproto::offsets,
@@ -728,6 +731,7 @@ PublicInfo::PublicInfo(const PublicInfo& from)
       decltype(_impl_.first_name_){}
     , decltype(_impl_.last_name_){}
     , decltype(_impl_.avatar_url_){}
+    , decltype(_impl_.headline_){}
     , decltype(_impl_.id_){nullptr}
     , /*decltype(_impl_._cached_size_)*/{}};
 
@@ -756,6 +760,14 @@ PublicInfo::PublicInfo(const PublicInfo& from)
     _this->_impl_.avatar_url_.Set(from._internal_avatar_url(), 
       _this->GetArenaForAllocation());
   }
+  _impl_.headline_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+    _impl_.headline_.Set("", GetArenaForAllocation());
+  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (!from._internal_headline().empty()) {
+    _this->_impl_.headline_.Set(from._internal_headline(), 
+      _this->GetArenaForAllocation());
+  }
   if (from._internal_has_id()) {
     _this->_impl_.id_ = new ::priemman::v1::ObjectId(*from._impl_.id_);
   }
@@ -770,6 +782,7 @@ inline void PublicInfo::SharedCtor(
       decltype(_impl_.first_name_){}
     , decltype(_impl_.last_name_){}
     , decltype(_impl_.avatar_url_){}
+    , decltype(_impl_.headline_){}
     , decltype(_impl_.id_){nullptr}
     , /*decltype(_impl_._cached_size_)*/{}
   };
@@ -784,6 +797,10 @@ inline void PublicInfo::SharedCtor(
   _impl_.avatar_url_.InitDefault();
   #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
     _impl_.avatar_url_.Set("", GetArenaForAllocation());
+  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  _impl_.headline_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+    _impl_.headline_.Set("", GetArenaForAllocation());
   #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
 }
 
@@ -801,6 +818,7 @@ inline void PublicInfo::SharedDtor() {
   _impl_.first_name_.Destroy();
   _impl_.last_name_.Destroy();
   _impl_.avatar_url_.Destroy();
+  _impl_.headline_.Destroy();
   if (this != internal_default_instance()) delete _impl_.id_;
 }
 
@@ -817,6 +835,7 @@ void PublicInfo::Clear() {
   _impl_.first_name_.ClearToEmpty();
   _impl_.last_name_.ClearToEmpty();
   _impl_.avatar_url_.ClearToEmpty();
+  _impl_.headline_.ClearToEmpty();
   if (GetArenaForAllocation() == nullptr && _impl_.id_ != nullptr) {
     delete _impl_.id_;
   }
@@ -865,6 +884,16 @@ const char* PublicInfo::_InternalParse(const char* ptr, ::_pbi::ParseContext* ct
           ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
           CHK_(ptr);
           CHK_(::_pbi::VerifyUTF8(str, "priemman.v1.PublicInfo.avatar_url"));
+        } else
+          goto handle_unusual;
+        continue;
+      // string headline = 5;
+      case 5:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 42)) {
+          auto str = _internal_mutable_headline();
+          ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
+          CHK_(ptr);
+          CHK_(::_pbi::VerifyUTF8(str, "priemman.v1.PublicInfo.headline"));
         } else
           goto handle_unusual;
         continue;
@@ -934,6 +963,16 @@ uint8_t* PublicInfo::_InternalSerialize(
         4, this->_internal_avatar_url(), target);
   }
 
+  // string headline = 5;
+  if (!this->_internal_headline().empty()) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+      this->_internal_headline().data(), static_cast<int>(this->_internal_headline().length()),
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+      "priemman.v1.PublicInfo.headline");
+    target = stream->WriteStringMaybeAliased(
+        5, this->_internal_headline(), target);
+  }
+
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
     target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
         _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
@@ -971,6 +1010,13 @@ size_t PublicInfo::ByteSizeLong() const {
         this->_internal_avatar_url());
   }
 
+  // string headline = 5;
+  if (!this->_internal_headline().empty()) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+        this->_internal_headline());
+  }
+
   // .priemman.v1.ObjectId id = 1;
   if (this->_internal_has_id()) {
     total_size += 1 +
@@ -1004,6 +1050,9 @@ void PublicInfo::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PRO
   }
   if (!from._internal_avatar_url().empty()) {
     _this->_internal_set_avatar_url(from._internal_avatar_url());
+  }
+  if (!from._internal_headline().empty()) {
+    _this->_internal_set_headline(from._internal_headline());
   }
   if (from._internal_has_id()) {
     _this->_internal_mutable_id()->::priemman::v1::ObjectId::MergeFrom(
@@ -1039,6 +1088,10 @@ void PublicInfo::InternalSwap(PublicInfo* other) {
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
       &_impl_.avatar_url_, lhs_arena,
       &other->_impl_.avatar_url_, rhs_arena
+  );
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
+      &_impl_.headline_, lhs_arena,
+      &other->_impl_.headline_, rhs_arena
   );
   swap(_impl_.id_, other->_impl_.id_);
 }

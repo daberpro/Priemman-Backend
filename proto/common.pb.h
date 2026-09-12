@@ -533,6 +533,7 @@ class PublicInfo final :
     kFirstNameFieldNumber = 2,
     kLastNameFieldNumber = 3,
     kAvatarUrlFieldNumber = 4,
+    kHeadlineFieldNumber = 5,
     kIdFieldNumber = 1,
   };
   // string first_name = 2;
@@ -577,6 +578,20 @@ class PublicInfo final :
   std::string* _internal_mutable_avatar_url();
   public:
 
+  // string headline = 5;
+  void clear_headline();
+  const std::string& headline() const;
+  template <typename ArgT0 = const std::string&, typename... ArgT>
+  void set_headline(ArgT0&& arg0, ArgT... args);
+  std::string* mutable_headline();
+  PROTOBUF_NODISCARD std::string* release_headline();
+  void set_allocated_headline(std::string* headline);
+  private:
+  const std::string& _internal_headline() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_headline(const std::string& value);
+  std::string* _internal_mutable_headline();
+  public:
+
   // .priemman.v1.ObjectId id = 1;
   bool has_id() const;
   private:
@@ -606,6 +621,7 @@ class PublicInfo final :
     ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr first_name_;
     ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr last_name_;
     ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr avatar_url_;
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr headline_;
     ::priemman::v1::ObjectId* id_;
     mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   };
@@ -1601,6 +1617,56 @@ inline void PublicInfo::set_allocated_avatar_url(std::string* avatar_url) {
   }
 #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
   // @@protoc_insertion_point(field_set_allocated:priemman.v1.PublicInfo.avatar_url)
+}
+
+// string headline = 5;
+inline void PublicInfo::clear_headline() {
+  _impl_.headline_.ClearToEmpty();
+}
+inline const std::string& PublicInfo::headline() const {
+  // @@protoc_insertion_point(field_get:priemman.v1.PublicInfo.headline)
+  return _internal_headline();
+}
+template <typename ArgT0, typename... ArgT>
+inline PROTOBUF_ALWAYS_INLINE
+void PublicInfo::set_headline(ArgT0&& arg0, ArgT... args) {
+ 
+ _impl_.headline_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
+  // @@protoc_insertion_point(field_set:priemman.v1.PublicInfo.headline)
+}
+inline std::string* PublicInfo::mutable_headline() {
+  std::string* _s = _internal_mutable_headline();
+  // @@protoc_insertion_point(field_mutable:priemman.v1.PublicInfo.headline)
+  return _s;
+}
+inline const std::string& PublicInfo::_internal_headline() const {
+  return _impl_.headline_.Get();
+}
+inline void PublicInfo::_internal_set_headline(const std::string& value) {
+  
+  _impl_.headline_.Set(value, GetArenaForAllocation());
+}
+inline std::string* PublicInfo::_internal_mutable_headline() {
+  
+  return _impl_.headline_.Mutable(GetArenaForAllocation());
+}
+inline std::string* PublicInfo::release_headline() {
+  // @@protoc_insertion_point(field_release:priemman.v1.PublicInfo.headline)
+  return _impl_.headline_.Release();
+}
+inline void PublicInfo::set_allocated_headline(std::string* headline) {
+  if (headline != nullptr) {
+    
+  } else {
+    
+  }
+  _impl_.headline_.SetAllocated(headline, GetArenaForAllocation());
+#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (_impl_.headline_.IsDefault()) {
+    _impl_.headline_.Set("", GetArenaForAllocation());
+  }
+#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:priemman.v1.PublicInfo.headline)
 }
 
 // -------------------------------------------------------------------
