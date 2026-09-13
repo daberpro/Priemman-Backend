@@ -1,5 +1,6 @@
 components_manager:
     components:
+        congestion-control:
         server:
             listener:
                 port: $frontend-port

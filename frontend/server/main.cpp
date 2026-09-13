@@ -10,6 +10,7 @@
 #include <userver/storages/secdist/component.hpp>
 #include <userver/storages/secdist/provider_component.hpp>
 #include <userver/utils/daemon_run.hpp>
+#include <userver/congestion_control/component.hpp>
 
 #include <frontend/server/session_middleware.hpp>
 #include <frontend/server/static_page_handler.hpp>
@@ -24,9 +25,10 @@ auto main(int argc, char* argv[]) -> int {
         .Append<priemman::middlewares::RateLimiterFactory>()
         .Append<priemman::frontend::SessionMiddlewareFactory>()
         .Append<userver::components::FsCache>("fs-cache-web")
+        .Append<userver::congestion_control::Component>()
         .Append<priemman::frontend::StaticPageHandler>("handler-pages");
 
-    std::println("=========================================");
+    std::println("\n=========================================");
     std::println(" Priemman Frontend Server");
     std::println("=========================================");
 
