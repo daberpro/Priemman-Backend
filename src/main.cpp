@@ -22,13 +22,13 @@
 #include <userver/clients/http/client_core.hpp>
 #include <userver/utils/daemon_run.hpp>
 #include <userver/server/middlewares/cors.hpp>
+#include <userver/congestion_control/component.hpp>
 
 #include <src/handlers/auth/send_otp_handler.hpp>
 #include <src/handlers/auth/verify_otp_handler.hpp>
 #include <src/handlers/auth/logout_handler.hpp>
 #include <src/handlers/auth/oauth_initiate_handler.hpp>
 #include <src/handlers/auth/oauth_callback_handler.hpp>
-#include <src/handlers/ping.hpp>
 #include <src/handlers/api_info_handler.hpp>
 #include <src/handlers/user/basic_info_handler.hpp>
 #include <src/handlers/user/connected_accounts_handler.hpp>
@@ -44,6 +44,7 @@
 #include <src/handlers/user/action_like_handler.hpp>
 #include <src/handlers/user/action_save_handler.hpp>
 #include <src/handlers/workspace/calendar_handler.hpp>
+#include <userver/server/handlers/ping.hpp>
 
 #include <src/middleware/rate_limiter.hpp>
 #include <src/component/Cloudinary/CloudinaryClientComponent.hpp>
@@ -109,7 +110,8 @@ auto main(int argc, char* argv[]) -> int {
         .Append<priemman::handlers::admin::AdminUpgradeConfirmPaymentHandler>()
 
         .Append<priemman::ApiInfoHandler>("handler-api-info")
-        .Append<priemman::PingHandler>("handler-ping");
+        .Append<userver::congestion_control::Component>()
+        .Append<userver::server::handlers::Ping>();
 
 
     std::println("\n=========================================");

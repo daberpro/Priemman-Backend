@@ -1,5 +1,6 @@
 components_manager:
     components:
+        congestion-control:
         server:
             listener:
                 port: $server-port
@@ -201,7 +202,7 @@ components_manager:
 
         handler-calendar-workspace:
             path: /v1/workspace/calendar
-            method: GET
+            method: GET,OPTIONS
             task_processor: main-task-processor
             workspace_host: $workspace-host
             username: $workspace-username
