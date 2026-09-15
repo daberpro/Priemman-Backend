@@ -12,7 +12,7 @@ components_manager:
             loggers:
                 default:
                     file_path: $log-file-path
-                    file_path#fallback: '@stderr'
+                    file_path#fallback: "@stderr"
                     level: $log-level
                     level#fallback: info
 
@@ -34,7 +34,7 @@ components_manager:
                 - cors-middleware
                 - rate-limiter-middleware
 
-# ============== Dynamic Config (content type untuk file statis) ==============
+        # ============== Dynamic Config (content type untuk file statis) ==============
         dynamic-config:
             defaults:
                 USERVER_FILES_CONTENT_TYPE_MAP:
@@ -55,7 +55,7 @@ components_manager:
                     .woff2: "font/woff2"
                     .xml: "application/xml; charset=utf-8"
 
-# ============== Cloudinary Component ==============
+        # ============== Cloudinary Component ==============
         cloudinary-client-component:
             cloud_name: $cloudinary-cloud-name
             cloud_name#fallback: "dummy-cloud"
@@ -64,20 +64,20 @@ components_manager:
             api_secret: $cloudinary-api-secret
             api_secret#fallback: "dummy-secret"
 
-# ============== Media Orphan Sweeper ==============
+        # ============== Media Orphan Sweeper ==============
         media-sweeper:
             task-processor: main-task-processor
-            interval-seconds: 3600   # sweep tiap 1 jam
-            ttl-seconds: 86400       # orphan > 24 jam dihapus
+            interval-seconds: 3600 # sweep tiap 1 jam
+            ttl-seconds: 86400 # orphan > 24 jam dihapus
             batch-limit: 100
 
-# ============== Static Files (Landing Page) ==============
+        # ============== Static Files (Landing Page) ==============
         fs-cache-static:
             dir: $static-dir
             dir#fallback: ../static
             fs-task-processor: fs-task-processor
 
-# ============== Handlers ==============
+        # ============== Handlers ==============
         handler-static:
             fs-cache-component: fs-cache-static
             path: /*
@@ -95,28 +95,29 @@ components_manager:
             method: POST,OPTIONS
             task_processor: main-task-processor
 
-
         handler-project-list:
             path: /v1/projects/list
             method: GET,OPTIONS
             task_processor: main-task-processor
-
 
         handler-project-detail:
             path: /v1/projects/{id}
             method: GET,PUT,DELETE,OPTIONS
             task_processor: main-task-processor
 
-
         handler-collection:
             path: /v1/collections
             method: GET,POST,PUT,DELETE,OPTIONS
             task_processor: main-task-processor
 
-
         handler-basic-info:
             path: /v1/users/me
             method: GET,PUT,PATCH,OPTIONS
+            task_processor: main-task-processor
+
+        handler-upgrade-logs:
+            path: /v1/users/upgrade-logs
+            method: GET,OPTIONS
             task_processor: main-task-processor
 
         handler-like-action:
@@ -134,12 +135,10 @@ components_manager:
             method: GET,POST,DELETE,OPTIONS
             task_processor: main-task-processor
 
-
         handler-connected-accounts:
             path: /v1/users/me/connected-accounts
             method: GET,DELETE,OPTIONS,POST
             task_processor: main-task-processor
-
 
         handler-send-otp:
             path: /v1/auth/send-otp
@@ -233,12 +232,12 @@ components_manager:
             method: POST,OPTIONS
             task_processor: main-task-processor
 
-# ============== DB ==============
+        # ============== DB ==============
         database:
             max_pool_size: 15
             initial_pool_size: 5
 
-# ============== SecDist ==============
+        # ============== SecDist ==============
         secdist:
             provider: default-secdist-provider
 
@@ -247,14 +246,15 @@ components_manager:
             format: json
             missing-ok: true
 
-# ============== SMTP ==============
+        # ============== SMTP ==============
         daberdev-smtp-component-client:
             host: $smtp-host
             port: $smtp-port
             email: $smtp-email
             password: $smtp-password
+            display_name: $smtp-display-name
 
-# ============== OAuth ==============
+        # ============== OAuth ==============
         daberdev-oauth-google-component:
             auth_url: https://accounts.google.com/o/oauth2/v2/auth
             token_url: https://oauth2.googleapis.com/token
@@ -273,7 +273,7 @@ components_manager:
             client_secret: $github-client-secret
             scope: "read:user user:email"
 
-# ============== Other ==============
+        # ============== Other ==============
         dns-client:
             fs-task-processor: fs-task-processor
 

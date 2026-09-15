@@ -45,6 +45,7 @@
 #include <src/handlers/user/action_save_handler.hpp>
 #include <src/handlers/workspace/calendar_handler.hpp>
 #include <userver/server/handlers/ping.hpp>
+#include <src/handlers/user/upgrade_logs_handler.hpp>
 
 #include <src/middleware/rate_limiter.hpp>
 #include <src/component/Cloudinary/CloudinaryClientComponent.hpp>
@@ -68,23 +69,23 @@ auto main(int argc, char* argv[]) -> int {
         .Append<userver::components::FsCache>("fs-cache-static")
         .Append<userver::server::handlers::HttpHandlerStatic>("handler-static")
 
-        .Append<daberdev::components::SMTPClientComponent>("daberdev-smtp-component-client")
-        .Append<daberdev::components::OAuthGoogleComponent>("daberdev-oauth-google-component")
-        .Append<daberdev::components::OAuthGithubComponent>("daberdev-oauth-github-component")
-        .Append<priemman::cloudinary::CloudinaryComponent>("cloudinary-client-component")
-        .Append<priemman::cloudinary::MediaSweeperComponent>("media-sweeper")
+        .Append<daberdev::components::SMTPClientComponent>()
+        .Append<daberdev::components::OAuthGoogleComponent>()
+        .Append<daberdev::components::OAuthGithubComponent>()
+        .Append<priemman::cloudinary::CloudinaryComponent>()
+        .Append<priemman::cloudinary::MediaSweeperComponent>()
 
         // Workspace handlers
         .Append<priemman::handlers::workspace::CalendarHandler>()
 
         // Auth Handlers
-        .Append<priemman::auth::SendOtpHandler>("handler-send-otp")
-        .Append<priemman::auth::VerifyOtpHandler>("handler-verify-otp")
-        .Append<priemman::auth::LogoutHandler>("handler-logout")
-        .Append<priemman::auth::InitiateGoogleOAuthHandler>("handler-initiate-google-oauth")
-        .Append<priemman::auth::OAuthGoogleCallbackHandler>("handler-callback-google-oauth")
-        .Append<priemman::auth::InitiateGithubOAuthHandler>("handler-initiate-github-oauth")
-        .Append<priemman::auth::OAuthGithubCallbackHandler>("handler-callback-github-oauth")
+        .Append<priemman::auth::SendOtpHandler>()
+        .Append<priemman::auth::VerifyOtpHandler>()
+        .Append<priemman::auth::LogoutHandler>()
+        .Append<priemman::auth::InitiateGoogleOAuthHandler>()
+        .Append<priemman::auth::OAuthGoogleCallbackHandler>()
+        .Append<priemman::auth::InitiateGithubOAuthHandler>()
+        .Append<priemman::auth::OAuthGithubCallbackHandler>()
 
         // Project Handlers
         .Append<priemman::handlers::projects::ProjectCreateHandler>()
@@ -102,6 +103,7 @@ auto main(int argc, char* argv[]) -> int {
         .Append<priemman::handlers::user::UpgradeHandler>()
         .Append<priemman::handlers::user::ActionLikeHandler>()
         .Append<priemman::handlers::user::ActionSaveHandler>()
+        .Append<priemman::handlers::user::UpgradeLogsHandler>()
 
         // Admin Handlers
         .Append<priemman::handlers::admin::AdminUsersHandler>()
@@ -109,7 +111,7 @@ auto main(int argc, char* argv[]) -> int {
         .Append<priemman::handlers::admin::AdminUpgradeReviewHandler>()
         .Append<priemman::handlers::admin::AdminUpgradeConfirmPaymentHandler>()
 
-        .Append<priemman::ApiInfoHandler>("handler-api-info")
+        .Append<priemman::ApiInfoHandler>()
         .Append<userver::congestion_control::Component>()
         .Append<userver::server::handlers::Ping>();
 

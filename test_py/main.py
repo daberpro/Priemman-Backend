@@ -52,6 +52,7 @@ COLLECTIONS_URL = f"{BASE_URL}/v1/collections"
 UPLOAD_MEDIA_URL = f"{BASE_URL}/v1/media/upload"
 
 UPGRADE_URL = f"{BASE_URL}/v1/users/me/upgrade"
+UPGRADE_LOGS_URL = f"{BASE_URL}/v1/users/upgrade-logs"
 ADMIN_USERS_URL = f"{BASE_URL}/v1/admin/users"
 ADMIN_UPGRADES_URL = f"{BASE_URL}/v1/admin/upgrades"
 ADMIN_UPGRADES_REVIEW_URL = f"{BASE_URL}/v1/admin/upgrades/review"
@@ -706,6 +707,62 @@ def get_upgrade_status(token: str) -> user_pb2.UpgradeStatus | None:
     return None
 
 
+
+def get_upgrade_logs(
+    token: str,
+    limit: int = 20,
+    offset: int = 0,
+) -> user_pb2.UpgradeLogs | None:
+    print(
+        f"\n== GET /v1/users/upgrade-logs "
+        f"(limit={limit}, offset={offset}) =="
+    )
+
+    params = {
+        "limit": limit,
+        "offset": offset,
+    }
+
+    resp = http.get(
+        UPGRADE_LOGS_URL,
+        params=params,
+        headers=auth_headers(token),
+    )
+
+    if resp.status_code == 200 and is_proto(resp):
+        out = user_pb2.UpgradeLogs()
+        out.ParseFromString(resp.content)
+
+        print(f"\nHTTP {resp.status_code}")
+        print(f"Total logs: {len(out.logs)}")
+
+        if not out.logs:
+            print("  Tidak ada upgrade log.")
+            return out
+
+        for i, log in enumerate(out.logs, 1):
+            print(f"\n  [{i}]")
+            print(f"      id               : {log.id.value}")
+            print(f"      status           : {log.status}")
+            print(
+                f"      rejection_reason : "
+                f"{log.rejection_reason or '-'}"
+            )
+            print(
+                f"      requested_at     : "
+                f"{fmt_ts(log.requested_at)}"
+            )
+            print(
+                f"      reviewed_at      : "
+                f"{fmt_ts(log.reviewed_at)}"
+            )
+
+        return out
+
+    show_error(resp)
+    return None
+
+
 def request_upgrade(token: str) -> bool:
     print("\n== POST /v1/users/me/upgrade (ajukan upgrade) ==")
     resp = http.post(UPGRADE_URL, data=b"", headers=auth_headers(token))
@@ -1166,12 +1223,25 @@ def main() -> None:
             print("UPGRADE KE CREATOR")
             print("=" * 60)
 
+            print("\n-- Current Upgrade Status --")
             get_upgrade_status(token)
 
-            sub_choice = input("\nAjukan upgrade (POST)? [y/N]: ").strip().lower()
+            print("\n-- Upgrade History --")
+            get_upgrade_logs(token)
+
+            sub_choice = input(
+                "\nAjukan upgrade (POST)? [y/N]: "
+            ).strip().lower()
+
             if sub_choice == "y":
-                request_upgrade(token)
-                get_upgrade_status(token)
+                success = request_upgrade(token)
+
+                if success:
+                    print("\n-- Status Setelah Request --")
+                    get_upgrade_status(token)
+
+                    print("\n-- Upgrade History Setelah Request --")
+                    get_upgrade_logs(token)
 
         elif choice == "8":
             print("\n" + "=" * 60)

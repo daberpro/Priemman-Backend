@@ -266,6 +266,36 @@ struct UpgradeStatusDefaultTypeInternal {
   };
 };
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 UpgradeStatusDefaultTypeInternal _UpgradeStatus_default_instance_;
+PROTOBUF_CONSTEXPR UpgradeLog::UpgradeLog(
+    ::_pbi::ConstantInitialized): _impl_{
+    /*decltype(_impl_.status_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
+  , /*decltype(_impl_.rejection_reason_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
+  , /*decltype(_impl_.id_)*/nullptr
+  , /*decltype(_impl_.requested_at_)*/nullptr
+  , /*decltype(_impl_.reviewed_at_)*/nullptr
+  , /*decltype(_impl_._cached_size_)*/{}} {}
+struct UpgradeLogDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR UpgradeLogDefaultTypeInternal()
+      : _instance(::_pbi::ConstantInitialized{}) {}
+  ~UpgradeLogDefaultTypeInternal() {}
+  union {
+    UpgradeLog _instance;
+  };
+};
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 UpgradeLogDefaultTypeInternal _UpgradeLog_default_instance_;
+PROTOBUF_CONSTEXPR UpgradeLogs::UpgradeLogs(
+    ::_pbi::ConstantInitialized): _impl_{
+    /*decltype(_impl_.logs_)*/{}
+  , /*decltype(_impl_._cached_size_)*/{}} {}
+struct UpgradeLogsDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR UpgradeLogsDefaultTypeInternal()
+      : _instance(::_pbi::ConstantInitialized{}) {}
+  ~UpgradeLogsDefaultTypeInternal() {}
+  union {
+    UpgradeLogs _instance;
+  };
+};
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 UpgradeLogsDefaultTypeInternal _UpgradeLogs_default_instance_;
 PROTOBUF_CONSTEXPR CreateUpgradeRequestResponse::CreateUpgradeRequestResponse(
     ::_pbi::ConstantInitialized): _impl_{
     /*decltype(_impl_.status_)*/nullptr
@@ -406,7 +436,7 @@ struct AdminConfirmPaymentResponseDefaultTypeInternal {
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 AdminConfirmPaymentResponseDefaultTypeInternal _AdminConfirmPaymentResponse_default_instance_;
 }  // namespace v1
 }  // namespace priemman
-static ::_pb::Metadata file_level_metadata_user_2eproto[24];
+static ::_pb::Metadata file_level_metadata_user_2eproto[26];
 static const ::_pb::EnumDescriptor* file_level_enum_descriptors_user_2eproto[2];
 static constexpr ::_pb::ServiceDescriptor const** file_level_service_descriptors_user_2eproto = nullptr;
 
@@ -577,6 +607,24 @@ const uint32_t TableStruct_user_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE(pro
   PROTOBUF_FIELD_OFFSET(::priemman::v1::UpgradeStatus, _impl_.reviewed_at_),
   PROTOBUF_FIELD_OFFSET(::priemman::v1::UpgradeStatus, _impl_.paid_at_),
   ~0u,  // no _has_bits_
+  PROTOBUF_FIELD_OFFSET(::priemman::v1::UpgradeLog, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  ~0u,  // no _inlined_string_donated_
+  PROTOBUF_FIELD_OFFSET(::priemman::v1::UpgradeLog, _impl_.id_),
+  PROTOBUF_FIELD_OFFSET(::priemman::v1::UpgradeLog, _impl_.status_),
+  PROTOBUF_FIELD_OFFSET(::priemman::v1::UpgradeLog, _impl_.rejection_reason_),
+  PROTOBUF_FIELD_OFFSET(::priemman::v1::UpgradeLog, _impl_.requested_at_),
+  PROTOBUF_FIELD_OFFSET(::priemman::v1::UpgradeLog, _impl_.reviewed_at_),
+  ~0u,  // no _has_bits_
+  PROTOBUF_FIELD_OFFSET(::priemman::v1::UpgradeLogs, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  ~0u,  // no _inlined_string_donated_
+  PROTOBUF_FIELD_OFFSET(::priemman::v1::UpgradeLogs, _impl_.logs_),
+  ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::priemman::v1::CreateUpgradeRequestResponse, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
@@ -677,15 +725,17 @@ static const ::_pbi::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protode
   { 136, -1, -1, sizeof(::priemman::v1::ListConnectedAccountsResponse)},
   { 143, -1, -1, sizeof(::priemman::v1::DeleteConnectedAccountRequest)},
   { 150, -1, -1, sizeof(::priemman::v1::UpgradeStatus)},
-  { 165, -1, -1, sizeof(::priemman::v1::CreateUpgradeRequestResponse)},
-  { 173, -1, -1, sizeof(::priemman::v1::AdminUserEntry)},
-  { 185, -1, -1, sizeof(::priemman::v1::AdminListUsersResponse)},
-  { 195, -1, -1, sizeof(::priemman::v1::UpgradeRequestEntry)},
-  { 210, -1, -1, sizeof(::priemman::v1::AdminListUpgradeRequestsResponse)},
-  { 217, -1, -1, sizeof(::priemman::v1::AdminReviewUpgradeRequest)},
-  { 226, -1, -1, sizeof(::priemman::v1::AdminReviewUpgradeResponse)},
-  { 234, -1, -1, sizeof(::priemman::v1::AdminConfirmPaymentRequest)},
-  { 241, -1, -1, sizeof(::priemman::v1::AdminConfirmPaymentResponse)},
+  { 165, -1, -1, sizeof(::priemman::v1::UpgradeLog)},
+  { 176, -1, -1, sizeof(::priemman::v1::UpgradeLogs)},
+  { 183, -1, -1, sizeof(::priemman::v1::CreateUpgradeRequestResponse)},
+  { 191, -1, -1, sizeof(::priemman::v1::AdminUserEntry)},
+  { 203, -1, -1, sizeof(::priemman::v1::AdminListUsersResponse)},
+  { 213, -1, -1, sizeof(::priemman::v1::UpgradeRequestEntry)},
+  { 228, -1, -1, sizeof(::priemman::v1::AdminListUpgradeRequestsResponse)},
+  { 235, -1, -1, sizeof(::priemman::v1::AdminReviewUpgradeRequest)},
+  { 244, -1, -1, sizeof(::priemman::v1::AdminReviewUpgradeResponse)},
+  { 252, -1, -1, sizeof(::priemman::v1::AdminConfirmPaymentRequest)},
+  { 259, -1, -1, sizeof(::priemman::v1::AdminConfirmPaymentResponse)},
 };
 
 static const ::_pb::Message* const file_default_instances[] = {
@@ -704,6 +754,8 @@ static const ::_pb::Message* const file_default_instances[] = {
   &::priemman::v1::_ListConnectedAccountsResponse_default_instance_._instance,
   &::priemman::v1::_DeleteConnectedAccountRequest_default_instance_._instance,
   &::priemman::v1::_UpgradeStatus_default_instance_._instance,
+  &::priemman::v1::_UpgradeLog_default_instance_._instance,
+  &::priemman::v1::_UpgradeLogs_default_instance_._instance,
   &::priemman::v1::_CreateUpgradeRequestResponse_default_instance_._instance,
   &::priemman::v1::_AdminUserEntry_default_instance_._instance,
   &::priemman::v1::_AdminListUsersResponse_default_instance_._instance,
@@ -778,42 +830,48 @@ const char descriptor_table_protodef_user_2eproto[] PROTOBUF_SECTION_VARIABLE(pr
   "n\030\006 \001(\t\0220\n\014requested_at\030\007 \001(\0132\032.google.p"
   "rotobuf.Timestamp\022/\n\013reviewed_at\030\010 \001(\0132\032"
   ".google.protobuf.Timestamp\022+\n\007paid_at\030\t "
-  "\001(\0132\032.google.protobuf.Timestamp\"[\n\034Creat"
-  "eUpgradeRequestResponse\022\017\n\007success\030\001 \001(\010"
-  "\022*\n\006status\030\002 \001(\0132\032.priemman.v1.UpgradeSt"
-  "atus\"\276\001\n\016AdminUserEntry\022!\n\002id\030\001 \001(\0132\025.pr"
-  "iemman.v1.ObjectId\022\r\n\005email\030\002 \001(\t\022\022\n\nfir"
-  "st_name\030\003 \001(\t\022\021\n\tlast_name\030\004 \001(\t\022#\n\004role"
-  "\030\005 \001(\0162\025.priemman.v1.UserRole\022.\n\ncreated"
-  "_at\030\006 \001(\0132\032.google.protobuf.Timestamp\"r\n"
-  "\026AdminListUsersResponse\022*\n\005users\030\001 \003(\0132\033"
-  ".priemman.v1.AdminUserEntry\022\r\n\005total\030\002 \001"
-  "(\005\022\r\n\005limit\030\003 \001(\005\022\016\n\006offset\030\004 \001(\005\"\211\002\n\023Up"
-  "gradeRequestEntry\022!\n\002id\030\001 \001(\0132\025.priemman"
-  ".v1.ObjectId\022&\n\007user_id\030\002 \001(\0132\025.priemman"
-  ".v1.ObjectId\022\r\n\005email\030\003 \001(\t\022\016\n\006status\030\004 "
-  "\001(\t\022\022\n\ninvoice_id\030\005 \001(\t\022\026\n\016invoice_amoun"
-  "t\030\006 \001(\003\022\020\n\010currency\030\007 \001(\t\022\030\n\020rejection_r"
-  "eason\030\010 \001(\t\0220\n\014requested_at\030\t \001(\0132\032.goog"
-  "le.protobuf.Timestamp\"V\n AdminListUpgrad"
-  "eRequestsResponse\0222\n\010requests\030\001 \003(\0132 .pr"
-  "iemman.v1.UpgradeRequestEntry\"i\n\031AdminRe"
-  "viewUpgradeRequest\022!\n\002id\030\001 \001(\0132\025.priemma"
-  "n.v1.ObjectId\022\017\n\007approve\030\002 \001(\010\022\030\n\020reject"
-  "ion_reason\030\003 \001(\t\"`\n\032AdminReviewUpgradeRe"
-  "sponse\022\017\n\007success\030\001 \001(\010\0221\n\007request\030\002 \001(\013"
-  "2 .priemman.v1.UpgradeRequestEntry\"\?\n\032Ad"
-  "minConfirmPaymentRequest\022!\n\002id\030\001 \001(\0132\025.p"
-  "riemman.v1.ObjectId\"V\n\033AdminConfirmPayme"
-  "ntResponse\022\017\n\007success\030\001 \001(\010\022&\n\007user_id\030\002"
-  " \001(\0132\025.priemman.v1.ObjectId*\231\001\n\021Connecte"
-  "dPlatform\022\"\n\036CONNECTED_PLATFORM_UNSPECIF"
-  "IED\020\000\022 \n\034CONNECTED_PLATFORM_INSTAGRAM\020\001\022"
-  "\037\n\033CONNECTED_PLATFORM_LINKEDIN\020\002\022\035\n\031CONN"
-  "ECTED_PLATFORM_GITHUB\020\003*e\n\010UserRole\022\031\n\025U"
-  "SER_ROLE_UNSPECIFIED\020\000\022\022\n\016USER_ROLE_USER"
-  "\020\001\022\025\n\021USER_ROLE_CREATOR\020\002\022\023\n\017USER_ROLE_A"
-  "DMIN\020\003b\006proto3"
+  "\001(\0132\032.google.protobuf.Timestamp\"\274\001\n\nUpgr"
+  "adeLog\022!\n\002id\030\001 \001(\0132\025.priemman.v1.ObjectI"
+  "d\022\016\n\006status\030\002 \001(\t\022\030\n\020rejection_reason\030\003 "
+  "\001(\t\0220\n\014requested_at\030\004 \001(\0132\032.google.proto"
+  "buf.Timestamp\022/\n\013reviewed_at\030\005 \001(\0132\032.goo"
+  "gle.protobuf.Timestamp\"4\n\013UpgradeLogs\022%\n"
+  "\004logs\030\001 \003(\0132\027.priemman.v1.UpgradeLog\"[\n\034"
+  "CreateUpgradeRequestResponse\022\017\n\007success\030"
+  "\001 \001(\010\022*\n\006status\030\002 \001(\0132\032.priemman.v1.Upgr"
+  "adeStatus\"\276\001\n\016AdminUserEntry\022!\n\002id\030\001 \001(\013"
+  "2\025.priemman.v1.ObjectId\022\r\n\005email\030\002 \001(\t\022\022"
+  "\n\nfirst_name\030\003 \001(\t\022\021\n\tlast_name\030\004 \001(\t\022#\n"
+  "\004role\030\005 \001(\0162\025.priemman.v1.UserRole\022.\n\ncr"
+  "eated_at\030\006 \001(\0132\032.google.protobuf.Timesta"
+  "mp\"r\n\026AdminListUsersResponse\022*\n\005users\030\001 "
+  "\003(\0132\033.priemman.v1.AdminUserEntry\022\r\n\005tota"
+  "l\030\002 \001(\005\022\r\n\005limit\030\003 \001(\005\022\016\n\006offset\030\004 \001(\005\"\211"
+  "\002\n\023UpgradeRequestEntry\022!\n\002id\030\001 \001(\0132\025.pri"
+  "emman.v1.ObjectId\022&\n\007user_id\030\002 \001(\0132\025.pri"
+  "emman.v1.ObjectId\022\r\n\005email\030\003 \001(\t\022\016\n\006stat"
+  "us\030\004 \001(\t\022\022\n\ninvoice_id\030\005 \001(\t\022\026\n\016invoice_"
+  "amount\030\006 \001(\003\022\020\n\010currency\030\007 \001(\t\022\030\n\020reject"
+  "ion_reason\030\010 \001(\t\0220\n\014requested_at\030\t \001(\0132\032"
+  ".google.protobuf.Timestamp\"V\n AdminListU"
+  "pgradeRequestsResponse\0222\n\010requests\030\001 \003(\013"
+  "2 .priemman.v1.UpgradeRequestEntry\"i\n\031Ad"
+  "minReviewUpgradeRequest\022!\n\002id\030\001 \001(\0132\025.pr"
+  "iemman.v1.ObjectId\022\017\n\007approve\030\002 \001(\010\022\030\n\020r"
+  "ejection_reason\030\003 \001(\t\"`\n\032AdminReviewUpgr"
+  "adeResponse\022\017\n\007success\030\001 \001(\010\0221\n\007request\030"
+  "\002 \001(\0132 .priemman.v1.UpgradeRequestEntry\""
+  "\?\n\032AdminConfirmPaymentRequest\022!\n\002id\030\001 \001("
+  "\0132\025.priemman.v1.ObjectId\"V\n\033AdminConfirm"
+  "PaymentResponse\022\017\n\007success\030\001 \001(\010\022&\n\007user"
+  "_id\030\002 \001(\0132\025.priemman.v1.ObjectId*\231\001\n\021Con"
+  "nectedPlatform\022\"\n\036CONNECTED_PLATFORM_UNS"
+  "PECIFIED\020\000\022 \n\034CONNECTED_PLATFORM_INSTAGR"
+  "AM\020\001\022\037\n\033CONNECTED_PLATFORM_LINKEDIN\020\002\022\035\n"
+  "\031CONNECTED_PLATFORM_GITHUB\020\003*e\n\010UserRole"
+  "\022\031\n\025USER_ROLE_UNSPECIFIED\020\000\022\022\n\016USER_ROLE"
+  "_USER\020\001\022\025\n\021USER_ROLE_CREATOR\020\002\022\023\n\017USER_R"
+  "OLE_ADMIN\020\003b\006proto3"
   ;
 static const ::_pbi::DescriptorTable* const descriptor_table_user_2eproto_deps[4] = {
   &::descriptor_table_common_2eproto,
@@ -823,9 +881,9 @@ static const ::_pbi::DescriptorTable* const descriptor_table_user_2eproto_deps[4
 };
 static ::_pbi::once_flag descriptor_table_user_2eproto_once;
 const ::_pbi::DescriptorTable descriptor_table_user_2eproto = {
-    false, false, 3894, descriptor_table_protodef_user_2eproto,
+    false, false, 4139, descriptor_table_protodef_user_2eproto,
     "user.proto",
-    &descriptor_table_user_2eproto_once, descriptor_table_user_2eproto_deps, 4, 24,
+    &descriptor_table_user_2eproto_once, descriptor_table_user_2eproto_deps, 4, 26,
     schemas, file_default_instances, TableStruct_user_2eproto::offsets,
     file_level_metadata_user_2eproto, file_level_enum_descriptors_user_2eproto,
     file_level_service_descriptors_user_2eproto,
@@ -5997,6 +6055,591 @@ void UpgradeStatus::InternalSwap(UpgradeStatus* other) {
 
 // ===================================================================
 
+class UpgradeLog::_Internal {
+ public:
+  static const ::priemman::v1::ObjectId& id(const UpgradeLog* msg);
+  static const ::PROTOBUF_NAMESPACE_ID::Timestamp& requested_at(const UpgradeLog* msg);
+  static const ::PROTOBUF_NAMESPACE_ID::Timestamp& reviewed_at(const UpgradeLog* msg);
+};
+
+const ::priemman::v1::ObjectId&
+UpgradeLog::_Internal::id(const UpgradeLog* msg) {
+  return *msg->_impl_.id_;
+}
+const ::PROTOBUF_NAMESPACE_ID::Timestamp&
+UpgradeLog::_Internal::requested_at(const UpgradeLog* msg) {
+  return *msg->_impl_.requested_at_;
+}
+const ::PROTOBUF_NAMESPACE_ID::Timestamp&
+UpgradeLog::_Internal::reviewed_at(const UpgradeLog* msg) {
+  return *msg->_impl_.reviewed_at_;
+}
+void UpgradeLog::clear_id() {
+  if (GetArenaForAllocation() == nullptr && _impl_.id_ != nullptr) {
+    delete _impl_.id_;
+  }
+  _impl_.id_ = nullptr;
+}
+void UpgradeLog::clear_requested_at() {
+  if (GetArenaForAllocation() == nullptr && _impl_.requested_at_ != nullptr) {
+    delete _impl_.requested_at_;
+  }
+  _impl_.requested_at_ = nullptr;
+}
+void UpgradeLog::clear_reviewed_at() {
+  if (GetArenaForAllocation() == nullptr && _impl_.reviewed_at_ != nullptr) {
+    delete _impl_.reviewed_at_;
+  }
+  _impl_.reviewed_at_ = nullptr;
+}
+UpgradeLog::UpgradeLog(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                         bool is_message_owned)
+  : ::PROTOBUF_NAMESPACE_ID::Message(arena, is_message_owned) {
+  SharedCtor(arena, is_message_owned);
+  // @@protoc_insertion_point(arena_constructor:priemman.v1.UpgradeLog)
+}
+UpgradeLog::UpgradeLog(const UpgradeLog& from)
+  : ::PROTOBUF_NAMESPACE_ID::Message() {
+  UpgradeLog* const _this = this; (void)_this;
+  new (&_impl_) Impl_{
+      decltype(_impl_.status_){}
+    , decltype(_impl_.rejection_reason_){}
+    , decltype(_impl_.id_){nullptr}
+    , decltype(_impl_.requested_at_){nullptr}
+    , decltype(_impl_.reviewed_at_){nullptr}
+    , /*decltype(_impl_._cached_size_)*/{}};
+
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  _impl_.status_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+    _impl_.status_.Set("", GetArenaForAllocation());
+  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (!from._internal_status().empty()) {
+    _this->_impl_.status_.Set(from._internal_status(), 
+      _this->GetArenaForAllocation());
+  }
+  _impl_.rejection_reason_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+    _impl_.rejection_reason_.Set("", GetArenaForAllocation());
+  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (!from._internal_rejection_reason().empty()) {
+    _this->_impl_.rejection_reason_.Set(from._internal_rejection_reason(), 
+      _this->GetArenaForAllocation());
+  }
+  if (from._internal_has_id()) {
+    _this->_impl_.id_ = new ::priemman::v1::ObjectId(*from._impl_.id_);
+  }
+  if (from._internal_has_requested_at()) {
+    _this->_impl_.requested_at_ = new ::PROTOBUF_NAMESPACE_ID::Timestamp(*from._impl_.requested_at_);
+  }
+  if (from._internal_has_reviewed_at()) {
+    _this->_impl_.reviewed_at_ = new ::PROTOBUF_NAMESPACE_ID::Timestamp(*from._impl_.reviewed_at_);
+  }
+  // @@protoc_insertion_point(copy_constructor:priemman.v1.UpgradeLog)
+}
+
+inline void UpgradeLog::SharedCtor(
+    ::_pb::Arena* arena, bool is_message_owned) {
+  (void)arena;
+  (void)is_message_owned;
+  new (&_impl_) Impl_{
+      decltype(_impl_.status_){}
+    , decltype(_impl_.rejection_reason_){}
+    , decltype(_impl_.id_){nullptr}
+    , decltype(_impl_.requested_at_){nullptr}
+    , decltype(_impl_.reviewed_at_){nullptr}
+    , /*decltype(_impl_._cached_size_)*/{}
+  };
+  _impl_.status_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+    _impl_.status_.Set("", GetArenaForAllocation());
+  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  _impl_.rejection_reason_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+    _impl_.rejection_reason_.Set("", GetArenaForAllocation());
+  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+}
+
+UpgradeLog::~UpgradeLog() {
+  // @@protoc_insertion_point(destructor:priemman.v1.UpgradeLog)
+  if (auto *arena = _internal_metadata_.DeleteReturnArena<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>()) {
+  (void)arena;
+    return;
+  }
+  SharedDtor();
+}
+
+inline void UpgradeLog::SharedDtor() {
+  GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
+  _impl_.status_.Destroy();
+  _impl_.rejection_reason_.Destroy();
+  if (this != internal_default_instance()) delete _impl_.id_;
+  if (this != internal_default_instance()) delete _impl_.requested_at_;
+  if (this != internal_default_instance()) delete _impl_.reviewed_at_;
+}
+
+void UpgradeLog::SetCachedSize(int size) const {
+  _impl_._cached_size_.Set(size);
+}
+
+void UpgradeLog::Clear() {
+// @@protoc_insertion_point(message_clear_start:priemman.v1.UpgradeLog)
+  uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  _impl_.status_.ClearToEmpty();
+  _impl_.rejection_reason_.ClearToEmpty();
+  if (GetArenaForAllocation() == nullptr && _impl_.id_ != nullptr) {
+    delete _impl_.id_;
+  }
+  _impl_.id_ = nullptr;
+  if (GetArenaForAllocation() == nullptr && _impl_.requested_at_ != nullptr) {
+    delete _impl_.requested_at_;
+  }
+  _impl_.requested_at_ = nullptr;
+  if (GetArenaForAllocation() == nullptr && _impl_.reviewed_at_ != nullptr) {
+    delete _impl_.reviewed_at_;
+  }
+  _impl_.reviewed_at_ = nullptr;
+  _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+}
+
+const char* UpgradeLog::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  while (!ctx->Done(&ptr)) {
+    uint32_t tag;
+    ptr = ::_pbi::ReadTag(ptr, &tag);
+    switch (tag >> 3) {
+      // .priemman.v1.ObjectId id = 1;
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 10)) {
+          ptr = ctx->ParseMessage(_internal_mutable_id(), ptr);
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      // string status = 2;
+      case 2:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 18)) {
+          auto str = _internal_mutable_status();
+          ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
+          CHK_(ptr);
+          CHK_(::_pbi::VerifyUTF8(str, "priemman.v1.UpgradeLog.status"));
+        } else
+          goto handle_unusual;
+        continue;
+      // string rejection_reason = 3;
+      case 3:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 26)) {
+          auto str = _internal_mutable_rejection_reason();
+          ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
+          CHK_(ptr);
+          CHK_(::_pbi::VerifyUTF8(str, "priemman.v1.UpgradeLog.rejection_reason"));
+        } else
+          goto handle_unusual;
+        continue;
+      // .google.protobuf.Timestamp requested_at = 4;
+      case 4:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 34)) {
+          ptr = ctx->ParseMessage(_internal_mutable_requested_at(), ptr);
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      // .google.protobuf.Timestamp reviewed_at = 5;
+      case 5:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 42)) {
+          ptr = ctx->ParseMessage(_internal_mutable_reviewed_at(), ptr);
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      default:
+        goto handle_unusual;
+    }  // switch
+  handle_unusual:
+    if ((tag == 0) || ((tag & 7) == 4)) {
+      CHK_(ptr);
+      ctx->SetLastTag(tag);
+      goto message_done;
+    }
+    ptr = UnknownFieldParse(
+        tag,
+        _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
+        ptr, ctx);
+    CHK_(ptr != nullptr);
+  }  // while
+message_done:
+  return ptr;
+failure:
+  ptr = nullptr;
+  goto message_done;
+#undef CHK_
+}
+
+uint8_t* UpgradeLog::_InternalSerialize(
+    uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
+  // @@protoc_insertion_point(serialize_to_array_start:priemman.v1.UpgradeLog)
+  uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // .priemman.v1.ObjectId id = 1;
+  if (this->_internal_has_id()) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+      InternalWriteMessage(1, _Internal::id(this),
+        _Internal::id(this).GetCachedSize(), target, stream);
+  }
+
+  // string status = 2;
+  if (!this->_internal_status().empty()) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+      this->_internal_status().data(), static_cast<int>(this->_internal_status().length()),
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+      "priemman.v1.UpgradeLog.status");
+    target = stream->WriteStringMaybeAliased(
+        2, this->_internal_status(), target);
+  }
+
+  // string rejection_reason = 3;
+  if (!this->_internal_rejection_reason().empty()) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+      this->_internal_rejection_reason().data(), static_cast<int>(this->_internal_rejection_reason().length()),
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+      "priemman.v1.UpgradeLog.rejection_reason");
+    target = stream->WriteStringMaybeAliased(
+        3, this->_internal_rejection_reason(), target);
+  }
+
+  // .google.protobuf.Timestamp requested_at = 4;
+  if (this->_internal_has_requested_at()) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+      InternalWriteMessage(4, _Internal::requested_at(this),
+        _Internal::requested_at(this).GetCachedSize(), target, stream);
+  }
+
+  // .google.protobuf.Timestamp reviewed_at = 5;
+  if (this->_internal_has_reviewed_at()) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+      InternalWriteMessage(5, _Internal::reviewed_at(this),
+        _Internal::reviewed_at(this).GetCachedSize(), target, stream);
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:priemman.v1.UpgradeLog)
+  return target;
+}
+
+size_t UpgradeLog::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:priemman.v1.UpgradeLog)
+  size_t total_size = 0;
+
+  uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  // string status = 2;
+  if (!this->_internal_status().empty()) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+        this->_internal_status());
+  }
+
+  // string rejection_reason = 3;
+  if (!this->_internal_rejection_reason().empty()) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+        this->_internal_rejection_reason());
+  }
+
+  // .priemman.v1.ObjectId id = 1;
+  if (this->_internal_has_id()) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
+        *_impl_.id_);
+  }
+
+  // .google.protobuf.Timestamp requested_at = 4;
+  if (this->_internal_has_requested_at()) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
+        *_impl_.requested_at_);
+  }
+
+  // .google.protobuf.Timestamp reviewed_at = 5;
+  if (this->_internal_has_reviewed_at()) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
+        *_impl_.reviewed_at_);
+  }
+
+  return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
+}
+
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData UpgradeLog::_class_data_ = {
+    ::PROTOBUF_NAMESPACE_ID::Message::CopyWithSourceCheck,
+    UpgradeLog::MergeImpl
+};
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*UpgradeLog::GetClassData() const { return &_class_data_; }
+
+
+void UpgradeLog::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg) {
+  auto* const _this = static_cast<UpgradeLog*>(&to_msg);
+  auto& from = static_cast<const UpgradeLog&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:priemman.v1.UpgradeLog)
+  GOOGLE_DCHECK_NE(&from, _this);
+  uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (!from._internal_status().empty()) {
+    _this->_internal_set_status(from._internal_status());
+  }
+  if (!from._internal_rejection_reason().empty()) {
+    _this->_internal_set_rejection_reason(from._internal_rejection_reason());
+  }
+  if (from._internal_has_id()) {
+    _this->_internal_mutable_id()->::priemman::v1::ObjectId::MergeFrom(
+        from._internal_id());
+  }
+  if (from._internal_has_requested_at()) {
+    _this->_internal_mutable_requested_at()->::PROTOBUF_NAMESPACE_ID::Timestamp::MergeFrom(
+        from._internal_requested_at());
+  }
+  if (from._internal_has_reviewed_at()) {
+    _this->_internal_mutable_reviewed_at()->::PROTOBUF_NAMESPACE_ID::Timestamp::MergeFrom(
+        from._internal_reviewed_at());
+  }
+  _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+}
+
+void UpgradeLog::CopyFrom(const UpgradeLog& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:priemman.v1.UpgradeLog)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool UpgradeLog::IsInitialized() const {
+  return true;
+}
+
+void UpgradeLog::InternalSwap(UpgradeLog* other) {
+  using std::swap;
+  auto* lhs_arena = GetArenaForAllocation();
+  auto* rhs_arena = other->GetArenaForAllocation();
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
+      &_impl_.status_, lhs_arena,
+      &other->_impl_.status_, rhs_arena
+  );
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
+      &_impl_.rejection_reason_, lhs_arena,
+      &other->_impl_.rejection_reason_, rhs_arena
+  );
+  ::PROTOBUF_NAMESPACE_ID::internal::memswap<
+      PROTOBUF_FIELD_OFFSET(UpgradeLog, _impl_.reviewed_at_)
+      + sizeof(UpgradeLog::_impl_.reviewed_at_)
+      - PROTOBUF_FIELD_OFFSET(UpgradeLog, _impl_.id_)>(
+          reinterpret_cast<char*>(&_impl_.id_),
+          reinterpret_cast<char*>(&other->_impl_.id_));
+}
+
+::PROTOBUF_NAMESPACE_ID::Metadata UpgradeLog::GetMetadata() const {
+  return ::_pbi::AssignDescriptors(
+      &descriptor_table_user_2eproto_getter, &descriptor_table_user_2eproto_once,
+      file_level_metadata_user_2eproto[15]);
+}
+
+// ===================================================================
+
+class UpgradeLogs::_Internal {
+ public:
+};
+
+UpgradeLogs::UpgradeLogs(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                         bool is_message_owned)
+  : ::PROTOBUF_NAMESPACE_ID::Message(arena, is_message_owned) {
+  SharedCtor(arena, is_message_owned);
+  // @@protoc_insertion_point(arena_constructor:priemman.v1.UpgradeLogs)
+}
+UpgradeLogs::UpgradeLogs(const UpgradeLogs& from)
+  : ::PROTOBUF_NAMESPACE_ID::Message() {
+  UpgradeLogs* const _this = this; (void)_this;
+  new (&_impl_) Impl_{
+      decltype(_impl_.logs_){from._impl_.logs_}
+    , /*decltype(_impl_._cached_size_)*/{}};
+
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  // @@protoc_insertion_point(copy_constructor:priemman.v1.UpgradeLogs)
+}
+
+inline void UpgradeLogs::SharedCtor(
+    ::_pb::Arena* arena, bool is_message_owned) {
+  (void)arena;
+  (void)is_message_owned;
+  new (&_impl_) Impl_{
+      decltype(_impl_.logs_){arena}
+    , /*decltype(_impl_._cached_size_)*/{}
+  };
+}
+
+UpgradeLogs::~UpgradeLogs() {
+  // @@protoc_insertion_point(destructor:priemman.v1.UpgradeLogs)
+  if (auto *arena = _internal_metadata_.DeleteReturnArena<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>()) {
+  (void)arena;
+    return;
+  }
+  SharedDtor();
+}
+
+inline void UpgradeLogs::SharedDtor() {
+  GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
+  _impl_.logs_.~RepeatedPtrField();
+}
+
+void UpgradeLogs::SetCachedSize(int size) const {
+  _impl_._cached_size_.Set(size);
+}
+
+void UpgradeLogs::Clear() {
+// @@protoc_insertion_point(message_clear_start:priemman.v1.UpgradeLogs)
+  uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  _impl_.logs_.Clear();
+  _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+}
+
+const char* UpgradeLogs::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  while (!ctx->Done(&ptr)) {
+    uint32_t tag;
+    ptr = ::_pbi::ReadTag(ptr, &tag);
+    switch (tag >> 3) {
+      // repeated .priemman.v1.UpgradeLog logs = 1;
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 10)) {
+          ptr -= 1;
+          do {
+            ptr += 1;
+            ptr = ctx->ParseMessage(_internal_add_logs(), ptr);
+            CHK_(ptr);
+            if (!ctx->DataAvailable(ptr)) break;
+          } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<10>(ptr));
+        } else
+          goto handle_unusual;
+        continue;
+      default:
+        goto handle_unusual;
+    }  // switch
+  handle_unusual:
+    if ((tag == 0) || ((tag & 7) == 4)) {
+      CHK_(ptr);
+      ctx->SetLastTag(tag);
+      goto message_done;
+    }
+    ptr = UnknownFieldParse(
+        tag,
+        _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
+        ptr, ctx);
+    CHK_(ptr != nullptr);
+  }  // while
+message_done:
+  return ptr;
+failure:
+  ptr = nullptr;
+  goto message_done;
+#undef CHK_
+}
+
+uint8_t* UpgradeLogs::_InternalSerialize(
+    uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
+  // @@protoc_insertion_point(serialize_to_array_start:priemman.v1.UpgradeLogs)
+  uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // repeated .priemman.v1.UpgradeLog logs = 1;
+  for (unsigned i = 0,
+      n = static_cast<unsigned>(this->_internal_logs_size()); i < n; i++) {
+    const auto& repfield = this->_internal_logs(i);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+        InternalWriteMessage(1, repfield, repfield.GetCachedSize(), target, stream);
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:priemman.v1.UpgradeLogs)
+  return target;
+}
+
+size_t UpgradeLogs::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:priemman.v1.UpgradeLogs)
+  size_t total_size = 0;
+
+  uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  // repeated .priemman.v1.UpgradeLog logs = 1;
+  total_size += 1UL * this->_internal_logs_size();
+  for (const auto& msg : this->_impl_.logs_) {
+    total_size +=
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(msg);
+  }
+
+  return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
+}
+
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData UpgradeLogs::_class_data_ = {
+    ::PROTOBUF_NAMESPACE_ID::Message::CopyWithSourceCheck,
+    UpgradeLogs::MergeImpl
+};
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*UpgradeLogs::GetClassData() const { return &_class_data_; }
+
+
+void UpgradeLogs::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg) {
+  auto* const _this = static_cast<UpgradeLogs*>(&to_msg);
+  auto& from = static_cast<const UpgradeLogs&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:priemman.v1.UpgradeLogs)
+  GOOGLE_DCHECK_NE(&from, _this);
+  uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  _this->_impl_.logs_.MergeFrom(from._impl_.logs_);
+  _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+}
+
+void UpgradeLogs::CopyFrom(const UpgradeLogs& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:priemman.v1.UpgradeLogs)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool UpgradeLogs::IsInitialized() const {
+  return true;
+}
+
+void UpgradeLogs::InternalSwap(UpgradeLogs* other) {
+  using std::swap;
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  _impl_.logs_.InternalSwap(&other->_impl_.logs_);
+}
+
+::PROTOBUF_NAMESPACE_ID::Metadata UpgradeLogs::GetMetadata() const {
+  return ::_pbi::AssignDescriptors(
+      &descriptor_table_user_2eproto_getter, &descriptor_table_user_2eproto_once,
+      file_level_metadata_user_2eproto[16]);
+}
+
+// ===================================================================
+
 class CreateUpgradeRequestResponse::_Internal {
  public:
   static const ::priemman::v1::UpgradeStatus& status(const CreateUpgradeRequestResponse* msg);
@@ -6216,7 +6859,7 @@ void CreateUpgradeRequestResponse::InternalSwap(CreateUpgradeRequestResponse* ot
 ::PROTOBUF_NAMESPACE_ID::Metadata CreateUpgradeRequestResponse::GetMetadata() const {
   return ::_pbi::AssignDescriptors(
       &descriptor_table_user_2eproto_getter, &descriptor_table_user_2eproto_once,
-      file_level_metadata_user_2eproto[15]);
+      file_level_metadata_user_2eproto[17]);
 }
 
 // ===================================================================
@@ -6648,7 +7291,7 @@ void AdminUserEntry::InternalSwap(AdminUserEntry* other) {
 ::PROTOBUF_NAMESPACE_ID::Metadata AdminUserEntry::GetMetadata() const {
   return ::_pbi::AssignDescriptors(
       &descriptor_table_user_2eproto_getter, &descriptor_table_user_2eproto_once,
-      file_level_metadata_user_2eproto[16]);
+      file_level_metadata_user_2eproto[18]);
 }
 
 // ===================================================================
@@ -6917,7 +7560,7 @@ void AdminListUsersResponse::InternalSwap(AdminListUsersResponse* other) {
 ::PROTOBUF_NAMESPACE_ID::Metadata AdminListUsersResponse::GetMetadata() const {
   return ::_pbi::AssignDescriptors(
       &descriptor_table_user_2eproto_getter, &descriptor_table_user_2eproto_once,
-      file_level_metadata_user_2eproto[17]);
+      file_level_metadata_user_2eproto[19]);
 }
 
 // ===================================================================
@@ -7493,7 +8136,7 @@ void UpgradeRequestEntry::InternalSwap(UpgradeRequestEntry* other) {
 ::PROTOBUF_NAMESPACE_ID::Metadata UpgradeRequestEntry::GetMetadata() const {
   return ::_pbi::AssignDescriptors(
       &descriptor_table_user_2eproto_getter, &descriptor_table_user_2eproto_once,
-      file_level_metadata_user_2eproto[18]);
+      file_level_metadata_user_2eproto[20]);
 }
 
 // ===================================================================
@@ -7678,7 +8321,7 @@ void AdminListUpgradeRequestsResponse::InternalSwap(AdminListUpgradeRequestsResp
 ::PROTOBUF_NAMESPACE_ID::Metadata AdminListUpgradeRequestsResponse::GetMetadata() const {
   return ::_pbi::AssignDescriptors(
       &descriptor_table_user_2eproto_getter, &descriptor_table_user_2eproto_once,
-      file_level_metadata_user_2eproto[19]);
+      file_level_metadata_user_2eproto[21]);
 }
 
 // ===================================================================
@@ -7960,7 +8603,7 @@ void AdminReviewUpgradeRequest::InternalSwap(AdminReviewUpgradeRequest* other) {
 ::PROTOBUF_NAMESPACE_ID::Metadata AdminReviewUpgradeRequest::GetMetadata() const {
   return ::_pbi::AssignDescriptors(
       &descriptor_table_user_2eproto_getter, &descriptor_table_user_2eproto_once,
-      file_level_metadata_user_2eproto[20]);
+      file_level_metadata_user_2eproto[22]);
 }
 
 // ===================================================================
@@ -8184,7 +8827,7 @@ void AdminReviewUpgradeResponse::InternalSwap(AdminReviewUpgradeResponse* other)
 ::PROTOBUF_NAMESPACE_ID::Metadata AdminReviewUpgradeResponse::GetMetadata() const {
   return ::_pbi::AssignDescriptors(
       &descriptor_table_user_2eproto_getter, &descriptor_table_user_2eproto_once,
-      file_level_metadata_user_2eproto[21]);
+      file_level_metadata_user_2eproto[23]);
 }
 
 // ===================================================================
@@ -8383,7 +9026,7 @@ void AdminConfirmPaymentRequest::InternalSwap(AdminConfirmPaymentRequest* other)
 ::PROTOBUF_NAMESPACE_ID::Metadata AdminConfirmPaymentRequest::GetMetadata() const {
   return ::_pbi::AssignDescriptors(
       &descriptor_table_user_2eproto_getter, &descriptor_table_user_2eproto_once,
-      file_level_metadata_user_2eproto[22]);
+      file_level_metadata_user_2eproto[24]);
 }
 
 // ===================================================================
@@ -8613,7 +9256,7 @@ void AdminConfirmPaymentResponse::InternalSwap(AdminConfirmPaymentResponse* othe
 ::PROTOBUF_NAMESPACE_ID::Metadata AdminConfirmPaymentResponse::GetMetadata() const {
   return ::_pbi::AssignDescriptors(
       &descriptor_table_user_2eproto_getter, &descriptor_table_user_2eproto_once,
-      file_level_metadata_user_2eproto[23]);
+      file_level_metadata_user_2eproto[25]);
 }
 
 // @@protoc_insertion_point(namespace_scope)
@@ -8679,6 +9322,14 @@ Arena::CreateMaybeMessage< ::priemman::v1::DeleteConnectedAccountRequest >(Arena
 template<> PROTOBUF_NOINLINE ::priemman::v1::UpgradeStatus*
 Arena::CreateMaybeMessage< ::priemman::v1::UpgradeStatus >(Arena* arena) {
   return Arena::CreateMessageInternal< ::priemman::v1::UpgradeStatus >(arena);
+}
+template<> PROTOBUF_NOINLINE ::priemman::v1::UpgradeLog*
+Arena::CreateMaybeMessage< ::priemman::v1::UpgradeLog >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::priemman::v1::UpgradeLog >(arena);
+}
+template<> PROTOBUF_NOINLINE ::priemman::v1::UpgradeLogs*
+Arena::CreateMaybeMessage< ::priemman::v1::UpgradeLogs >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::priemman::v1::UpgradeLogs >(arena);
 }
 template<> PROTOBUF_NOINLINE ::priemman::v1::CreateUpgradeRequestResponse*
 Arena::CreateMaybeMessage< ::priemman::v1::CreateUpgradeRequestResponse >(Arena* arena) {

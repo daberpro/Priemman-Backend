@@ -128,6 +128,18 @@ message UpgradeStatus {
   google.protobuf.Timestamp paid_at = 9;
 }
 
+message UpgradeLog {
+  ObjectId id = 1;
+  string status = 2;
+  string rejection_reason = 3;
+  google.protobuf.Timestamp requested_at = 4;
+  google.protobuf.Timestamp reviewed_at = 5;
+}
+
+message UpgradeLogs {
+  repeated UpgradeLog logs = 1;
+}
+
 message CreateUpgradeRequestResponse {
   bool success = 1;
   UpgradeStatus status = 2;

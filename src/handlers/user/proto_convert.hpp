@@ -9,6 +9,7 @@
 #include <src/database/account_repository.hpp>
 #include <src/database/creator_upgrade_repository.hpp>
 #include <src/database/user_repository.hpp>
+#include <src/database/creator_upgrade_logs.hpp>
 
 namespace priemman::handlers::mapper {
 
@@ -179,6 +180,38 @@ inline database::ProjectSummaryRow ToRow(const priemman::v1::ProjectSummaryRow& 
         .first_name = r.first_name(),
         .last_name = r.last_name()
     };
+}
+
+inline priemman::v1::UpgradeLog ToProto(
+    const database::UpgradeLog& row
+) {
+    priemman::v1::UpgradeLog log;
+
+    log.mutable_id()->set_value(row.id);
+    log.set_status(row.status);
+    log.set_rejection_reason(row.rejection_reason);
+
+    if (row.requested_at.has_value()) {
+        SqlToTimestamp(
+            row.requested_at.value(),
+            log.mutable_requested_at()
+        );
+    }
+
+    if (row.reviewed_at.has_value()) {
+        SqlToTimestamp(
+            row.reviewed_at.value(),
+            log.mutable_reviewed_at()
+        );
+    }
+
+    return log;
+}
+
+inline priemman::v1::UpgradeLogs ToProto(const std::vector<database::UpgradeLog>& ul){
+    priemman::v1::UpgradeLogs logs;
+    for (const auto& log : ul) *logs.add_logs() = mapper::ToProto(log);
+    return logs;
 }
 
 }  // namespace priemman::handlers::mapper

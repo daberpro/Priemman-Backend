@@ -7,23 +7,21 @@
 
 namespace priemman::frontend {
 
-class StaticPageHandler final : public userver::server::handlers::HttpHandlerBase {
+class StaticPageHandler final
+    : public userver::server::handlers::HttpHandlerBase {
 public:
-    StaticPageHandler(
-        const userver::components::ComponentConfig& config,
-        const userver::components::ComponentContext& context
-    );
+  StaticPageHandler(const userver::components::ComponentConfig &config,
+                    const userver::components::ComponentContext &context);
 
-    std::string HandleRequestThrow(
-        const userver::server::http::HttpRequest& request,
-        userver::server::request::RequestContext& context
-    ) const override;
+  std::string HandleRequestThrow(
+      const userver::server::http::HttpRequest &request,
+      userver::server::request::RequestContext &context) const override;
 
-    static userver::yaml_config::Schema GetStaticConfigSchema();
+  static userver::yaml_config::Schema GetStaticConfigSchema();
 
 private:
-    const userver::fs::FsCacheClient* _fs;
-    std::string _favicon_data;
+  const userver::fs::FsCacheClient *_fs;
+  std::string _favicon_data;
 };
 
-}  // namespace priemman::frontend
+} // namespace priemman::frontend
