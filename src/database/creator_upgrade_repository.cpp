@@ -134,8 +134,8 @@ std::vector<UpgradeRequestRow> CreatorUpgradeRepository::ListByStatus(
 }
 
 bool CreatorUpgradeRepository::Approve(const std::string& id) const {
-    const auto result = _mysql_cluster->Execute(
-        userver::storages::mysql::ClusterHostType::kPrimary,
+    auto trx = _mysql_cluster->Begin(userver::storages::mysql::ClusterHostType::kPrimary);
+    const auto approved_result = trx.Execute(
         userver::storages::mysql::Query{
             R"sql(
                 UPDATE creator_upgrades
@@ -151,15 +151,53 @@ bool CreatorUpgradeRepository::Approve(const std::string& id) const {
         id
     ).AsExecutionResult();
 
-    return result.rows_affected > 0;
+    if(approved_result.rows_affected > 0){
+
+        const auto logs_result = trx.Execute(
+            userver::storages::mysql::Query{
+                R"sql(
+                    INSERT INTO upgrade_logs (
+                        id,
+                        user_id,
+                        status,
+                        rejection_reason,
+                        requested_at,
+                        reviewed_at
+                    )
+                    SELECT
+                        ?,
+                        cu.user_id,
+                        cu.status,
+                        cu.rejection_reason,
+                        cu.requested_at,
+                        cu.reviewed_at
+                    FROM creator_upgrades AS cu
+                    WHERE cu.id = ?;
+                )sql"
+            },
+            userver::utils::generators::GenerateUuid(),
+            id
+        ).AsExecutionResult();
+
+        if(logs_result.rows_affected > 0){
+            trx.Commit();
+            return true;
+        }
+
+    }
+
+    return false;
 }
 
 bool CreatorUpgradeRepository::Reject(
     const std::string& id,
     const std::string& reason
 ) const {
-    const auto result = _mysql_cluster->Execute(
-        userver::storages::mysql::ClusterHostType::kPrimary,
+    auto trx = _mysql_cluster->Begin(
+        userver::storages::mysql::ClusterHostType::kPrimary
+    );
+
+    const auto rejected_result = trx.Execute(
         userver::storages::mysql::Query{
             R"sql(
                 UPDATE creator_upgrades
@@ -169,10 +207,44 @@ bool CreatorUpgradeRepository::Reject(
                 WHERE id = ? AND status = 'pending'
             )sql"
         },
-        reason, id
+        reason,
+        id
     ).AsExecutionResult();
 
-    return result.rows_affected > 0;
+    if (rejected_result.rows_affected > 0) {
+        const auto logs_result = trx.Execute(
+            userver::storages::mysql::Query{
+                R"sql(
+                    INSERT INTO upgrade_logs (
+                        id,
+                        user_id,
+                        status,
+                        rejection_reason,
+                        requested_at,
+                        reviewed_at
+                    )
+                    SELECT
+                        ?,
+                        cu.user_id,
+                        cu.status,
+                        cu.rejection_reason,
+                        cu.requested_at,
+                        cu.reviewed_at
+                    FROM creator_upgrades AS cu
+                    WHERE cu.id = ?
+                )sql"
+            },
+            userver::utils::generators::GenerateUuid(),
+            id
+        ).AsExecutionResult();
+
+        if (logs_result.rows_affected > 0) {
+            trx.Commit();
+            return true;
+        }
+    }
+
+    return false;
 }
 
 std::optional<std::string> CreatorUpgradeRepository::ConfirmPaid(

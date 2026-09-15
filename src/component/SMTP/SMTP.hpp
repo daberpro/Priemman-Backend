@@ -41,6 +41,7 @@ namespace daberdev::components {
         uint16_t m_port{};
         std::string m_email{};
         std::string m_password{};
+        std::string m_display_name{};
         userver::clients::dns::Resolver* _resolver;
         userver::concurrent::BackgroundTaskStorage m_background_tasks;
 

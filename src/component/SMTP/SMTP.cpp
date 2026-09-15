@@ -16,6 +16,7 @@ namespace daberdev::components {
         m_port {config["port"].As<uint16_t>()},
         m_email {config["email"].As<std::string>()},
         m_password {config["password"].As<std::string>()},
+        m_display_name{config["display_name"].As<std::string>()},
         _resolver{&context.FindComponent<userver::clients::dns::Component>("dns-client").GetResolver()},
         m_background_tasks{context.GetTaskProcessor("main-task-processor")} {}
 
@@ -236,7 +237,7 @@ namespace daberdev::components {
             expect_response(tls_socket, 354);
 
             const std::string email_payload = fmt::format(
-                "From: <{}>\r\n"
+                "From: {} <{}>\r\n"
                 "To: <{}>\r\n"
                 "Subject: {}\r\n"
                 "MIME-Version: 1.0\r\n"
@@ -245,6 +246,7 @@ namespace daberdev::components {
                 "\r\n"
                 "{}\r\n"
                 ".\r\n",
+                m_display_name,
                 m_email,
                 to,
                 subject,
@@ -285,6 +287,9 @@ namespace daberdev::components {
             password:
                 type: string
                 description: Password aplikasi
+            display_name:
+                type: string
+                description: Nama pengirim email
         )");
     }
 }
