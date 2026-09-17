@@ -4,6 +4,9 @@
 #include <proto/common.pb.h>
 #include <proto/user.pb.h>
 #include <userver/server/http/http_request.hpp>
+#include <userver/components/component_config.hpp>
+#include <userver/logging/log.hpp>
+#include <fstream>
 
 constexpr std::int64_t kDefaultPageSize = 20;
 constexpr std::int64_t kMaxPageSize = 50;
@@ -82,6 +85,44 @@ inline std::int64_t ParseOffset(
     }
 
     return value < 0 ? 0 : value;
+}
+
+[[nodiscard("Normalize result are not used")]]
+inline std::string NormalizeEmail(std::string email) {
+    std::transform(email.begin(), email.end(), email.begin(),
+                   [](unsigned char c) { return static_cast<char>(std::tolower(c)); });
+    return email;
+}
+
+inline void ReplaceAllOccurrences(std::string& haystack, std::string_view needle, std::string_view replacement) {
+    std::size_t pos = 0;
+    while ((pos = haystack.find(needle, pos)) != std::string::npos) {
+        haystack.replace(pos, needle.length(), replacement);
+        pos += replacement.length();
+    }
+}
+
+[[nodiscard("Email template are not used")]]
+inline std::string LoadEmailTemplate(const std::string& template_path, const std::string& FallbackEmailTemplate) {
+    std::ifstream template_file{template_path};
+    if (!template_file.is_open()) {
+        LOG_ERROR() << "OTP email template not found at '" << template_path
+                    << "', falling back to built-in template";
+        return FallbackEmailTemplate;
+    }
+
+    std::string content{
+        std::istreambuf_iterator<char>{template_file},
+        std::istreambuf_iterator<char>{}
+    };
+    if (content.empty()) {
+        LOG_ERROR() << "OTP email template at '" << template_path
+                    << "' is empty, falling back to built-in template";
+        return FallbackEmailTemplate;
+    }
+
+    LOG_INFO() << "Loaded OTP email template from " << template_path;
+    return content;
 }
 
 } // namespace priemman::utils

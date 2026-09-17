@@ -152,7 +152,7 @@ std::string SendOtpHandler::HandleRequestThrow(
     }
 
     const std::string otp_code = GenerateOtpCode();
-    const std::string ip_address = request.GetRemoteAddress().PrimaryAddressString();
+    const std::string ip_address = request.GetHeader("X-Real-IP");
 
     // ====== SIMPAN KE DATABASE ======
     const bool created = _otp_repo.CreateChallenge(
