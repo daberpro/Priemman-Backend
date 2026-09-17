@@ -4,10 +4,9 @@ CREATE TABLE IF NOT EXISTS upgrade_logs (
     status ENUM('pending', 'approved', 'rejected', 'paid') NOT NULL DEFAULT 'pending',
     rejection_reason VARCHAR(255) NOT NULL DEFAULT '',
     requested_at DATETIME(6) NOT NULL,
-    reviewed_at DATETIME(6) NOT NULL,
+    reviewed_at DATETIME(6) NULL,
 
     PRIMARY KEY (id),
-    UNIQUE KEY uq_user (user_id),
 
     CONSTRAINT fk_upgrade_user_log
         FOREIGN KEY (user_id)
