@@ -48,12 +48,17 @@ CreatorUpgradeRepository::CreatorUpgradeRepository(
 }
 
 bool CreatorUpgradeRepository::CreateRequest(const std::string& user_id) const {
-    const auto active = _mysql_cluster->Execute(
-        userver::storages::mysql::ClusterHostType::kPrimary,
+    auto trx = _mysql_cluster->Begin(
+        userver::storages::mysql::ClusterHostType::kPrimary
+    );
+
+    const auto active = trx.Execute(
         userver::storages::mysql::Query{
             R"sql(
-                SELECT 1 FROM creator_upgrades
-                WHERE user_id = ? AND status IN ('pending', 'approved')
+                SELECT 1
+                FROM creator_upgrades
+                WHERE user_id = ?
+                  AND status IN ('pending', 'approved')
                 LIMIT 1
             )sql"
         },
@@ -64,21 +69,61 @@ bool CreatorUpgradeRepository::CreateRequest(const std::string& user_id) const {
         return false;
     }
 
-    const auto result = _mysql_cluster->Execute(
-        userver::storages::mysql::ClusterHostType::kPrimary,
+    const auto upgrade_id =
+        userver::utils::generators::GenerateUuid();
+
+    const auto result = trx.Execute(
         userver::storages::mysql::Query{
             R"sql(
-                INSERT INTO creator_upgrades (id, user_id, status)
+                INSERT INTO creator_upgrades (
+                    id,
+                    user_id,
+                    status
+                )
                 VALUES (?, ?, 'pending')
             )sql"
         },
-        userver::utils::generators::GenerateUuid(),
+        upgrade_id,
         user_id
     ).AsExecutionResult();
 
-    return result.rows_affected > 0;
-}
+    if (result.rows_affected == 0) {
+        return false;
+    }
 
+    const auto logs_result = trx.Execute(
+        userver::storages::mysql::Query{
+            R"sql(
+                INSERT INTO upgrade_logs (
+                    id,
+                    user_id,
+                    status,
+                    rejection_reason,
+                    requested_at,
+                    reviewed_at
+                )
+                SELECT
+                    ?,
+                    cu.user_id,
+                    cu.status,
+                    cu.rejection_reason,
+                    cu.requested_at,
+                    cu.reviewed_at
+                FROM creator_upgrades AS cu
+                WHERE cu.id = ?
+            )sql"
+        },
+        userver::utils::generators::GenerateUuid(),
+        upgrade_id
+    ).AsExecutionResult();
+
+    if (logs_result.rows_affected == 0) {
+        return false;
+    }
+
+    trx.Commit();
+    return true;
+}
 std::optional<UpgradeRow> CreatorUpgradeRepository::FindActiveByUser(
     const std::string& user_id
 ) const {
