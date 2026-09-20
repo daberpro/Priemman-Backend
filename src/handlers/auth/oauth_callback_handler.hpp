@@ -13,6 +13,7 @@
 #include <src/component/OAuth/Google/OAuthGoogleComponent.hpp>
 #include <src/database/session_repository.hpp>
 #include <src/database/user_repository.hpp>
+#include <src/component/SMTP/SMTP.hpp>
 
 namespace priemman::auth {
 
@@ -33,12 +34,14 @@ public:
     std::string HandleRequestThrow(const userver::server::http::HttpRequest& request, userver::server::request::RequestContext& context) const override;
     static userver::yaml_config::Schema GetStaticConfigSchema();
 private:
-    std::string _domain{"priemman.my.id"};
+    std::string _domain{""};
+    std::string _welcome_template{""};
     std::shared_ptr<userver::storages::mysql::Cluster> _mysql_cluster{nullptr};
     database::UserRepository _users;
     database::SessionRepository _sessions;
     daberdev::components::OAuthGoogleComponent* _oauth_google_component{nullptr};
     DashboardUrls _dashboards;
+    daberdev::components::SMTPClientComponent* _smtp_component{nullptr};
 };
 
 class OAuthGithubCallbackHandler final : public userver::server::handlers::HttpHandlerBase {
@@ -49,11 +52,13 @@ public:
     static userver::yaml_config::Schema GetStaticConfigSchema();
 private:
     std::string _domain{""};
+    std::string _welcome_template{""};
     std::shared_ptr<userver::storages::mysql::Cluster> _mysql_cluster{nullptr};
     database::UserRepository _users;
     database::SessionRepository _sessions;
     daberdev::components::OAuthGithubComponent* _oauth_github_component{nullptr};
     DashboardUrls _dashboards;
-};
+    daberdev::components::SMTPClientComponent* _smtp_component{nullptr};
 
+};
 }

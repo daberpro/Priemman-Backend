@@ -106,7 +106,7 @@ inline void ReplaceAllOccurrences(std::string& haystack, std::string_view needle
 inline std::string LoadEmailTemplate(const std::string& template_path, const std::string& FallbackEmailTemplate) {
     std::ifstream template_file{template_path};
     if (!template_file.is_open()) {
-        LOG_ERROR() << "OTP email template not found at '" << template_path
+        LOG_ERROR() << "template not found at '" << template_path
                     << "', falling back to built-in template";
         return FallbackEmailTemplate;
     }
@@ -116,12 +116,12 @@ inline std::string LoadEmailTemplate(const std::string& template_path, const std
         std::istreambuf_iterator<char>{}
     };
     if (content.empty()) {
-        LOG_ERROR() << "OTP email template at '" << template_path
+        LOG_ERROR() << "template at '" << template_path
                     << "' is empty, falling back to built-in template";
         return FallbackEmailTemplate;
     }
 
-    LOG_INFO() << "Loaded OTP email template from " << template_path;
+    LOG_INFO() << "Loaded template from " << template_path;
     return content;
 }
 

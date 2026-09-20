@@ -152,6 +152,7 @@ components_manager:
             method: POST,OPTIONS
             task_processor: main-task-processor
             domain: $base-domain
+            welcome-template-path: $welcome-template-path
 
         handler-logout:
             path: /v1/auth/logout
@@ -177,6 +178,7 @@ components_manager:
             dashboard-creator-url: $dashboard-creator-url
             dashboard-admin-url: $dashboard-admin-url
             domain: $base-domain
+            welcome-template-path: $welcome-template-path
 
         handler-initiate-github-oauth:
             path: /v1/auth/github
@@ -191,6 +193,7 @@ components_manager:
             dashboard-creator-url: $dashboard-creator-url
             dashboard-admin-url: $dashboard-admin-url
             domain: $base-domain
+            welcome-template-path: $welcome-template-path
 
         handler-upload-media:
             path: /v1/media/upload
