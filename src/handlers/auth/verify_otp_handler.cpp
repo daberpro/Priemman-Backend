@@ -10,10 +10,54 @@
 #include <src/handlers/api_errors.hpp>
 #include <userver/server/http/http_response.hpp>
 #include <userver/server/http/http_status.hpp>
+#include <src/handlers/utils.hpp>
 
 namespace priemman::auth {
 
 namespace {
+
+constexpr std::string_view kFirstNamePlaceholder{"{{first_name}}"};
+constexpr std::string_view kLoginTImePlaceholder{"{{login_time}}"};
+constexpr std::string_view kDevicePlaceholder{"{{device}}"};
+constexpr std::string_view kIpAddressPlaceholder{"{{ip_address}}"};
+
+constexpr std::string_view kFallbackEmailTemplate{
+R"HTML(
+<h2>Login Pertama Berhasil</h2>
+<p>Halo, {{first_name}},</p>
+<p>
+    Selamat datang di Priemman.
+</p>
+<p>
+    Kami mendeteksi bahwa akun Priemman Anda berhasil digunakan
+    untuk login untuk pertama kalinya.
+</p>
+<div>
+    <strong>Waktu</strong><br>
+    {{login_time}}
+</div>
+<div>
+    <strong>Perangkat</strong><br>
+    {{device}}
+</div>
+<div>
+    <strong>Alamat IP</strong><br>
+    {{ip_address}}
+</div>
+<p>
+    Jika Anda mengenali aktivitas ini, tidak ada tindakan yang perlu dilakukan.
+</p>
+<p>
+    Jika Anda tidak merasa melakukan login ini, segera ubah kata sandi
+    akun Anda dan pastikan akun Anda tetap aman.
+</p>
+<p>
+    Salam hangat,<br>
+    <strong>Tim Priemman</strong>
+</p>
+)HTML"
+};
+
 std::string NormalizeEmail(std::string email) {
     std::transform(email.begin(), email.end(), email.begin(),
                    [](unsigned char c) { return static_cast<char>(std::tolower(c)); });
@@ -25,7 +69,8 @@ void AddProperties(userver::yaml_config::Schema& schema) {
         schema.properties.emplace();
     }
     static const std::pair<std::string_view, std::string_view> kProps[] = {
-        {"domain","Domain utama atau base domain contoh priemman.my.id"}
+        {"domain","Domain utama atau base domain contoh priemman.my.id"},
+        {"welcome-template-path","Template html untuk welcome user"}
     };
     for (const auto& [name, description] : kProps) {
         schema.properties->emplace(
@@ -37,6 +82,20 @@ void AddProperties(userver::yaml_config::Schema& schema) {
         );
     }
 }
+
+void BuildWelcomeEmailHtml(
+    std::string& html,
+    const std::string& first_name, 
+    const std::string& login_time,
+    const std::string& device,
+    const std::string& ip_address
+) {
+    priemman::utils::ReplaceAllOccurrences(html, kFirstNamePlaceholder, first_name);
+    priemman::utils::ReplaceAllOccurrences(html, kLoginTImePlaceholder, login_time);
+    priemman::utils::ReplaceAllOccurrences(html, kDevicePlaceholder, device);
+    priemman::utils::ReplaceAllOccurrences(html, kIpAddressPlaceholder, ip_address);
+}
+
 }  // namespace
 
 userver::yaml_config::Schema VerifyOtpHandler::GetStaticConfigSchema() {
@@ -51,12 +110,14 @@ VerifyOtpHandler::VerifyOtpHandler(
 )
     : userver::server::handlers::HttpHandlerBase(config, context),
       _domain{config["domain"].As<std::string>()},
+      _welcome_template(config["welcome-template-path"].As<std::string>()),
       _mysql_cluster(
           context.FindComponent<userver::storages::mysql::Component>("database").GetCluster()
       ),
       _otp_repo(&_mysql_cluster),
       _users(&_mysql_cluster),
-      _sessions(&_mysql_cluster) {
+      _sessions(&_mysql_cluster),
+      _smtp_component( &context.FindComponent<daberdev::components::SMTPClientComponent>("daberdev-smtp-component-client")) {
 }
 
 std::string VerifyOtpHandler::HandleRequestThrow(
@@ -114,6 +175,21 @@ std::string VerifyOtpHandler::HandleRequestThrow(
     }
 
     auto result = _users.FindOrCreateFromEmail(email);
+    if(result.is_new_user){
+        std::string html = priemman::utils::LoadEmailTemplate(std::string{_welcome_template}, std::string{kFallbackEmailTemplate});
+        BuildWelcomeEmailHtml(
+            html, 
+            result.user.first_name, 
+            std::format("{:%Y-%m-%dT%H:%M:%SZ}", std::chrono::time_point_cast<std::chrono::seconds>(std::chrono::high_resolution_clock::now())),
+            request.GetHeader("X-Platform"), 
+            request.GetHeader("X-Real-IP")
+        );
+        _smtp_component->SendEmailAsync(
+            email,
+            "Welcome To Priemman", 
+            html
+        );
+    }
     auto session = _sessions.Create(result.user.id);
 
     res.SetHeader(std::string("Set-Cookie"), BuildSessionCookie(session.token, _domain));

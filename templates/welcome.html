@@ -1,41 +1,422 @@
-<h2>Login Pertama Berhasil</h2>
+<!DOCTYPE html>
+<html lang="id" xmlns="http://www.w3.org/1999/xhtml">
 
-<p>Halo, {{first_name}},</p>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-<p>
-    Selamat datang di Priemman.
-</p>
+    <title>Selamat Datang di Priemman</title>
+</head>
 
-<p>
-    Kami mendeteksi bahwa akun Priemman Anda berhasil digunakan
-    untuk login untuk pertama kalinya.
-</p>
+<body style="
+    margin:0;
+    padding:0;
+    background-color:#f4f4f7;
+    -webkit-text-size-adjust:100%;
+    -ms-text-size-adjust:100%;
+">
 
-<div>
-    <strong>Waktu</strong><br>
-    {{login_time}}
-</div>
+    <!-- Preheader -->
+    <div style="
+        display:none;
+        max-height:0;
+        overflow:hidden;
+        mso-hide:all;
+        font-size:1px;
+        line-height:1px;
+        color:#f4f4f7;
+    ">
+        Selamat datang di Priemman. Login pertama ke akun Anda berhasil.
+        &zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;
+    </div>
 
-<div>
-    <strong>Perangkat</strong><br>
-    {{device}}
-</div>
 
-<div>
-    <strong>Alamat IP</strong><br>
-    {{ip_address}}
-</div>
+    <!-- Main Background -->
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="
+            background-color:#f4f4f7;
+            padding:48px 12px;
+        ">
+        <tr>
+            <td align="center">
 
-<p>
-    Jika Anda mengenali aktivitas ini, tidak ada tindakan yang perlu dilakukan.
-</p>
+                <!-- Main Container -->
+                <table role="presentation" width="560" cellpadding="0" cellspacing="0" border="0" style="
+                        width:100%;
+                        max-width:560px;
+                        background-color:#ffffff;
+                        border-radius:12px;
+                        overflow:hidden;
+                        box-shadow:0 2px 10px rgba(17,24,39,0.08);
+                    ">
 
-<p>
-    Jika Anda tidak merasa melakukan login ini, segera ubah kata sandi
-    akun Anda dan pastikan akun Anda tetap aman.
-</p>
+                    <!-- CONTENT -->
+                    <tr>
+                        <td style="
+                            padding:36px 28px;
+                        ">
 
-<p>
-    Salam hangat,<br>
-    <strong>Tim Priemman</strong>
-</p>
+                            <!-- Greeting -->
+                            <p style="
+                                margin:0 0 8px 0;
+                                font-size:15px;
+                                line-height:1.65;
+                                color:#4b5563;
+                                font-family:'Segoe UI', Arial, Helvetica, sans-serif;
+                            ">
+                                Halo, <strong style="color:#111827;">{{first_name}}</strong>.
+                            </p>
+
+
+                            <!-- Welcome Message -->
+                            <p style="
+                                margin:0 0 28px 0;
+                                font-size:15px;
+                                line-height:1.65;
+                                color:#4b5563;
+                                font-family:'Segoe UI', Arial, Helvetica, sans-serif;
+                            ">
+                                Selamat datang di Priemman. Akun Anda berhasil digunakan
+                                untuk login untuk pertama kalinya.
+                            </p>
+
+
+                            <!-- Login Information -->
+                            <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="
+                                    background-color:#f9fafb;
+                                    border:1px solid #e5e7eb;
+                                    border-radius:10px;
+                                ">
+                                <tr>
+                                    <td style="
+                                        padding:20px;
+                                    ">
+
+                                        <!-- Section Title -->
+                                        <p style="
+                                            margin:0 0 18px 0;
+                                            font-size:14px;
+                                            line-height:1.5;
+                                            font-weight:700;
+                                            color:#111827;
+                                            font-family:'Segoe UI',
+                                                Arial,
+                                                Helvetica,
+                                                sans-serif;
+                                        ">
+                                            Detail Login
+                                        </p>
+
+
+                                        <!-- Time -->
+                                        <table role="presentation" width="100%" cellpadding="0" cellspacing="0"
+                                            border="0">
+                                            <tr>
+                                                <td style="
+                                                    padding-bottom:14px;
+                                                ">
+                                                    <p style="
+                                                        margin:0 0 3px 0;
+                                                        font-size:12px;
+                                                        line-height:1.5;
+                                                        color:#6b7280;
+                                                        font-family:'Segoe UI',
+                                                            Arial,
+                                                            Helvetica,
+                                                            sans-serif;
+                                                    ">
+                                                        Waktu
+                                                    </p>
+
+                                                    <p style="
+                                                        margin:0;
+                                                        font-size:14px;
+                                                        line-height:1.5;
+                                                        color:#111827;
+                                                        font-family:'Segoe UI',
+                                                            Arial,
+                                                            Helvetica,
+                                                            sans-serif;
+                                                    ">
+                                                        <strong>{{login_time}}</strong>
+                                                    </p>
+                                                </td>
+                                            </tr>
+
+
+                                            <!-- Device -->
+                                            <tr>
+                                                <td style="
+                                                    padding-bottom:14px;
+                                                ">
+                                                    <p style="
+                                                        margin:0 0 3px 0;
+                                                        font-size:12px;
+                                                        line-height:1.5;
+                                                        color:#6b7280;
+                                                        font-family:'Segoe UI',
+                                                            Arial,
+                                                            Helvetica,
+                                                            sans-serif;
+                                                    ">
+                                                        Perangkat
+                                                    </p>
+
+                                                    <p style="
+                                                        margin:0;
+                                                        font-size:14px;
+                                                        line-height:1.5;
+                                                        color:#111827;
+                                                        font-family:'Segoe UI',
+                                                            Arial,
+                                                            Helvetica,
+                                                            sans-serif;
+                                                    ">
+                                                        <strong>{{device}}</strong>
+                                                    </p>
+                                                </td>
+                                            </tr>
+
+
+                                            <!-- IP Address -->
+                                            <tr>
+                                                <td>
+                                                    <p style="
+                                                        margin:0 0 3px 0;
+                                                        font-size:12px;
+                                                        line-height:1.5;
+                                                        color:#6b7280;
+                                                        font-family:'Segoe UI',
+                                                            Arial,
+                                                            Helvetica,
+                                                            sans-serif;
+                                                    ">
+                                                        Alamat IP
+                                                    </p>
+
+                                                    <p style="
+                                                        margin:0;
+                                                        font-size:14px;
+                                                        line-height:1.5;
+                                                        color:#111827;
+                                                        font-family:'Cascadia Mono',
+                                                            'Courier New',
+                                                            Courier,
+                                                            monospace;
+                                                    ">
+                                                        {{ip_address}}
+                                                    </p>
+                                                </td>
+                                            </tr>
+
+                                        </table>
+
+                                    </td>
+                                </tr>
+                            </table>
+
+
+                            <!-- Recognized Login -->
+                            <p style="
+                                margin:24px 0 0 0;
+                                font-size:14px;
+                                line-height:1.6;
+                                color:#4b5563;
+                                font-family:'Segoe UI',
+                                    Arial,
+                                    Helvetica,
+                                    sans-serif;
+                            ">
+                                Jika Anda mengenali aktivitas ini, tidak ada tindakan
+                                yang perlu dilakukan.
+                            </p>
+
+
+                            <!-- Security Warning -->
+                            <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"
+                                style="margin-top:24px;">
+                                <tr>
+                                    <td style="
+                                        background-color:#fef3c7;
+                                        border-left:4px solid #f59e0b;
+                                        border-radius:6px;
+                                        padding:14px 16px;
+                                    ">
+                                        <p style="
+                                            margin:0;
+                                            font-size:13px;
+                                            line-height:1.6;
+                                            color:#92400e;
+                                            font-family:'Segoe UI',
+                                                Arial,
+                                                Helvetica,
+                                                sans-serif;
+                                        ">
+                                            <strong>
+                                                Bukan Anda?
+                                            </strong>
+                                            Jika Anda tidak merasa melakukan login ini,
+                                            segera ubah kata sandi akun Anda dan pastikan
+                                            akun Anda tetap aman.
+                                        </p>
+                                    </td>
+                                </tr>
+                            </table>
+
+
+                            <!-- Security Note -->
+                            <p style="
+                                margin:24px 0 0 0;
+                                font-size:13px;
+                                line-height:1.6;
+                                color:#6b7280;
+                                font-family:'Segoe UI',
+                                    Arial,
+                                    Helvetica,
+                                    sans-serif;
+                            ">
+                                Untuk menjaga keamanan akun, jangan bagikan informasi
+                                login Anda kepada siapa pun.
+                            </p>
+
+
+                            <!-- Signature -->
+                            <p style="
+                                margin:28px 0 0 0;
+                                font-size:14px;
+                                line-height:1.6;
+                                color:#4b5563;
+                                font-family:'Segoe UI',
+                                    Arial,
+                                    Helvetica,
+                                    sans-serif;
+                            ">
+                                Salam hangat,<br>
+
+                                <strong style="color:#111827;">
+                                    Tim Priemman
+                                </strong>
+                            </p>
+
+                        </td>
+                    </tr>
+
+
+                    <!-- FOOTER -->
+                    <tr>
+                        <td style="
+                            background-color:#111827;
+                            padding:28px 24px;
+                            text-align:center;
+                        ">
+
+                            <!-- Brand -->
+                            <p style="
+                                margin:0 0 8px 0;
+                                font-size:14px;
+                                line-height:1.4;
+                                font-weight:700;
+                                color:#ffffff;
+                                font-family:'Segoe UI',
+                                    Arial,
+                                    Helvetica,
+                                    sans-serif;
+                            ">
+                                Priemman Studio
+                            </p>
+
+
+                            <!-- Description -->
+                            <p style="
+                                margin:0 0 14px 0;
+                                font-size:12px;
+                                line-height:1.6;
+                                color:#9ca3af;
+                                font-family:'Segoe UI',
+                                    Arial,
+                                    Helvetica,
+                                    sans-serif;
+                            ">
+                                Platform portofolio &amp; manajemen proyek untuk kreator.
+                            </p>
+
+
+                            <!-- Links -->
+                            <table role="presentation" cellpadding="0" cellspacing="0" border="0" align="center">
+                                <tr>
+
+                                    <!-- Website -->
+                                    <td style="padding:0 10px;">
+                                        <a href="https://priemman.my.id" target="_blank" style="
+                                                font-size:12px;
+                                                color:#60a5fa;
+                                                text-decoration:none;
+                                                font-family:'Segoe UI',
+                                                    Arial,
+                                                    Helvetica,
+                                                    sans-serif;
+                                            ">
+                                            Website
+                                        </a>
+                                    </td>
+
+
+                                    <!-- Separator -->
+                                    <td style="
+                                        color:#4b5563;
+                                        font-size:12px;
+                                    ">
+                                        &bull;
+                                    </td>
+
+
+                                    <!-- Instagram -->
+                                    <td style="padding:0 10px;">
+                                        <a href="https://www.instagram.com/priemman_/" target="_blank" style="
+                                                font-size:12px;
+                                                color:#60a5fa;
+                                                text-decoration:none;
+                                                font-family:'Segoe UI',
+                                                    Arial,
+                                                    Helvetica,
+                                                    sans-serif;
+                                            ">
+                                            Instagram
+                                        </a>
+                                    </td>
+
+                                </tr>
+                            </table>
+
+
+                            <!-- Copyright -->
+                            <p style="
+                                margin:16px 0 0 0;
+                                font-size:11px;
+                                line-height:1.6;
+                                color:#6b7280;
+                                font-family:'Segoe UI',
+                                    Arial,
+                                    Helvetica,
+                                    sans-serif;
+                            ">
+                                Email ini dikirim secara otomatis karena adanya
+                                aktivitas login pada akun Priemman Anda.
+
+                                <br>
+
+                                &copy; 2026 Priemman Studio. All rights reserved.
+                            </p>
+
+                        </td>
+                    </tr>
+
+                </table>
+
+            </td>
+        </tr>
+    </table>
+
+</body>
+
+</html>

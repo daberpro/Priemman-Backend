@@ -13,6 +13,7 @@
 #include <src/handlers/api_errors.hpp>
 #include <userver/logging/log.hpp>
 #include <userver/server/http/http_status.hpp>
+#include <src/handlers/utils.hpp>
 
 namespace priemman::auth {
 
@@ -46,43 +47,6 @@ constexpr std::string_view kFallbackEmailTemplate = R"HTML(
 </body></html>
 )HTML";
 
-std::string NormalizeEmail(std::string email) {
-    std::transform(email.begin(), email.end(), email.begin(),
-                   [](unsigned char c) { return static_cast<char>(std::tolower(c)); });
-    return email;
-}
-
-void ReplaceAllOccurrences(std::string& haystack, std::string_view needle, std::string_view replacement) {
-    std::size_t pos = 0;
-    while ((pos = haystack.find(needle, pos)) != std::string::npos) {
-        haystack.replace(pos, needle.length(), replacement);
-        pos += replacement.length();
-    }
-}
-
-std::string LoadEmailTemplate(const userver::components::ComponentConfig& config) {
-    const auto template_path = config["email-template-path"].As<std::string>(
-        std::string{kDefaultEmailTemplatePath});
-
-    std::ifstream template_file{template_path};
-    if (!template_file.is_open()) {
-        LOG_ERROR() << "OTP email template not found at '" << template_path
-                    << "', falling back to built-in template";
-        return std::string{kFallbackEmailTemplate};
-    }
-
-    std::string content{
-        std::istreambuf_iterator<char>{template_file},
-        std::istreambuf_iterator<char>{}};
-    if (content.empty()) {
-        LOG_ERROR() << "OTP email template at '" << template_path
-                    << "' is empty, falling back to built-in template";
-        return std::string{kFallbackEmailTemplate};
-    }
-
-    LOG_INFO() << "Loaded OTP email template from " << template_path;
-    return content;
-}
 }  // namespace
 
 SendOtpHandler::SendOtpHandler(
@@ -97,7 +61,7 @@ SendOtpHandler::SendOtpHandler(
           &context.FindComponent<daberdev::components::SMTPClientComponent>("daberdev-smtp-component-client")
       ),
       _otp_repo(&_mysql_cluster),
-      _email_template(LoadEmailTemplate(config)) {
+      _email_template(priemman::utils::LoadEmailTemplate(config["email-template-path"].As<std::string>(),std::string{kDefaultEmailTemplatePath})) {
 }
 
 userver::yaml_config::Schema SendOtpHandler::GetStaticConfigSchema() {
@@ -126,8 +90,8 @@ std::string SendOtpHandler::GenerateOtpCode() {
 
 std::string SendOtpHandler::BuildOtpEmailHtml(const std::string& email, const std::string& otp_code) const {
     std::string html{_email_template};
-    ReplaceAllOccurrences(html, kOtpPlaceholder, otp_code);
-    ReplaceAllOccurrences(html, kEmailPlaceholder, email);
+    priemman::utils::ReplaceAllOccurrences(html, kOtpPlaceholder, otp_code);
+    priemman::utils::ReplaceAllOccurrences(html, kEmailPlaceholder, email);
     return html;
 }
 
@@ -144,7 +108,7 @@ std::string SendOtpHandler::HandleRequestThrow(
         return errors::BuildErrorResult("INVALID_REQUEST_BODY");
     }
 
-    const std::string email = NormalizeEmail(request_body.email());
+    const std::string email = priemman::utils::NormalizeEmail(request_body.email());
     if (email.empty()) {
         http_response.SetStatus(userver::server::http::HttpStatus::kBadRequest);
         http_response.SetContentType(errors::kProtobufContentType);

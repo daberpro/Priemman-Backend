@@ -13,6 +13,7 @@
 #include <src/database/otp_repository.hpp>
 #include <src/database/session_repository.hpp>
 #include <src/database/user_repository.hpp>
+#include <src/component/SMTP/SMTP.hpp>
 #include <userver/yaml_config/yaml_config.hpp>
 #include <userver/yaml_config/merge_schemas.hpp>
 
@@ -36,10 +37,12 @@ public:
 
 private:
     std::string _domain{""};
+    std::string _welcome_template{""};
     std::shared_ptr<userver::storages::mysql::Cluster> _mysql_cluster;
     database::OtpRepository _otp_repo;
     database::UserRepository _users;
     database::SessionRepository _sessions;
+    daberdev::components::SMTPClientComponent* _smtp_component{nullptr};
 };
 
 }  // namespace priemman::auth
