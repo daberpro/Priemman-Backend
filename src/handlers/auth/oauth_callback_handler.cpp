@@ -315,7 +315,7 @@ std::string OAuthGoogleCallbackHandler::HandleRequestThrow(
                     std::chrono::high_resolution_clock::now()
                 )
             ),
-            request.GetHeader("X-Platform"),
+            request.GetHeader("User-Agent"),
             request.GetHeader("X-Real-IP")
         );
 
@@ -467,7 +467,7 @@ std::string OAuthGithubCallbackHandler::HandleRequestThrow(
                     std::chrono::high_resolution_clock::now()
                 )
             ),
-            request.GetHeader("X-Platform"),
+            request.GetHeader("User-Agent"),
             request.GetHeader("X-Real-IP")
         );
 

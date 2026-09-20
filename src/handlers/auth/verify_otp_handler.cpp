@@ -181,7 +181,7 @@ std::string VerifyOtpHandler::HandleRequestThrow(
             html, 
             result.user.first_name, 
             std::format("{:%Y-%m-%dT%H:%M:%SZ}", std::chrono::time_point_cast<std::chrono::seconds>(std::chrono::high_resolution_clock::now())),
-            request.GetHeader("X-Platform"), 
+            request.GetHeader("User-Agent"), 
             request.GetHeader("X-Real-IP")
         );
         _smtp_component->SendEmailAsync(
