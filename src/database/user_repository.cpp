@@ -402,7 +402,7 @@ std::vector<ProjectSummaryRow> UserRepository::ListLikedProjects(
                     p.title AS title,
                     p.cover_media_id AS thumbnail,
                     u.first_name AS first_name,
-                    u.last_name AS last_name,
+                    u.last_name AS last_name
                 FROM project_likes pl
                 INNER JOIN projects p
                     ON pl.project_id = p.id
