@@ -1,6 +1,10 @@
 components_manager:
     components:
         congestion-control:
+        avifconvert-component:
+            quality: 55
+            lossless: false
+            effort: 4
         server:
             listener:
                 port: $server-port
@@ -122,12 +126,12 @@ components_manager:
 
         handler-like-action:
             path: /v1/users/me/liked
-            method: GET,POST,DELETE
+            method: GET,POST,DELETE,OPTIONS
             task_processor: main-task-processor
 
         handler-save-action:
             path: /v1/users/me/saved
-            method: GET,POST,DELETE
+            method: GET,POST,DELETE,OPTIONS
             task_processor: main-task-processor
 
         handler-work-experience:

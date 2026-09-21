@@ -12,6 +12,7 @@ find_package(userver COMPONENTS core mysql REQUIRED)
 find_package(PkgConfig REQUIRED)
 
 pkg_check_modules(ICAL REQUIRED IMPORTED_TARGET libical)
+pkg_check_modules(VIPS REQUIRED vips-cpp)
 
 add_library(server_proto_objects OBJECT)
 protobuf_generate(
@@ -36,6 +37,7 @@ add_executable(${PROJECT_NAME} ${SOURCES})
 
 target_include_directories(
     ${PROJECT_NAME} PRIVATE
+    ${VIPS_INCLUDE_DIRS}
     "${CMAKE_CURRENT_SOURCE_DIR}"
 )
 
@@ -48,6 +50,7 @@ target_link_libraries(
     ssl
     crypto
     PkgConfig::ICAL
+    ${VIPS_LIBRARIES}
 )
 
 add_subdirectory(frontend)
