@@ -10,7 +10,7 @@ AvifConvertComponent::AvifConvertComponent(
 )
     : userver::components::LoggableComponentBase(config, context),
       _fs_task_processor{
-          &context.GetTaskProcessor("fs-task-processor")
+          &context.GetTaskProcessor("avif-task-processor")
       },
       _quality{
           config["quality"].As<int>()
