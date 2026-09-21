@@ -54,6 +54,7 @@
 #include <src/component/SMTP/SMTP.hpp>
 #include <src/component/OAuth/Google/OAuthGoogleComponent.hpp>
 #include <src/component/OAuth/Github/OAuthGithubComponent.hpp>
+#include <src/component/AvifConvert/AvifConvertComponent.hpp>
 
 auto main(int argc, char* argv[]) -> int {
     auto component_list = userver::components::MinimalServerComponentList()
@@ -72,6 +73,7 @@ auto main(int argc, char* argv[]) -> int {
         .Append<daberdev::components::SMTPClientComponent>()
         .Append<daberdev::components::OAuthGoogleComponent>()
         .Append<daberdev::components::OAuthGithubComponent>()
+        .Append<daberdev::components::AvifConvertComponent>()
         .Append<priemman::cloudinary::CloudinaryComponent>()
         .Append<priemman::cloudinary::MediaSweeperComponent>()
 
