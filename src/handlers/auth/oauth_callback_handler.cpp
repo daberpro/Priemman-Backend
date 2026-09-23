@@ -244,13 +244,13 @@ OAuthGoogleCallbackHandler::OAuthGoogleCallbackHandler(
       _oauth_google_component{
           &context.FindComponent<
               daberdev::components::OAuthGoogleComponent
-          >("daberdev-oauth-google-component")
+          >(daberdev::components::OAuthGoogleComponent::kName)
       },
       _dashboards{DashboardUrls::FromConfig(config)},
       _smtp_component{
           &context.FindComponent<
               daberdev::components::SMTPClientComponent
-          >("daberdev-smtp-component-client")
+          >(daberdev::components::SMTPClientComponent::kName)
       } {}
 
 std::string OAuthGoogleCallbackHandler::HandleRequestThrow(
@@ -366,13 +366,13 @@ OAuthGithubCallbackHandler::OAuthGithubCallbackHandler(
       _oauth_github_component{
           &context.FindComponent<
               daberdev::components::OAuthGithubComponent
-          >("daberdev-oauth-github-component")
+          >(daberdev::components::OAuthGithubComponent::kName)
       },
       _dashboards{DashboardUrls::FromConfig(config)},
       _smtp_component{
           &context.FindComponent<
               daberdev::components::SMTPClientComponent
-          >("daberdev-smtp-component-client")
+          >(daberdev::components::SMTPClientComponent::kName)
       } {}
 
 std::string OAuthGithubCallbackHandler::HandleRequestThrow(

@@ -454,4 +454,42 @@ std::vector<ProjectSummaryRow> UserRepository::ListSavedProjects(
     ).AsVector<ProjectSummaryRow>();
 }
 
+std::expected<UserProfile,std::string> UserRepository::GetPublicProfile(const std::string& user_id) const {
+    auto trx = _mysql_cluster->Begin(userver::storages::mysql::ClusterHostType::kSecondary);
+    auto user_info = trx.Execute(
+        userver::storages::Query{
+            R"sql(
+                SELECT 
+                    id,
+                    email,
+                    first_name,
+                    last_name,
+                    headline,
+                    company,
+                    city,
+                    country,
+                    website_url,
+                    avatar_url,
+                    is_onboarded,
+                    role,
+                    about_title,
+                    about_description,
+                    DATE_FORMAT(created_at, '%Y-%m-%dT%H:%i:%sZ') AS join_at
+                FROM users
+                WHERE id = ?
+            )sql"
+        }, 
+        user_id
+    ).AsOptionalSingleRow<UserProfile>();
+
+   
+    if(user_info.has_value()){
+        trx.Commit();
+        return *user_info;
+    }
+
+    return std::unexpected<std::string>("Cannot get public profile");
+
+}
+
 }

@@ -58,7 +58,7 @@ SendOtpHandler::SendOtpHandler(
           context.FindComponent<userver::storages::mysql::Component>("database").GetCluster()
       ),
       _smtp_component(
-          &context.FindComponent<daberdev::components::SMTPClientComponent>("daberdev-smtp-component-client")
+          &context.FindComponent<daberdev::components::SMTPClientComponent>(daberdev::components::SMTPClientComponent::kName)
       ),
       _otp_repo(&_mysql_cluster),
       _email_template(priemman::utils::LoadEmailTemplate(config["email-template-path"].As<std::string>(),std::string{kDefaultEmailTemplatePath})) {

@@ -11,7 +11,7 @@ class InitiateGoogleOAuthHandler final : public userver::server::handlers::HttpH
      static constexpr std::string_view kName = "handler-initiate-google-oauth";
      InitiateGoogleOAuthHandler(const userver::components::ComponentConfig& config, const userver::components::ComponentContext& context)
      : userver::server::handlers::HttpHandlerBase(config, context),
-       _oauth_google_component(&context.FindComponent<daberdev::components::OAuthGoogleComponent>("daberdev-oauth-google-component")) {};
+       _oauth_google_component(&context.FindComponent<daberdev::components::OAuthGoogleComponent>(daberdev::components::OAuthGoogleComponent::kName)) {};
      std::string HandleRequestThrow(const userver::server::http::HttpRequest& request, userver::server::request::RequestContext& context) const override;
  private:
      daberdev::components::OAuthGoogleComponent* _oauth_google_component{nullptr};
@@ -22,7 +22,7 @@ class InitiateGithubOAuthHandler final : public userver::server::handlers::HttpH
      static constexpr std::string_view kName = "handler-initiate-github-oauth";
      InitiateGithubOAuthHandler(const userver::components::ComponentConfig& config, const userver::components::ComponentContext& context)
      : userver::server::handlers::HttpHandlerBase(config, context),
-       _oauth_github_component(&context.FindComponent<daberdev::components::OAuthGithubComponent>("daberdev-oauth-github-component")) {};
+       _oauth_github_component(&context.FindComponent<daberdev::components::OAuthGithubComponent>(daberdev::components::OAuthGithubComponent::kName)) {};
      std::string HandleRequestThrow(const userver::server::http::HttpRequest& request, userver::server::request::RequestContext& context) const override;
  private:
      daberdev::components::OAuthGithubComponent* _oauth_github_component{nullptr};

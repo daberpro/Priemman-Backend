@@ -7,6 +7,7 @@
 #include <userver/components/component_config.hpp>
 #include <userver/logging/log.hpp>
 #include <fstream>
+#include <src/handlers/api_errors.hpp>
 
 constexpr std::int64_t kDefaultPageSize = 20;
 constexpr std::int64_t kMaxPageSize = 50;
@@ -124,5 +125,13 @@ inline std::string LoadEmailTemplate(const std::string& template_path, const std
     LOG_INFO() << "Loaded template from " << template_path;
     return content;
 }
+
+inline std::string ErrorResult(
+    const std::string& code,
+    const std::string& message
+) {
+    return errors::BuildErrorResult(code, message);
+}
+
 
 } // namespace priemman::utils
