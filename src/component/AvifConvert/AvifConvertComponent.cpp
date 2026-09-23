@@ -24,6 +24,7 @@ AvifConvertComponent::AvifConvertComponent(
     if (VIPS_INIT("server")) {
         throw std::runtime_error("Failed to initialize VIPS");
     }
+    vips_concurrency_set(1);
     // Force libvips plugins to initialize while
     // component construction is still allowed to dlopen().
     vips_foreign_find_load_buffer(nullptr, 0);
@@ -44,6 +45,7 @@ AvifConvertComponent::ConvertBuffer(
                 buffer.size(),
                 "",
                 vips::VImage::option()
+                ->set("access", VIPS_ACCESS_SEQUENTIAL)
             )
         };
 
@@ -58,6 +60,7 @@ AvifConvertComponent::ConvertBuffer(
                 ->set("Q", _quality)
                 ->set("lossless", _lossless)
                 ->set("effort", _effort)
+                ->set("bitdepth", 8)
         );
 
         std::string result_buffer{
@@ -65,7 +68,10 @@ AvifConvertComponent::ConvertBuffer(
             size_buffer
         };
 
-        g_free(out_buffer);
+        if(out_buffer != nullptr){
+            g_free(out_buffer);
+            out_buffer = nullptr;
+        }
 
         return result_buffer;
     } catch (const std::exception& err) {

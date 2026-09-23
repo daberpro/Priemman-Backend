@@ -1,6 +1,9 @@
 #include "upload_media_handler.hpp"
 
+#include <fmt/format.h>
+
 #include <map>
+#include <string>
 #include <string_view>
 
 #include <userver/formats/json.hpp>
@@ -17,24 +20,8 @@ namespace priemman::handlers::media {
 
 namespace {
 
-constexpr std::size_t kMaxFileSize = 10 * 1024 * 1024; // 10 MB
+constexpr std::size_t kMaxFileSize = 10 * 1024 * 1024;  // 10 MB
 constexpr std::size_t kMaxFiles = 10;
-
-std::string InsertDeliveryTransform(std::string media_url) {
-    constexpr std::string_view kUploadMarker = "/upload/";
-
-    const auto marker_pos = media_url.find(kUploadMarker);
-
-    if (media_url.find("res.cloudinary.com") != std::string::npos &&
-        marker_pos != std::string::npos) {
-        media_url.insert(
-            marker_pos + kUploadMarker.size(),
-            "f_auto,q_auto/"
-        );
-    }
-
-    return media_url;
-}
 
 priemman::v1::MediaType MediaTypeFromCloudinary(
     const std::string& resource_type,
@@ -59,7 +46,7 @@ priemman::v1::MediaType MediaTypeFromCloudinary(
     return priemman::v1::MEDIA_TYPE_UNSPECIFIED;
 }
 
-} // namespace
+}  // namespace
 
 UploadMediaHandler::UploadMediaHandler(
     const userver::components::ComponentConfig& config,
@@ -67,14 +54,16 @@ UploadMediaHandler::UploadMediaHandler(
 )
     : AuthenticatedHandlerBase(config, context),
       cloudinary_client_(
-          context.FindComponent<cloudinary::CloudinaryComponent>()
-              .GetClient()
-      ),
-      avif_converter_(
           context.FindComponent<
-              daberdev::components::AvifConvertComponent
-          >()
-      ) {}
+              cloudinary::CloudinaryComponent
+          >().GetClient()
+      )
+      // , avif_converter_(
+      //       context.FindComponent<
+      //           daberdev::components::AvifConvertComponent
+      //       >()
+      //   )
+{}
 
 std::string UploadMediaHandler::HandleRequestThrow(
     const userver::server::http::HttpRequest& request,
@@ -86,10 +75,11 @@ std::string UploadMediaHandler::HandleRequestThrow(
         [&](userver::server::http::HttpStatus status,
             const std::string& code,
             const std::string& message) -> std::string {
-            res.SetStatus(status);
-            res.SetContentType("application/protobuf");
-            return ErrorResult(code, message);
-        };
+        res.SetStatus(status);
+        res.SetContentType("application/protobuf");
+
+        return ErrorResult(code, message);
+    };
 
     const auto user_id = RequireAuth(request);
 
@@ -172,12 +162,11 @@ std::string UploadMediaHandler::HandleRequestThrow(
         const std::string original_filename =
             file_arg.filename.value_or("upload.bin");
 
-        const std::string original_content_type =
-            std::string{
-                file_arg.content_type.value_or(
-                    "application/octet-stream"
-                )
-            };
+        const std::string original_content_type{
+            file_arg.content_type.value_or(
+                "application/octet-stream"
+            )
+        };
 
         LOG_INFO()
             << "Processing file: "
@@ -202,6 +191,23 @@ std::string UploadMediaHandler::HandleRequestThrow(
 
         std::string resource_type = "auto";
 
+        /*
+         * AVIF CONVERSION DISABLED
+         *
+         * Originally, every non-AVIF image was converted to AVIF
+         * before being uploaded to Cloudinary.
+         *
+         * This conversion is currently disabled because AVIF encoding
+         * is CPU-intensive and the server only has 2 CPU cores.
+         *
+         * The original image buffer, filename, and content type are
+         * now passed directly to Cloudinary.
+         *
+         * The original implementation is kept below in comments so
+         * it can be enabled again later if needed.
+         */
+
+        /*
         // AVIF tidak perlu dikonversi lagi.
         const bool is_image =
             original_content_type.find("image/") == 0;
@@ -275,6 +281,19 @@ std::string UploadMediaHandler::HandleRequestThrow(
         else if (original_content_type.find("video/") == 0) {
             resource_type = "video";
         }
+        */
+
+        /*
+         * AVIF conversion is disabled, so resource_type is determined
+         * directly from the uploaded file's content type.
+         */
+
+        if (original_content_type.find("image/") == 0) {
+            resource_type = "image";
+        }
+        else if (original_content_type.find("video/") == 0) {
+            resource_type = "video";
+        }
 
         std::map<std::string, std::string> additional_params = {
             {
@@ -306,7 +325,8 @@ std::string UploadMediaHandler::HandleRequestThrow(
                     additional_params,
                     resource_type
                 );
-        } catch (const std::exception& e) {
+        }
+        catch (const std::exception& e) {
             LOG_ERROR()
                 << "Cloudinary upload failed: "
                 << e.what();
@@ -333,16 +353,29 @@ std::string UploadMediaHandler::HandleRequestThrow(
         auto* item =
             batch_res.add_items();
 
-        std::string media_url =
+        /*
+         * Store the original Cloudinary secure_url.
+         *
+         * Do not add delivery transformations here.
+         *
+         * Example:
+         *
+         * https://res.cloudinary.com/.../image/upload/v123/file.png
+         *
+         * instead of:
+         *
+         * https://res.cloudinary.com/.../image/upload/f_auto,q_auto/v123/file.png
+         *
+         * Delivery transformations can be added later when
+         * constructing the API response if needed.
+         */
+
+        const std::string media_url =
             json["secure_url"].As<std::string>(
                 json["url"].As<std::string>("")
             );
 
-        item->set_url(
-            InsertDeliveryTransform(
-                std::move(media_url)
-            )
-        );
+        item->set_url(media_url);
 
         item->set_public_id(public_id);
 
@@ -362,7 +395,8 @@ std::string UploadMediaHandler::HandleRequestThrow(
                     *user_id,
                     cloudinary_resource_type
                 );
-            } catch (const std::exception& e) {
+            }
+            catch (const std::exception& e) {
                 LOG_ERROR()
                     << "Failed to track media upload "
                     << public_id
@@ -394,4 +428,4 @@ std::string UploadMediaHandler::HandleRequestThrow(
     return batch_res.SerializeAsString();
 }
 
-} // namespace priemman::handlers::media
+}  // namespace priemman::handlers::media

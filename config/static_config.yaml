@@ -1,10 +1,10 @@
 components_manager:
     components:
         congestion-control:
-        avifconvert-component:
-            quality: 55
-            lossless: false
-            effort: 4
+        # avifconvert-component:
+        #     quality: 55
+        #     lossless: false
+        #     effort: 4
         server:
             listener:
                 port: $server-port
@@ -298,8 +298,8 @@ components_manager:
             middlewares: {}
 
     task_processors:
-        avif-task-processor:
-            worker_threads: 1
+        # avif-task-processor:
+        #     worker_threads: 2
         main-task-processor:
             worker_threads#env: WORKER_THREADS
             worker_threads#fallback: 2

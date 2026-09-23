@@ -8,7 +8,7 @@
 #include <userver/server/http/http_response.hpp>
 
 #include <proto/media.pb.h>
-#include <src/component/AvifConvert/AvifConvertComponent.hpp>
+// #include <src/component/AvifConvert/AvifConvertComponent.hpp>
 #include <src/component/Cloudinary/CloudinaryClientComponent.hpp>
 #include <src/handlers/user/authenticated_handler_base.hpp>
 
@@ -30,7 +30,7 @@ public:
 
 private:
     const cloudinary::Client& cloudinary_client_;
-    const daberdev::components::AvifConvertComponent& avif_converter_;
+    // const daberdev::components::AvifConvertComponent& avif_converter_;
 };
 
 } // namespace priemman::handlers::media
