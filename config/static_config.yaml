@@ -144,6 +144,16 @@ components_manager:
             method: GET,DELETE,OPTIONS,POST
             task_processor: main-task-processor
 
+        handler-public-projects-list:
+            path: /v1/users/public/projects
+            method: GET,OPTIONS
+            task_processor: main-task-processor
+
+        handler-public-profile:
+            path: /v1/users/public
+            method: GET,OPTIONS
+            task_processor: main-task-processor
+
         handler-send-otp:
             path: /v1/auth/send-otp
             method: POST,OPTIONS
@@ -282,6 +292,9 @@ components_manager:
 
         # ============== Other ==============
         dns-client:
+            network-custom-servers:
+                - '1.1.1.1'
+                - '8.8.8.8'
             fs-task-processor: fs-task-processor
 
         http-client-core:

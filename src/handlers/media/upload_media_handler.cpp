@@ -56,7 +56,7 @@ UploadMediaHandler::UploadMediaHandler(
       cloudinary_client_(
           context.FindComponent<
               cloudinary::CloudinaryComponent
-          >().GetClient()
+          >(priemman::cloudinary::CloudinaryComponent::kName).GetClient()
       )
       // , avif_converter_(
       //       context.FindComponent<
@@ -190,103 +190,6 @@ std::string UploadMediaHandler::HandleRequestThrow(
         };
 
         std::string resource_type = "auto";
-
-        /*
-         * AVIF CONVERSION DISABLED
-         *
-         * Originally, every non-AVIF image was converted to AVIF
-         * before being uploaded to Cloudinary.
-         *
-         * This conversion is currently disabled because AVIF encoding
-         * is CPU-intensive and the server only has 2 CPU cores.
-         *
-         * The original image buffer, filename, and content type are
-         * now passed directly to Cloudinary.
-         *
-         * The original implementation is kept below in comments so
-         * it can be enabled again later if needed.
-         */
-
-        /*
-        // AVIF tidak perlu dikonversi lagi.
-        const bool is_image =
-            original_content_type.find("image/") == 0;
-
-        const bool is_avif =
-            original_content_type == "image/avif";
-
-        if (is_image && !is_avif) {
-            LOG_INFO()
-                << "Image detected, converting to AVIF: "
-                << original_filename;
-
-            auto converted =
-                avif_converter_.ConvertBufferAsync(
-                    upload_buffer
-                );
-
-            if (!converted.has_value()) {
-                LOG_ERROR()
-                    << "AVIF conversion failed for "
-                    << original_filename
-                    << ": "
-                    << converted.error();
-
-                return return_error(
-                    userver::server::http::HttpStatus::kBadRequest,
-                    "AVIF_CONVERSION_FAILED",
-                    "Failed to convert image to AVIF: " +
-                        converted.error()
-                );
-            }
-
-            upload_buffer = std::move(*converted);
-
-            const auto extension_pos =
-                upload_filename.find_last_of('.');
-
-            if (extension_pos != std::string::npos) {
-                upload_filename.replace(
-                    extension_pos,
-                    std::string::npos,
-                    ".avif"
-                );
-            } else {
-                upload_filename += ".avif";
-            }
-
-            upload_content_type = "image/avif";
-            resource_type = "image";
-
-            LOG_INFO()
-                << "AVIF conversion success: "
-                << original_filename
-                << " -> "
-                << upload_filename
-                << " size: "
-                << upload_buffer.size()
-                << " bytes";
-        }
-        else if (is_avif) {
-            // AVIF sudah dalam format target, jadi upload langsung.
-            resource_type = "image";
-
-            LOG_INFO()
-                << "AVIF detected, skipping conversion: "
-                << original_filename
-                << " size: "
-                << upload_buffer.size()
-                << " bytes";
-        }
-        else if (original_content_type.find("video/") == 0) {
-            resource_type = "video";
-        }
-        */
-
-        /*
-         * AVIF conversion is disabled, so resource_type is determined
-         * directly from the uploaded file's content type.
-         */
 
         if (original_content_type.find("image/") == 0) {
             resource_type = "image";

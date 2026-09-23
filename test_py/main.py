@@ -37,6 +37,7 @@ SEND_OTP_URL = f"{BASE_URL}/v1/auth/send-otp"
 VERIFY_OTP_URL = f"{BASE_URL}/v1/auth/verify-otp"
 LOGOUT_URL = f"{BASE_URL}/v1/auth/logout"
 
+PUBLIC_USER_PROFILE = f"{BASE_URL}/v1/users/public"
 GET_PROFILE_URL = f"{BASE_URL}/v1/users/me"
 UPDATE_PROFILE_URL = f"{BASE_URL}/v1/users/me"
 LIST_WORK_EXP_URL = f"{BASE_URL}/v1/users/me/work-experiences"
@@ -940,6 +941,57 @@ def check_verify(step: str, expected_err: str, status: int, err: str) -> bool:
     print(f"  [{label}] {step} | expected={expected_err!r} actual={detail}")
     return ok
 
+def get_public_user_profile():
+    print("\n== GET /v1/users/public?user_id=... ==")
+
+    user_id = input("Masukkan User ID: ").strip()
+
+    if not user_id:
+        print("User ID tidak boleh kosong.")
+        return None
+
+    resp = http.get(
+        PUBLIC_USER_PROFILE,
+        params={"user_id": user_id},
+        headers=PROTO_HEADERS,
+    )
+
+    if resp.status_code == 200 and is_proto(resp):
+        profile = user_pb2.UserProfile()
+        profile.ParseFromString(resp.content)
+
+        print(f"\nStatus          : {resp.status_code}")
+        print(f"id              : {profile.id.value}")
+        print(f"email           : {profile.email}")
+        print(f"first_name      : {profile.first_name}")
+        print(f"last_name       : {profile.last_name}")
+        print(f"headline        : {profile.headline}")
+        print(f"company         : {profile.company}")
+        print(f"city            : {profile.city}")
+        print(f"country         : {profile.country}")
+        print(f"website_url     : {profile.website_url}")
+        print(f"avatar_url      : {profile.avatar_url}")
+        print(f"is_onboarded    : {profile.is_onboarded}")
+        print(f"role            : {profile.role}")
+        print(f"about_title     : {profile.about_title}")
+        print(f"about_description: {profile.about_description}")
+        print(f"join_at         : {profile.join_at}")
+        print(f"work_exp_count  : {len(profile.work_experience)}")
+
+        for i, work in enumerate(profile.work_experience, 1):
+            print(f"\n  Work Experience [{i}]")
+            print(f"    id          : {work.id.value}")
+            print(f"    title       : {work.title}")
+            print(f"    company     : {work.company}")
+            print(f"    is_current  : {work.is_current}")
+            print(f"    description : {work.description}")
+
+        return profile
+
+    show_error(resp)
+    return None
+
+
 
 def test_email_suspend_and_ip_block() -> None:
     print("\n" + "=" * 60)
@@ -1084,9 +1136,10 @@ def main() -> None:
         print("  7. Upgrade ke Creator")
         print("  8. Admin: List Users & Upgrade Requests")
         print("  9. Uji Throttle (Rate Limiter)")
+        print("  10. Get Public User Profile")
         print("  0. Exit (tanpa logout)")
 
-        choice = input("\nPilih [0-9]: ").strip()
+        choice = input("\nPilih [0-10]: ").strip()
 
         if choice == "1":
             print("\n" + "=" * 60)
@@ -1287,6 +1340,11 @@ def main() -> None:
             except ValueError:
                 count = 80
             test_throttle(token, count)
+
+        elif choice == "10":
+            print("\n==== Mengambil Public Profile User ===")
+            get_public_user_profile()
+
 
         elif choice == "4":
             print("\n== Logout ==")

@@ -5,6 +5,8 @@
 #include <vector>
 #include <userver/storages/mysql/cluster.hpp>
 #include <src/database/project_repository.hpp>
+#include <expected>
+#include <src/database/account_repository.hpp>
 
 namespace priemman::database {
 
@@ -75,6 +77,29 @@ struct ProjectSummaryRow {
     std::string last_name;
 };
 
+struct UserProfile {
+    std::string id;
+    std::string email;
+    std::string first_name;
+    std::string last_name;
+    std::string headline;
+    std::string company;
+    std::string city;
+    std::string country;
+    std::string website_url;
+    std::string avatar_url;
+    std::int8_t is_onboarded; // Diubah ke std::int8_t
+    std::string role;
+    std::string about_title;
+    std::string about_description;
+    std::optional<std::string> join_at;
+};
+
+struct UserProfileAggregate {
+    UserProfile profile;
+    std::vector<WorkExperienceRow> work_experiences;
+};
+
 class UserRepository {
 public:
     explicit UserRepository(std::shared_ptr<userver::storages::mysql::Cluster>* mysql_cluster);
@@ -92,7 +117,6 @@ public:
     ) const;
     std::int64_t CountUsers(const std::string& role_filter) const;
     bool SetRole(const std::string& user_id, const std::string& role) const;
-
 
     bool ActionLike(const std::string& user_id,const std::string& project_id) const;
     bool ActionUnLike(const std::string& user_id,const std::string& project_id) const;
@@ -113,6 +137,8 @@ public:
         std::int64_t limit,
         std::int64_t offset
     ) const;
+
+    std::expected<UserProfile,std::string> GetPublicProfile(const std::string& user_id) const;
 
 private:
     std::shared_ptr<userver::storages::mysql::Cluster> _mysql_cluster{nullptr};

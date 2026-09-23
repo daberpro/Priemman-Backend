@@ -46,6 +46,8 @@
 #include <src/handlers/workspace/calendar_handler.hpp>
 #include <userver/server/handlers/ping.hpp>
 #include <src/handlers/user/upgrade_logs_handler.hpp>
+#include <src/handlers/user/public_profile_handler.hpp>
+#include <src/handlers/user/public_projects_list_handler.hpp>
 
 #include <src/middleware/rate_limiter.hpp>
 #include <src/component/Cloudinary/CloudinaryClientComponent.hpp>
@@ -54,7 +56,6 @@
 #include <src/component/SMTP/SMTP.hpp>
 #include <src/component/OAuth/Google/OAuthGoogleComponent.hpp>
 #include <src/component/OAuth/Github/OAuthGithubComponent.hpp>
-// #include <src/component/AvifConvert/AvifConvertComponent.hpp>
 
 auto main(int argc, char* argv[]) -> int {
     auto component_list = userver::components::MinimalServerComponentList()
@@ -73,7 +74,6 @@ auto main(int argc, char* argv[]) -> int {
         .Append<daberdev::components::SMTPClientComponent>()
         .Append<daberdev::components::OAuthGoogleComponent>()
         .Append<daberdev::components::OAuthGithubComponent>()
-        // .Append<daberdev::components::AvifConvertComponent>()
         .Append<priemman::cloudinary::CloudinaryComponent>()
         .Append<priemman::cloudinary::MediaSweeperComponent>()
 
@@ -106,6 +106,8 @@ auto main(int argc, char* argv[]) -> int {
         .Append<priemman::handlers::user::ActionLikeHandler>()
         .Append<priemman::handlers::user::ActionSaveHandler>()
         .Append<priemman::handlers::user::UpgradeLogsHandler>()
+        .Append<priemman::handlers::user::PublicProfileHandler>()
+        .Append<priemman::handlers::user::PublicProjectsListHandler>()
 
         // Admin Handlers
         .Append<priemman::handlers::admin::AdminUsersHandler>()

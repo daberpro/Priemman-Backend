@@ -117,7 +117,7 @@ VerifyOtpHandler::VerifyOtpHandler(
       _otp_repo(&_mysql_cluster),
       _users(&_mysql_cluster),
       _sessions(&_mysql_cluster),
-      _smtp_component( &context.FindComponent<daberdev::components::SMTPClientComponent>("daberdev-smtp-component-client")) {
+      _smtp_component( &context.FindComponent<daberdev::components::SMTPClientComponent>(daberdev::components::SMTPClientComponent::kName)) {
 }
 
 std::string VerifyOtpHandler::HandleRequestThrow(

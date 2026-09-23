@@ -214,4 +214,31 @@ inline priemman::v1::UpgradeLogs ToProto(const std::vector<database::UpgradeLog>
     return logs;
 }
 
+inline priemman::v1::UserProfile ToProto(const priemman::database::UserProfileAggregate& user){
+    priemman::v1::UserProfile result;
+    result.mutable_id()->set_value(user.profile.id);
+    result.set_email(user.profile.email);
+    result.set_first_name(user.profile.first_name);
+    result.set_last_name(user.profile.last_name);
+    result.set_headline(user.profile.headline);
+    result.set_company(user.profile.company);
+    result.set_city(user.profile.city);
+    result.set_country(user.profile.country);
+    result.set_website_url(user.profile.website_url);
+    result.set_avatar_url(user.profile.avatar_url);
+    result.set_is_onboarded(user.profile.is_onboarded);
+    result.set_role(user.profile.role);
+    result.set_about_title(user.profile.about_title);
+    result.set_about_description(user.profile.about_description);
+    if(user.profile.join_at.has_value()){
+        result.set_join_at(*user.profile.join_at);
+    }
+
+    for(const auto& we: user.work_experiences){
+        *result.add_work_experience() = ToProto(we);
+    }
+
+    return result;
+}
+
 }  // namespace priemman::handlers::mapper
