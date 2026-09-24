@@ -63,24 +63,6 @@ CREATE TABLE IF NOT EXISTS work_experiences (
         ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-CREATE TABLE IF NOT EXISTS connected_accounts (
-    id CHAR(36) NOT NULL,
-    user_id CHAR(36) NOT NULL,
-    platform ENUM('INSTAGRAM', 'LINKEDIN', 'GITHUB') NOT NULL,
-    handle_or_url TEXT NOT NULL,
-    verified BOOLEAN NOT NULL DEFAULT FALSE,
-    connected_at DATETIME(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
-
-    PRIMARY KEY (id),
-    UNIQUE KEY uq_connected_account_platform (user_id, platform),
-    KEY idx_connected_accounts_user_id (user_id),
-
-    CONSTRAINT fk_connected_accounts_user
-        FOREIGN KEY (user_id)
-        REFERENCES users(id)
-        ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
 -- ============================================================
 -- AUTHENTICATION
 -- ============================================================

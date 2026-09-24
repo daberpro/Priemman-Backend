@@ -1,10 +1,6 @@
 components_manager:
     components:
         congestion-control:
-        # avifconvert-component:
-        #     quality: 55
-        #     lossless: false
-        #     effort: 4
         server:
             listener:
                 port: $server-port
@@ -137,11 +133,6 @@ components_manager:
         handler-work-experience:
             path: /v1/users/me/work-experiences
             method: GET,POST,DELETE,OPTIONS
-            task_processor: main-task-processor
-
-        handler-connected-accounts:
-            path: /v1/users/me/connected-accounts
-            method: GET,DELETE,OPTIONS,POST
             task_processor: main-task-processor
 
         handler-public-projects-list:
@@ -311,8 +302,6 @@ components_manager:
             middlewares: {}
 
     task_processors:
-        # avif-task-processor:
-        #     worker_threads: 2
         main-task-processor:
             worker_threads#env: WORKER_THREADS
             worker_threads#fallback: 2

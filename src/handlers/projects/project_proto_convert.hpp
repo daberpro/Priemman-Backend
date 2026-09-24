@@ -46,7 +46,9 @@ inline priemman::v1::Project ToProto(
     p.mutable_owner_id()->set_value(row.project.owner_id);
     p.set_title(row.project.title);
     p.set_slug(row.project.slug);
-    p.set_content(row.project.content);
+    if(row.project.content.has_value()){
+        p.set_content(*row.project.content);
+    }
     p.set_cover_media_id(row.project.cover_media_id.value_or(""));
     p.set_visibility(StringToVisibility(row.project.visibility));
     p.set_status(StringToStatus(row.project.status));
