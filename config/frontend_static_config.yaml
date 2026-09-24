@@ -55,8 +55,6 @@ components_manager:
 
         handler-pages:
             fs-cache-component: fs-cache-web
-            favicon-path: $favicon-path
-            favicon-path#fallback: ../static/favicon.ico
             path: /*
             method: GET,HEAD,OPTIONS
             task_processor: main-task-processor

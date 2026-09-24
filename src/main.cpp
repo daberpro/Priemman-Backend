@@ -31,7 +31,6 @@
 #include <src/handlers/auth/oauth_callback_handler.hpp>
 #include <src/handlers/api_info_handler.hpp>
 #include <src/handlers/user/basic_info_handler.hpp>
-#include <src/handlers/user/connected_accounts_handler.hpp>
 #include <src/handlers/user/work_experience_handler.hpp>
 #include <src/handlers/user/upgrade_handler.hpp>
 #include <src/handlers/admin/admin_users_handler.hpp>
@@ -101,7 +100,6 @@ auto main(int argc, char* argv[]) -> int {
         // User Handlers
         .Append<priemman::handlers::user::BasicInfoHandler>()
         .Append<priemman::handlers::user::WorkExperienceHandler>()
-        .Append<priemman::handlers::user::ConnectedAccountsHandler>()
         .Append<priemman::handlers::user::UpgradeHandler>()
         .Append<priemman::handlers::user::ActionLikeHandler>()
         .Append<priemman::handlers::user::ActionSaveHandler>()
@@ -118,7 +116,6 @@ auto main(int argc, char* argv[]) -> int {
         .Append<priemman::ApiInfoHandler>()
         .Append<userver::congestion_control::Component>()
         .Append<userver::server::handlers::Ping>();
-
 
     std::println("\n=========================================");
     std::println(" Priemman Backend Server");

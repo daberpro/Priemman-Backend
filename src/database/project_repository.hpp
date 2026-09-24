@@ -16,7 +16,7 @@ struct ProjectRow {
     std::string owner_id;
     std::string title;
     std::string slug;
-    std::string content;
+    std::optional<std::string> content;
     std::optional<std::string> cover_media_id;
     std::string visibility;   // 'PUBLIC' | 'UNLISTED' | 'DRAFT'
     std::string status;       // 'DRAFT' | 'PUBLISHED' | 'ARCHIVED'
