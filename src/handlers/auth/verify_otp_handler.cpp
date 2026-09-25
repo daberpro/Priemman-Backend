@@ -205,6 +205,14 @@ std::string VerifyOtpHandler::HandleRequestThrow(
     })))
     .sign(jwt::algorithm::hs256{_jwt_secret});
 
+    userver::server::http::Cookie xsrf_cookie{"XSRF-TOKEN",  userver::utils::generators::GenerateUuid()};
+    xsrf_cookie.SetDomain("." + _domain);
+    xsrf_cookie.SetPath("/");
+    // xsrf_cookie.SetHttpOnly();
+    xsrf_cookie.SetSecure();
+    xsrf_cookie.SetSameSite("Lax");
+    res.SetCookie(xsrf_cookie);
+
     userver::server::http::Cookie jwt_cookie{"JWT", token};
     jwt_cookie.SetDomain("." + _domain); 
     jwt_cookie.SetPath("/");

@@ -350,6 +350,14 @@ std::string OAuthGoogleCallbackHandler::HandleRequestThrow(
     jwt_cookie.SetSameSite("Lax");
     res.SetCookie(jwt_cookie);
 
+    userver::server::http::Cookie xsrf_cookie{"XSRF-TOKEN",  userver::utils::generators::GenerateUuid()};
+    xsrf_cookie.SetDomain("." + _domain);
+    xsrf_cookie.SetPath("/");
+    // xsrf_cookie.SetHttpOnly();
+    xsrf_cookie.SetSecure();
+    xsrf_cookie.SetSameSite("Lax");
+    res.SetCookie(xsrf_cookie);
+
     res.SetHeader(
         std::string("Set-Cookie"),
         BuildSessionCookie(session.token, _domain)
@@ -521,6 +529,14 @@ std::string OAuthGithubCallbackHandler::HandleRequestThrow(
     jwt_cookie.SetSecure();
     jwt_cookie.SetSameSite("Lax");
     res.SetCookie(jwt_cookie);
+
+    userver::server::http::Cookie xsrf_cookie{"XSRF-TOKEN",  userver::utils::generators::GenerateUuid()};
+    xsrf_cookie.SetDomain("." + _domain);
+    xsrf_cookie.SetPath("/");
+    // xsrf_cookie.SetHttpOnly();
+    xsrf_cookie.SetSecure();
+    xsrf_cookie.SetSameSite("Lax");
+    res.SetCookie(xsrf_cookie);
 
     res.SetHeader(
         std::string("Set-Cookie"),

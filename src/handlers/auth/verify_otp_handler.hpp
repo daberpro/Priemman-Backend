@@ -17,6 +17,7 @@
 #include <userver/yaml_config/yaml_config.hpp>
 #include <userver/yaml_config/merge_schemas.hpp>
 #include <jwt-cpp/jwt.h>
+#include <userver/utils/uuid4.hpp>
 
 namespace priemman::auth {
 
