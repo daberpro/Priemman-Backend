@@ -332,14 +332,26 @@ std::string OAuthGoogleCallbackHandler::HandleRequestThrow(
 
     // kunci ini harus sama persis dengan variabel SECRET di server Remark42
     auto token = jwt::create()
-    .set_audience("remark42")
+    .set_audience("priemman")
     .set_issued_at(std::chrono::system_clock::now())
-    .set_expires_at(std::chrono::system_clock::now() + std::chrono::hours(24))
-    .set_payload_claim("user", jwt::claim(picojson::value(picojson::object{
-        {"id", picojson::value(result.user.id)},
-        {"name", picojson::value(std::format("{} {}",result.user.last_name, result.user.last_name))},
-        {"role", picojson::value(result.user.role)}
-    })))
+    .set_expires_at(
+        std::chrono::system_clock::now() + std::chrono::hours(24)
+    )
+    .set_payload_claim(
+        "user",
+        jwt::claim(picojson::value(picojson::object{
+            {"id", picojson::value(result.user.id)},
+            {"name", picojson::value(
+                std::format(
+                    "{} {}",
+                    result.user.first_name,
+                    result.user.last_name
+                )
+            )},
+            {"picture", picojson::value(result.user.avatar_url)},
+            {"email", picojson::value(result.user.email)}
+        }))
+    )
     .sign(jwt::algorithm::hs256{_jwt_secret});
 
     userver::server::http::Cookie jwt_cookie{"JWT", token};
@@ -512,14 +524,26 @@ std::string OAuthGithubCallbackHandler::HandleRequestThrow(
     auto session = _sessions.Create(result.user.id);
 
     auto token = jwt::create()
-    .set_audience("remark42")
+    .set_audience("priemman")
     .set_issued_at(std::chrono::system_clock::now())
-    .set_expires_at(std::chrono::system_clock::now() + std::chrono::hours(24))
-    .set_payload_claim("user", jwt::claim(picojson::value(picojson::object{
-        {"id", picojson::value(result.user.id)},
-        {"name", picojson::value(std::format("{} {}",result.user.last_name, result.user.last_name))},
-        {"role", picojson::value(result.user.role)}
-    })))
+    .set_expires_at(
+        std::chrono::system_clock::now() + std::chrono::hours(24)
+    )
+    .set_payload_claim(
+        "user",
+        jwt::claim(picojson::value(picojson::object{
+            {"id", picojson::value(result.user.id)},
+            {"name", picojson::value(
+                std::format(
+                    "{} {}",
+                    result.user.first_name,
+                    result.user.last_name
+                )
+            )},
+            {"picture", picojson::value(result.user.avatar_url)},
+            {"email", picojson::value(result.user.email)}
+        }))
+    )
     .sign(jwt::algorithm::hs256{_jwt_secret});
 
     userver::server::http::Cookie jwt_cookie{"JWT", token};
