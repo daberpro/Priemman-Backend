@@ -78,21 +78,12 @@ extern AdminReviewUpgradeResponseDefaultTypeInternal _AdminReviewUpgradeResponse
 class AdminUserEntry;
 struct AdminUserEntryDefaultTypeInternal;
 extern AdminUserEntryDefaultTypeInternal _AdminUserEntry_default_instance_;
-class ConnectedAccount;
-struct ConnectedAccountDefaultTypeInternal;
-extern ConnectedAccountDefaultTypeInternal _ConnectedAccount_default_instance_;
 class CreateUpgradeRequestResponse;
 struct CreateUpgradeRequestResponseDefaultTypeInternal;
 extern CreateUpgradeRequestResponseDefaultTypeInternal _CreateUpgradeRequestResponse_default_instance_;
-class DeleteConnectedAccountRequest;
-struct DeleteConnectedAccountRequestDefaultTypeInternal;
-extern DeleteConnectedAccountRequestDefaultTypeInternal _DeleteConnectedAccountRequest_default_instance_;
 class DeleteWorkExperienceRequest;
 struct DeleteWorkExperienceRequestDefaultTypeInternal;
 extern DeleteWorkExperienceRequestDefaultTypeInternal _DeleteWorkExperienceRequest_default_instance_;
-class ListConnectedAccountsResponse;
-struct ListConnectedAccountsResponseDefaultTypeInternal;
-extern ListConnectedAccountsResponseDefaultTypeInternal _ListConnectedAccountsResponse_default_instance_;
 class ListProjectSummaryRow;
 struct ListProjectSummaryRowDefaultTypeInternal;
 extern ListProjectSummaryRowDefaultTypeInternal _ListProjectSummaryRow_default_instance_;
@@ -117,9 +108,6 @@ extern UpgradeRequestEntryDefaultTypeInternal _UpgradeRequestEntry_default_insta
 class UpgradeStatus;
 struct UpgradeStatusDefaultTypeInternal;
 extern UpgradeStatusDefaultTypeInternal _UpgradeStatus_default_instance_;
-class UpsertConnectedAccountRequest;
-struct UpsertConnectedAccountRequestDefaultTypeInternal;
-extern UpsertConnectedAccountRequestDefaultTypeInternal _UpsertConnectedAccountRequest_default_instance_;
 class UpsertWorkExperienceRequest;
 struct UpsertWorkExperienceRequestDefaultTypeInternal;
 extern UpsertWorkExperienceRequestDefaultTypeInternal _UpsertWorkExperienceRequest_default_instance_;
@@ -144,11 +132,8 @@ template<> ::priemman::v1::AdminListUsersResponse* Arena::CreateMaybeMessage<::p
 template<> ::priemman::v1::AdminReviewUpgradeRequest* Arena::CreateMaybeMessage<::priemman::v1::AdminReviewUpgradeRequest>(Arena*);
 template<> ::priemman::v1::AdminReviewUpgradeResponse* Arena::CreateMaybeMessage<::priemman::v1::AdminReviewUpgradeResponse>(Arena*);
 template<> ::priemman::v1::AdminUserEntry* Arena::CreateMaybeMessage<::priemman::v1::AdminUserEntry>(Arena*);
-template<> ::priemman::v1::ConnectedAccount* Arena::CreateMaybeMessage<::priemman::v1::ConnectedAccount>(Arena*);
 template<> ::priemman::v1::CreateUpgradeRequestResponse* Arena::CreateMaybeMessage<::priemman::v1::CreateUpgradeRequestResponse>(Arena*);
-template<> ::priemman::v1::DeleteConnectedAccountRequest* Arena::CreateMaybeMessage<::priemman::v1::DeleteConnectedAccountRequest>(Arena*);
 template<> ::priemman::v1::DeleteWorkExperienceRequest* Arena::CreateMaybeMessage<::priemman::v1::DeleteWorkExperienceRequest>(Arena*);
-template<> ::priemman::v1::ListConnectedAccountsResponse* Arena::CreateMaybeMessage<::priemman::v1::ListConnectedAccountsResponse>(Arena*);
 template<> ::priemman::v1::ListProjectSummaryRow* Arena::CreateMaybeMessage<::priemman::v1::ListProjectSummaryRow>(Arena*);
 template<> ::priemman::v1::ListWorkExperienceResponse* Arena::CreateMaybeMessage<::priemman::v1::ListWorkExperienceResponse>(Arena*);
 template<> ::priemman::v1::ProjectSummaryRow* Arena::CreateMaybeMessage<::priemman::v1::ProjectSummaryRow>(Arena*);
@@ -157,7 +142,6 @@ template<> ::priemman::v1::UpgradeLog* Arena::CreateMaybeMessage<::priemman::v1:
 template<> ::priemman::v1::UpgradeLogs* Arena::CreateMaybeMessage<::priemman::v1::UpgradeLogs>(Arena*);
 template<> ::priemman::v1::UpgradeRequestEntry* Arena::CreateMaybeMessage<::priemman::v1::UpgradeRequestEntry>(Arena*);
 template<> ::priemman::v1::UpgradeStatus* Arena::CreateMaybeMessage<::priemman::v1::UpgradeStatus>(Arena*);
-template<> ::priemman::v1::UpsertConnectedAccountRequest* Arena::CreateMaybeMessage<::priemman::v1::UpsertConnectedAccountRequest>(Arena*);
 template<> ::priemman::v1::UpsertWorkExperienceRequest* Arena::CreateMaybeMessage<::priemman::v1::UpsertWorkExperienceRequest>(Arena*);
 template<> ::priemman::v1::User* Arena::CreateMaybeMessage<::priemman::v1::User>(Arena*);
 template<> ::priemman::v1::UserProfile* Arena::CreateMaybeMessage<::priemman::v1::UserProfile>(Arena*);
@@ -1010,396 +994,6 @@ class WorkExperience final :
 };
 // -------------------------------------------------------------------
 
-class ConnectedAccount final :
-    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:priemman.v1.ConnectedAccount) */ {
- public:
-  inline ConnectedAccount() : ConnectedAccount(nullptr) {}
-  ~ConnectedAccount() override;
-  explicit PROTOBUF_CONSTEXPR ConnectedAccount(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
-
-  ConnectedAccount(const ConnectedAccount& from);
-  ConnectedAccount(ConnectedAccount&& from) noexcept
-    : ConnectedAccount() {
-    *this = ::std::move(from);
-  }
-
-  inline ConnectedAccount& operator=(const ConnectedAccount& from) {
-    CopyFrom(from);
-    return *this;
-  }
-  inline ConnectedAccount& operator=(ConnectedAccount&& from) noexcept {
-    if (this == &from) return *this;
-    if (GetOwningArena() == from.GetOwningArena()
-  #ifdef PROTOBUF_FORCE_COPY_IN_MOVE
-        && GetOwningArena() != nullptr
-  #endif  // !PROTOBUF_FORCE_COPY_IN_MOVE
-    ) {
-      InternalSwap(&from);
-    } else {
-      CopyFrom(from);
-    }
-    return *this;
-  }
-
-  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
-    return GetDescriptor();
-  }
-  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
-    return default_instance().GetMetadata().descriptor;
-  }
-  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
-    return default_instance().GetMetadata().reflection;
-  }
-  static const ConnectedAccount& default_instance() {
-    return *internal_default_instance();
-  }
-  static inline const ConnectedAccount* internal_default_instance() {
-    return reinterpret_cast<const ConnectedAccount*>(
-               &_ConnectedAccount_default_instance_);
-  }
-  static constexpr int kIndexInFileMessages =
-    4;
-
-  friend void swap(ConnectedAccount& a, ConnectedAccount& b) {
-    a.Swap(&b);
-  }
-  inline void Swap(ConnectedAccount* other) {
-    if (other == this) return;
-  #ifdef PROTOBUF_FORCE_COPY_IN_SWAP
-    if (GetOwningArena() != nullptr &&
-        GetOwningArena() == other->GetOwningArena()) {
-   #else  // PROTOBUF_FORCE_COPY_IN_SWAP
-    if (GetOwningArena() == other->GetOwningArena()) {
-  #endif  // !PROTOBUF_FORCE_COPY_IN_SWAP
-      InternalSwap(other);
-    } else {
-      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
-    }
-  }
-  void UnsafeArenaSwap(ConnectedAccount* other) {
-    if (other == this) return;
-    GOOGLE_DCHECK(GetOwningArena() == other->GetOwningArena());
-    InternalSwap(other);
-  }
-
-  // implements Message ----------------------------------------------
-
-  ConnectedAccount* New(::PROTOBUF_NAMESPACE_ID::Arena* arena = nullptr) const final {
-    return CreateMaybeMessage<ConnectedAccount>(arena);
-  }
-  using ::PROTOBUF_NAMESPACE_ID::Message::CopyFrom;
-  void CopyFrom(const ConnectedAccount& from);
-  using ::PROTOBUF_NAMESPACE_ID::Message::MergeFrom;
-  void MergeFrom( const ConnectedAccount& from) {
-    ConnectedAccount::MergeImpl(*this, from);
-  }
-  private:
-  static void MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg);
-  public:
-  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
-  bool IsInitialized() const final;
-
-  size_t ByteSizeLong() const final;
-  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
-  uint8_t* _InternalSerialize(
-      uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
-  int GetCachedSize() const final { return _impl_._cached_size_.Get(); }
-
-  private:
-  void SharedCtor(::PROTOBUF_NAMESPACE_ID::Arena* arena, bool is_message_owned);
-  void SharedDtor();
-  void SetCachedSize(int size) const final;
-  void InternalSwap(ConnectedAccount* other);
-
-  private:
-  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
-  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
-    return "priemman.v1.ConnectedAccount";
-  }
-  protected:
-  explicit ConnectedAccount(::PROTOBUF_NAMESPACE_ID::Arena* arena,
-                       bool is_message_owned = false);
-  public:
-
-  static const ClassData _class_data_;
-  const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
-
-  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
-
-  // nested types ----------------------------------------------------
-
-  // accessors -------------------------------------------------------
-
-  enum : int {
-    kHandleOrUrlFieldNumber = 2,
-    kConnectedAtFieldNumber = 4,
-    kPlatformFieldNumber = 1,
-    kVerifiedFieldNumber = 3,
-  };
-  // string handle_or_url = 2;
-  void clear_handle_or_url();
-  const std::string& handle_or_url() const;
-  template <typename ArgT0 = const std::string&, typename... ArgT>
-  void set_handle_or_url(ArgT0&& arg0, ArgT... args);
-  std::string* mutable_handle_or_url();
-  PROTOBUF_NODISCARD std::string* release_handle_or_url();
-  void set_allocated_handle_or_url(std::string* handle_or_url);
-  private:
-  const std::string& _internal_handle_or_url() const;
-  inline PROTOBUF_ALWAYS_INLINE void _internal_set_handle_or_url(const std::string& value);
-  std::string* _internal_mutable_handle_or_url();
-  public:
-
-  // .google.protobuf.Timestamp connected_at = 4;
-  bool has_connected_at() const;
-  private:
-  bool _internal_has_connected_at() const;
-  public:
-  void clear_connected_at();
-  const ::PROTOBUF_NAMESPACE_ID::Timestamp& connected_at() const;
-  PROTOBUF_NODISCARD ::PROTOBUF_NAMESPACE_ID::Timestamp* release_connected_at();
-  ::PROTOBUF_NAMESPACE_ID::Timestamp* mutable_connected_at();
-  void set_allocated_connected_at(::PROTOBUF_NAMESPACE_ID::Timestamp* connected_at);
-  private:
-  const ::PROTOBUF_NAMESPACE_ID::Timestamp& _internal_connected_at() const;
-  ::PROTOBUF_NAMESPACE_ID::Timestamp* _internal_mutable_connected_at();
-  public:
-  void unsafe_arena_set_allocated_connected_at(
-      ::PROTOBUF_NAMESPACE_ID::Timestamp* connected_at);
-  ::PROTOBUF_NAMESPACE_ID::Timestamp* unsafe_arena_release_connected_at();
-
-  // .priemman.v1.ConnectedPlatform platform = 1;
-  void clear_platform();
-  ::priemman::v1::ConnectedPlatform platform() const;
-  void set_platform(::priemman::v1::ConnectedPlatform value);
-  private:
-  ::priemman::v1::ConnectedPlatform _internal_platform() const;
-  void _internal_set_platform(::priemman::v1::ConnectedPlatform value);
-  public:
-
-  // bool verified = 3;
-  void clear_verified();
-  bool verified() const;
-  void set_verified(bool value);
-  private:
-  bool _internal_verified() const;
-  void _internal_set_verified(bool value);
-  public:
-
-  // @@protoc_insertion_point(class_scope:priemman.v1.ConnectedAccount)
- private:
-  class _Internal;
-
-  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
-  typedef void InternalArenaConstructable_;
-  typedef void DestructorSkippable_;
-  struct Impl_ {
-    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr handle_or_url_;
-    ::PROTOBUF_NAMESPACE_ID::Timestamp* connected_at_;
-    int platform_;
-    bool verified_;
-    mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
-  };
-  union { Impl_ _impl_; };
-  friend struct ::TableStruct_user_2eproto;
-};
-// -------------------------------------------------------------------
-
-class UpsertConnectedAccountRequest final :
-    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:priemman.v1.UpsertConnectedAccountRequest) */ {
- public:
-  inline UpsertConnectedAccountRequest() : UpsertConnectedAccountRequest(nullptr) {}
-  ~UpsertConnectedAccountRequest() override;
-  explicit PROTOBUF_CONSTEXPR UpsertConnectedAccountRequest(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
-
-  UpsertConnectedAccountRequest(const UpsertConnectedAccountRequest& from);
-  UpsertConnectedAccountRequest(UpsertConnectedAccountRequest&& from) noexcept
-    : UpsertConnectedAccountRequest() {
-    *this = ::std::move(from);
-  }
-
-  inline UpsertConnectedAccountRequest& operator=(const UpsertConnectedAccountRequest& from) {
-    CopyFrom(from);
-    return *this;
-  }
-  inline UpsertConnectedAccountRequest& operator=(UpsertConnectedAccountRequest&& from) noexcept {
-    if (this == &from) return *this;
-    if (GetOwningArena() == from.GetOwningArena()
-  #ifdef PROTOBUF_FORCE_COPY_IN_MOVE
-        && GetOwningArena() != nullptr
-  #endif  // !PROTOBUF_FORCE_COPY_IN_MOVE
-    ) {
-      InternalSwap(&from);
-    } else {
-      CopyFrom(from);
-    }
-    return *this;
-  }
-
-  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
-    return GetDescriptor();
-  }
-  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
-    return default_instance().GetMetadata().descriptor;
-  }
-  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
-    return default_instance().GetMetadata().reflection;
-  }
-  static const UpsertConnectedAccountRequest& default_instance() {
-    return *internal_default_instance();
-  }
-  static inline const UpsertConnectedAccountRequest* internal_default_instance() {
-    return reinterpret_cast<const UpsertConnectedAccountRequest*>(
-               &_UpsertConnectedAccountRequest_default_instance_);
-  }
-  static constexpr int kIndexInFileMessages =
-    5;
-
-  friend void swap(UpsertConnectedAccountRequest& a, UpsertConnectedAccountRequest& b) {
-    a.Swap(&b);
-  }
-  inline void Swap(UpsertConnectedAccountRequest* other) {
-    if (other == this) return;
-  #ifdef PROTOBUF_FORCE_COPY_IN_SWAP
-    if (GetOwningArena() != nullptr &&
-        GetOwningArena() == other->GetOwningArena()) {
-   #else  // PROTOBUF_FORCE_COPY_IN_SWAP
-    if (GetOwningArena() == other->GetOwningArena()) {
-  #endif  // !PROTOBUF_FORCE_COPY_IN_SWAP
-      InternalSwap(other);
-    } else {
-      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
-    }
-  }
-  void UnsafeArenaSwap(UpsertConnectedAccountRequest* other) {
-    if (other == this) return;
-    GOOGLE_DCHECK(GetOwningArena() == other->GetOwningArena());
-    InternalSwap(other);
-  }
-
-  // implements Message ----------------------------------------------
-
-  UpsertConnectedAccountRequest* New(::PROTOBUF_NAMESPACE_ID::Arena* arena = nullptr) const final {
-    return CreateMaybeMessage<UpsertConnectedAccountRequest>(arena);
-  }
-  using ::PROTOBUF_NAMESPACE_ID::Message::CopyFrom;
-  void CopyFrom(const UpsertConnectedAccountRequest& from);
-  using ::PROTOBUF_NAMESPACE_ID::Message::MergeFrom;
-  void MergeFrom( const UpsertConnectedAccountRequest& from) {
-    UpsertConnectedAccountRequest::MergeImpl(*this, from);
-  }
-  private:
-  static void MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg);
-  public:
-  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
-  bool IsInitialized() const final;
-
-  size_t ByteSizeLong() const final;
-  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
-  uint8_t* _InternalSerialize(
-      uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
-  int GetCachedSize() const final { return _impl_._cached_size_.Get(); }
-
-  private:
-  void SharedCtor(::PROTOBUF_NAMESPACE_ID::Arena* arena, bool is_message_owned);
-  void SharedDtor();
-  void SetCachedSize(int size) const final;
-  void InternalSwap(UpsertConnectedAccountRequest* other);
-
-  private:
-  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
-  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
-    return "priemman.v1.UpsertConnectedAccountRequest";
-  }
-  protected:
-  explicit UpsertConnectedAccountRequest(::PROTOBUF_NAMESPACE_ID::Arena* arena,
-                       bool is_message_owned = false);
-  public:
-
-  static const ClassData _class_data_;
-  const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
-
-  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
-
-  // nested types ----------------------------------------------------
-
-  // accessors -------------------------------------------------------
-
-  enum : int {
-    kHandleOrUrlFieldNumber = 2,
-    kConnectedAtFieldNumber = 4,
-    kPlatformFieldNumber = 1,
-    kVerifiedFieldNumber = 3,
-  };
-  // string handle_or_url = 2;
-  void clear_handle_or_url();
-  const std::string& handle_or_url() const;
-  template <typename ArgT0 = const std::string&, typename... ArgT>
-  void set_handle_or_url(ArgT0&& arg0, ArgT... args);
-  std::string* mutable_handle_or_url();
-  PROTOBUF_NODISCARD std::string* release_handle_or_url();
-  void set_allocated_handle_or_url(std::string* handle_or_url);
-  private:
-  const std::string& _internal_handle_or_url() const;
-  inline PROTOBUF_ALWAYS_INLINE void _internal_set_handle_or_url(const std::string& value);
-  std::string* _internal_mutable_handle_or_url();
-  public:
-
-  // .google.protobuf.Timestamp connected_at = 4;
-  bool has_connected_at() const;
-  private:
-  bool _internal_has_connected_at() const;
-  public:
-  void clear_connected_at();
-  const ::PROTOBUF_NAMESPACE_ID::Timestamp& connected_at() const;
-  PROTOBUF_NODISCARD ::PROTOBUF_NAMESPACE_ID::Timestamp* release_connected_at();
-  ::PROTOBUF_NAMESPACE_ID::Timestamp* mutable_connected_at();
-  void set_allocated_connected_at(::PROTOBUF_NAMESPACE_ID::Timestamp* connected_at);
-  private:
-  const ::PROTOBUF_NAMESPACE_ID::Timestamp& _internal_connected_at() const;
-  ::PROTOBUF_NAMESPACE_ID::Timestamp* _internal_mutable_connected_at();
-  public:
-  void unsafe_arena_set_allocated_connected_at(
-      ::PROTOBUF_NAMESPACE_ID::Timestamp* connected_at);
-  ::PROTOBUF_NAMESPACE_ID::Timestamp* unsafe_arena_release_connected_at();
-
-  // .priemman.v1.ConnectedPlatform platform = 1;
-  void clear_platform();
-  ::priemman::v1::ConnectedPlatform platform() const;
-  void set_platform(::priemman::v1::ConnectedPlatform value);
-  private:
-  ::priemman::v1::ConnectedPlatform _internal_platform() const;
-  void _internal_set_platform(::priemman::v1::ConnectedPlatform value);
-  public:
-
-  // bool verified = 3;
-  void clear_verified();
-  bool verified() const;
-  void set_verified(bool value);
-  private:
-  bool _internal_verified() const;
-  void _internal_set_verified(bool value);
-  public:
-
-  // @@protoc_insertion_point(class_scope:priemman.v1.UpsertConnectedAccountRequest)
- private:
-  class _Internal;
-
-  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
-  typedef void InternalArenaConstructable_;
-  typedef void DestructorSkippable_;
-  struct Impl_ {
-    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr handle_or_url_;
-    ::PROTOBUF_NAMESPACE_ID::Timestamp* connected_at_;
-    int platform_;
-    bool verified_;
-    mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
-  };
-  union { Impl_ _impl_; };
-  friend struct ::TableStruct_user_2eproto;
-};
-// -------------------------------------------------------------------
-
 class AboutMe final :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:priemman.v1.AboutMe) */ {
  public:
@@ -1448,7 +1042,7 @@ class AboutMe final :
                &_AboutMe_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    6;
+    4;
 
   friend void swap(AboutMe& a, AboutMe& b) {
     a.Swap(&b);
@@ -1617,7 +1211,7 @@ class User final :
                &_User_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    7;
+    5;
 
   friend void swap(User& a, User& b) {
     a.Swap(&b);
@@ -1691,7 +1285,6 @@ class User final :
 
   enum : int {
     kWorkExperienceFieldNumber = 11,
-    kConnectedAccountsFieldNumber = 12,
     kEmailFieldNumber = 2,
     kFirstNameFieldNumber = 3,
     kLastNameFieldNumber = 4,
@@ -1724,24 +1317,6 @@ class User final :
   ::priemman::v1::WorkExperience* add_work_experience();
   const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::priemman::v1::WorkExperience >&
       work_experience() const;
-
-  // repeated .priemman.v1.ConnectedAccount connected_accounts = 12;
-  int connected_accounts_size() const;
-  private:
-  int _internal_connected_accounts_size() const;
-  public:
-  void clear_connected_accounts();
-  ::priemman::v1::ConnectedAccount* mutable_connected_accounts(int index);
-  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::priemman::v1::ConnectedAccount >*
-      mutable_connected_accounts();
-  private:
-  const ::priemman::v1::ConnectedAccount& _internal_connected_accounts(int index) const;
-  ::priemman::v1::ConnectedAccount* _internal_add_connected_accounts();
-  public:
-  const ::priemman::v1::ConnectedAccount& connected_accounts(int index) const;
-  ::priemman::v1::ConnectedAccount* add_connected_accounts();
-  const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::priemman::v1::ConnectedAccount >&
-      connected_accounts() const;
 
   // string email = 2;
   void clear_email();
@@ -1958,7 +1533,6 @@ class User final :
   typedef void DestructorSkippable_;
   struct Impl_ {
     ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::priemman::v1::WorkExperience > work_experience_;
-    ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::priemman::v1::ConnectedAccount > connected_accounts_;
     ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr email_;
     ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr first_name_;
     ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr last_name_;
@@ -2028,7 +1602,7 @@ class UserProfile final :
                &_UserProfile_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    8;
+    6;
 
   friend void swap(UserProfile& a, UserProfile& b) {
     a.Swap(&b);
@@ -2424,7 +1998,7 @@ class UpdateBasicInfoRequest final :
                &_UpdateBasicInfoRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    9;
+    7;
 
   friend void swap(UpdateBasicInfoRequest& a, UpdateBasicInfoRequest& b) {
     a.Swap(&b);
@@ -2722,7 +2296,7 @@ class UpsertWorkExperienceRequest final :
                &_UpsertWorkExperienceRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    10;
+    8;
 
   friend void swap(UpsertWorkExperienceRequest& a, UpsertWorkExperienceRequest& b) {
     a.Swap(&b);
@@ -2879,7 +2453,7 @@ class ListWorkExperienceResponse final :
                &_ListWorkExperienceResponse_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    11;
+    9;
 
   friend void swap(ListWorkExperienceResponse& a, ListWorkExperienceResponse& b) {
     a.Swap(&b);
@@ -3036,7 +2610,7 @@ class DeleteWorkExperienceRequest final :
                &_DeleteWorkExperienceRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    12;
+    10;
 
   friend void swap(DeleteWorkExperienceRequest& a, DeleteWorkExperienceRequest& b) {
     a.Swap(&b);
@@ -3145,311 +2719,6 @@ class DeleteWorkExperienceRequest final :
 };
 // -------------------------------------------------------------------
 
-class ListConnectedAccountsResponse final :
-    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:priemman.v1.ListConnectedAccountsResponse) */ {
- public:
-  inline ListConnectedAccountsResponse() : ListConnectedAccountsResponse(nullptr) {}
-  ~ListConnectedAccountsResponse() override;
-  explicit PROTOBUF_CONSTEXPR ListConnectedAccountsResponse(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
-
-  ListConnectedAccountsResponse(const ListConnectedAccountsResponse& from);
-  ListConnectedAccountsResponse(ListConnectedAccountsResponse&& from) noexcept
-    : ListConnectedAccountsResponse() {
-    *this = ::std::move(from);
-  }
-
-  inline ListConnectedAccountsResponse& operator=(const ListConnectedAccountsResponse& from) {
-    CopyFrom(from);
-    return *this;
-  }
-  inline ListConnectedAccountsResponse& operator=(ListConnectedAccountsResponse&& from) noexcept {
-    if (this == &from) return *this;
-    if (GetOwningArena() == from.GetOwningArena()
-  #ifdef PROTOBUF_FORCE_COPY_IN_MOVE
-        && GetOwningArena() != nullptr
-  #endif  // !PROTOBUF_FORCE_COPY_IN_MOVE
-    ) {
-      InternalSwap(&from);
-    } else {
-      CopyFrom(from);
-    }
-    return *this;
-  }
-
-  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
-    return GetDescriptor();
-  }
-  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
-    return default_instance().GetMetadata().descriptor;
-  }
-  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
-    return default_instance().GetMetadata().reflection;
-  }
-  static const ListConnectedAccountsResponse& default_instance() {
-    return *internal_default_instance();
-  }
-  static inline const ListConnectedAccountsResponse* internal_default_instance() {
-    return reinterpret_cast<const ListConnectedAccountsResponse*>(
-               &_ListConnectedAccountsResponse_default_instance_);
-  }
-  static constexpr int kIndexInFileMessages =
-    13;
-
-  friend void swap(ListConnectedAccountsResponse& a, ListConnectedAccountsResponse& b) {
-    a.Swap(&b);
-  }
-  inline void Swap(ListConnectedAccountsResponse* other) {
-    if (other == this) return;
-  #ifdef PROTOBUF_FORCE_COPY_IN_SWAP
-    if (GetOwningArena() != nullptr &&
-        GetOwningArena() == other->GetOwningArena()) {
-   #else  // PROTOBUF_FORCE_COPY_IN_SWAP
-    if (GetOwningArena() == other->GetOwningArena()) {
-  #endif  // !PROTOBUF_FORCE_COPY_IN_SWAP
-      InternalSwap(other);
-    } else {
-      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
-    }
-  }
-  void UnsafeArenaSwap(ListConnectedAccountsResponse* other) {
-    if (other == this) return;
-    GOOGLE_DCHECK(GetOwningArena() == other->GetOwningArena());
-    InternalSwap(other);
-  }
-
-  // implements Message ----------------------------------------------
-
-  ListConnectedAccountsResponse* New(::PROTOBUF_NAMESPACE_ID::Arena* arena = nullptr) const final {
-    return CreateMaybeMessage<ListConnectedAccountsResponse>(arena);
-  }
-  using ::PROTOBUF_NAMESPACE_ID::Message::CopyFrom;
-  void CopyFrom(const ListConnectedAccountsResponse& from);
-  using ::PROTOBUF_NAMESPACE_ID::Message::MergeFrom;
-  void MergeFrom( const ListConnectedAccountsResponse& from) {
-    ListConnectedAccountsResponse::MergeImpl(*this, from);
-  }
-  private:
-  static void MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg);
-  public:
-  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
-  bool IsInitialized() const final;
-
-  size_t ByteSizeLong() const final;
-  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
-  uint8_t* _InternalSerialize(
-      uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
-  int GetCachedSize() const final { return _impl_._cached_size_.Get(); }
-
-  private:
-  void SharedCtor(::PROTOBUF_NAMESPACE_ID::Arena* arena, bool is_message_owned);
-  void SharedDtor();
-  void SetCachedSize(int size) const final;
-  void InternalSwap(ListConnectedAccountsResponse* other);
-
-  private:
-  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
-  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
-    return "priemman.v1.ListConnectedAccountsResponse";
-  }
-  protected:
-  explicit ListConnectedAccountsResponse(::PROTOBUF_NAMESPACE_ID::Arena* arena,
-                       bool is_message_owned = false);
-  public:
-
-  static const ClassData _class_data_;
-  const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
-
-  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
-
-  // nested types ----------------------------------------------------
-
-  // accessors -------------------------------------------------------
-
-  enum : int {
-    kAccountsFieldNumber = 1,
-  };
-  // repeated .priemman.v1.ConnectedAccount accounts = 1;
-  int accounts_size() const;
-  private:
-  int _internal_accounts_size() const;
-  public:
-  void clear_accounts();
-  ::priemman::v1::ConnectedAccount* mutable_accounts(int index);
-  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::priemman::v1::ConnectedAccount >*
-      mutable_accounts();
-  private:
-  const ::priemman::v1::ConnectedAccount& _internal_accounts(int index) const;
-  ::priemman::v1::ConnectedAccount* _internal_add_accounts();
-  public:
-  const ::priemman::v1::ConnectedAccount& accounts(int index) const;
-  ::priemman::v1::ConnectedAccount* add_accounts();
-  const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::priemman::v1::ConnectedAccount >&
-      accounts() const;
-
-  // @@protoc_insertion_point(class_scope:priemman.v1.ListConnectedAccountsResponse)
- private:
-  class _Internal;
-
-  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
-  typedef void InternalArenaConstructable_;
-  typedef void DestructorSkippable_;
-  struct Impl_ {
-    ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::priemman::v1::ConnectedAccount > accounts_;
-    mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
-  };
-  union { Impl_ _impl_; };
-  friend struct ::TableStruct_user_2eproto;
-};
-// -------------------------------------------------------------------
-
-class DeleteConnectedAccountRequest final :
-    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:priemman.v1.DeleteConnectedAccountRequest) */ {
- public:
-  inline DeleteConnectedAccountRequest() : DeleteConnectedAccountRequest(nullptr) {}
-  ~DeleteConnectedAccountRequest() override;
-  explicit PROTOBUF_CONSTEXPR DeleteConnectedAccountRequest(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
-
-  DeleteConnectedAccountRequest(const DeleteConnectedAccountRequest& from);
-  DeleteConnectedAccountRequest(DeleteConnectedAccountRequest&& from) noexcept
-    : DeleteConnectedAccountRequest() {
-    *this = ::std::move(from);
-  }
-
-  inline DeleteConnectedAccountRequest& operator=(const DeleteConnectedAccountRequest& from) {
-    CopyFrom(from);
-    return *this;
-  }
-  inline DeleteConnectedAccountRequest& operator=(DeleteConnectedAccountRequest&& from) noexcept {
-    if (this == &from) return *this;
-    if (GetOwningArena() == from.GetOwningArena()
-  #ifdef PROTOBUF_FORCE_COPY_IN_MOVE
-        && GetOwningArena() != nullptr
-  #endif  // !PROTOBUF_FORCE_COPY_IN_MOVE
-    ) {
-      InternalSwap(&from);
-    } else {
-      CopyFrom(from);
-    }
-    return *this;
-  }
-
-  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
-    return GetDescriptor();
-  }
-  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
-    return default_instance().GetMetadata().descriptor;
-  }
-  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
-    return default_instance().GetMetadata().reflection;
-  }
-  static const DeleteConnectedAccountRequest& default_instance() {
-    return *internal_default_instance();
-  }
-  static inline const DeleteConnectedAccountRequest* internal_default_instance() {
-    return reinterpret_cast<const DeleteConnectedAccountRequest*>(
-               &_DeleteConnectedAccountRequest_default_instance_);
-  }
-  static constexpr int kIndexInFileMessages =
-    14;
-
-  friend void swap(DeleteConnectedAccountRequest& a, DeleteConnectedAccountRequest& b) {
-    a.Swap(&b);
-  }
-  inline void Swap(DeleteConnectedAccountRequest* other) {
-    if (other == this) return;
-  #ifdef PROTOBUF_FORCE_COPY_IN_SWAP
-    if (GetOwningArena() != nullptr &&
-        GetOwningArena() == other->GetOwningArena()) {
-   #else  // PROTOBUF_FORCE_COPY_IN_SWAP
-    if (GetOwningArena() == other->GetOwningArena()) {
-  #endif  // !PROTOBUF_FORCE_COPY_IN_SWAP
-      InternalSwap(other);
-    } else {
-      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
-    }
-  }
-  void UnsafeArenaSwap(DeleteConnectedAccountRequest* other) {
-    if (other == this) return;
-    GOOGLE_DCHECK(GetOwningArena() == other->GetOwningArena());
-    InternalSwap(other);
-  }
-
-  // implements Message ----------------------------------------------
-
-  DeleteConnectedAccountRequest* New(::PROTOBUF_NAMESPACE_ID::Arena* arena = nullptr) const final {
-    return CreateMaybeMessage<DeleteConnectedAccountRequest>(arena);
-  }
-  using ::PROTOBUF_NAMESPACE_ID::Message::CopyFrom;
-  void CopyFrom(const DeleteConnectedAccountRequest& from);
-  using ::PROTOBUF_NAMESPACE_ID::Message::MergeFrom;
-  void MergeFrom( const DeleteConnectedAccountRequest& from) {
-    DeleteConnectedAccountRequest::MergeImpl(*this, from);
-  }
-  private:
-  static void MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg);
-  public:
-  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
-  bool IsInitialized() const final;
-
-  size_t ByteSizeLong() const final;
-  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
-  uint8_t* _InternalSerialize(
-      uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
-  int GetCachedSize() const final { return _impl_._cached_size_.Get(); }
-
-  private:
-  void SharedCtor(::PROTOBUF_NAMESPACE_ID::Arena* arena, bool is_message_owned);
-  void SharedDtor();
-  void SetCachedSize(int size) const final;
-  void InternalSwap(DeleteConnectedAccountRequest* other);
-
-  private:
-  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
-  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
-    return "priemman.v1.DeleteConnectedAccountRequest";
-  }
-  protected:
-  explicit DeleteConnectedAccountRequest(::PROTOBUF_NAMESPACE_ID::Arena* arena,
-                       bool is_message_owned = false);
-  public:
-
-  static const ClassData _class_data_;
-  const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
-
-  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
-
-  // nested types ----------------------------------------------------
-
-  // accessors -------------------------------------------------------
-
-  enum : int {
-    kPlatformFieldNumber = 1,
-  };
-  // .priemman.v1.ConnectedPlatform platform = 1;
-  void clear_platform();
-  ::priemman::v1::ConnectedPlatform platform() const;
-  void set_platform(::priemman::v1::ConnectedPlatform value);
-  private:
-  ::priemman::v1::ConnectedPlatform _internal_platform() const;
-  void _internal_set_platform(::priemman::v1::ConnectedPlatform value);
-  public:
-
-  // @@protoc_insertion_point(class_scope:priemman.v1.DeleteConnectedAccountRequest)
- private:
-  class _Internal;
-
-  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
-  typedef void InternalArenaConstructable_;
-  typedef void DestructorSkippable_;
-  struct Impl_ {
-    int platform_;
-    mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
-  };
-  union { Impl_ _impl_; };
-  friend struct ::TableStruct_user_2eproto;
-};
-// -------------------------------------------------------------------
-
 class UpgradeStatus final :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:priemman.v1.UpgradeStatus) */ {
  public:
@@ -3498,7 +2767,7 @@ class UpgradeStatus final :
                &_UpgradeStatus_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    15;
+    11;
 
   friend void swap(UpgradeStatus& a, UpgradeStatus& b) {
     a.Swap(&b);
@@ -3790,7 +3059,7 @@ class UpgradeLog final :
                &_UpgradeLog_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    16;
+    12;
 
   friend void swap(UpgradeLog& a, UpgradeLog& b) {
     a.Swap(&b);
@@ -4019,7 +3288,7 @@ class UpgradeLogs final :
                &_UpgradeLogs_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    17;
+    13;
 
   friend void swap(UpgradeLogs& a, UpgradeLogs& b) {
     a.Swap(&b);
@@ -4176,7 +3445,7 @@ class CreateUpgradeRequestResponse final :
                &_CreateUpgradeRequestResponse_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    18;
+    14;
 
   friend void swap(CreateUpgradeRequestResponse& a, CreateUpgradeRequestResponse& b) {
     a.Swap(&b);
@@ -4344,7 +3613,7 @@ class AdminUserEntry final :
                &_AdminUserEntry_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    19;
+    15;
 
   friend void swap(AdminUserEntry& a, AdminUserEntry& b) {
     a.Swap(&b);
@@ -4580,7 +3849,7 @@ class AdminListUsersResponse final :
                &_AdminListUsersResponse_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    20;
+    16;
 
   friend void swap(AdminListUsersResponse& a, AdminListUsersResponse& b) {
     a.Swap(&b);
@@ -4770,7 +4039,7 @@ class UpgradeRequestEntry final :
                &_UpgradeRequestEntry_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    21;
+    17;
 
   friend void swap(UpgradeRequestEntry& a, UpgradeRequestEntry& b) {
     a.Swap(&b);
@@ -5058,7 +4327,7 @@ class AdminListUpgradeRequestsResponse final :
                &_AdminListUpgradeRequestsResponse_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    22;
+    18;
 
   friend void swap(AdminListUpgradeRequestsResponse& a, AdminListUpgradeRequestsResponse& b) {
     a.Swap(&b);
@@ -5215,7 +4484,7 @@ class AdminReviewUpgradeRequest final :
                &_AdminReviewUpgradeRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    23;
+    19;
 
   friend void swap(AdminReviewUpgradeRequest& a, AdminReviewUpgradeRequest& b) {
     a.Swap(&b);
@@ -5399,7 +4668,7 @@ class AdminReviewUpgradeResponse final :
                &_AdminReviewUpgradeResponse_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    24;
+    20;
 
   friend void swap(AdminReviewUpgradeResponse& a, AdminReviewUpgradeResponse& b) {
     a.Swap(&b);
@@ -5567,7 +4836,7 @@ class AdminConfirmPaymentRequest final :
                &_AdminConfirmPaymentRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    25;
+    21;
 
   friend void swap(AdminConfirmPaymentRequest& a, AdminConfirmPaymentRequest& b) {
     a.Swap(&b);
@@ -5724,7 +4993,7 @@ class AdminConfirmPaymentResponse final :
                &_AdminConfirmPaymentResponse_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    26;
+    22;
 
   friend void swap(AdminConfirmPaymentResponse& a, AdminConfirmPaymentResponse& b) {
     a.Swap(&b);
@@ -6650,364 +5919,6 @@ inline void WorkExperience::set_allocated_description(std::string* description) 
 
 // -------------------------------------------------------------------
 
-// ConnectedAccount
-
-// .priemman.v1.ConnectedPlatform platform = 1;
-inline void ConnectedAccount::clear_platform() {
-  _impl_.platform_ = 0;
-}
-inline ::priemman::v1::ConnectedPlatform ConnectedAccount::_internal_platform() const {
-  return static_cast< ::priemman::v1::ConnectedPlatform >(_impl_.platform_);
-}
-inline ::priemman::v1::ConnectedPlatform ConnectedAccount::platform() const {
-  // @@protoc_insertion_point(field_get:priemman.v1.ConnectedAccount.platform)
-  return _internal_platform();
-}
-inline void ConnectedAccount::_internal_set_platform(::priemman::v1::ConnectedPlatform value) {
-  
-  _impl_.platform_ = value;
-}
-inline void ConnectedAccount::set_platform(::priemman::v1::ConnectedPlatform value) {
-  _internal_set_platform(value);
-  // @@protoc_insertion_point(field_set:priemman.v1.ConnectedAccount.platform)
-}
-
-// string handle_or_url = 2;
-inline void ConnectedAccount::clear_handle_or_url() {
-  _impl_.handle_or_url_.ClearToEmpty();
-}
-inline const std::string& ConnectedAccount::handle_or_url() const {
-  // @@protoc_insertion_point(field_get:priemman.v1.ConnectedAccount.handle_or_url)
-  return _internal_handle_or_url();
-}
-template <typename ArgT0, typename... ArgT>
-inline PROTOBUF_ALWAYS_INLINE
-void ConnectedAccount::set_handle_or_url(ArgT0&& arg0, ArgT... args) {
- 
- _impl_.handle_or_url_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
-  // @@protoc_insertion_point(field_set:priemman.v1.ConnectedAccount.handle_or_url)
-}
-inline std::string* ConnectedAccount::mutable_handle_or_url() {
-  std::string* _s = _internal_mutable_handle_or_url();
-  // @@protoc_insertion_point(field_mutable:priemman.v1.ConnectedAccount.handle_or_url)
-  return _s;
-}
-inline const std::string& ConnectedAccount::_internal_handle_or_url() const {
-  return _impl_.handle_or_url_.Get();
-}
-inline void ConnectedAccount::_internal_set_handle_or_url(const std::string& value) {
-  
-  _impl_.handle_or_url_.Set(value, GetArenaForAllocation());
-}
-inline std::string* ConnectedAccount::_internal_mutable_handle_or_url() {
-  
-  return _impl_.handle_or_url_.Mutable(GetArenaForAllocation());
-}
-inline std::string* ConnectedAccount::release_handle_or_url() {
-  // @@protoc_insertion_point(field_release:priemman.v1.ConnectedAccount.handle_or_url)
-  return _impl_.handle_or_url_.Release();
-}
-inline void ConnectedAccount::set_allocated_handle_or_url(std::string* handle_or_url) {
-  if (handle_or_url != nullptr) {
-    
-  } else {
-    
-  }
-  _impl_.handle_or_url_.SetAllocated(handle_or_url, GetArenaForAllocation());
-#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  if (_impl_.handle_or_url_.IsDefault()) {
-    _impl_.handle_or_url_.Set("", GetArenaForAllocation());
-  }
-#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  // @@protoc_insertion_point(field_set_allocated:priemman.v1.ConnectedAccount.handle_or_url)
-}
-
-// bool verified = 3;
-inline void ConnectedAccount::clear_verified() {
-  _impl_.verified_ = false;
-}
-inline bool ConnectedAccount::_internal_verified() const {
-  return _impl_.verified_;
-}
-inline bool ConnectedAccount::verified() const {
-  // @@protoc_insertion_point(field_get:priemman.v1.ConnectedAccount.verified)
-  return _internal_verified();
-}
-inline void ConnectedAccount::_internal_set_verified(bool value) {
-  
-  _impl_.verified_ = value;
-}
-inline void ConnectedAccount::set_verified(bool value) {
-  _internal_set_verified(value);
-  // @@protoc_insertion_point(field_set:priemman.v1.ConnectedAccount.verified)
-}
-
-// .google.protobuf.Timestamp connected_at = 4;
-inline bool ConnectedAccount::_internal_has_connected_at() const {
-  return this != internal_default_instance() && _impl_.connected_at_ != nullptr;
-}
-inline bool ConnectedAccount::has_connected_at() const {
-  return _internal_has_connected_at();
-}
-inline const ::PROTOBUF_NAMESPACE_ID::Timestamp& ConnectedAccount::_internal_connected_at() const {
-  const ::PROTOBUF_NAMESPACE_ID::Timestamp* p = _impl_.connected_at_;
-  return p != nullptr ? *p : reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Timestamp&>(
-      ::PROTOBUF_NAMESPACE_ID::_Timestamp_default_instance_);
-}
-inline const ::PROTOBUF_NAMESPACE_ID::Timestamp& ConnectedAccount::connected_at() const {
-  // @@protoc_insertion_point(field_get:priemman.v1.ConnectedAccount.connected_at)
-  return _internal_connected_at();
-}
-inline void ConnectedAccount::unsafe_arena_set_allocated_connected_at(
-    ::PROTOBUF_NAMESPACE_ID::Timestamp* connected_at) {
-  if (GetArenaForAllocation() == nullptr) {
-    delete reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(_impl_.connected_at_);
-  }
-  _impl_.connected_at_ = connected_at;
-  if (connected_at) {
-    
-  } else {
-    
-  }
-  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:priemman.v1.ConnectedAccount.connected_at)
-}
-inline ::PROTOBUF_NAMESPACE_ID::Timestamp* ConnectedAccount::release_connected_at() {
-  
-  ::PROTOBUF_NAMESPACE_ID::Timestamp* temp = _impl_.connected_at_;
-  _impl_.connected_at_ = nullptr;
-#ifdef PROTOBUF_FORCE_COPY_IN_RELEASE
-  auto* old =  reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(temp);
-  temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
-  if (GetArenaForAllocation() == nullptr) { delete old; }
-#else  // PROTOBUF_FORCE_COPY_IN_RELEASE
-  if (GetArenaForAllocation() != nullptr) {
-    temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
-  }
-#endif  // !PROTOBUF_FORCE_COPY_IN_RELEASE
-  return temp;
-}
-inline ::PROTOBUF_NAMESPACE_ID::Timestamp* ConnectedAccount::unsafe_arena_release_connected_at() {
-  // @@protoc_insertion_point(field_release:priemman.v1.ConnectedAccount.connected_at)
-  
-  ::PROTOBUF_NAMESPACE_ID::Timestamp* temp = _impl_.connected_at_;
-  _impl_.connected_at_ = nullptr;
-  return temp;
-}
-inline ::PROTOBUF_NAMESPACE_ID::Timestamp* ConnectedAccount::_internal_mutable_connected_at() {
-  
-  if (_impl_.connected_at_ == nullptr) {
-    auto* p = CreateMaybeMessage<::PROTOBUF_NAMESPACE_ID::Timestamp>(GetArenaForAllocation());
-    _impl_.connected_at_ = p;
-  }
-  return _impl_.connected_at_;
-}
-inline ::PROTOBUF_NAMESPACE_ID::Timestamp* ConnectedAccount::mutable_connected_at() {
-  ::PROTOBUF_NAMESPACE_ID::Timestamp* _msg = _internal_mutable_connected_at();
-  // @@protoc_insertion_point(field_mutable:priemman.v1.ConnectedAccount.connected_at)
-  return _msg;
-}
-inline void ConnectedAccount::set_allocated_connected_at(::PROTOBUF_NAMESPACE_ID::Timestamp* connected_at) {
-  ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArenaForAllocation();
-  if (message_arena == nullptr) {
-    delete reinterpret_cast< ::PROTOBUF_NAMESPACE_ID::MessageLite*>(_impl_.connected_at_);
-  }
-  if (connected_at) {
-    ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena =
-        ::PROTOBUF_NAMESPACE_ID::Arena::InternalGetOwningArena(
-                reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(connected_at));
-    if (message_arena != submessage_arena) {
-      connected_at = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
-          message_arena, connected_at, submessage_arena);
-    }
-    
-  } else {
-    
-  }
-  _impl_.connected_at_ = connected_at;
-  // @@protoc_insertion_point(field_set_allocated:priemman.v1.ConnectedAccount.connected_at)
-}
-
-// -------------------------------------------------------------------
-
-// UpsertConnectedAccountRequest
-
-// .priemman.v1.ConnectedPlatform platform = 1;
-inline void UpsertConnectedAccountRequest::clear_platform() {
-  _impl_.platform_ = 0;
-}
-inline ::priemman::v1::ConnectedPlatform UpsertConnectedAccountRequest::_internal_platform() const {
-  return static_cast< ::priemman::v1::ConnectedPlatform >(_impl_.platform_);
-}
-inline ::priemman::v1::ConnectedPlatform UpsertConnectedAccountRequest::platform() const {
-  // @@protoc_insertion_point(field_get:priemman.v1.UpsertConnectedAccountRequest.platform)
-  return _internal_platform();
-}
-inline void UpsertConnectedAccountRequest::_internal_set_platform(::priemman::v1::ConnectedPlatform value) {
-  
-  _impl_.platform_ = value;
-}
-inline void UpsertConnectedAccountRequest::set_platform(::priemman::v1::ConnectedPlatform value) {
-  _internal_set_platform(value);
-  // @@protoc_insertion_point(field_set:priemman.v1.UpsertConnectedAccountRequest.platform)
-}
-
-// string handle_or_url = 2;
-inline void UpsertConnectedAccountRequest::clear_handle_or_url() {
-  _impl_.handle_or_url_.ClearToEmpty();
-}
-inline const std::string& UpsertConnectedAccountRequest::handle_or_url() const {
-  // @@protoc_insertion_point(field_get:priemman.v1.UpsertConnectedAccountRequest.handle_or_url)
-  return _internal_handle_or_url();
-}
-template <typename ArgT0, typename... ArgT>
-inline PROTOBUF_ALWAYS_INLINE
-void UpsertConnectedAccountRequest::set_handle_or_url(ArgT0&& arg0, ArgT... args) {
- 
- _impl_.handle_or_url_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
-  // @@protoc_insertion_point(field_set:priemman.v1.UpsertConnectedAccountRequest.handle_or_url)
-}
-inline std::string* UpsertConnectedAccountRequest::mutable_handle_or_url() {
-  std::string* _s = _internal_mutable_handle_or_url();
-  // @@protoc_insertion_point(field_mutable:priemman.v1.UpsertConnectedAccountRequest.handle_or_url)
-  return _s;
-}
-inline const std::string& UpsertConnectedAccountRequest::_internal_handle_or_url() const {
-  return _impl_.handle_or_url_.Get();
-}
-inline void UpsertConnectedAccountRequest::_internal_set_handle_or_url(const std::string& value) {
-  
-  _impl_.handle_or_url_.Set(value, GetArenaForAllocation());
-}
-inline std::string* UpsertConnectedAccountRequest::_internal_mutable_handle_or_url() {
-  
-  return _impl_.handle_or_url_.Mutable(GetArenaForAllocation());
-}
-inline std::string* UpsertConnectedAccountRequest::release_handle_or_url() {
-  // @@protoc_insertion_point(field_release:priemman.v1.UpsertConnectedAccountRequest.handle_or_url)
-  return _impl_.handle_or_url_.Release();
-}
-inline void UpsertConnectedAccountRequest::set_allocated_handle_or_url(std::string* handle_or_url) {
-  if (handle_or_url != nullptr) {
-    
-  } else {
-    
-  }
-  _impl_.handle_or_url_.SetAllocated(handle_or_url, GetArenaForAllocation());
-#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  if (_impl_.handle_or_url_.IsDefault()) {
-    _impl_.handle_or_url_.Set("", GetArenaForAllocation());
-  }
-#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  // @@protoc_insertion_point(field_set_allocated:priemman.v1.UpsertConnectedAccountRequest.handle_or_url)
-}
-
-// bool verified = 3;
-inline void UpsertConnectedAccountRequest::clear_verified() {
-  _impl_.verified_ = false;
-}
-inline bool UpsertConnectedAccountRequest::_internal_verified() const {
-  return _impl_.verified_;
-}
-inline bool UpsertConnectedAccountRequest::verified() const {
-  // @@protoc_insertion_point(field_get:priemman.v1.UpsertConnectedAccountRequest.verified)
-  return _internal_verified();
-}
-inline void UpsertConnectedAccountRequest::_internal_set_verified(bool value) {
-  
-  _impl_.verified_ = value;
-}
-inline void UpsertConnectedAccountRequest::set_verified(bool value) {
-  _internal_set_verified(value);
-  // @@protoc_insertion_point(field_set:priemman.v1.UpsertConnectedAccountRequest.verified)
-}
-
-// .google.protobuf.Timestamp connected_at = 4;
-inline bool UpsertConnectedAccountRequest::_internal_has_connected_at() const {
-  return this != internal_default_instance() && _impl_.connected_at_ != nullptr;
-}
-inline bool UpsertConnectedAccountRequest::has_connected_at() const {
-  return _internal_has_connected_at();
-}
-inline const ::PROTOBUF_NAMESPACE_ID::Timestamp& UpsertConnectedAccountRequest::_internal_connected_at() const {
-  const ::PROTOBUF_NAMESPACE_ID::Timestamp* p = _impl_.connected_at_;
-  return p != nullptr ? *p : reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Timestamp&>(
-      ::PROTOBUF_NAMESPACE_ID::_Timestamp_default_instance_);
-}
-inline const ::PROTOBUF_NAMESPACE_ID::Timestamp& UpsertConnectedAccountRequest::connected_at() const {
-  // @@protoc_insertion_point(field_get:priemman.v1.UpsertConnectedAccountRequest.connected_at)
-  return _internal_connected_at();
-}
-inline void UpsertConnectedAccountRequest::unsafe_arena_set_allocated_connected_at(
-    ::PROTOBUF_NAMESPACE_ID::Timestamp* connected_at) {
-  if (GetArenaForAllocation() == nullptr) {
-    delete reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(_impl_.connected_at_);
-  }
-  _impl_.connected_at_ = connected_at;
-  if (connected_at) {
-    
-  } else {
-    
-  }
-  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:priemman.v1.UpsertConnectedAccountRequest.connected_at)
-}
-inline ::PROTOBUF_NAMESPACE_ID::Timestamp* UpsertConnectedAccountRequest::release_connected_at() {
-  
-  ::PROTOBUF_NAMESPACE_ID::Timestamp* temp = _impl_.connected_at_;
-  _impl_.connected_at_ = nullptr;
-#ifdef PROTOBUF_FORCE_COPY_IN_RELEASE
-  auto* old =  reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(temp);
-  temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
-  if (GetArenaForAllocation() == nullptr) { delete old; }
-#else  // PROTOBUF_FORCE_COPY_IN_RELEASE
-  if (GetArenaForAllocation() != nullptr) {
-    temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
-  }
-#endif  // !PROTOBUF_FORCE_COPY_IN_RELEASE
-  return temp;
-}
-inline ::PROTOBUF_NAMESPACE_ID::Timestamp* UpsertConnectedAccountRequest::unsafe_arena_release_connected_at() {
-  // @@protoc_insertion_point(field_release:priemman.v1.UpsertConnectedAccountRequest.connected_at)
-  
-  ::PROTOBUF_NAMESPACE_ID::Timestamp* temp = _impl_.connected_at_;
-  _impl_.connected_at_ = nullptr;
-  return temp;
-}
-inline ::PROTOBUF_NAMESPACE_ID::Timestamp* UpsertConnectedAccountRequest::_internal_mutable_connected_at() {
-  
-  if (_impl_.connected_at_ == nullptr) {
-    auto* p = CreateMaybeMessage<::PROTOBUF_NAMESPACE_ID::Timestamp>(GetArenaForAllocation());
-    _impl_.connected_at_ = p;
-  }
-  return _impl_.connected_at_;
-}
-inline ::PROTOBUF_NAMESPACE_ID::Timestamp* UpsertConnectedAccountRequest::mutable_connected_at() {
-  ::PROTOBUF_NAMESPACE_ID::Timestamp* _msg = _internal_mutable_connected_at();
-  // @@protoc_insertion_point(field_mutable:priemman.v1.UpsertConnectedAccountRequest.connected_at)
-  return _msg;
-}
-inline void UpsertConnectedAccountRequest::set_allocated_connected_at(::PROTOBUF_NAMESPACE_ID::Timestamp* connected_at) {
-  ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArenaForAllocation();
-  if (message_arena == nullptr) {
-    delete reinterpret_cast< ::PROTOBUF_NAMESPACE_ID::MessageLite*>(_impl_.connected_at_);
-  }
-  if (connected_at) {
-    ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena =
-        ::PROTOBUF_NAMESPACE_ID::Arena::InternalGetOwningArena(
-                reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(connected_at));
-    if (message_arena != submessage_arena) {
-      connected_at = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
-          message_arena, connected_at, submessage_arena);
-    }
-    
-  } else {
-    
-  }
-  _impl_.connected_at_ = connected_at;
-  // @@protoc_insertion_point(field_set_allocated:priemman.v1.UpsertConnectedAccountRequest.connected_at)
-}
-
-// -------------------------------------------------------------------
-
 // AboutMe
 
 // string title = 1;
@@ -7692,46 +6603,6 @@ inline const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::priemman::v1::WorkExpe
 User::work_experience() const {
   // @@protoc_insertion_point(field_list:priemman.v1.User.work_experience)
   return _impl_.work_experience_;
-}
-
-// repeated .priemman.v1.ConnectedAccount connected_accounts = 12;
-inline int User::_internal_connected_accounts_size() const {
-  return _impl_.connected_accounts_.size();
-}
-inline int User::connected_accounts_size() const {
-  return _internal_connected_accounts_size();
-}
-inline void User::clear_connected_accounts() {
-  _impl_.connected_accounts_.Clear();
-}
-inline ::priemman::v1::ConnectedAccount* User::mutable_connected_accounts(int index) {
-  // @@protoc_insertion_point(field_mutable:priemman.v1.User.connected_accounts)
-  return _impl_.connected_accounts_.Mutable(index);
-}
-inline ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::priemman::v1::ConnectedAccount >*
-User::mutable_connected_accounts() {
-  // @@protoc_insertion_point(field_mutable_list:priemman.v1.User.connected_accounts)
-  return &_impl_.connected_accounts_;
-}
-inline const ::priemman::v1::ConnectedAccount& User::_internal_connected_accounts(int index) const {
-  return _impl_.connected_accounts_.Get(index);
-}
-inline const ::priemman::v1::ConnectedAccount& User::connected_accounts(int index) const {
-  // @@protoc_insertion_point(field_get:priemman.v1.User.connected_accounts)
-  return _internal_connected_accounts(index);
-}
-inline ::priemman::v1::ConnectedAccount* User::_internal_add_connected_accounts() {
-  return _impl_.connected_accounts_.Add();
-}
-inline ::priemman::v1::ConnectedAccount* User::add_connected_accounts() {
-  ::priemman::v1::ConnectedAccount* _add = _internal_add_connected_accounts();
-  // @@protoc_insertion_point(field_add:priemman.v1.User.connected_accounts)
-  return _add;
-}
-inline const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::priemman::v1::ConnectedAccount >&
-User::connected_accounts() const {
-  // @@protoc_insertion_point(field_list:priemman.v1.User.connected_accounts)
-  return _impl_.connected_accounts_;
 }
 
 // .priemman.v1.AboutMe about_me = 13;
@@ -9642,74 +8513,6 @@ inline void DeleteWorkExperienceRequest::set_allocated_id(::priemman::v1::Object
   }
   _impl_.id_ = id;
   // @@protoc_insertion_point(field_set_allocated:priemman.v1.DeleteWorkExperienceRequest.id)
-}
-
-// -------------------------------------------------------------------
-
-// ListConnectedAccountsResponse
-
-// repeated .priemman.v1.ConnectedAccount accounts = 1;
-inline int ListConnectedAccountsResponse::_internal_accounts_size() const {
-  return _impl_.accounts_.size();
-}
-inline int ListConnectedAccountsResponse::accounts_size() const {
-  return _internal_accounts_size();
-}
-inline void ListConnectedAccountsResponse::clear_accounts() {
-  _impl_.accounts_.Clear();
-}
-inline ::priemman::v1::ConnectedAccount* ListConnectedAccountsResponse::mutable_accounts(int index) {
-  // @@protoc_insertion_point(field_mutable:priemman.v1.ListConnectedAccountsResponse.accounts)
-  return _impl_.accounts_.Mutable(index);
-}
-inline ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::priemman::v1::ConnectedAccount >*
-ListConnectedAccountsResponse::mutable_accounts() {
-  // @@protoc_insertion_point(field_mutable_list:priemman.v1.ListConnectedAccountsResponse.accounts)
-  return &_impl_.accounts_;
-}
-inline const ::priemman::v1::ConnectedAccount& ListConnectedAccountsResponse::_internal_accounts(int index) const {
-  return _impl_.accounts_.Get(index);
-}
-inline const ::priemman::v1::ConnectedAccount& ListConnectedAccountsResponse::accounts(int index) const {
-  // @@protoc_insertion_point(field_get:priemman.v1.ListConnectedAccountsResponse.accounts)
-  return _internal_accounts(index);
-}
-inline ::priemman::v1::ConnectedAccount* ListConnectedAccountsResponse::_internal_add_accounts() {
-  return _impl_.accounts_.Add();
-}
-inline ::priemman::v1::ConnectedAccount* ListConnectedAccountsResponse::add_accounts() {
-  ::priemman::v1::ConnectedAccount* _add = _internal_add_accounts();
-  // @@protoc_insertion_point(field_add:priemman.v1.ListConnectedAccountsResponse.accounts)
-  return _add;
-}
-inline const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::priemman::v1::ConnectedAccount >&
-ListConnectedAccountsResponse::accounts() const {
-  // @@protoc_insertion_point(field_list:priemman.v1.ListConnectedAccountsResponse.accounts)
-  return _impl_.accounts_;
-}
-
-// -------------------------------------------------------------------
-
-// DeleteConnectedAccountRequest
-
-// .priemman.v1.ConnectedPlatform platform = 1;
-inline void DeleteConnectedAccountRequest::clear_platform() {
-  _impl_.platform_ = 0;
-}
-inline ::priemman::v1::ConnectedPlatform DeleteConnectedAccountRequest::_internal_platform() const {
-  return static_cast< ::priemman::v1::ConnectedPlatform >(_impl_.platform_);
-}
-inline ::priemman::v1::ConnectedPlatform DeleteConnectedAccountRequest::platform() const {
-  // @@protoc_insertion_point(field_get:priemman.v1.DeleteConnectedAccountRequest.platform)
-  return _internal_platform();
-}
-inline void DeleteConnectedAccountRequest::_internal_set_platform(::priemman::v1::ConnectedPlatform value) {
-  
-  _impl_.platform_ = value;
-}
-inline void DeleteConnectedAccountRequest::set_platform(::priemman::v1::ConnectedPlatform value) {
-  _internal_set_platform(value);
-  // @@protoc_insertion_point(field_set:priemman.v1.DeleteConnectedAccountRequest.platform)
 }
 
 // -------------------------------------------------------------------
@@ -12288,14 +11091,6 @@ inline void AdminConfirmPaymentResponse::set_allocated_user_id(::priemman::v1::O
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
-// -------------------------------------------------------------------
-
-// -------------------------------------------------------------------
-
-// -------------------------------------------------------------------
-
-// -------------------------------------------------------------------
-
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------

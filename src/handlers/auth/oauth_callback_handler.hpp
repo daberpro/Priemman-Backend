@@ -14,6 +14,7 @@
 #include <src/database/session_repository.hpp>
 #include <src/database/user_repository.hpp>
 #include <src/component/SMTP/SMTP.hpp>
+#include <jwt-cpp/jwt.h>
 
 namespace priemman::auth {
 
@@ -36,6 +37,7 @@ public:
 private:
     std::string _domain{""};
     std::string _welcome_template{""};
+    std::string _jwt_secret{""};
     std::shared_ptr<userver::storages::mysql::Cluster> _mysql_cluster{nullptr};
     database::UserRepository _users;
     database::SessionRepository _sessions;
@@ -53,6 +55,7 @@ public:
 private:
     std::string _domain{""};
     std::string _welcome_template{""};
+    std::string _jwt_secret{""};
     std::shared_ptr<userver::storages::mysql::Cluster> _mysql_cluster{nullptr};
     database::UserRepository _users;
     database::SessionRepository _sessions;

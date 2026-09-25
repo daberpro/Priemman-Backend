@@ -7,6 +7,15 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 file(GLOB_RECURSE SOURCES "src/*.cpp")
 file(GLOB PROTO_FILES "proto/*.proto")
 
+include(FetchContent)
+
+FetchContent_Declare(
+    jwt-cpp
+    GIT_REPOSITORY https://github.com/Thalhammer/jwt-cpp.git
+    GIT_TAG        v0.7.2
+)
+FetchContent_MakeAvailable(jwt-cpp)
+
 find_package(Protobuf REQUIRED)
 find_package(userver COMPONENTS core mysql REQUIRED)
 find_package(PkgConfig REQUIRED)
@@ -50,7 +59,7 @@ target_link_libraries(
     ssl
     crypto
     PkgConfig::ICAL
-    # ${VIPS_LIBRARIES}
+    jwt-cpp::jwt-cpp
 )
 
 add_subdirectory(frontend)

@@ -20,13 +20,6 @@ struct WorkExperienceRow {
     std::string description;
 };
 
-struct ConnectedAccountRow {
-    std::string platform;
-    std::string handle_or_url;
-    std::int8_t verified;
-    std::optional<std::string> connected_at;
-};
-
 class AccountRepository {
 public:
     explicit AccountRepository(
@@ -36,12 +29,6 @@ public:
     std::vector<WorkExperienceRow> ListWorkExperiences(const std::string& user_id) const;
     std::string UpsertWorkExperience(const std::string& user_id, const WorkExperienceRow& row) const;
     bool DeleteWorkExperience(const std::string& user_id, const std::string& id) const;
-
-    std::vector<ConnectedAccountRow> ListConnectedAccounts(const std::string& user_id) const;
-    bool DeleteConnectedAccount(const std::string& user_id, const std::string& platform) const;
-
-    bool UpsertConnectedAccount(const std::string& user_id, const ConnectedAccountRow& row) const;
-
 private:
     std::shared_ptr<userver::storages::mysql::Cluster> _mysql_cluster{nullptr};
 };

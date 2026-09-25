@@ -37,7 +37,6 @@ constexpr EndpointInfo kEndpoints[] = {
     {"GET", "/v1/auth/callback/github", "GitHub OAuth callback"},
     {"GET", "/v1/users/me", "Get/update basic user info"},
     {"GET", "/v1/users/me/work-experiences", "Manage work experiences"},
-    {"GET", "/v1/users/me/connected-accounts", "Manage connected accounts"},
     {"GET", "/v1/users/me/upgrade", "Get latest creator upgrade request status"},
     {"POST", "/v1/users/me/upgrade", "Request an upgrade from user to creator"},
     {"POST", "/v1/projects", "Create a project"},
