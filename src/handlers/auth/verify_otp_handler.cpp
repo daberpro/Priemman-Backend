@@ -70,7 +70,8 @@ void AddProperties(userver::yaml_config::Schema& schema) {
     }
     static const std::pair<std::string_view, std::string_view> kProps[] = {
         {"domain","Domain utama atau base domain contoh priemman.my.id"},
-        {"welcome-template-path","Template html untuk welcome user"}
+        {"welcome-template-path","Template html untuk welcome user"},
+        {"jwt-secret", "Secret JWT untuk token comments"}
     };
     for (const auto& [name, description] : kProps) {
         schema.properties->emplace(
@@ -111,6 +112,7 @@ VerifyOtpHandler::VerifyOtpHandler(
     : userver::server::handlers::HttpHandlerBase(config, context),
       _domain{config["domain"].As<std::string>()},
       _welcome_template(config["welcome-template-path"].As<std::string>()),
+      _jwt_secret{config["jwt-secret"].As<std::string>()},
       _mysql_cluster(
           context.FindComponent<userver::storages::mysql::Component>("database").GetCluster()
       ),
@@ -191,6 +193,25 @@ std::string VerifyOtpHandler::HandleRequestThrow(
         );
     }
     auto session = _sessions.Create(result.user.id);
+
+    auto token = jwt::create()
+    .set_audience("remark42")
+    .set_issued_at(std::chrono::system_clock::now())
+    .set_expires_at(std::chrono::system_clock::now() + std::chrono::hours(24))
+    .set_payload_claim("user", jwt::claim(picojson::value(picojson::object{
+        {"id", picojson::value(result.user.id)},
+        {"name", picojson::value(std::format("{} {}",result.user.last_name, result.user.last_name))},
+        {"role", picojson::value(result.user.role)}
+    })))
+    .sign(jwt::algorithm::hs256{_jwt_secret});
+
+    userver::server::http::Cookie jwt_cookie{"JWT", token};
+    jwt_cookie.SetDomain("." + _domain); 
+    jwt_cookie.SetPath("/");
+    jwt_cookie.SetHttpOnly();
+    jwt_cookie.SetSecure();
+    jwt_cookie.SetSameSite("Lax");
+    res.SetCookie(jwt_cookie);
 
     res.SetHeader(std::string("Set-Cookie"), BuildSessionCookie(session.token, _domain));
 

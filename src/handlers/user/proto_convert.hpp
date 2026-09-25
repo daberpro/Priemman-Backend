@@ -66,35 +66,10 @@ inline database::WorkExperienceRow ToRow(const priemman::v1::WorkExperience& w) 
     return r;
 }
 
-inline database::ConnectedAccountRow ToRow(const priemman::v1::UpsertConnectedAccountRequest& r) {
-    database::ConnectedAccountRow row;
-    row.platform = r.platform();
-    row.handle_or_url = r.handle_or_url();
-    row.verified = r.verified();
-    row.connected_at = TimestampToSql(r.connected_at());
-    return row;
-}
-
-inline priemman::v1::ConnectedAccount ToProto(const database::ConnectedAccountRow& r) {
-    priemman::v1::ConnectedAccount c;
-    if (r.platform == "INSTAGRAM") c.set_platform(priemman::v1::CONNECTED_PLATFORM_INSTAGRAM);
-    else if (r.platform == "LINKEDIN") c.set_platform(priemman::v1::CONNECTED_PLATFORM_LINKEDIN);
-    else if (r.platform == "GITHUB") c.set_platform(priemman::v1::CONNECTED_PLATFORM_GITHUB);
-    else c.set_platform(priemman::v1::CONNECTED_PLATFORM_UNSPECIFIED);
-
-    c.set_handle_or_url(r.handle_or_url);
-    c.set_verified(r.verified != 0);
-
-    // r.connected_at sekarang std::optional<std::string>, langsung pass saja
-    SqlToTimestamp(r.connected_at, c.mutable_connected_at());
-
-    return c;
-}
 inline priemman::v1::User ToUserProto(
     const database::User& u,
     const std::optional<database::AboutInfo>& about,
-    const std::vector<database::WorkExperienceRow>& wx,
-    const std::vector<database::ConnectedAccountRow>& ca
+    const std::vector<database::WorkExperienceRow>& wx
 ) {
     priemman::v1::User p;
     p.mutable_id()->set_value(u.id);
@@ -114,7 +89,6 @@ inline priemman::v1::User ToUserProto(
         p.mutable_about_me()->set_description(about->description);
     }
     for (const auto& w : wx) *p.add_work_experience() = ToProto(w);
-    for (const auto& a : ca) *p.add_connected_accounts() = ToProto(a);
     return p;
 }
 

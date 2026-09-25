@@ -1,240 +1,838 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Priemman API Documentation</title>
-    <style>
-        :root {
-            --bg-body: #0f172a;
-            --bg-sidebar: #1e293b;
-            --bg-card: #1e293b;
-            --bg-code: #020617;
-            --text-main: #f8fafc;
-            --text-muted: #94a3b8;
-            --border: #334155;
-            --accent: #3b82f6;
-            --method-get: #10b981;
-            --method-post: #3b82f6;
-            --method-put: #f59e0b;
-            --method-delete: #ef4444;
-        }
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            background-color: var(--bg-body);
-            color: var(--text-main);
-            line-height: 1.6;
-            display: flex;
-            min-height: 100vh;
-        }
-        .sidebar {
-            width: 260px;
-            background-color: var(--bg-sidebar);
-            border-right: 1px solid var(--border);
-            padding: 2rem 1rem;
-            position: fixed;
-            height: 100vh;
-            overflow-y: auto;
-        }
-        .logo { font-size: 1.25rem; font-weight: bold; color: var(--accent); margin-bottom: 2rem; display: flex; align-items: center; gap: 0.5rem; }
-        .nav-group { margin-bottom: 1.5rem; }
-        .nav-title { font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted); letter-spacing: 0.05em; margin-bottom: 0.5rem; padding-left: 0.75rem; }
-        .nav-link { display: block; padding: 0.5rem 0.75rem; color: var(--text-muted); text-decoration: none; border-radius: 0.375rem; font-size: 0.875rem; transition: all 0.2s; }
-        .nav-link:hover { background-color: rgba(255,255,255,0.05); color: var(--text-main); }
-        .nav-link.active { background-color: var(--accent); color: white; }
-        .main { margin-left: 260px; flex: 1; padding: 3rem 4rem; max-width: 1000px; }
-        .header { margin-bottom: 3rem; border-bottom: 1px solid var(--border); padding-bottom: 2rem; }
-        .header h1 { font-size: 2rem; margin-bottom: 0.5rem; }
-        .header p { color: var(--text-muted); }
-        .badge-base { display: inline-block; background: var(--bg-code); padding: 0.25rem 0.75rem; border-radius: 999px; font-family: monospace; font-size: 0.875rem; margin-top: 1rem; border: 1px solid var(--border); }
-        .endpoint-card { background-color: var(--bg-card); border: 1px solid var(--border); border-radius: 0.5rem; margin-bottom: 1rem; overflow: hidden; }
-        details { cursor: pointer; }
-        details[open] summary { border-bottom: 1px solid var(--border); }
-        summary { padding: 1rem 1.5rem; font-weight: 600; font-size: 1.1rem; list-style: none; display: flex; justify-content: space-between; align-items: center; }
-        summary::-webkit-details-marker { display: none; }
-        summary:hover { background-color: rgba(255,255,255,0.02); }
-        .path-text { font-family: monospace; color: var(--text-main); }
-        .methods-preview { display: flex; gap: 0.5rem; }
-        .method-badge { font-size: 0.7rem; font-weight: bold; padding: 0.2rem 0.5rem; border-radius: 0.25rem; color: white; }
-        .bg-get { background-color: var(--method-get); }
-        .bg-post { background-color: var(--method-post); }
-        .bg-put { background-color: var(--method-put); }
-        .bg-delete { background-color: var(--method-delete); }
-        .method-content { padding: 1.5rem; }
-        .method-item { margin-bottom: 2rem; border-left: 3px solid var(--border); padding-left: 1rem; }
-        .method-item:last-child { margin-bottom: 0; }
-        .method-header { display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem; }
-        .method-verb { font-size: 0.875rem; font-weight: bold; width: 60px; }
-        .tabs { display: flex; gap: 1rem; border-bottom: 1px solid var(--border); margin-bottom: 1rem; }
-        .tab-btn { background: none; border: none; color: var(--text-muted); padding: 0.5rem 0; cursor: pointer; font-size: 0.875rem; border-bottom: 2px solid transparent; }
-        .tab-btn.active { color: var(--accent); border-bottom-color: var(--accent); }
-        .tab-content { display: none; }
-        .tab-content.active { display: block; }
-        pre { background-color: var(--bg-code); padding: 1rem; border-radius: 0.375rem; overflow-x: auto; font-size: 0.875rem; border: 1px solid var(--border); }
-        code { font-family: 'Fira Code', monospace; }
-        .empty-state { text-align: center; padding: 4rem; color: var(--text-muted); }
-        .note { font-size: 0.875rem; color: var(--text-muted); margin-top: 0.5rem; font-style: italic; }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Priemman API · Dokumentasi</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📡</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://unpkg.com/htmx.org@1.9.12"></script>
+<script>
+/* Lebar sidebar dibaca sebelum render agar tidak jump */
+document.documentElement.style.setProperty('--sbw', (parseInt(localStorage.getItem('pm_sbw'),10)||288) + 'px');
+tailwind.config = { theme: { extend: {
+  fontFamily: {
+    sans: ['Roboto','ui-sans-serif','system-ui','sans-serif'],
+    mono: ['"Roboto Mono"','ui-monospace','SFMono-Regular','monospace'],
+  },
+  /* ---- MD3 tonal palette (dark) + brand orange ---- */
+  colors: {
+    surface: { DEFAULT:'#121316', dim:'#0C0D0F', container:'#191A1D', high:'#222427', highest:'#2C2E31' },
+    on: { surface:'#E4E2E6', variant:'#C5C6CF', disabled:'#8A8B93' },
+    outline: { DEFAULT:'#8E9099', variant:'#43464E' },
+    primary: { DEFAULT:'#FFB59F', container:'#7A2E00', on:'#561F00', 'on-container':'#FFDBCF' },
+    secondary: { DEFAULT:'#E7BDB0', container:'#4A372E' },
+    tertiary: '#D6C38F',
+    error: { DEFAULT:'#FFB4AB', container:'#93000A' },
+    success: '#7BD88F',
+  },
+  /* ---- MD3 type scale ---- */
+  fontSize: {
+    'display':     ['57px',{lineHeight:'64px',letterSpacing:'-0.25px'}],
+    'headline-lg': ['32px',{lineHeight:'40px'}],
+    'headline-md': ['28px',{lineHeight:'36px'}],
+    'headline-sm': ['24px',{lineHeight:'32px'}],
+    'title-lg':    ['22px',{lineHeight:'28px'}],
+    'title-md':    ['16px',{lineHeight:'24px',letterSpacing:'0.15px'}],
+    'title-sm':    ['14px',{lineHeight:'20px',letterSpacing:'0.1px'}],
+    'body-lg':     ['16px',{lineHeight:'24px',letterSpacing:'0.5px'}],
+    'body-md':     ['14px',{lineHeight:'20px',letterSpacing:'0.25px'}],
+    'body-sm':     ['12px',{lineHeight:'16px',letterSpacing:'0.4px'}],
+    'label-lg':    ['14px',{lineHeight:'20px',letterSpacing:'0.1px'}],
+    'label-md':    ['12px',{lineHeight:'16px',letterSpacing:'0.5px'}],
+    'label-sm':    ['11px',{lineHeight:'16px',letterSpacing:'0.5px'}],
+  },
+  boxShadow: {
+    e1: '0 1px 2px rgba(0,0,0,.30), 0 1px 3px 1px rgba(0,0,0,.15)',
+    e2: '0 1px 2px rgba(0,0,0,.30), 0 2px 6px 2px rgba(0,0,0,.15)',
+  },
+}}}
+</script>
+<style>
+  /* satu-satunya CSS custom: scrollbar (tidak tersedia di Tailwind) */
+  ::-webkit-scrollbar{width:8px;height:8px}
+  ::-webkit-scrollbar-thumb{background:#3a3d45;border-radius:8px}
+  ::-webkit-scrollbar-thumb:hover{background:#4a4d56}
+  ::-webkit-scrollbar-track{background:transparent}
+  .code{font-family:'Roboto Mono',monospace}
+</style>
 </head>
-<body>
-    <aside class="sidebar">
-        <div class="logo">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
-            Priemman API
+<body class="bg-surface text-on-surface font-sans antialiased">
+
+<!-- ======================= TOP APP BAR (MD3) ======================= -->
+<header class="fixed top-0 inset-x-0 h-16 z-50 bg-surface-container/90 backdrop-blur border-b border-outline-variant/60 flex items-center gap-4 px-4">
+  <button class="md:hidden w-10 h-10 rounded-full grid place-items-center text-on-variant hover:bg-surface-high transition" hx-on:click="window.toggleSidebar()" aria-label="Menu">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+  </button>
+  <a href="#overview" class="flex items-center gap-3 shrink-0 min-w-0">
+    <div class="w-9 h-9 rounded-xl bg-primary-container grid place-items-center font-bold text-primary-on-container text-title-md">P</div>
+    <div class="leading-tight min-w-0">
+      <div class="text-title-md font-medium text-on-surface truncate">Priemman <span class="text-primary">API</span></div>
+      <div class="text-label-sm text-on-disabled font-mono truncate">priemman.v1 · REST + protobuf</div>
+    </div>
+  </a>
+  <div class="flex-1"></div>
+  <div class="hidden sm:flex items-center gap-2">
+    <label class="text-label-sm font-medium uppercase tracking-[0.12em] text-on-variant">Base URL</label>
+    <input id="base-url" class="h-9 w-60 rounded-lg border border-outline-variant/70 bg-surface-high px-3 font-mono text-body-sm text-on-surface placeholder:text-on-disabled focus:border-primary focus:ring-2 focus:ring-primary/30 outline-none transition" value="http://localhost:8080">
+  </div>
+  <div class="hidden lg:flex items-center gap-2">
+    <label class="text-label-sm font-medium uppercase tracking-[0.12em] text-on-variant">Session Token</label>
+    <input id="global-token" placeholder="sess_…" class="h-9 w-56 rounded-lg border border-outline-variant/70 bg-surface-high px-3 font-mono text-body-sm text-on-surface placeholder:text-on-disabled focus:border-primary focus:ring-2 focus:ring-primary/30 outline-none transition">
+  </div>
+</header>
+
+<!-- ======================= NAVIGATION RAIL / SIDEBAR (resizable) ======================= -->
+<aside id="sidebar" class="hidden md:block fixed z-40 top-16 bottom-0 left-0 bg-surface-dim border-r border-outline-variant/60" style="width:var(--sbw)">
+  <div class="p-3 pb-1">
+    <input id="nav-search" placeholder="Cari endpoint…   ( / )"
+      class="w-full h-10 rounded-full border border-outline-variant/70 bg-surface-high px-4 text-body-md text-on-surface placeholder:text-on-disabled focus:border-primary focus:ring-2 focus:ring-primary/30 outline-none transition"
+      hx-on:input="window.filterNav(this.value)">
+  </div>
+  <nav id="nav" class="h-[calc(100%-3.5rem)] overflow-y-auto px-3 pb-8"></nav>
+  <!-- drag handle -->
+  <div id="sb-handle" title="Tarik untuk resize · double-click untuk reset"
+       class="absolute top-0 -right-[5px] w-[10px] h-full cursor-col-resize z-50 group">
+    <div class="mx-auto h-full w-[3px] rounded-full bg-transparent group-hover:bg-primary/70 group-active:bg-primary transition-colors"></div>
+  </div>
+</aside>
+
+<!-- ======================= CONTENT ======================= -->
+<main class="pt-16 md:ml-[var(--sbw)]">
+  <div class="max-w-5xl px-5 lg:px-10 py-10">
+    <section id="overview" class="scroll-mt-24">
+      <div class="flex items-center gap-3 mb-2">
+        <h1 class="text-headline-sm font-medium text-on-surface">Priemman Backend API</h1>
+        <span class="text-label-md font-mono px-2.5 py-1 rounded-full bg-primary-container/40 text-primary-on-container border border-primary/30">v1</span>
+      </div>
+      <p class="text-body-md text-on-variant mb-8">Dokumentasi REST API <span class="font-mono text-on-surface">priemman.v1</span> — dibangkitkan dari <span class="font-mono">static_config.yaml</span> dan skema protobuf. Update: 25 Sep 2026.</p>
+      <div class="grid md:grid-cols-3 gap-4 mb-8" id="overview-cards"></div>
+      <div id="overview-notes" class="space-y-4"></div>
+    </section>
+    <div id="sections"></div>
+    <footer class="mt-16 pt-6 border-t border-outline-variant/50 text-body-sm text-on-disabled flex flex-wrap gap-x-6 gap-y-1">
+      <span>Priemman API · priemman.v1</span><span>Rate limit: 60 req/menit</span><span>CORS: priemman.my.id & localhost:3000</span>
+    </footer>
+  </div>
+</main>
+
+<div id="toast" class="fixed bottom-6 right-6 rounded-full bg-surface-highest border border-outline-variant/60 text-on-surface text-body-md px-5 py-2.5 shadow-e2 opacity-0 pointer-events-none transition z-[60]"></div>
+
+<script>
+/* ================= util ================= */
+const esc = s => String(s ?? '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+function hlProto(code){
+  code = esc(code);
+  code = code.replace(/("[^"\n]*")/g,'<span class="text-success">$1</span>');
+  code = code.replace(/(\/\/[^\n]*)/g,'<span class="text-on-disabled italic">$1</span>');
+  code = code.replace(/\b(syntax|package|import|message|enum|repeated|map|service|rpc|returns|option)\b/g,'<span class="text-primary font-medium">$1</span>');
+  code = code.replace(/\b(string|int32|int64|bool|bytes|true|false)\b/g,'<span class="text-secondary">$1</span>');
+  code = code.replace(/(=\s*\d+)/g,'<span class="text-on-disabled">$1</span>');
+  return code;
+}
+function hlJson(str){
+  str = esc(str);
+  return str.replace(/("(?:\\.|[^"\\])*")(\s*:)?|\b(true|false|null)\b|(-?\d+(?:\.\d+)?)/g,(m,s,c,b,n)=>{
+    if(s) return c ? '<span class="text-secondary">'+s+'</span>'+c : '<span class="text-success">'+s+'</span>';
+    if(b) return '<span class="text-primary">'+b+'</span>';
+    if(n) return '<span class="text-tertiary">'+n+'</span>';
+    return m;
+  });
+}
+const sampleText = s => typeof s==='string' ? s : JSON.stringify(s,null,2);
+const sampleHtml = s => typeof s==='string' ? esc(s) : hlJson(JSON.stringify(s,null,2));
+function codeBlock(id, html, label){
+  return `<div class="relative group mb-4">${label?`<div class="text-label-sm font-medium uppercase tracking-[0.14em] text-on-disabled mb-2">${label}</div>`:''}
+    <pre id="${id}" class="code rounded-xl bg-surface-dim border border-outline-variant/60 p-4 text-body-sm leading-relaxed overflow-x-auto text-on-variant">${html}</pre>
+    <button hx-on:click="window.copyBlock('${id}')" class="absolute top-2.5 right-2.5 h-8 px-3 rounded-full border border-outline-variant/70 bg-surface-high/80 text-label-md font-medium text-on-variant hover:text-on-surface hover:bg-surface-highest opacity-0 group-hover:opacity-100 transition">COPY</button></div>`;
+}
+window.copyBlock = id => { navigator.clipboard.writeText(document.getElementById(id).innerText); toast('Disalin ✓'); };
+window.copyText  = t  => { navigator.clipboard.writeText(t); toast('Path disalin ✓'); };
+function toast(msg){ const t=document.getElementById('toast'); t.textContent=msg; t.style.opacity=1; setTimeout(()=>t.style.opacity=0,1400); }
+const inline = t => esc(t).replace(/`([^`]+)`/g,'<code class="font-mono text-body-sm bg-surface-high border border-outline-variant/60 rounded-md px-1.5 py-0.5 text-on-surface">$1</code>');
+
+const METHOD_COLORS = {GET:'#49cc90',POST:'#fca130',PUT:'#61affe',DELETE:'#f93e3e',PATCH:'#a855f7',OPTIONS:'#6b7280'};
+const badge = m => `<span class="inline-flex items-center justify-center h-6 px-2.5 rounded-full text-label-md font-bold font-mono text-white shrink-0" style="background:${METHOD_COLORS[m]}">${m}</span>`;
+const mini  = m => `<i class="not-italic px-1.5 py-px rounded text-[9px] font-bold text-surface-dim shrink-0" style="background:${METHOD_COLORS[m]}">${m}</i>`;
+const chipAuth = a => a==='required' ? `<span class="text-label-sm font-mono px-2.5 py-1 rounded-full border border-tertiary/40 text-tertiary bg-tertiary/10">🔒 AUTH</span>`
+  : a==='admin' ? `<span class="text-label-sm font-mono px-2.5 py-1 rounded-full border border-error/40 text-error bg-error/10">🛡 ADMIN</span>`
+  : a==='optional' ? `<span class="text-label-sm font-mono px-2.5 py-1 rounded-full border border-secondary/40 text-secondary bg-secondary/10">AUTH opsional</span>` : '';
+
+/* ================= snippets proto ================= */
+const S_RESULT = `message ErrorDetail {
+  string code = 1;      // mis. "RATE_LIMITED", "INVALID_OTP"
+  string message = 2;
+  map<string, string> meta = 3;
+}
+
+message Result {
+  bool is_error = 1;
+  bool has_value = 2;
+  string message = 3;
+  string value = 4;
+  ErrorDetail error_detail = 5;
+}`;
+const S_SESSION = `message Session {
+  string token = 1;
+  ObjectId user_id = 2;
+  google.protobuf.Timestamp expires_at = 3;
+}`;
+const S_UPLOAD_RES = `message UploadMediaResponse {
+  string url = 1;           // URL delivery Cloudinary dgn f_auto,q_auto
+  MediaType type = 2;       // IMAGE / VIDEO
+  int32 order = 3;
+  ObjectId id = 4;
+  string public_id = 5;     // wajib utk operasi hapus
+  string resource_type = 6; // "image" | "video" | "raw"
+}
+
+message UploadMediaBatchResponse {
+  repeated UploadMediaResponse items = 1; // urutan = urutan file di request
+}`;
+const S_PROJECT = `message Collaborator { ObjectId user_id = 1; string role = 2; }
+message ProjectMetrics { int64 views = 1; int64 likes = 2; int64 saves = 3; }
+
+message Project {
+  ObjectId id = 1;
+  ObjectId owner_id = 2;
+  string title = 3;
+  string slug = 4;
+  string content = 5;
+  repeated string tags = 6;
+  string cover_media_id = 7;
+  repeated Media media = 8;
+  repeated Collaborator collaborators = 9;
+  ProjectVisibility visibility = 10;
+  ProjectStatus status = 11;
+  ProjectMetrics metrics = 12;
+  google.protobuf.Timestamp created_at = 13;
+  google.protobuf.Timestamp updated_at = 14;
+  google.protobuf.Timestamp published_at = 15;
+  PublicInfo author = 16;
+}`;
+const S_PROJECT_INPUT = `message ProjectInput {
+  string title = 1;
+  repeated string tags = 2;
+  repeated Media media = 3;
+  repeated Collaborator collaborators = 4;
+  ProjectVisibility visibility = 5;
+  ProjectStatus status = 6;    // set PUBLISHED utk publish
+  string cover_media_id = 7;   // kosong = media pertama
+  string content = 8;
+}`;
+const S_COLLECTION = `enum CollectionVisibility {
+  COLLECTION_VISIBILITY_UNSPECIFIED = 0;
+  COLLECTION_VISIBILITY_PUBLIC = 1;
+  COLLECTION_VISIBILITY_PRIVATE = 2;
+}
+
+message Collection {
+  ObjectId id = 1;
+  ObjectId owner_id = 2;
+  string title = 3;
+  string description = 4;
+  repeated ObjectId project_ids = 5;
+  CollectionVisibility visibility = 6;
+  google.protobuf.Timestamp created_at = 7;
+  google.protobuf.Timestamp updated_at = 8;
+}`;
+
+const H_CT   = {n:'Content-Type', v:'application/json', req:true,  d:'Body JSON (mapping dari protobuf message).'};
+const H_AUTH = {n:'Authorization', v:'Bearer <session_token>', req:true, d:'Session token dari `verify-otp` / OAuth callback.'};
+const H_MP   = {n:'Content-Type', v:'multipart/form-data', req:true, d:'Boundary dibuat otomatis oleh client.'};
+const ERR_429 = {is_error:true,has_value:false,message:"Terlalu banyak request",value:"",error_detail:{code:"RATE_LIMITED",message:"Batas 60 request/menit tercapai",meta:{retry_after:"12"}}};
+
+const CORS_HEADERS = [
+  ['Access-Control-Allow-Origin','https://priemman.my.id  |  http://localhost:3000'],
+  ['Access-Control-Allow-Credentials','true'],
+  ['Access-Control-Allow-Headers','Content-Type, Authorization'],
+  ['Access-Control-Allow-Methods','Method yang tersedia di path ini'],
+  ['Access-Control-Max-Age','86400'],
+];
+const OPT = { m:'OPTIONS', auth:'none', noTry:true, desc:'CORS preflight.', headers:[], cors:CORS_HEADERS };
+
+/* ================= endpoint ================= */
+const API = [
+{ group:'System', items:[
+  { path:'/ping', title:'Health Check', desc:'Cek apakah server hidup.', methods:[
+    { m:'GET', auth:'none', desc:'Balasan cepat tanpa autentikasi.', headers:[], resSample:'pong' }, OPT ]},
+  { path:'/', title:'Landing Page (Statis)', desc:'File statis dari `fs-cache-static`.', methods:[
+    { m:'GET', auth:'none', desc:'Menyajikan halaman landing.', headers:[], resRaw:'HTTP/1.1 200 OK\nContent-Type: text/html; charset=utf-8\n\n<html>…landing page…</html>' }, OPT ]},
+  { path:'/v1/info', title:'Info API', desc:'Informasi umum service.', methods:[
+    { m:'GET', auth:'none', desc:'Tidak perlu autentikasi.', headers:[], ilustratif:true, resSample:{name:"priemman-api",version:"v1",build:"2026.09.25"} }, OPT ]},
+]},
+{ group:'Auth', items:[
+  { path:'/v1/auth/send-otp', title:'Kirim OTP (Email)', desc:'Memulai login email OTP.', methods:[
+    { m:'POST', auth:'none', headers:[H_CT],
+      reqProto:`message SendOtpRequest {\n  string email = 1;\n}`,
+      reqSample:{email:"budi@example.com"},
+      resProto:`message SendOtpResponse {\n  bool success = 1;\n  string message = 2;\n  int32 cooldown_seconds = 3;\n}`,
+      resSample:{success:true,message:"OTP telah dikirim",cooldown_seconds:30},
+      errorSample:{is_error:true,message:"Tunggu sebelum meminta OTP lagi"} }, OPT ]},
+  { path:'/v1/auth/verify-otp', title:'Verifikasi OTP', desc:'Menukar kode OTP dengan session token.', methods:[
+    { m:'POST', auth:'none', headers:[H_CT],
+      reqProto:`message VerifyOtpRequest {\n  string email = 1;\n  string otp = 2;\n}`,
+      reqSample:{email:"budi@example.com",otp:"482913"},
+      resProto:`message VerifyOtpResponse {\n  string session_token = 1;\n  bool is_new_user = 2;\n}`,
+      resSample:{session_token:"sess_9f2c1ab7e8",is_new_user:true} }, OPT ]},
+  { path:'/v1/auth/logout', title:'Logout', desc:'Membatalkan session.', methods:[
+    { m:'POST', auth:'required', headers:[H_AUTH,H_CT],
+      reqProto:`message LogoutRequest {\n  string session_token = 1;\n}`,
+      reqSample:{session_token:"sess_9f2c1ab7e8"},
+      resProto:`message LogoutResponse {\n  bool success = 1;\n}`,
+      resSample:{success:true} }, OPT ]},
+  { path:'/v1/auth/google', title:'Mulai OAuth Google', desc:'Redirect ke login Google.', methods:[
+    { m:'GET', auth:'none', noTry:true, headers:[], resRaw:'HTTP/1.1 302 Found\nLocation: https://accounts.google.com/o/oauth2/v2/auth' }, OPT ]},
+  { path:'/v1/auth/callback/google', title:'Callback OAuth Google', desc:'Callback dari Google.', methods:[
+    { m:'GET', auth:'none', noTry:true, headers:[], resRaw:'HTTP/1.1 302 Found\nLocation: <dashboard-url>\nSet-Cookie: session=<token>' }, OPT ]},
+  { path:'/v1/auth/github', title:'Mulai OAuth GitHub', desc:'Redirect ke login GitHub.', methods:[
+    { m:'GET', auth:'none', noTry:true, headers:[], resRaw:'HTTP/1.1 302 Found\nLocation: https://github.com/login/oauth/authorize' }, OPT ]},
+  { path:'/v1/auth/callback/github', title:'Callback OAuth GitHub', desc:'Callback dari GitHub.', methods:[
+    { m:'GET', auth:'none', noTry:true, headers:[], resRaw:'HTTP/1.1 302 Found\nLocation: <dashboard-url>\nSet-Cookie: session=<token>' }, OPT ]},
+]},
+{ group:'Projects', items:[
+  { path:'/v1/projects', title:'Buat Project', desc:'Membuat project baru.', methods:[
+    { m:'POST', auth:'required', headers:[H_AUTH,H_CT],
+      reqProto:`message CreateProjectRequest { ProjectInput input = 1; }\n\n`+S_PROJECT_INPUT,
+      reqSample:{input:{title:"Redesign Landing Page Priemman",tags:["ui-design","landing-page"],media:[{url:"https://res.cloudinary.com/priemman/image/upload/hero.png",type:"MEDIA_TYPE_IMAGE",order:1,public_id:"priemman/hero"}],collaborators:[{user_id:{value:"usr_abc123"},role:"contributor"}],visibility:"PROJECT_VISIBILITY_PUBLIC",status:"PROJECT_STATUS_PUBLISHED",cover_media_id:"",content:"<p>Studi kasus redesign…</p>"}},
+      resProto:`message ProjectResponse { Project project = 1; }\n\n`+S_PROJECT,
+      resSample:{project:{id:{value:"prj_7f3k9"},owner_id:{value:"usr_abc123"},title:"Redesign Landing Page Priemman",slug:"redesign-landing-page-priemman",tags:["ui-design"],visibility:"PROJECT_VISIBILITY_PUBLIC",status:"PROJECT_STATUS_PUBLISHED",metrics:{views:0,likes:0,saves:0},created_at:"2026-09-25T08:00:00Z",author:{id:{value:"usr_abc123"},first_name:"Budi",last_name:"Santoso",headline:"Product Designer"}}} }, OPT ]},
+  { path:'/v1/projects/list', title:'Daftar Project (Milik Saya)', desc:'Daftar project user login dengan filter status.', methods:[
+    { m:'GET', auth:'required', headers:[H_AUTH],
+      queryParams:[{n:'status_filter',d:'UNSPECIFIED | DRAFT | PUBLISHED | ARCHIVED'},{n:'page_size',d:'Jumlah item'},{n:'page_token',d:'Token halaman'}],
+      reqProto:`message ListProjectsRequest {\n  ObjectId owner_id = 1;\n  ProjectStatus status_filter = 2;\n  int32 page_size = 3;\n  string page_token = 4;\n}`,
+      resProto:`message ListProjectsResponse {\n  repeated Project projects = 1;\n  string next_page_token = 2;\n}`,
+      resSample:{projects:[{id:{value:"prj_7f3k9"},title:"Redesign Landing Page Priemman",status:"PROJECT_STATUS_PUBLISHED",metrics:{views:128,likes:12,saves:4}}],next_page_token:""} }, OPT ]},
+  { path:'/v1/projects/{id}', title:'Detail / Update / Hapus Project', desc:'Operasi pada satu project.', methods:[
+    { m:'GET', auth:'optional', desc:'Ambil detail project.', headers:[H_AUTH],
+      pathParams:[{n:'id',d:'ObjectId project'}],
+      resProto:`message ProjectResponse { Project project = 1; }`,
+      resSample:{project:{id:{value:"prj_7f3k9"},title:"Redesign Landing Page Priemman",status:"PROJECT_STATUS_PUBLISHED",metrics:{views:128,likes:12,saves:4}}} },
+    { m:'PUT', auth:'required', desc:'Update penuh.', headers:[H_AUTH,H_CT],
+      pathParams:[{n:'id',d:'ObjectId project'}],
+      reqProto:`message UpdateProjectRequest {\n  ObjectId id = 1;\n  ProjectInput input = 2;\n}\n\n`+S_PROJECT_INPUT,
+      reqSample:{id:{value:"prj_7f3k9"},input:{title:"Redesign (v2)",tags:["ui-design"],media:[],collaborators:[],visibility:"PROJECT_VISIBILITY_PUBLIC",status:"PROJECT_STATUS_PUBLISHED",cover_media_id:"",content:"<p>v2…</p>"}},
+      resProto:`message ProjectResponse { Project project = 1; }`,
+      resSample:{project:{id:{value:"prj_7f3k9"},title:"Redesign (v2)",updated_at:"2026-09-25T09:30:00Z"}} },
+    { m:'DELETE', auth:'required', desc:'Hapus project.', headers:[H_AUTH],
+      pathParams:[{n:'id',d:'ObjectId project'}],
+      resProto:`message DeleteResponse {\n  bool success = 1;\n}`,
+      resSample:{success:true} }, OPT ]},
+]},
+{ group:'Collections', items:[
+  { path:'/v1/collections', title:'CRUD Collection', desc:'Koleksi project milik user.', methods:[
+    { m:'GET', auth:'required', desc:'Daftar semua collection.', headers:[H_AUTH],
+      resProto:`message ListCollectionsResponse {\n  repeated Collection collections = 1;\n}\n\n`+S_COLLECTION,
+      resSample:{collections:[{id:{value:"col_a1"},title:"UI Inspiration",description:"Kumpulan referensi UI",project_ids:[{value:"prj_7f3k9"}],visibility:"COLLECTION_VISIBILITY_PUBLIC"}]} },
+    { m:'POST', auth:'required', desc:'Buat collection baru.', headers:[H_AUTH,H_CT],
+      reqProto:`message CreateCollectionRequest { CollectionInput input = 1; }\n\nmessage CollectionInput {\n  string title = 1;\n  string description = 2;\n  CollectionVisibility visibility = 3;\n  repeated ObjectId project_ids = 4;\n}`,
+      reqSample:{input:{title:"UI Inspiration",description:"Kumpulan referensi UI",visibility:"COLLECTION_VISIBILITY_PUBLIC",project_ids:[{value:"prj_7f3k9"}]}},
+      resProto:`message CollectionResponse { Collection collection = 1; }`,
+      resSample:{collection:{id:{value:"col_a1"},title:"UI Inspiration"}} },
+    { m:'PUT', auth:'required', desc:'Update collection.', headers:[H_AUTH,H_CT],
+      reqProto:`message UpdateCollectionRequest {\n  ObjectId id = 1;\n  CollectionInput input = 2;\n}`,
+      reqSample:{id:{value:"col_a1"},input:{title:"UI Inspiration 2026",description:"Edisi terbaru",visibility:"COLLECTION_VISIBILITY_PRIVATE",project_ids:[{value:"prj_2x8"}]}},
+      resProto:`message CollectionResponse { Collection collection = 1; }`,
+      resSample:{collection:{id:{value:"col_a1"},title:"UI Inspiration 2026"}} },
+    { m:'DELETE', auth:'required', desc:'Hapus collection.', headers:[H_AUTH,H_CT],
+      reqProto:`message DeleteCollectionRequest { ObjectId id = 1; }`,
+      reqSample:{id:{value:"col_a1"}},
+      resProto:`message DeleteResponse {\n  bool success = 1;\n}`,
+      resSample:{success:true} }, OPT ]},
+]},
+{ group:'Users', items:[
+  { path:'/v1/users/me', title:'Profil Saya', desc:'Ambil / perbarui profil.', methods:[
+    { m:'GET', auth:'required', headers:[H_AUTH], ilustratif:true, resSample:{id:{value:"usr_abc123"},first_name:"Budi",last_name:"Santoso",email:"budi@example.com",headline:"Product Designer",role:"user"} },
+    { m:'PUT', auth:'required', desc:'Update penuh.', headers:[H_AUTH,H_CT], ilustratif:true, reqSample:{first_name:"Budi",headline:"Product Designer"}, resSample:{id:{value:"usr_abc123"},first_name:"Budi"} },
+    { m:'PATCH', auth:'required', desc:'Update parsial.', headers:[H_AUTH,H_CT], ilustratif:true, reqSample:{headline:"Product Designer · Design System"}, resSample:{id:{value:"usr_abc123"},headline:"Product Designer · Design System"} }, OPT ]},
+  { path:'/v1/users/upgrade-logs', title:'Riwayat Upgrade', desc:'Riwayat pengajuan upgrade.', methods:[
+    { m:'GET', auth:'required', headers:[H_AUTH], ilustratif:true, resSample:{logs:[{id:{value:"upg_01"},plan:"creator",status:"pending_review"}]} }, OPT ]},
+  { path:'/v1/users/me/liked', title:'Project yang Disukai', desc:'Kelola daftar like.', methods:[
+    { m:'GET', auth:'required', desc:'Daftar project yang di-like.', headers:[H_AUTH], ilustratif:true, resSample:{projects:[{id:{value:"prj_7f3k9"},title:"Redesign Landing Page"}]} },
+    { m:'POST', auth:'required', desc:'Like sebuah project.', headers:[H_AUTH,H_CT], reqSample:{project_id:{value:"prj_7f3k9"}}, resSample:{success:true} },
+    { m:'DELETE', auth:'required', desc:'Batalkan like.', headers:[H_AUTH,H_CT], reqSample:{project_id:{value:"prj_7f3k9"}}, resSample:{success:true} }, OPT ]},
+  { path:'/v1/users/me/saved', title:'Project yang Disimpan', desc:'Kelola bookmark/save.', methods:[
+    { m:'GET', auth:'required', headers:[H_AUTH], ilustratif:true, resSample:{projects:[{id:{value:"prj_2x8"},title:"Mobile Banking App"}]} },
+    { m:'POST', auth:'required', headers:[H_AUTH,H_CT], reqSample:{project_id:{value:"prj_2x8"}}, resSample:{success:true} },
+    { m:'DELETE', auth:'required', headers:[H_AUTH,H_CT], reqSample:{project_id:{value:"prj_2x8"}}, resSample:{success:true} }, OPT ]},
+  { path:'/v1/users/me/work-experiences', title:'Pengalaman Kerja', desc:'CRUD pengalaman kerja.', methods:[
+    { m:'GET', auth:'required', headers:[H_AUTH], ilustratif:true, resSample:{work_experiences:[{id:{value:"we_1"},company:"PT Kreatif Digital",role:"UI Designer"}]} },
+    { m:'POST', auth:'required', headers:[H_AUTH,H_CT], ilustratif:true, reqSample:{input:{company:"PT Kreatif Digital",role:"UI Designer",start_date:"2022-01-01",end_date:"2023-12-31"}}, resSample:{id:{value:"we_1"},company:"PT Kreatif Digital"} },
+    { m:'DELETE', auth:'required', headers:[H_AUTH,H_CT], ilustratif:true, reqSample:{id:{value:"we_1"}}, resSample:{success:true} }, OPT ]},
+  { path:'/v1/users/public', title:'Profil Publik', desc:'Profil publik seorang user.', methods:[
+    { m:'GET', auth:'none', headers:[], queryParams:[{n:'id',d:'ObjectId user'}],
+      resProto:`message PublicInfo {\n  ObjectId id = 1;\n  string first_name = 2;\n  string last_name = 3;\n  string avatar_url = 4;\n  string headline = 5;\n}`,
+      resSample:{id:{value:"usr_abc123"},first_name:"Budi",last_name:"Santoso",headline:"Product Designer"} }, OPT ]},
+  { path:'/v1/users/public/projects', title:'Project Publik Seorang User', desc:'Daftar project PUBLISHED + PUBLIC.', methods:[
+    { m:'GET', auth:'none', headers:[], queryParams:[{n:'id',d:'ObjectId owner'},{n:'page_size',d:'Item per halaman'},{n:'page_token',d:'Pagination'}],
+      resProto:`message ListProjectsResponse {\n  repeated Project projects = 1;\n  string next_page_token = 2;\n}`,
+      resSample:{projects:[{id:{value:"prj_7f3k9"},title:"Redesign Landing Page",metrics:{views:128,likes:12,saves:4}}],next_page_token:""} }, OPT ]},
+]},
+{ group:'Media', items:[
+  { path:'/v1/media/upload', title:'Upload Media (Cloudinary)', desc:'Upload file ke Cloudinary. Maks 20 MB.', methods:[
+    { m:'POST', auth:'required', headers:[H_AUTH,H_MP],
+      formFields:[{n:'files',t:'file (bisa banyak)',d:'Gambar / video.'}],
+      resProto:S_UPLOAD_RES,
+      resSample:{items:[{url:"https://res.cloudinary.com/priemman/image/upload/f_auto,q_auto/hero.png",type:"MEDIA_TYPE_IMAGE",order:1,id:{value:"med_x1"},public_id:"priemman/hero",resource_type:"image"}]},
+      note:'Simpan `public_id` — dibutuhkan untuk operasi hapus media.' }, OPT ]},
+]},
+{ group:'Workspace', items:[
+  { path:'/v1/workspace/calendar', title:'Kalender Workspace', desc:'Proxy ke kalender workspace.', methods:[
+    { m:'GET', auth:'required', headers:[H_AUTH], ilustratif:true, queryParams:[{n:'from',d:'ISO date'},{n:'to',d:'ISO date'}], resSample:{events:[{id:"evt_1",title:"Design sync",start:"2026-09-25T09:00:00Z"}]} }, OPT ]},
+]},
+{ group:'Upgrade', items:[
+  { path:'/v1/users/me/upgrade', title:'Upgrade Akun', desc:'Ajukan upgrade akun.', methods:[
+    { m:'GET', auth:'required', desc:'Status pengajuan.', headers:[H_AUTH], ilustratif:true, resSample:{status:"pending_review",submitted_at:"2026-09-24T13:00:00Z"} },
+    { m:'POST', auth:'required', desc:'Submit pengajuan.', headers:[H_AUTH,H_CT], ilustratif:true, reqSample:{plan:"creator",payment_proof_media_id:"med_pay1"}, resProto:S_RESULT, resSample:{is_error:false,has_value:true,message:"Pengajuan diterima",value:"upg_01"} }, OPT ]},
+]},
+{ group:'Admin', items:[
+  { path:'/v1/admin/users', title:'Daftar User', desc:'[Admin] Daftar semua user.', methods:[
+    { m:'GET', auth:'admin', headers:[H_AUTH], ilustratif:true, queryParams:[{n:'page_size',d:'Item'},{n:'page_token',d:'Pagination'},{n:'q',d:'Keyword'}], resSample:{users:[{id:{value:"usr_abc123"},email:"budi@example.com",role:"user"}],next_page_token:""} }, OPT ]},
+  { path:'/v1/admin/upgrades', title:'Daftar Pengajuan Upgrade', desc:'[Admin] Lihat pengajuan.', methods:[
+    { m:'GET', auth:'admin', headers:[H_AUTH], ilustratif:true, resSample:{upgrades:[{id:{value:"upg_01"},user_id:{value:"usr_abc123"},plan:"creator",status:"pending_review"}]} }, OPT ]},
+  { path:'/v1/admin/upgrades/review', title:'Review Pengajuan', desc:'[Admin] Setujui / tolak.', methods:[
+    { m:'POST', auth:'admin', headers:[H_AUTH,H_CT], ilustratif:true, reqSample:{upgrade_id:{value:"upg_01"},approve:true}, resProto:S_RESULT, resSample:{is_error:false,message:"Disetujui",value:"upg_01"} }, OPT ]},
+  { path:'/v1/admin/upgrades/confirm-payment', title:'Konfirmasi Pembayaran', desc:'[Admin] Tandai pembayaran.', methods:[
+    { m:'POST', auth:'admin', headers:[H_AUTH,H_CT], ilustratif:true, reqSample:{upgrade_id:{value:"upg_01"}}, resProto:S_RESULT, resSample:{is_error:false,message:"Pembayaran dikonfirmasi",value:"upg_01"} }, OPT ]},
+]},
+];
+
+/* ================= models ================= */
+const MODELS = [
+{ name:'common.proto', code:`syntax = "proto3";
+package priemman.v1;
+import "google/protobuf/timestamp.proto";
+
+message ObjectId { string value = 1; }
+message Location { string country = 1; string city = 2; }
+
+message PublicInfo {
+  ObjectId id = 1;
+  string first_name = 2;
+  string last_name = 3;
+  string avatar_url = 4;
+  string headline = 5;
+}
+
+message ErrorDetail {
+  string code = 1;
+  string message = 2;
+  map<string, string> meta = 3;
+}
+
+message Result {
+  bool is_error = 1;
+  bool has_value = 2;
+  string message = 3;
+  string value = 4;
+  ErrorDetail error_detail = 5;
+}
+
+message DeleteResponse { bool success = 1; }`},
+{ name:'auth.proto', code:`syntax = "proto3";
+package priemman.v1;
+import "common.proto";
+import "google/protobuf/timestamp.proto";
+
+enum AuthProvider {
+  AUTH_PROVIDER_UNSPECIFIED = 0;
+  AUTH_PROVIDER_EMAIL = 1;
+  AUTH_PROVIDER_GOOGLE = 2;
+  AUTH_PROVIDER_GITHUB = 3;
+}
+
+message SendOtpRequest  { string email = 1; }
+message SendOtpResponse {
+  bool success = 1;
+  string message = 2;
+  int32 cooldown_seconds = 3; // 30s sesuai PRD
+}
+message VerifyOtpRequest {
+  string email = 1;
+  string otp = 2; // 6 digit
+}
+message VerifyOtpResponse {
+  string session_token = 1;
+  bool is_new_user = 2;
+}
+message OAuthCallbackRequest {
+  AuthProvider provider = 1;
+  string code = 2;
+  string state = 3;
+}
+message OAuthCallbackResponse {
+  string session_token = 1;
+  bool is_new_user = 2;
+}
+message Session {
+  string token = 1;
+  ObjectId user_id = 2;
+  google.protobuf.Timestamp expires_at = 3;
+}
+message LogoutRequest  { string session_token = 1; }
+message LogoutResponse { bool success = 1; }`},
+{ name:'media.proto', code:`syntax = "proto3";
+package priemman.v1;
+import "common.proto";
+
+enum MediaType {
+  MEDIA_TYPE_UNSPECIFIED = 0;
+  MEDIA_TYPE_IMAGE = 1;
+  MEDIA_TYPE_VIDEO = 2;
+}
+
+message Media {
+  string url = 1;
+  MediaType type = 2;
+  int32 order = 3;
+  ObjectId id = 4;
+  string public_id = 5;
+}
+
+message UploadMediaResponse {
+  string url = 1;
+  MediaType type = 2;
+  int32 order = 3;
+  ObjectId id = 4;
+  string public_id = 5;
+  string resource_type = 6;
+}
+
+message UploadMediaBatchResponse {
+  repeated UploadMediaResponse items = 1;
+}`},
+{ name:'project.proto', code:`syntax = "proto3";
+package priemman.v1;
+import "common.proto";
+import "media.proto";
+import "google/protobuf/timestamp.proto";
+
+enum ProjectVisibility {
+  PROJECT_VISIBILITY_UNSPECIFIED = 0;
+  PROJECT_VISIBILITY_PUBLIC = 1;
+  PROJECT_VISIBILITY_UNLISTED = 2;
+  PROJECT_VISIBILITY_DRAFT = 3;
+}
+enum ProjectStatus {
+  PROJECT_STATUS_UNSPECIFIED = 0;
+  PROJECT_STATUS_DRAFT = 1;
+  PROJECT_STATUS_PUBLISHED = 2;
+  PROJECT_STATUS_ARCHIVED = 3;
+}
+message Collaborator { ObjectId user_id = 1; string role = 2; }
+message ProjectMetrics { int64 views = 1; int64 likes = 2; int64 saves = 3; }
+message Project {
+  ObjectId id = 1;
+  ObjectId owner_id = 2;
+  string title = 3;
+  string slug = 4;
+  string content = 5;
+  repeated string tags = 6;
+  string cover_media_id = 7;
+  repeated Media media = 8;
+  repeated Collaborator collaborators = 9;
+  ProjectVisibility visibility = 10;
+  ProjectStatus status = 11;
+  ProjectMetrics metrics = 12;
+  google.protobuf.Timestamp created_at = 13;
+  google.protobuf.Timestamp updated_at = 14;
+  google.protobuf.Timestamp published_at = 15;
+  PublicInfo author = 16;
+}
+enum CollectionVisibility {
+  COLLECTION_VISIBILITY_UNSPECIFIED = 0;
+  COLLECTION_VISIBILITY_PUBLIC = 1;
+  COLLECTION_VISIBILITY_PRIVATE = 2;
+}
+message Collection {
+  ObjectId id = 1;
+  ObjectId owner_id = 2;
+  string title = 3;
+  string description = 4;
+  repeated ObjectId project_ids = 5;
+  CollectionVisibility visibility = 6;
+  google.protobuf.Timestamp created_at = 7;
+  google.protobuf.Timestamp updated_at = 8;
+}
+message ListProjectsRequest {
+  ObjectId owner_id = 1;
+  ProjectStatus status_filter = 2;
+  int32 page_size = 3;
+  string page_token = 4;
+}
+message ListProjectsResponse {
+  repeated Project projects = 1;
+  string next_page_token = 2;
+}
+message ProjectInput {
+  string title = 1;
+  repeated string tags = 2;
+  repeated Media media = 3;
+  repeated Collaborator collaborators = 4;
+  ProjectVisibility visibility = 5;
+  ProjectStatus status = 6;
+  string cover_media_id = 7;
+  string content = 8;
+}
+message CreateProjectRequest  { ProjectInput input = 1; }
+message UpdateProjectRequest  { ObjectId id = 1; ProjectInput input = 2; }
+message ProjectResponse       { Project project = 1; }
+message CollectionInput {
+  string title = 1;
+  string description = 2;
+  CollectionVisibility visibility = 3;
+  repeated ObjectId project_ids = 4;
+}
+message CreateCollectionRequest { CollectionInput input = 1; }
+message UpdateCollectionRequest { ObjectId id = 1; CollectionInput input = 2; }
+message CollectionResponse      { Collection collection = 1; }
+message ListCollectionsResponse { repeated Collection collections = 1; }
+message DeleteCollectionRequest { ObjectId id = 1; }`},
+];
+
+/* ================= render helpers ================= */
+const EP_MAP = {};
+let pendingBody = null;
+const ACTIVE_CLS = ['bg-primary/15','text-primary','font-medium'];
+
+function kvTable(rows, cols){
+  return `<div class="rounded-xl border border-outline-variant/60 overflow-hidden mb-4">
+    <table class="w-full text-body-sm">
+    <thead><tr class="bg-surface-high/60 text-left text-label-md font-medium uppercase tracking-[0.08em] text-on-variant">${cols.map(c=>`<th class="px-3.5 py-2.5">${c}</th>`).join('')}</tr></thead>
+    <tbody class="divide-y divide-outline-variant/40 bg-surface-container/40">${rows.map(r=>`<tr class="hover:bg-surface-high/40 transition-colors">${r.map((cell,i)=>`<td class="px-3.5 py-2.5 align-top ${i===0?'font-mono text-on-surface whitespace-nowrap':'text-on-variant'}">${cell}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`;
+}
+const headersTable = hs => kvTable(hs.map(h=>[h.n, `<span class="font-mono">${esc(h.v)}</span>${h.req?' <span class="text-error text-label-sm font-bold">required</span>':''}<div class="text-body-sm text-on-disabled mt-1">${inline(h.d||'')}</div>`]),['Header','Nilai / Keterangan']);
+const paramsTable = (ps,label) => kvTable(ps.map(p=>[p.n, `<div>${inline(p.d)}</div>`]),[label,'Keterangan']);
+
+function methodPanel(mm, item, c, i){
+  const key = c+'-'+i;
+  let h = `<div data-card="${c}" data-mi="${i}" class="${i>0?'hidden':''}">`;
+  if(mm.desc) h += `<p class="text-body-md text-on-variant mb-4">${inline(mm.desc)}</p>`;
+  if(mm.ilustratif) h += `<div class="flex items-start gap-2.5 text-body-sm rounded-xl bg-secondary/10 border border-secondary/25 text-secondary px-4 py-3 mb-4">ℹ️ <span>Skema protobuf endpoint ini tidak ada di file yang diberikan — contoh JSON bersifat <b>ilustratif</b>.</span></div>`;
+  if(mm.note) h += `<div class="text-body-sm rounded-xl bg-tertiary/10 border border-tertiary/25 text-tertiary px-4 py-3 mb-4">📝 ${inline(mm.note)}</div>`;
+  if(mm.cors) h += `<div class="text-label-sm font-medium uppercase tracking-[0.14em] text-on-disabled mb-2">Response Headers (CORS)</div>` + kvTable(mm.cors.map(r=>[r[0],`<span class="font-mono">${esc(r[1])}</span>`]),['Header','Nilai']);
+  if(mm.headers && mm.headers.length) h += `<div class="text-label-sm font-medium uppercase tracking-[0.14em] text-on-disabled mb-2">Headers</div>` + headersTable(mm.headers);
+  if(mm.pathParams)  h += `<div class="text-label-sm font-medium uppercase tracking-[0.14em] text-on-disabled mb-2">Path Parameters</div>` + paramsTable(mm.pathParams,'Param');
+  if(mm.queryParams) h += `<div class="text-label-sm font-medium uppercase tracking-[0.14em] text-on-disabled mb-2">Query Parameters</div>` + paramsTable(mm.queryParams,'Param');
+  if(mm.formFields)  h += `<div class="text-label-sm font-medium uppercase tracking-[0.14em] text-on-disabled mb-2">Form Data (multipart)</div>` + kvTable(mm.formFields.map(f=>[f.n,`<span class="font-mono text-primary">${esc(f.t)}</span><div class="text-body-sm text-on-disabled mt-1">${esc(f.d)}</div>`]),['Field','Tipe / Keterangan']);
+  if(mm.reqProto)   h += codeBlock('reqp-'+key, hlProto(mm.reqProto), 'Request · Protobuf');
+  if(mm.reqSample)  h += codeBlock('reqj-'+key, sampleHtml(mm.reqSample), 'Contoh Body (JSON)');
+  if(mm.resProto)   h += codeBlock('resp-'+key, hlProto(mm.resProto), 'Response · Protobuf');
+  if(mm.resRaw)     h += codeBlock('resr-'+key, esc(mm.resRaw), 'Response (HTTP)');
+  else if(mm.resSample) h += codeBlock('resj-'+key, sampleHtml(mm.resSample), 'Contoh Response (JSON)');
+  if(mm.errorSample) h += codeBlock('rese-'+key, sampleHtml(mm.errorSample), 'Contoh Error (HTTP 4xx)');
+  if(!mm.noTry) h += tryIt(mm, item.path, key);
+  return h+'</div>';
+}
+
+function tryIt(mm, path, key){
+  const pps = (path.match(/{(\w+)}/g)||[]).map(s=>s.slice(1,-1));
+  const inp = 'mt-1.5 w-full h-10 rounded-lg border border-outline-variant/70 bg-surface-high px-3 font-mono text-body-sm text-on-surface placeholder:text-on-disabled focus:border-primary focus:ring-2 focus:ring-primary/30 outline-none transition';
+  let f = '';
+  if(pps.length) f += pps.map(p=>`<label class="text-label-sm font-medium uppercase tracking-[0.1em] text-on-variant block">${p}<input data-pp="${p}" placeholder="mis. prj_7f3k9" class="${inp}"></label>`).join('');
+  if(mm.queryParams) f += mm.queryParams.map(q=>`<label class="text-label-sm font-medium uppercase tracking-[0.1em] text-on-variant block">${esc(q.n)}<input data-qp="${esc(q.n)}" placeholder="${esc(q.n==='page_size'?'20':'')}" class="${inp}"></label>`).join('');
+  let body = '';
+  if(mm.reqSample && !['GET','HEAD','OPTIONS'].includes(mm.m)){
+    body = `<label class="text-label-sm font-medium uppercase tracking-[0.1em] text-on-variant block">Body (JSON)<textarea data-body rows="8" spellcheck="false" class="mt-1.5 w-full rounded-lg border border-outline-variant/70 bg-surface-high px-3 py-2.5 font-mono text-body-sm text-on-surface focus:border-primary focus:ring-2 focus:ring-primary/30 outline-none transition">${esc(sampleText(mm.reqSample))}</textarea></label>`;
+  }
+  const authNote = mm.auth!=='none' ? `<p class="text-label-md text-on-disabled">Header <code class="font-mono text-on-variant">Authorization</code> otomatis dari topbar.</p>` : '';
+  return `<details class="mt-2 rounded-xl border border-outline-variant/60 bg-surface-dim/60 overflow-hidden">
+    <summary class="cursor-pointer select-none px-4 py-3 text-label-lg font-medium text-primary hover:bg-primary/10 active:bg-primary/15 transition-colors">▶ TRY IT — KIRIM REQUEST</summary>
+    <div id="try-${key}" class="px-4 pb-5 grid gap-4 border-t border-outline-variant/40 pt-4">
+      ${f?'<div class="grid sm:grid-cols-2 gap-4">'+f+'</div>':''}
+      ${body}
+      <div class="flex items-center gap-4 flex-wrap">
+        <button hx-on:click="window.sendTryIt('${key}')" class="h-10 px-6 rounded-full bg-primary text-primary-on text-label-lg font-medium hover:shadow-e1 hover:brightness-105 active:brightness-95 transition">Send ${mm.m} ${esc(path)}</button>
+        <span id="stat-${key}" class="text-body-sm font-mono text-on-disabled"></span>
+        ${authNote}
+      </div>
+      <div id="resp-${key}" class="min-h-[40px]"></div>
+    </div></details>`;
+}
+
+function renderCard(item, gi, ii){
+  const c = gi+'-'+ii, anchor = 'ep-'+c;
+  const chips = item.methods.map((mm,i)=>{
+    const active = i===0 ? 'ring-2 ring-on-surface/80 ring-offset-2 ring-offset-surface-container' : 'opacity-75 hover:opacity-100';
+    return `<button data-chip="${c}-${i}" hx-on:click="window.selectMethod('${c}',${i})" title="${mm.m} ${esc(item.path)}" class="rounded-full transition ${active}">${badge(mm.m)}</button>`;
+  }).join('');
+  const panels = item.methods.map((mm,i)=>methodPanel(mm,item,c,i)).join('');
+  const authMax = item.methods.reduce((a,m)=>(m.auth==='admin'?'admin':(m.auth==='required'&&a!=='admin'?'required':(m.auth==='optional'&&a==='none'?'optional':a))),'none');
+  return `<section id="${anchor}" class="scroll-mt-24 mb-8">
+    <div class="rounded-xl border border-outline-variant/60 bg-surface-container shadow-e1 overflow-hidden">
+      <div class="px-5 py-4 border-b border-outline-variant/50 bg-surface-high/40 flex flex-wrap items-center gap-3">
+        <code class="font-mono text-title-sm font-medium text-on-surface break-all">${esc(item.path)}</code>
+        <div class="flex gap-1.5">${chips}</div>
+        <div class="ml-auto flex items-center gap-2">
+          ${chipAuth(authMax)}
+          <button hx-on:click="window.copyText('${esc(item.path)}')" class="h-8 px-3 rounded-full border border-outline-variant/70 text-label-md font-medium text-on-variant hover:bg-surface-high hover:text-on-surface active:bg-surface-highest transition">COPY PATH</button>
         </div>
-        <div class="nav-group">
-            <div class="nav-title">Overview</div>
-            <a href="#all" class="nav-link" data-filter="all">All Endpoints</a>
-        </div>
-        <div class="nav-group">
-            <div class="nav-title">Resources</div>
-            <a href="#auth" class="nav-link" data-filter="auth">Auth</a>
-            <a href="#users" class="nav-link" data-filter="users">Users</a>
-            <a href="#projects" class="nav-link" data-filter="projects">Projects</a>
-            <a href="#collections" class="nav-link" data-filter="collections">Collections</a>
-            <a href="#media" class="nav-link" data-filter="media">Media</a>
-            <a href="#admin" class="nav-link" data-filter="admin">Admin</a>
-        </div>
-    </aside>
+      </div>
+      <div class="px-5 py-5">
+        <h3 class="text-title-md font-medium text-on-surface mb-3">${esc(item.title)}</h3>
+        ${panels}
+      </div>
+    </div></section>`;
+}
 
-    <main class="main" id="app"></main>
+window.selectMethod = function(c, i){
+  document.querySelectorAll(`[data-card="${c}"]`).forEach(p=>p.classList.toggle('hidden', p.dataset.mi != i));
+  document.querySelectorAll(`[data-chip^="${c}-"]`).forEach(b=>{
+    const on = b.dataset.chip === c+'-'+i;
+    ['ring-2','ring-on-surface/80','ring-offset-2','ring-offset-surface-container','opacity-75'].forEach(cl=>b.classList.remove(cl));
+    if(on) b.classList.add('ring-2','ring-on-surface/80','ring-offset-2','ring-offset-surface-container');
+    else b.classList.add('opacity-75');
+  });
+};
 
-    <script>
-        // DATA LENGKAP SEMUA ENDPOINT
-        const apiData = [
-            // ================= AUTH =================
-            { group: "auth", path: "/v1/auth/send-otp", methods: [{ verb: "POST", summary: "Kirim OTP", desc: "Mengirim kode OTP 6 digit ke email. Cooldown 30 detik.", proto: `message SendOtpRequest { string email = 1; }\nmessage SendOtpResponse { bool success = 1; string message = 2; int32 cooldown_seconds = 3; }`, curl: `curl -X POST http://localhost:8080/v1/auth/send-otp \\\n  -H "Content-Type: application/x-protobuf" \\\n  --data-binary "@send_otp.pb"` }] },
-            { group: "auth", path: "/v1/auth/verify-otp", methods: [{ verb: "POST", summary: "Verifikasi OTP", desc: "Verifikasi kode OTP. Mengembalikan session token.", proto: `message VerifyOtpRequest { string email = 1; string otp = 2; }\nmessage VerifyOtpResponse { string session_token = 1; bool is_new_user = 2; }`, curl: `curl -X POST http://localhost:8080/v1/auth/verify-otp \\\n  -H "Content-Type: application/x-protobuf"` }] },
-            { group: "auth", path: "/v1/auth/logout", methods: [{ verb: "POST", summary: "Logout", desc: "Menghapus session token aktif.", proto: `message LogoutRequest { string session_token = 1; }\nmessage LogoutResponse { bool success = 1; }`, curl: `curl -X POST http://localhost:8080/v1/auth/logout \\\n  -H "Authorization: Bearer <token>"` }] },
+function render(){
+  let navHtml='', secHtml='', gi=0;
+  API.forEach(g=>{
+    navHtml += `<div data-nav-group class="mb-2"><div class="px-3 pt-5 pb-2 text-label-sm font-medium uppercase tracking-[0.16em] text-on-disabled">${g.group}</div><div class="space-y-0.5">`;
+    g.items.forEach((item,ii)=>{
+      const c = gi+'-'+ii, anchor='ep-'+c;
+      const search = (item.path+' '+item.title+' '+g.group+' '+item.methods.map(m=>m.m).join(' ')).toLowerCase();
+      navHtml += `<a href="#${anchor}" data-nav-item data-anchor="${anchor}" data-search="${esc(search)}"
+        class="flex items-center gap-2 rounded-full px-2.5 py-2 min-w-0 text-body-sm font-mono text-on-variant hover:bg-surface-high hover:text-on-surface active:bg-surface-highest transition-colors">
+        <span class="flex gap-1 shrink-0">${item.methods.map(m=>mini(m)).join('')}</span>
+        <span class="truncate">${esc(item.path)}</span></a>`;
+      item.methods.forEach((mm,i)=>{ EP_MAP[c+'-'+i] = {verb:mm.m, path:item.path}; });
+    });
+    navHtml += '</div></div>';
+    secHtml += `<div class="flex items-center gap-4 mt-14 mb-6"><h2 class="text-headline-sm font-medium text-on-surface">${g.group}</h2><div class="h-px flex-1 bg-outline-variant/50"></div></div>`;
+    g.items.forEach((item,ii)=>{ secHtml += renderCard(item, gi, ii); });
+    gi++;
+  });
+  navHtml += `<div data-nav-group class="mb-2"><div class="px-3 pt-5 pb-2 text-label-sm font-medium uppercase tracking-[0.16em] text-on-disabled">Models</div><div class="space-y-0.5">
+    <a href="#models" data-nav-item data-anchor="models" data-search="models proto schema protobuf"
+      class="flex items-center gap-2 rounded-full px-2.5 py-2 min-w-0 text-body-sm font-mono text-on-variant hover:bg-surface-high hover:text-on-surface transition-colors">📦 <span class="truncate">common · auth · media · project</span></a></div></div>`;
+  const mTabs = MODELS.map((m,i)=>`<button data-mchip="${i}" hx-on:click="window.selectModel(${i})" class="h-8 px-4 rounded-full text-label-md font-medium transition ${i===0?'bg-primary text-primary-on':'text-on-variant hover:text-on-surface hover:bg-surface-high'}">${m.name}</button>`).join('');
+  const mPanes = MODELS.map((m,i)=>`<pre data-model="${i}" class="code rounded-xl bg-surface-dim border border-outline-variant/60 p-4 text-body-sm leading-relaxed overflow-x-auto text-on-variant ${i>0?'hidden':''}">${hlProto(m.code)}</pre>`).join('');
+  secHtml += `<div class="flex items-center gap-4 mt-14 mb-6" id="models"><h2 class="text-headline-sm font-medium text-on-surface">Models · Protobuf</h2><div class="h-px flex-1 bg-outline-variant/50"></div></div>
+    <div class="rounded-xl border border-outline-variant/60 bg-surface-container shadow-e1 p-5">
+      <p class="text-body-md text-on-variant mb-4">Isi lengkap definisi protobuf package <code class="font-mono text-on-surface">priemman.v1</code>.</p>
+      <div class="inline-flex flex-wrap gap-1 mb-4 rounded-full border border-outline-variant/60 bg-surface-high p-1">${mTabs}</div>${mPanes}</div>`;
+  document.getElementById('nav').innerHTML = navHtml;
+  document.getElementById('sections').innerHTML = secHtml;
+}
+window.selectModel = function(i){
+  document.querySelectorAll('[data-model]').forEach(p=>p.classList.toggle('hidden', p.dataset.model != i));
+  document.querySelectorAll('[data-mchip]').forEach(b=>{
+    const on = b.dataset.mchip == i;
+    b.className = 'h-8 px-4 rounded-full text-label-md font-medium transition ' + (on ? 'bg-primary text-primary-on' : 'text-on-variant hover:text-on-surface hover:bg-surface-high');
+  });
+};
 
-            // ================= USERS =================
-            { group: "users", path: "/v1/users/me", methods: [
-                { verb: "GET", summary: "Get Current Profile", desc: "Mengambil profil lengkap pengguna yang sedang login.", proto: `// Response: User\nmessage User {\n  ObjectId id = 1;\n  string email = 2;\n  string first_name = 3;\n  UserRole role = 16;\n  repeated WorkExperience work_experience = 11;\n  // ...\n}`, curl: `curl -X GET http://localhost:8080/v1/users/me \\\n  -H "Authorization: Bearer <token>" \\\n  -H "Accept: application/x-protobuf"` },
-                { verb: "PUT", summary: "Update Basic Info", desc: "Memperbarui informasi dasar profil (nama, headline, lokasi, dll).", proto: `message UpdateBasicInfoRequest {\n  optional string first_name = 1;\n  optional string last_name = 2;\n  optional string headline = 3;\n  Location location = 5;\n  Media avatar_replace_media = 8;\n}`, curl: `curl -X PUT http://localhost:8080/v1/users/me \\\n  -H "Authorization: Bearer <token>" \\\n  -H "Content-Type: application/x-protobuf"` }
-            ]},
-            { group: "users", path: "/v1/users/me/work-experiences", methods: [
-                { verb: "GET", summary: "List Work Experiences", desc: "Daftar pengalaman kerja pengguna.", proto: `message ListWorkExperienceResponse {\n  repeated WorkExperience entries = 1;\n}`, curl: `curl -X GET http://localhost:8080/v1/users/me/work-experiences \\\n  -H "Authorization: Bearer <token>"` },
-                { verb: "POST", summary: "Upsert Work Experience", desc: "Tambah atau update pengalaman kerja. (id kosong = buat baru).", proto: `message UpsertWorkExperienceRequest {\n  WorkExperience entry = 1;\n}\nmessage WorkExperience {\n  ObjectId id = 1;\n  string title = 2;\n  string company = 3;\n  bool is_current = 4;\n  string description = 7;\n}`, curl: `curl -X POST http://localhost:8080/v1/users/me/work-experiences \\\n  -H "Authorization: Bearer <token>" \\\n  -H "Content-Type: application/x-protobuf"` },
-                { verb: "DELETE", summary: "Delete Work Experience", desc: "Menghapus pengalaman kerja berdasarkan ID.", proto: `message DeleteWorkExperienceRequest {\n  ObjectId id = 1;\n}\nmessage DeleteResponse { bool success = 1; }`, curl: `curl -X DELETE http://localhost:8080/v1/users/me/work-experiences \\\n  -H "Authorization: Bearer <token>"` }
-            ]},
-            { group: "users", path: "/v1/users/me/connected-accounts", methods: [
-                { verb: "GET", summary: "List Connected Accounts", desc: "Daftar akun sosial media yang terhubung (Instagram, LinkedIn, GitHub).", proto: `message ListConnectedAccountsResponse {\n  repeated ConnectedAccount accounts = 1;\n}`, curl: `curl -X GET http://localhost:8080/v1/users/me/connected-accounts \\\n  -H "Authorization: Bearer <token>"` },
-                { verb: "DELETE", summary: "Delete Connected Account", desc: "Memutus koneksi akun sosial media.", proto: `message DeleteConnectedAccountRequest {\n  ConnectedPlatform platform = 1;\n}`, curl: `curl -X DELETE http://localhost:8080/v1/users/me/connected-accounts \\\n  -H "Authorization: Bearer <token>"` }
-            ]},
-            { group: "users", path: "/v1/users/me/upgrade", methods: [
-                { verb: "GET", summary: "Get Upgrade Status", desc: "Cek status upgrade ke Creator (none/pending/approved/rejected/paid).", proto: `message UpgradeStatus {\n  string status = 1;\n  ObjectId request_id = 2;\n  string invoice_id = 3;\n  int64 invoice_amount = 4;\n}`, curl: `curl -X GET http://localhost:8080/v1/users/me/upgrade \\\n  -H "Authorization: Bearer <token>"` },
-                { verb: "POST", summary: "Request Upgrade", desc: "Mengajukan permintaan upgrade ke role Creator.", proto: `// Request body kosong\n// Response: CreateUpgradeRequestResponse`, curl: `curl -X POST http://localhost:8080/v1/users/me/upgrade \\\n  -H "Authorization: Bearer <token>"` }
-            ]},
-            { group: "users", path: "/v1/users/public", methods: [{ verb: "GET", summary: "Get Public Profile", desc: "Mengambil profil publik pengguna berdasarkan query param user_id.", proto: `// Query Param: ?user_id=...\n// Response: UserProfile\nmessage UserProfile {\n  ObjectId id = 1;\n  string first_name = 3;\n  string headline = 5;\n  repeated WorkExperience work_experience = 16;\n}`, curl: `curl -X GET "http://localhost:8080/v1/users/public?user_id=123" \\\n  -H "Accept: application/x-protobuf"` }] },
-            { group: "users", path: "/v1/users/upgrade-logs", methods: [{ verb: "GET", summary: "Get Upgrade Logs", desc: "Riwayat permintaan upgrade (query param: limit, offset).", proto: `message UpgradeLogs { repeated UpgradeLog logs = 1; }`, curl: `curl -X GET "http://localhost:8080/v1/users/upgrade-logs?limit=20&offset=0" \\\n  -H "Authorization: Bearer <token>"` }] },
+function renderOverview(){
+  const cards = [
+    ['🔑','Autentikasi','Email OTP atau OAuth Google/GitHub. Header <code class="font-mono text-body-sm text-on-surface">Authorization: Bearer &lt;token&gt;</code>.'],
+    ['⏱','Rate Limiting','Global <b class="text-on-surface">60 request/menit</b> per client (<code class="font-mono text-body-sm">rate-limiter-middleware</code>).'],
+    ['🌐','CORS','Origin: <code class="font-mono text-body-sm">priemman.my.id</code> & <code class="font-mono text-body-sm">localhost:3000</code>, credentials aktif.'],
+  ];
+  document.getElementById('overview-cards').innerHTML = cards.map(c=>`<div class="rounded-xl border border-outline-variant/60 bg-surface-container p-5 shadow-e1"><div class="text-title-lg mb-2">${c[0]}</div><div class="text-title-sm font-medium text-on-surface mb-1">${c[1]}</div><div class="text-body-sm text-on-variant leading-relaxed">${c[2]}</div></div>`).join('');
+  document.getElementById('overview-notes').innerHTML = `
+  <div class="rounded-xl border border-outline-variant/60 bg-surface-container p-5 shadow-e1">
+    <div class="text-label-sm font-medium uppercase tracking-[0.14em] text-on-disabled mb-3">Format Error Umum · Result / ErrorDetail</div>
+    ${codeBlock('ov-err', hlJson(JSON.stringify(ERR_429,null,2)))}
+    <p class="text-body-sm text-on-disabled -mt-1">Semua error business-level memakai struktur <code class="font-mono">Result</code> + <code class="font-mono">ErrorDetail</code>.</p>
+  </div>
+  <div class="rounded-xl border border-outline-variant/60 bg-surface-container p-5 shadow-e1">
+    <div class="text-label-sm font-medium uppercase tracking-[0.14em] text-on-disabled mb-3">Model Session</div>
+    ${codeBlock('ov-sess', hlProto(S_SESSION))}
+  </div>`;
+}
 
-            // ================= PROJECTS =================
-            { group: "projects", path: "/v1/projects", methods: [{ verb: "POST", summary: "Create Project", desc: "Membuat project showcase baru. (Catatan: ProjectInput pakai 'content' & 'tags').", proto: `message CreateProjectRequest { ProjectInput input = 1; }\nmessage ProjectInput {\n  string title = 1;\n  string content = 8;\n  repeated string tags = 2;\n  ProjectVisibility visibility = 5;\n  ProjectStatus status = 6;\n  repeated Media media = 3;\n}`, curl: `curl -X POST http://localhost:8080/v1/projects \\\n  -H "Authorization: Bearer <token>" \\\n  -H "Content-Type: application/x-protobuf"` }] },
-            { group: "projects", path: "/v1/projects/list", methods: [{ verb: "GET", summary: "List My Projects", desc: "Daftar project milik pengguna yang login.", proto: `message ListProjectsResponse {\n  repeated Project projects = 1;\n  string next_page_token = 2;\n}`, curl: `curl -X GET http://localhost:8080/v1/projects/list \\\n  -H "Authorization: Bearer <token>"` }] },
-            { group: "projects", path: "/v1/projects/{id}", methods: [
-                { verb: "GET", summary: "Get Project Detail", desc: "Detail lengkap satu project.", proto: `message ProjectResponse { Project project = 1; }`, curl: `curl -X GET http://localhost:8080/v1/projects/{id} \\\n  -H "Authorization: Bearer <token>"` },
-                { verb: "PUT", summary: "Update Project", desc: "Update project. Wajib kirim field yang ingin diupdate.", proto: `message UpdateProjectRequest {\n  ObjectId id = 1;\n  ProjectInput input = 2;\n}`, curl: `curl -X PUT http://localhost:8080/v1/projects/{id} \\\n  -H "Authorization: Bearer <token>"` },
-                { verb: "DELETE", summary: "Delete Project", desc: "Menghapus project secara permanen.", proto: `message DeleteResponse { bool success = 1; }`, curl: `curl -X DELETE http://localhost:8080/v1/projects/{id} \\\n  -H "Authorization: Bearer <token>"` }
-            ]},
+/* ================= try-it (HTMX) ================= */
+window.sendTryIt = function(key){
+  const info = EP_MAP[key]; if(!info) return;
+  const root = document.getElementById('try-'+key);
+  const resp = document.getElementById('resp-'+key);
+  const chip = document.getElementById('stat-'+key);
+  let path = info.path;
+  root.querySelectorAll('[data-pp]').forEach(inp=>{ path = path.replace('{'+inp.dataset.pp+'}', encodeURIComponent(inp.value.trim()||'1')); });
+  const qp = [];
+  root.querySelectorAll('[data-qp]').forEach(inp=>{ if(inp.value.trim()) qp.push(encodeURIComponent(inp.dataset.qp)+'='+encodeURIComponent(inp.value.trim())); });
+  const base = (document.getElementById('base-url').value||'').replace(/\/+$/,'');
+  const url = base + path + (qp.length ? '?'+qp.join('&') : '');
+  const bodyEl = root.querySelector('[data-body]');
+  pendingBody = null;
+  if(bodyEl && !['GET','HEAD','OPTIONS'].includes(info.verb)) pendingBody = bodyEl.value;
+  chip.textContent = 'mengirim…'; chip.className = 'text-body-sm font-mono text-on-disabled';
+  resp.innerHTML = '<div class="text-body-sm font-mono text-on-disabled">⏳ Menunggu respons…</div>';
+  htmx.ajax(info.verb, url, {target: resp, swap:'innerHTML'});
+};
+document.body.addEventListener('htmx:configRequest', e=>{
+  const token = (document.getElementById('global-token').value||'').trim();
+  if(token) e.detail.headers['Authorization'] = 'Bearer ' + token;
+  if(pendingBody != null){ e.detail.headers['Content-Type'] = 'application/json'; e.detail.body = pendingBody; pendingBody = null; }
+});
+document.body.addEventListener('htmx:afterRequest', e=>{
+  const t = e.detail.target; if(!t || !t.id || !t.id.startsWith('resp-')) return;
+  const key = t.id.slice(5), chip = document.getElementById('stat-'+key);
+  const xhr = e.detail.xhr, st = xhr ? xhr.status : 0;
+  if(chip){ chip.textContent = 'Status: '+st; chip.className = 'text-body-sm font-mono font-medium ' + ((st>=200&&st<400) ? 'text-success' : 'text-error'); }
+  let text = xhr ? xhr.responseText : '';
+  let pretty = text;
+  try{ pretty = JSON.stringify(JSON.parse(text),null,2); }catch(_){}
+  t.innerHTML = '<pre class="code rounded-xl bg-surface-dim border border-outline-variant/60 p-4 text-body-sm whitespace-pre-wrap text-on-variant">'+esc(pretty||'(body kosong)')+'</pre>';
+});
+document.body.addEventListener('htmx:sendError', e=>{
+  const t = e.detail.target; if(!t || !t.id || !t.id.startsWith('resp-')) return;
+  const chip = document.getElementById('stat-'+t.id.slice(5));
+  if(chip){ chip.textContent = 'Gagal (network/CORS)'; chip.className = 'text-body-sm font-mono font-medium text-error'; }
+  t.innerHTML = '<div class="text-body-sm font-mono text-error">✖ Request gagal — server tidak terjangkau atau diblokir CORS.</div>';
+});
 
-            // ================= COLLECTIONS =================
-            { group: "collections", path: "/v1/collections", methods: [
-                { verb: "POST", summary: "Create Collection", desc: "Membuat koleksi untuk mengelompokkan project.", proto: `message CreateCollectionRequest { CollectionInput input = 1; }\nmessage CollectionInput {\n  string title = 1;\n  string description = 2;\n  repeated ObjectId project_ids = 4;\n}`, curl: `curl -X POST http://localhost:8080/v1/collections \\\n  -H "Authorization: Bearer <token>"` },
-                { verb: "DELETE", summary: "Delete Collection", desc: "Menghapus koleksi.", proto: `message DeleteCollectionRequest { ObjectId id = 1; }`, curl: `curl -X DELETE http://localhost:8080/v1/collections \\\n  -H "Authorization: Bearer <token>"` }
-            ]},
+/* ================= nav: filter, active, sidebar ================= */
+window.filterNav = function(q){
+  q = q.toLowerCase();
+  document.querySelectorAll('[data-nav-item]').forEach(a=>a.classList.toggle('hidden', !!q && !a.dataset.search.includes(q)));
+  document.querySelectorAll('[data-nav-group]').forEach(g=>{
+    const vis = [...g.querySelectorAll('[data-nav-item]')].some(a=>!a.classList.contains('hidden'));
+    g.classList.toggle('hidden', !vis);
+  });
+};
+window.toggleSidebar = function(){ document.getElementById('sidebar').classList.toggle('hidden'); };
+document.addEventListener('keydown', e=>{
+  if(e.key === '/' && !['INPUT','TEXTAREA'].includes(document.activeElement.tagName)){ e.preventDefault(); document.getElementById('nav-search').focus(); }
+});
+function watchActive(){
+  const links = {};
+  document.querySelectorAll('[data-nav-item][data-anchor]').forEach(a=>links[a.dataset.anchor]=a);
+  const secs = [...document.querySelectorAll('section[id]')].filter(s=>links[s.id]);
+  secs.forEach(s=>{
+    new IntersectionObserver(es=>es.forEach(en=>{
+      if(en.isIntersecting){
+        document.querySelectorAll('[data-nav-item]').forEach(x=>ACTIVE_CLS.forEach(cl=>x.classList.remove(cl)));
+        const l = links[en.target.id]; if(l) ACTIVE_CLS.forEach(cl=>l.classList.add(cl));
+      }
+    }), {rootMargin:'-15% 0px -75% 0px'}).observe(s);
+  });
+}
 
-            // ================= MEDIA =================
-            { group: "media", path: "/v1/media/upload", methods: [{ verb: "POST", summary: "Upload Media", desc: "Upload file ke Cloudinary. Menggunakan multipart/form-data.", proto: `message UploadMediaBatchResponse {\n  repeated UploadMediaResponse items = 1;\n}\nmessage UploadMediaResponse {\n  string url = 1;\n  string public_id = 5; // Wajib untuk delete\n  MediaType type = 2;\n}`, curl: `curl -X POST http://localhost:8080/v1/media/upload \\\n  -H "Authorization: Bearer <token>" \\\n  -F "file=@photo.jpg"` }] },
+/* ================= sidebar resizable ================= */
+(function(){
+  const sb = document.getElementById('sidebar'), handle = document.getElementById('sb-handle');
+  const MIN=240, MAX=560, DEF=288;
+  const set = w => { document.documentElement.style.setProperty('--sbw', w+'px'); localStorage.setItem('pm_sbw', w); };
+  let dragging = false;
+  handle.addEventListener('pointerdown', e=>{ dragging=true; handle.setPointerCapture(e.pointerId); document.body.classList.add('select-none','cursor-col-resize'); });
+  handle.addEventListener('pointermove', e=>{ if(!dragging) return; set(Math.min(MAX, Math.max(MIN, e.clientX))); });
+  ['pointerup','pointercancel'].forEach(ev=>handle.addEventListener(ev, ()=>{ dragging=false; document.body.classList.remove('select-none','cursor-col-resize'); }));
+  handle.addEventListener('dblclick', ()=>set(DEF));
+})();
 
-            // ================= ADMIN =================
-            { group: "admin", path: "/v1/admin/users", methods: [{ verb: "GET", summary: "List Users", desc: "Hanya ADMIN. List semua user dengan pagination & filter role.", proto: `message AdminListUsersResponse {\n  repeated AdminUserEntry users = 1;\n  int32 total = 2;\n  int32 limit = 3;\n  int32 offset = 4;\n}`, curl: `curl -X GET "http://localhost:8080/v1/admin/users?limit=20&offset=0&role=creator" \\\n  -H "Authorization: Bearer <admin_token>"` }] },
-            { group: "admin", path: "/v1/admin/upgrades", methods: [{ verb: "GET", summary: "List Upgrade Requests", desc: "Hanya ADMIN. List permintaan upgrade (query: status=pending/approved/etc).", proto: `message AdminListUpgradeRequestsResponse {\n  repeated UpgradeRequestEntry requests = 1;\n}`, curl: `curl -X GET "http://localhost:8080/v1/admin/upgrades?status=pending" \\\n  -H "Authorization: Bearer <admin_token>"` }] },
-            { group: "admin", path: "/v1/admin/upgrades/review", methods: [{ verb: "POST", summary: "Review Upgrade", desc: "Hanya ADMIN. Approve atau Reject permintaan upgrade.", proto: `message AdminReviewUpgradeRequest {\n  ObjectId id = 1;\n  bool approve = 2;\n  string rejection_reason = 3;\n}`, curl: `curl -X POST http://localhost:8080/v1/admin/upgrades/review \\\n  -H "Authorization: Bearer <admin_token>"` }] },
-            { group: "admin", path: "/v1/admin/upgrades/confirm-payment", methods: [{ verb: "POST", summary: "Confirm Payment", desc: "Hanya ADMIN. Konfirmasi pembayaran upgrade untuk menaikkan role user.", proto: `message AdminConfirmPaymentRequest { ObjectId id = 1; }`, curl: `curl -X POST http://localhost:8080/v1/admin/upgrades/confirm-payment \\\n  -H "Authorization: Bearer <admin_token>"` }] }
-        ];
-
-        const app = document.getElementById('app');
-
-        function render(filter = 'all') {
-            const filteredData = filter === 'all' ? apiData : apiData.filter(item => item.group === filter);
-            let html = `
-                <div class="header">
-                    <h1>Priemman API Docs</h1>
-                    <p>Dokumentasi lengkap REST API backend Priemman. Format: Protobuf Binary.</p>
-                    <div class="badge-base">Base URL: http://localhost:8080</div>
-                </div>
-            `;
-            if (filteredData.length === 0) {
-                html += `<div class="empty-state">Tidak ada endpoint untuk kategori ini.</div>`;
-            } else {
-                filteredData.forEach(endpoint => {
-                    const badges = endpoint.methods.map(m => `<span class="method-badge bg-${m.verb.toLowerCase()}">${m.verb}</span>`).join('');
-                    html += `
-                        <div class="endpoint-card">
-                            <details open>
-                                <summary>
-                                    <span class="path-text">${endpoint.path}</span>
-                                    <div class="methods-preview">${badges}</div>
-                                </summary>
-                                <div class="method-content">
-                    `;
-                    endpoint.methods.forEach((method, idx) => {
-                        const tabId = `tab-${endpoint.path.replace(/[^a-zA-Z0-9]/g,'')}-${idx}`;
-                        html += `
-                            <div class="method-item">
-                                <div class="method-header">
-                                    <span class="method-verb method-badge bg-${method.verb.toLowerCase()}">${method.verb}</span>
-                                    <h3>${method.summary}</h3>
-                                </div>
-                                <p style="color: var(--text-muted); margin-bottom: 1rem;">${method.desc}</p>
-                                <div class="tabs">
-                                    <button class="tab-btn active" onclick="switchTab(event, '${tabId}', 'overview')">Overview</button>
-                                    <button class="tab-btn" onclick="switchTab(event, '${tabId}', 'proto')">Proto</button>
-                                    <button class="tab-btn" onclick="switchTab(event, '${tabId}', 'curl')">cURL</button>
-                                </div>
-                                <div id="${tabId}-overview" class="tab-content active">
-                                    <p>Gunakan header <code>Content-Type: application/x-protobuf</code> dan <code>Accept: application/x-protobuf</code>.</p>
-                                    <p class="note">Auth: Tambahkan header <code>Authorization: Bearer &lt;session_token&gt;</code> untuk endpoint berlabel AUTH.</p>
-                                </div>
-                                <div id="${tabId}-proto" class="tab-content">
-                                    <pre><code>${method.proto}</code></pre>
-                                </div>
-                                <div id="${tabId}-curl" class="tab-content">
-                                    <pre><code>${method.curl}</code></pre>
-                                </div>
-                            </div>
-                        `;
-                    });
-                    html += `</div></details></div>`;
-                });
-            }
-            app.innerHTML = html;
-            updateSidebarActive(filter);
-        }
-
-        function switchTab(event, tabId, type) {
-            event.preventDefault();
-            document.querySelectorAll(`[id^="${tabId}-"]`).forEach(el => el.classList.remove('active'));
-            document.getElementById(`${tabId}-${type}`).classList.add('active');
-            const parent = event.target.parentElement;
-            parent.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
-        }
-
-        function updateSidebarActive(filter) {
-            document.querySelectorAll('.nav-link').forEach(link => {
-                link.classList.toggle('active', link.dataset.filter === filter);
-            });
-        }
-
-        function handleRoute() {
-            const hash = window.location.hash.replace('#', '') || 'all';
-            render(hash);
-        }
-
-        window.addEventListener('hashchange', handleRoute);
-        window.addEventListener('DOMContentLoaded', handleRoute);
-    </script>
+/* ================= init ================= */
+renderOverview();
+render();
+const bu = document.getElementById('base-url'), gt = document.getElementById('global-token');
+bu.value = localStorage.getItem('pm_base') || 'http://localhost:8080';
+gt.value = localStorage.getItem('pm_token') || '';
+bu.addEventListener('input', ()=>localStorage.setItem('pm_base', bu.value));
+gt.addEventListener('input', ()=>localStorage.setItem('pm_token', gt.value));
+watchActive();
+</script>
 </body>
 </html>

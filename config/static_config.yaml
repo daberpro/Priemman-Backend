@@ -158,6 +158,7 @@ components_manager:
             task_processor: main-task-processor
             domain: $base-domain
             welcome-template-path: $welcome-template-path
+            jwt-secret: $jwt-secret
 
         handler-logout:
             path: /v1/auth/logout
@@ -184,6 +185,7 @@ components_manager:
             dashboard-admin-url: $dashboard-admin-url
             domain: $base-domain
             welcome-template-path: $welcome-template-path
+            jwt-secret: $jwt-secret
 
         handler-initiate-github-oauth:
             path: /v1/auth/github
@@ -199,6 +201,7 @@ components_manager:
             dashboard-admin-url: $dashboard-admin-url
             domain: $base-domain
             welcome-template-path: $welcome-template-path
+            jwt-secret: $jwt-secret
 
         handler-upload-media:
             path: /v1/media/upload

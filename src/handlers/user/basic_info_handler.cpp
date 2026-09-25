@@ -42,9 +42,8 @@ std::string BuildMe(
 
     const auto about = users.FindAbout(user_id);
     const auto wx = accounts.ListWorkExperiences(user_id);
-    const auto ca = accounts.ListConnectedAccounts(user_id);
 
-    return mapper::ToUserProto(*user, about, wx, ca).SerializeAsString();
+    return mapper::ToUserProto(*user, about, wx).SerializeAsString();
 }
 
 }  // namespace

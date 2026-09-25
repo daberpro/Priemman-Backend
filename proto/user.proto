@@ -45,20 +45,6 @@ message WorkExperience {
   string description = 7;
 }
 
-message ConnectedAccount {
-  ConnectedPlatform platform = 1;
-  string handle_or_url = 2;
-  bool verified = 3;
-  google.protobuf.Timestamp connected_at = 4;
-}
-
-message UpsertConnectedAccountRequest {
-  ConnectedPlatform platform = 1;
-  string handle_or_url = 2;
-  bool verified = 3;
-  google.protobuf.Timestamp connected_at = 4;
-}
-
 message AboutMe {
   string title = 1;
   string description = 2;
@@ -76,7 +62,6 @@ message User {
   string avatar_url = 9;
   bool is_onboarded = 10;
   repeated WorkExperience work_experience = 11;
-  repeated ConnectedAccount connected_accounts = 12;
   AboutMe about_me = 13;
   google.protobuf.Timestamp created_at = 14;
   google.protobuf.Timestamp updated_at = 15;
@@ -125,12 +110,6 @@ message ListWorkExperienceResponse {
 }
 message DeleteWorkExperienceRequest {
     ObjectId id = 1;
-}
-message ListConnectedAccountsResponse {
-    repeated ConnectedAccount accounts = 1;
-}
-message DeleteConnectedAccountRequest {
-    ConnectedPlatform platform = 1;
 }
 
 // ---- Creator upgrade flow ----
