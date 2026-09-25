@@ -332,7 +332,11 @@ std::string OAuthGoogleCallbackHandler::HandleRequestThrow(
 
     // kunci ini harus sama persis dengan variabel SECRET di server Remark42
     auto token = jwt::create()
-    .set_audience("priemman")
+    .set_audience(
+        std::vector<picojson::value>{
+            picojson::value("priemman")
+        }
+    )
     .set_issued_at(std::chrono::system_clock::now())
     .set_expires_at(
         std::chrono::system_clock::now() + std::chrono::hours(24)
@@ -524,7 +528,11 @@ std::string OAuthGithubCallbackHandler::HandleRequestThrow(
     auto session = _sessions.Create(result.user.id);
 
     auto token = jwt::create()
-    .set_audience("priemman")
+    .set_audience(
+        std::vector<picojson::value>{
+            picojson::value("priemman")
+        }
+    )
     .set_issued_at(std::chrono::system_clock::now())
     .set_expires_at(
         std::chrono::system_clock::now() + std::chrono::hours(24)
