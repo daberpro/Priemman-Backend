@@ -193,8 +193,10 @@ std::string VerifyOtpHandler::HandleRequestThrow(
         );
     }
     auto session = _sessions.Create(result.user.id);
+    auto xsrf = userver::utils::generators::GenerateUuid();
 
     auto token = jwt::create()
+    .set_id(xsrf)
     .set_audience(
         std::vector<picojson::value>{
             picojson::value("priemman")
@@ -221,7 +223,7 @@ std::string VerifyOtpHandler::HandleRequestThrow(
     )
     .sign(jwt::algorithm::hs256{_jwt_secret});
 
-    userver::server::http::Cookie xsrf_cookie{"XSRF-TOKEN",  userver::utils::generators::GenerateUuid()};
+    userver::server::http::Cookie xsrf_cookie{"XSRF-TOKEN", xsrf};
     xsrf_cookie.SetDomain("." + _domain);
     xsrf_cookie.SetPath("/");
     // xsrf_cookie.SetHttpOnly();
