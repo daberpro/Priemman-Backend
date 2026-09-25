@@ -195,33 +195,34 @@ std::string VerifyOtpHandler::HandleRequestThrow(
     auto session = _sessions.Create(result.user.id);
     auto xsrf = userver::utils::generators::GenerateUuid();
 
+    auto _now = std::chrono::system_clock::now();
+
     auto token = jwt::create()
+    .set_issuer("remark42")
     .set_id(xsrf)
-    .set_audience(
-        std::vector<picojson::value>{
-            picojson::value("priemman")
+    .set_audience(std::vector<picojson::value>{
+        picojson::value("priemman")
+    })
+    .set_issued_at(_now)
+    .set_expires_at(_now + std::chrono::hours(24))
+    .set_payload_claim("user", jwt::claim(picojson::value(picojson::object{
+        {"id", picojson::value(std::format("google_{}", result.user.id))},
+        {"name", picojson::value(std::format(
+            "{} {}", result.user.first_name, result.user.last_name
+        ))},
+        {"picture", picojson::value(result.user.avatar_url)},
+        {"attrs", picojson::value(picojson::object{
+            {"admin", picojson::value( picojson::value(result.user.role == "admin"))},
+            {"blocked", picojson::value(false)}
+        })}
+    })))
+    .set_payload_claim("auth_provider", jwt::claim(picojson::value(
+        picojson::object{
+            {"name", picojson::value("google")}
         }
-    )
-    .set_issued_at(std::chrono::system_clock::now())
-    .set_expires_at(
-        std::chrono::system_clock::now() + std::chrono::hours(24)
-    )
-    .set_payload_claim(
-        "user",
-        jwt::claim(picojson::value(picojson::object{
-            {"id", picojson::value(result.user.id)},
-            {"name", picojson::value(
-                std::format(
-                    "{} {}",
-                    result.user.first_name,
-                    result.user.last_name
-                )
-            )},
-            {"picture", picojson::value(result.user.avatar_url)},
-            {"email", picojson::value(result.user.email)}
-        }))
-    )
+    )))
     .sign(jwt::algorithm::hs256{_jwt_secret});
+
 
     userver::server::http::Cookie xsrf_cookie{"XSRF-TOKEN", xsrf};
     xsrf_cookie.SetDomain("." + _domain);
