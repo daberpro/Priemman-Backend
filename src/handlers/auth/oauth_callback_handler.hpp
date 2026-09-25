@@ -15,6 +15,7 @@
 #include <src/database/user_repository.hpp>
 #include <src/component/SMTP/SMTP.hpp>
 #include <jwt-cpp/jwt.h>
+#include <userver/utils/uuid4.hpp>
 
 namespace priemman::auth {
 
