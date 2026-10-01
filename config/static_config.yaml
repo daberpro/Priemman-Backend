@@ -54,7 +54,8 @@ components_manager:
                     .woff: "font/woff"
                     .woff2: "font/woff2"
                     .xml: "application/xml; charset=utf-8"
-
+        testsuite-support:
+            load-enabled: true
         # ============== Cloudinary Component ==============
         cloudinary-client-component:
             cloud_name: $cloudinary-cloud-name
@@ -303,6 +304,20 @@ components_manager:
 
         http-client-middleware-pipeline:
             middlewares: {}
+
+        # Cache config
+        user-cache:
+            size: 1000
+            ways: 4
+            lifetime: 0
+            background-update: false
+            config-settings: false
+        project-cache:
+            size: 500
+            ways: 4
+            lifetime: 0
+            background-update: false
+            config-settings: false
 
     task_processors:
         main-task-processor:

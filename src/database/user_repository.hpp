@@ -121,7 +121,9 @@ public:
     bool ActionLike(const std::string& user_id,const std::string& project_id) const;
     bool ActionUnLike(const std::string& user_id,const std::string& project_id) const;
 
-    bool ActionView(const std::string& user_id, const std::string& project_id) const;
+    // sudah di definisikan di dalam project repository dengan nama
+    // IncrementViews
+    // bool ActionView(const std::string& user_id, const std::string& project_id) const;
 
     bool ActionSave(const std::string& user_id, const std::string& project_id) const;
     bool ActionUnSave(const std::string& user_id,const std::string& project_id) const;

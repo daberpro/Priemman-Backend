@@ -289,7 +289,7 @@ std::string CalendarHandler::HandleRequestThrow(
             << "Cannot access Priemman Platform user API";
 
         request.SetResponseStatus(
-            userver::server::http::HttpStatus::kBadGateway
+            userver::server::http::HttpStatus::kInternalServerError
         );
 
         builder["message"] =

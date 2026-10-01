@@ -280,9 +280,9 @@ bool UserRepository::ActionLike(const std::string& user_id, const std::string& p
         trx.Execute(
             userver::storages::mysql::Query{
                 R"sql(
-                    UPDATE projects
+                    UPDATE projects_meta_data
                     SET likes = likes + 1
-                    WHERE id = ?
+                    WHERE project_id = ?
                 )sql"
             },
             project_id
@@ -309,37 +309,37 @@ bool UserRepository::ActionUnLike(const std::string& user_id, const std::string&
     return result.rows_affected > 0;
 }
 
-bool UserRepository::ActionView(const std::string& user_id, const std::string& project_id) const {
-    auto trx = _mysql_cluster->Begin(userver::storages::mysql::ClusterHostType::kPrimary);
-    const auto id = userver::utils::generators::GenerateUuid();
-    const auto result = trx.Execute(
-      userver::storages::mysql::Query{
-          R"sql(
-            INSERT IGNORE INTO project_views (id,user_id,project_id)
-            VALUES (?,?,?)
-          )sql"
-      },
-      id,
-      user_id,
-      project_id
-    ).AsExecutionResult();
+// bool UserRepository::ActionView(const std::string& user_id, const std::string& project_id) const {
+//     auto trx = _mysql_cluster->Begin(userver::storages::mysql::ClusterHostType::kPrimary);
+//     const auto id = userver::utils::generators::GenerateUuid();
+//     const auto result = trx.Execute(
+//       userver::storages::mysql::Query{
+//           R"sql(
+//             INSERT IGNORE INTO project_views (id,user_id,project_id)
+//             VALUES (?,?,?)
+//           )sql"
+//       },
+//       id,
+//       user_id,
+//       project_id
+//     ).AsExecutionResult();
 
-    if(result.rows_affected > 0){
-        trx.Execute(
-            userver::storages::mysql::Query{
-                R"sql(
-                    UPDATE projects
-                    SET views = views + 1
-                    WHERE id = ?
-                )sql"
-            },
-            project_id
-        );
-        trx.Commit();
-        return true;
-    }
-    return false;
-}
+//     if(result.rows_affected > 0){
+//         trx.Execute(
+//             userver::storages::mysql::Query{
+//                 R"sql(
+//                     UPDATE projects
+//                     SET views = views + 1
+//                     WHERE id = ?
+//                 )sql"
+//             },
+//             project_id
+//         );
+//         trx.Commit();
+//         return true;
+//     }
+//     return false;
+// }
 
 bool UserRepository::ActionSave(const std::string& user_id, const std::string& project_id) const {
     auto trx = _mysql_cluster->Begin(userver::storages::mysql::ClusterHostType::kPrimary);
@@ -360,9 +360,9 @@ bool UserRepository::ActionSave(const std::string& user_id, const std::string& p
         trx.Execute(
             userver::storages::mysql::Query{
                 R"sql(
-                    UPDATE projects
+                    UPDATE projects_meta_data
                     SET saves = saves + 1
-                    WHERE id = ?
+                    WHERE project_id = ?
                 )sql"
             },
             project_id

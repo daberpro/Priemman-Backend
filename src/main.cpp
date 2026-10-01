@@ -4,6 +4,7 @@
 // membuka namespace engine::io::impl (mis. components/fs_cache.hpp via inotify.hpp),
 // jika tidak lookup impl::AwaitableBase di common.hpp gagal terkompilasi.
 #include <userver/engine/io/common.hpp>
+#include <userver/testsuite/testsuite_support.hpp>
 
 #include <userver/clients/dns/component.hpp>
 #include <userver/clients/http/client.hpp>
@@ -47,6 +48,9 @@
 #include <src/handlers/user/upgrade_logs_handler.hpp>
 #include <src/handlers/user/public_profile_handler.hpp>
 #include <src/handlers/user/public_projects_list_handler.hpp>
+
+#include <src/database/cache/user_cache_lru.hpp>
+#include <src/database/cache/project_cache_lru.hpp>
 
 #include <src/middleware/rate_limiter.hpp>
 #include <src/component/Cloudinary/CloudinaryClientComponent.hpp>
@@ -112,6 +116,13 @@ auto main(int argc, char* argv[]) -> int {
         .Append<priemman::handlers::admin::AdminUpgradeListHandler>()
         .Append<priemman::handlers::admin::AdminUpgradeReviewHandler>()
         .Append<priemman::handlers::admin::AdminUpgradeConfirmPaymentHandler>()
+
+        // Cache
+        .Append<priemman::cache::user::UserCache>()
+        .Append<priemman::cache::project::ProjectCache>()
+
+        // Testsuite
+        .Append<userver::components::TestsuiteSupport>()
 
         .Append<priemman::ApiInfoHandler>()
         .Append<userver::congestion_control::Component>()
