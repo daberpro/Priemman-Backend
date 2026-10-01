@@ -63,12 +63,17 @@ std::string BasicInfoHandler::HandleRequestThrow(
     const auto method = request.GetMethod();
 
     if (method == HttpMethod::kGet) {
-        const auto body = BuildMe(nullptr, _users, _accounts, *user_id);
-        if (body.empty()) {
+        // const auto body = BuildMe(nullptr, _users, _accounts, *user_id);
+        try{
+            auto body = _user_cache.GetOptional(*user_id);
+            if(!body.has_value()){
+                return _user_cache.Get(*user_id).SerializeAsString();
+            }
+            return (*body).SerializeAsString();
+        }catch(std::exception& err){
             res.SetStatus(HttpStatus::kNotFound);
             return ErrorResult("NOT_FOUND", "User not found");
         }
-        return body;
     }
 
     if (method == HttpMethod::kPut || method == HttpMethod::kPatch) {
@@ -144,6 +149,7 @@ std::string BasicInfoHandler::HandleRequestThrow(
             : user->avatar_url;
 
         _users.UpdateBasicInfo(*user_id, patch);
+        _user_cache.InvalidateByKey(*user_id);
         if (replace_avatar) {
             media::AttachMedia(_media, avatar_public_ids, *user_id);
         }

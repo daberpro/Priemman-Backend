@@ -15,9 +15,11 @@ namespace priemman::handlers::projects {
 namespace {
 using namespace userver::server::http;  // NOLINT
 
-bool IsPubliclyVisible(const database::ProjectRowPopulated& row) {
-    return row.project.status == "PUBLISHED" && row.project.visibility == "PUBLIC";
+bool IsPubliclyVisible(const priemman::v1::Project& project) {
+    return project.status() == priemman::v1::ProjectStatus::PROJECT_STATUS_PUBLISHED &&
+           project.visibility() == priemman::v1::ProjectVisibility::PROJECT_VISIBILITY_PUBLIC;
 }
+
 }  // namespace
 
 std::string ProjectDetailHandler::HandleRequestThrow(
@@ -38,29 +40,37 @@ std::string ProjectDetailHandler::HandleRequestThrow(
 
     // ================= GET =================
     if (method == HttpMethod::kGet) {
-        auto row = _projects.FindById(id);
-        if (!row.has_value()) {
+        priemman::v1::ProjectResponse response;
+
+        try {
+            auto raw_response = _project_cache.GetOptional(id);
+
+            if (raw_response.has_value()) {
+                response = std::move(*raw_response);
+            } else {
+                response = _project_cache.Get(id);
+            }
+        } catch (const std::runtime_error& e) {
+            if (std::string_view{e.what()} == "NOT_FOUND") {
+                res.SetStatus(HttpStatus::kNotFound);
+                return ErrorResult("NOT_FOUND", "Project not found");
+            }
+
+            throw;
+        }
+
+        const auto& project = response.project();
+        const bool is_owner = viewer.has_value() && *viewer == project.owner_id().value();
+
+        if (!IsPubliclyVisible(project) && !is_owner) {
             res.SetStatus(HttpStatus::kNotFound);
             return ErrorResult("NOT_FOUND", "Project not found");
         }
 
-        const bool is_owner = viewer.has_value() && *viewer == row->project.owner_id;
-        if (!IsPubliclyVisible(*row) && !is_owner) {
-            res.SetStatus(HttpStatus::kNotFound);
-            return ErrorResult("NOT_FOUND", "Project not found");
-        }
-
-        if (IsPubliclyVisible(*row) && !is_owner) {
+        if (IsPubliclyVisible(project) && !is_owner) {
             _projects.IncrementViews(id);
         }
 
-        priemman::v1::ProjectResponse response;
-        *response.mutable_project() = mapper::ToProto(
-            *row,
-            _projects.ListStrings(id, "tags"),
-            _projects.ListMedia(id),
-            _projects.ListCollaborators(id)
-        );
         return response.SerializeAsString();
     }
 
@@ -76,6 +86,7 @@ std::string ProjectDetailHandler::HandleRequestThrow(
             res.SetStatus(HttpStatus::kBadRequest);
             return ErrorResult("INVALID_BODY", "Invalid request body");
         }
+
         if (!req.id().value().empty() && req.id().value() != id) {
             res.SetStatus(HttpStatus::kBadRequest);
             return ErrorResult("INVALID_ID", "Request project ID does not match the URL");
@@ -93,14 +104,17 @@ std::string ProjectDetailHandler::HandleRequestThrow(
             res.SetStatus(HttpStatus::kBadRequest);
             return ErrorResult("INVALID_TITLE", "Title is required");
         }
+
         if (input.content().empty()) {
             res.SetStatus(HttpStatus::kBadRequest);
             return ErrorResult("INVALID_CONTENT", "Content is required");
         }
+
         if (helpers::isExceeding1MB(input.content())) {
             res.SetStatus(HttpStatus::kPayloadTooLarge);
             return ErrorResult("CONTENT_TOO_LARGE", "Content cannot be more than 1 MB");
         }
+
         if (const auto relations = helpers::ValidateProjectRelations(input);
             !relations.has_value()) {
             res.SetStatus(HttpStatus::kBadRequest);
@@ -119,13 +133,15 @@ std::string ProjectDetailHandler::HandleRequestThrow(
         // dikirim ulang; milik orang lain / tidak dikenal ditolak tegas.
         std::vector<std::string> public_ids;
         media::CollectPublicIds(input.media(), &public_ids);
-        if (const auto validation = media::ValidateMediaForUpdate(_media, public_ids, *user_id);
-            !validation.has_value()) {
+
+        if (const auto validation = media::ValidateMediaForUpdate(
+                _media, public_ids, *user_id
+            ); !validation.has_value()) {
             res.SetStatus(HttpStatus::kBadRequest);
             return ErrorResult("INVALID_MEDIA", validation.error());
         }
 
-        // Simpan media lama sebelum update
+        // Simpan media lama sebelum update.
         auto old_media = _projects.ListMedia(id);
 
         database::ProjectRow row;
@@ -164,6 +180,7 @@ std::string ProjectDetailHandler::HandleRequestThrow(
         }
 
         auto updated = _projects.FindById(id);
+
         priemman::v1::ProjectResponse response;
         if (updated.has_value()) {
             *response.mutable_project() = mapper::ToProto(
@@ -173,11 +190,12 @@ std::string ProjectDetailHandler::HandleRequestThrow(
                 _projects.ListCollaborators(id)
             );
         }
+
         return response.SerializeAsString();
     }
 
     if (method == HttpMethod::kDelete) {
-        // Ambil media project sebelum dihapus
+        // Ambil media project sebelum dihapus.
         auto media_list = _projects.ListMedia(id);
 
         if (!_projects.Delete(id, *user_id)) {

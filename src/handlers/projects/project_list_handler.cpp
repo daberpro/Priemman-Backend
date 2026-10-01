@@ -17,6 +17,19 @@ using namespace userver::server::http;  // NOLINT
 
 void FillProject(
     const database::ProjectRepository& repo,
+    const database::ProjectRowWithMetaInfo& row,
+    priemman::v1::Project* out
+) {
+    *out = mapper::ToProto(
+        row,
+        repo.ListStrings(row.id, "tags"),
+        repo.ListMedia(row.id),
+        repo.ListCollaborators(row.id)
+    );
+}
+
+void FillProject(
+    const database::ProjectRepository& repo,
     const database::ProjectRowPopulated& row,
     priemman::v1::Project* out
 ) {
@@ -45,20 +58,31 @@ std::string ProjectListHandler::HandleRequestThrow(
     const auto limit = priemman::utils::ParsePageSize(request);
     const auto offset = priemman::utils::ParseOffset(request);
 
-    // Dengan token  -> list milik sendiri (semua status, bisa difilter)
-    // Tanpa token   -> feed publik untuk halaman utama (PUBLISHED + PUBLIC)
+    // Dengan token -> list milik sendiri (semua status, bisa difilter)
+    // Tanpa token -> feed publik untuk halaman utama (PUBLISHED + PUBLIC)
     const auto viewer = TryAuth(request);
 
-    std::vector<database::ProjectRowPopulated> rows;
     if (viewer.has_value()) {
-        rows = _projects.ListByOwner(
+        const auto rows = _projects.ListByOwner(
             *viewer,
             std::string{request.GetArg("status")},
-            limit, offset
+            limit,
+            offset
         );
-    } else {
-        rows = _projects.ListPublic(limit, offset);
+
+        priemman::v1::ListProjectsResponse response;
+        for (const auto& row : rows) {
+            FillProject(_projects, row, response.add_projects());
+        }
+
+        if (static_cast<std::int64_t>(rows.size()) == limit) {
+            response.set_next_page_token(std::to_string(offset + limit));
+        }
+
+        return response.SerializeAsString();
     }
+
+    const auto rows = _projects.ListPublic(limit, offset);
 
     priemman::v1::ListProjectsResponse response;
     for (const auto& row : rows) {
