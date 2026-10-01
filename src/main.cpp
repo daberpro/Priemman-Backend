@@ -9,11 +9,9 @@
 #include <userver/clients/dns/component.hpp>
 #include <userver/clients/http/client.hpp>
 #include <userver/clients/http/component_core.hpp>
-#include <userver/components/fs_cache.hpp>
 #include <userver/components/minimal_server_component_list.hpp>
 #include <userver/logging/component.hpp>
 #include <userver/logging/log.hpp>
-#include <userver/server/handlers/http_handler_static.hpp>
 #include <userver/storages/mysql.hpp>
 #include <userver/storages/mysql/component.hpp>
 #include <userver/storages/secdist/component.hpp>
@@ -24,13 +22,14 @@
 #include <userver/utils/daemon_run.hpp>
 #include <userver/server/middlewares/cors.hpp>
 #include <userver/congestion_control/component.hpp>
+#include <userver/components/fs_cache.hpp>
+#include <userver/server/handlers/http_handler_static.hpp>
 
 #include <src/handlers/auth/send_otp_handler.hpp>
 #include <src/handlers/auth/verify_otp_handler.hpp>
 #include <src/handlers/auth/logout_handler.hpp>
 #include <src/handlers/auth/oauth_initiate_handler.hpp>
 #include <src/handlers/auth/oauth_callback_handler.hpp>
-#include <src/handlers/api_info_handler.hpp>
 #include <src/handlers/user/basic_info_handler.hpp>
 #include <src/handlers/user/work_experience_handler.hpp>
 #include <src/handlers/user/upgrade_handler.hpp>
@@ -51,6 +50,7 @@
 
 #include <src/database/cache/user_cache_lru.hpp>
 #include <src/database/cache/project_cache_lru.hpp>
+#include <src/database/cache/calendar_cache_lru.hpp>
 
 #include <src/middleware/rate_limiter.hpp>
 #include <src/component/Cloudinary/CloudinaryClientComponent.hpp>
@@ -71,14 +71,13 @@ auto main(int argc, char* argv[]) -> int {
         .Append<userver::clients::http::MiddlewarePipelineComponent>()
         .Append<userver::server::middlewares::CorsFactory>()
         .Append<priemman::middlewares::RateLimiterFactory>()
-        .Append<userver::components::FsCache>("fs-cache-static")
-        .Append<userver::server::handlers::HttpHandlerStatic>("handler-static")
-
         .Append<daberdev::components::SMTPClientComponent>()
         .Append<daberdev::components::OAuthGoogleComponent>()
         .Append<daberdev::components::OAuthGithubComponent>()
         .Append<priemman::cloudinary::CloudinaryComponent>()
         .Append<priemman::cloudinary::MediaSweeperComponent>()
+        .Append<userver::components::FsCache>("fs-cache-static")
+        .Append<userver::server::handlers::HttpHandlerStatic>("handler-static")
 
         // Workspace handlers
         .Append<priemman::handlers::workspace::CalendarHandler>()
@@ -120,18 +119,18 @@ auto main(int argc, char* argv[]) -> int {
         // Cache
         .Append<priemman::cache::user::UserCache>()
         .Append<priemman::cache::project::ProjectCache>()
+        .Append<priemman::cache::calendar::CalendarCache>()
 
         // Testsuite
         .Append<userver::components::TestsuiteSupport>()
 
-        .Append<priemman::ApiInfoHandler>()
         .Append<userver::congestion_control::Component>()
         .Append<userver::server::handlers::Ping>();
 
-    std::println("\n=========================================");
+    std::println("\n====================================================================");
     std::println(" Priemman Backend Server");
     std::println(" Starting on config: {}", argc > 2 ? argv[2] : "../config/config.yaml");
-    std::println("=========================================");
+    std::println("====================================================================");
 
     return userver::utils::DaemonMain(argc, argv, component_list);
 }

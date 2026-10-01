@@ -3,12 +3,14 @@ cloudinary-api-key:
 cloudinary-api-secret:
 
 base-domain: 'localhost'
+max-req-size-file-upload: 20971520
 
 # SMTP
 smtp-host:
 smtp-port:
 smtp-email:
 smtp-password:
+smtp-display-name: 'Priemman Studio'
 
 # OAuth
 google-redirect-url:
@@ -32,3 +34,4 @@ dashboard-admin-url: 'http://localhost:3000/dashboard-admin'
 
 # Frontend server
 favicon-path: '../static/favicon.ico'
+visible-api-docs: true
