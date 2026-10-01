@@ -9,6 +9,6 @@ CREATE TABLE IF NOT EXISTS projects_meta_data (
     UNIQUE KEY uq_project_meta_info (project_id),
 
     CONSTRAINT fk_project_meta_info
-        FOREIGN KEY (project_id) REFERENCES projects(id) ON DELETE CASCADE,
+        FOREIGN KEY (project_id) REFERENCES projects(id) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 

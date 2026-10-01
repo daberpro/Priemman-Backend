@@ -20,6 +20,7 @@ components_manager:
             allowed-origins:
                 - https://priemman.my.id
                 - http://localhost:3000
+                - http://localhost:8080
             allow-credentials: true
             allowed-headers:
                 - Content-Type
@@ -85,11 +86,6 @@ components_manager:
             method: GET
             task_processor: main-task-processor
             directory-file: index.html
-
-        handler-api-info:
-            path: /v1/info
-            method: GET,OPTIONS
-            task_processor: main-task-processor
 
         handler-project-create:
             path: /v1/projects
@@ -215,9 +211,6 @@ components_manager:
             path: /v1/workspace/calendar
             method: GET,OPTIONS
             task_processor: main-task-processor
-            workspace_host: $workspace-host
-            username: $workspace-username
-            password: $workspace-password
 
         handler-upgrade:
             path: /v1/users/me/upgrade
@@ -318,6 +311,15 @@ components_manager:
             lifetime: 0
             background-update: false
             config-settings: false
+        calendar-cache:
+            size: 500
+            ways: 4
+            lifetime: 300
+            background-update: false
+            config-settings: false
+            workspace_host: $workspace-host
+            username: $workspace-username
+            password: $workspace-password
 
     task_processors:
         main-task-processor:

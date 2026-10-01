@@ -63,3 +63,4 @@ target_link_libraries(
 )
 
 add_subdirectory(frontend)
+add_subdirectory(dynamic_config)

@@ -29,9 +29,9 @@ auto main(int argc, char *argv[]) -> int {
           .Append<userver::congestion_control::Component>()
           .Append<priemman::frontend::StaticPageHandler>("handler-pages");
 
-  std::println("\n=========================================");
+  std::println("\n====================================================================");
   std::println(" Priemman Frontend Server");
-  std::println("=========================================");
+  std::println("====================================================================");
 
   return userver::utils::DaemonMain(argc, argv, component_list);
 }
