@@ -55,6 +55,7 @@
 #include <src/middleware/rate_limiter.hpp>
 #include <src/component/Cloudinary/CloudinaryClientComponent.hpp>
 #include <src/component/Cloudinary/MediaSweeperComponent.hpp>
+#include <src/component/DynamicConfig/DynamicConfigComponent.hpp>
 
 #include <src/component/SMTP/SMTP.hpp>
 #include <src/component/OAuth/Google/OAuthGoogleComponent.hpp>
@@ -120,6 +121,9 @@ auto main(int argc, char* argv[]) -> int {
         .Append<priemman::cache::user::UserCache>()
         .Append<priemman::cache::project::ProjectCache>()
         .Append<priemman::cache::calendar::CalendarCache>()
+
+        // Dynamic Config
+        .Append<priemman::components::DynamicConfigComponent>()
 
         // Testsuite
         .Append<userver::components::TestsuiteSupport>()

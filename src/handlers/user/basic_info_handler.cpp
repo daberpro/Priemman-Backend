@@ -64,6 +64,16 @@ std::string BasicInfoHandler::HandleRequestThrow(
 
     if (method == HttpMethod::kGet) {
         // const auto body = BuildMe(nullptr, _users, _accounts, *user_id);
+        
+        auto config_opt = _dynamic_config->Get("admin-notify-change", {"user_ids"});
+        
+        if (config_opt && !config_opt->IsEmpty()) {
+            const auto& user_ids_map = (*config_opt)["user_ids"];
+            if (user_ids_map.IsObject() && !user_ids_map[*user_id].IsNull()) {
+                _user_cache.InvalidateByKey(*user_id);
+            }
+        }
+        
         try{
             auto body = _user_cache.GetOptional(*user_id);
             if(!body.has_value()){

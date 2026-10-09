@@ -27,10 +27,10 @@ namespace priemman::handlers::user {
         if(public_info_profile){
             user_profile.profile = *public_info_profile;
             auto experiences{_accounts.ListWorkExperiences(user_id)};
-            if(experiences.empty()){
-                LOG_ERROR() << '\n' << "Cannot get user public profile" << '\n';
-                return ErrorResult("ERROR_GET_PROFILE","Cannot get user public profile");
-            }
+            // if(experiences.empty()){
+            //     LOG_ERROR() << '\n' << "Cannot get user public profile" << '\n';
+            //     return ErrorResult("ERROR_GET_PROFILE","Cannot get user public profile");
+            // }
             user_profile.work_experiences = std::move(experiences);
         }else{
             LOG_ERROR() << '\n' << public_info_profile.error() << '\n';

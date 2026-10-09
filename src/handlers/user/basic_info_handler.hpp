@@ -2,6 +2,7 @@
 
 #include <src/handlers/user/authenticated_handler_base.hpp>
 #include <src/database/cache/user_cache_lru.hpp>
+#include <src/component/DynamicConfig/DynamicConfigComponent.hpp>
 
 namespace priemman::handlers::user {
 
@@ -17,8 +18,13 @@ public:
         context.FindComponent<
             cache::user::UserCache
         >().GetCache()
+    },
+    _dynamic_config{
+        &context.FindComponent<priemman::components::DynamicConfigComponent>()
     }
-    {};
+    {
+        _dynamic_config->Register("admin-notify-change", {"user_ids"});
+    };
 
     std::string HandleRequestThrow(
         const userver::server::http::HttpRequest& request,
@@ -27,6 +33,7 @@ public:
 
 private:
     mutable userver::cache::LruCacheWrapper<cache::user::UserId, cache::user::UserData> _user_cache;
+    priemman::components::DynamicConfigComponent* _dynamic_config;
 };
 
 }  // namespace priemman::handlers::user
