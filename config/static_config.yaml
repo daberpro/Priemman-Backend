@@ -1,7 +1,7 @@
 components_manager:
     components:
         congestion-control:
-        dynamic-config-server:
+        dynamic-config-custom:
             url: $dynamic-config-url
             update-time: "2s"
             http-timeout: "5s"
@@ -83,10 +83,6 @@ components_manager:
             fs-task-processor: fs-task-processor
 
         # ============== Handlers ==============
-        handler-test-dynamic-config:
-            path: /test-config
-            method: GET
-            task_processor: main-task-processor
 
         handler-static:
             fs-cache-component: fs-cache-static
