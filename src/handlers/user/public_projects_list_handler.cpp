@@ -38,8 +38,7 @@ namespace priemman::handlers::user {
         const auto limit = priemman::utils::ParsePageSize(request);
         const auto offset = priemman::utils::ParseOffset(request);
         
-        // Tetap gunakan GetPathArg sesuai kaidah userver untuk path parameter
-        const auto user_id{request.GetPathArg("user_id")};
+        const auto user_id{request.GetArg("user_id")};
 
         std::vector<database::ProjectRowWithMetaInfo> rows;
         rows = _projects.ListByOwner(

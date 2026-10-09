@@ -17,7 +17,7 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - name: Checkout
-        # Catatan: v4 adalah versi stabil terbaru. v6 belum ada dan akan menyebabkan error.
+        # Catatan: v4 adalah versi stabil terbaru.
         uses: actions/checkout@v4
 
       - name: Install build dependencies
@@ -66,13 +66,20 @@ jobs:
             -DCMAKE_CXX_COMPILER=g++-14
           cmake --build ./ -j4
 
+      # ==============================================================================
+      # STRIP BINARIES
+      # ==============================================================================
       - name: Strip binaries (reduce size)
         if: github.event_name == 'push'
         run: |
           strip build-ci/server
           strip build-ci/frontend_server
-          ls -lh build-ci/server build-ci/frontend_server
+          strip build-ci/dynamic_config
+          ls -lh build-ci/server build-ci/frontend_server build-ci/dynamic_config
 
+      # ==============================================================================
+      # UPLOAD ARTIFACTS
+      # ==============================================================================
       - name: Upload all artifacts
         if: github.event_name == 'push'
         uses: actions/upload-artifact@v4
@@ -81,6 +88,7 @@ jobs:
           path: |
             build-ci/server
             build-ci/frontend_server
+            build-ci/dynamic_config
             config/
             static/
             templates/

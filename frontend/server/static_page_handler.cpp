@@ -180,39 +180,26 @@ std::string StaticPageHandler::HandleRequestThrow(
     userver::server::request::RequestContext& context) const {
   auto& response = request.GetHttpResponse();
 
-  if (request.GetMethod() ==
-      userver::server::http::HttpMethod::kOptions) {
-    response.SetStatus(
-        userver::server::http::HttpStatus::kOk);
+  if (request.GetMethod() == userver::server::http::HttpMethod::kOptions) {
+    response.SetStatus(userver::server::http::HttpStatus::kOk);
     return {};
   }
 
   const std::string path = request.GetRequestPath();
 
-  const auto* identity =
-      context.GetDataOptional<
-          std::optional<database::SessionIdentity>>(
-          kSessionDataKey);
+  const auto* identity = context.GetDataOptional<
+    std::optional<database::SessionIdentity>
+    >(kSessionDataKey);
 
-  const bool logged_in =
-      identity != nullptr && identity->has_value();
-
-  const std::string role =
-      logged_in
-          ? identity->value().role
-          : std::string{};
+  const bool logged_in = identity != nullptr && identity->has_value();
+  const std::string role = logged_in ? identity->value().role : std::string{};
 
   const bool is_rsc = IsRscRequest(request);
 
   const auto redirect_to =
       [&response](const std::string& url) -> std::string {
-        response.SetStatus(
-            userver::server::http::HttpStatus::kFound);
-
-        response.SetHeader(
-            std::string_view{"Location"},
-            url);
-
+        response.SetStatus(userver::server::http::HttpStatus::kFound);
+        response.SetHeader(std::string_view{"Location"},url);
         return {};
       };
 
@@ -239,8 +226,7 @@ std::string StaticPageHandler::HandleRequestThrow(
 
   if (path == "/login" || path == "/sign-in") {
     if (logged_in) {
-      return redirect_to(
-          SafeNext(request, DashboardForRole(role)));
+      return redirect_to(SafeNext(request, DashboardForRole(role)));
     }
   } else if (
       path.starts_with("/admin") ||

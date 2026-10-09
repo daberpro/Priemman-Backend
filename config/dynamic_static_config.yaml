@@ -1,0 +1,34 @@
+components_manager:
+    task_processors:
+        main-task-processor:
+            worker_threads: 4
+
+        fs-task-processor:
+            worker_threads: 1
+
+    components:
+        server:
+            listener:
+                port: $dynamic-config-port
+        logging:
+            loggers:
+                default:
+                    file_path: '@stderr'
+                    level: error
+                    overflow_behavior: discard
+
+        config-map: {}
+
+        handler-ping: 
+            path: /ping
+            method: GET
+
+        handler-register:
+            path: /register
+            method: POST
+            task_processor: main-task-processor
+
+        handler-dynamic-config:
+            path: /configs
+            method: POST,PUT
+            task_processor: main-task-processor

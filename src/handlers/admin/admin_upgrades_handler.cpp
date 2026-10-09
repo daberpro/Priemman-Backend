@@ -140,7 +140,12 @@ std::string AdminUpgradeConfirmPaymentHandler::HandleRequestThrow(
             "Request not found or not in approved status");
     }
 
-    _users.SetRole(*user_id, "creator");
+    if (!_users.SetRole(*user_id, "creator")) {
+        res.SetStatus(HttpStatus::kConflict);
+        return ErrorResult("ROLE_UPDATE_FAILED", "Failed to update user role");
+    }
+
+    _user_cache.InvalidateByKey(*user_id);
 
     priemman::v1::AdminConfirmPaymentResponse response;
     response.set_success(true);
