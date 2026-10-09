@@ -17,7 +17,7 @@ namespace priemman::components {
 class DynamicConfigComponent final
 : public userver::components::ComponentBase {
 public:
-    static constexpr std::string_view kName = "dynamic-config-server";
+    static constexpr std::string_view kName = "dynamic-config-custom";
 
     DynamicConfigComponent(
         const userver::components::ComponentConfig& _config,
