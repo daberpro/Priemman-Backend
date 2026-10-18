@@ -190,7 +190,7 @@ std::string ProjectDetailHandler::HandleRequestThrow(
                 _projects.ListCollaborators(id)
             );
         }
-
+        _project_cache.InvalidateByKey(id);
         return response.SerializeAsString();
     }
 
@@ -213,6 +213,7 @@ std::string ProjectDetailHandler::HandleRequestThrow(
 
         priemman::v1::DeleteResponse response;
         response.set_success(true);
+        _project_cache.InvalidateByKey(id);
         return response.SerializeAsString();
     }
 
