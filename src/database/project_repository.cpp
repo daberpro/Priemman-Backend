@@ -213,6 +213,7 @@ std::optional<ProjectRowPopulated> ProjectRepository::Update(const ProjectRow& r
                     visibility = ?,
                     status = ?,
                     content = ?,
+                    updated_at = NOW(6),
                     published_at = CASE
                         WHEN ? = 'PUBLISHED'
                         THEN COALESCE(published_at, NOW(6))
